@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Nullable = null | undefined;
 export type Numeric = number | bigint;
 export type Primitive = Nullable | Numeric | string | boolean | symbol;
@@ -12,4 +11,5 @@ export type Vals<T> = T[Keys<T>];
 export type OneOrMany<T> = T | T[];
 export type MaybeUndefined<T> = T | undefined;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Newable = { new (...args: any[]): any };
