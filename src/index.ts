@@ -10,4 +10,5 @@ export type IsUnknwon<T> = [T] extends [unknown] ? true : false;
 export type Keys<T> = keyof T;
 export type Vals<T> = T[Keys<T>];
 export type OneOrMany<T> = T | T[];
+export type MaybeUndefined<T> = T | undefined;
 
