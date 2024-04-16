@@ -1,0 +1,99 @@
+{
+    "name": "ts-extended",
+    "version": "8.0.0",
+    "private": false,
+    "description": "Extending the TS library with types and decorators that should've been built-in",
+    "keywords": [
+      "types",
+      "decorators"
+    ],
+    "homepage": "https://github.com/ashgw/ts-extended",
+    "bugs": {
+      "url": "https://github.com/ashgw/ts-extended/issues"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/ashgw/ts-extended.git"
+    },
+    "license": "GPL-3.0-only",
+    "author": {
+      "name": "Ashref Gwader",
+      "email": "ashrefgw@proton.me"
+    },
+    "type": "module",
+    "exports": {
+      "types": {
+        "import": "./dist/index.d.mts",
+        "require": "./dist/index.d.cts"
+      },
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "files": [
+      "dist/",
+      "package.json",
+      "LICENSE",
+      "README.md"
+    ],
+    "scripts": {
+      "build": "pnpm run build:node",
+      "build:node": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
+      "hooks": "husky init",
+      "test": "vitest --coverage --run",
+      "lint": "pnpm format-check && pnpm lint:ts && pnpm lint:spelling && pnpm lint:knip",
+      "lint:ts": "tsc --noEmit; eslint .",
+      "lint:knip": "knip --production --strict --exclude exports,nsExports,types,nsTypes",
+      "format": "prettier . --write",
+      "format-check": "prettier --check .",
+      "lint:spelling": "cspell \"**\" \".github/**/*\""
+    },
+    "devDependencies": {
+      "@commitlint/cli": "18.6.0",
+      "@commitlint/config-conventional": "18.6.0",
+      "@cspell/dict-cryptocurrencies": "5.0.0",
+      "@rollup/plugin-replace": "5.0.5",
+      "@rollup/plugin-typescript": "11.1.5",
+      "@semantic-release/changelog": "6.0.3",
+      "@semantic-release/commit-analyzer": "11.1.0",
+      "@semantic-release/git": "10.0.1",
+      "@semantic-release/github": "9.2.6",
+      "@semantic-release/npm": "11.0.2",
+      "@semantic-release/release-notes-generator": "12.1.0",
+      "@types/node": "20.10.7",
+      "@types/rollup-plugin-auto-external": "2.0.5",
+      "@typescript-eslint/eslint-plugin": "6.21.0",
+      "@typescript-eslint/parser": "6.21.0",
+      "@vitest/coverage-v8": "1.2.2",
+      "cspell": "8.3.2",
+      "eslint": "8.56.0",
+      "eslint-config-prettier": "9.1.0",
+      "eslint-import-resolver-typescript": "3.6.1",
+      "eslint-plugin-eslint-comments": "3.2.0",
+      "eslint-plugin-functional": "6.0.0",
+      "eslint-plugin-import": "2.29.1",
+      "eslint-plugin-jsdoc": "48.0.2",
+      "eslint-plugin-markdown": "3.0.1",
+      "eslint-plugin-n": "16.6.1",
+      "eslint-plugin-optimize-regex": "1.2.1",
+      "eslint-plugin-prettier": "5.1.2",
+      "eslint-plugin-promise": "6.1.1",
+      "eslint-plugin-sonarjs": "0.23.0",
+      "eslint-plugin-unicorn": "51.0.1",
+      "eslint-plugin-vitest": "0.3.20",
+      "husky": "9.0.7",
+      "knip": "4.2.0",
+      "prettier": "3.1.1",
+      "prettier-plugin-packagejson": "2.4.9",
+      "rimraf": "5.0.5",
+      "rollup": "4.9.4",
+      "rollup-plugin-auto-external": "2.0.0",
+      "rollup-plugin-dts": "6.1.0",
+      "semantic-release": "23.0.2",
+      "ts-node": "^10.9.2",
+      "typescript": "5.3.3",
+      "vite-tsconfig-paths": "4.2.3",
+      "vitest": "1.2.2"
+    },
+    "packageManager": "pnpm@8.14.0"
+  }
+  
