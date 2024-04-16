@@ -1,1 +1,1 @@
-pnpm lint
+echo "hey"

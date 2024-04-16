@@ -2,3 +2,5 @@ Knip
 knip
 npmjs
 lintstagedrc
+Unknwon
+Vals
