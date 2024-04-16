@@ -1,6 +1,6 @@
 {
     "name": "ts-extended",
-    "version": "8.0.0",
+    "version": "0.0.0",
     "private": false,
     "description": "Extending the TS library with types and decorators that should've been built-in",
     "keywords": [
