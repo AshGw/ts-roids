@@ -9,7 +9,7 @@ npm i ts-extended
 ```ts
 import { 
     locked,
-    frozen,
+    final,
     Maybe,
     Callable
 } from 'ts-extended';
@@ -26,6 +26,6 @@ export class Foo<F> {
 }
 ```
 ### Docs
-No time for docs so checkout the inline documentation in `/src` along with `/tests` to see how it works.
+Checkout the inline documentation in `/src` along with `/tests` to see how it works.
 ### License 
 [GPL-3](/LICENSE)
