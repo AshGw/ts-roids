@@ -8,4 +8,5 @@ export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
 export type IsNever<T> = [T] extends [never] ? true : false;
 export type IsUnknwon<T> = [T] extends [unknown] ? true : false;
 export type Keys<T> = keyof T;
+export type Vals<T> = T[Keys<T>];
 
