@@ -12,3 +12,4 @@ export type Vals<T> = T[Keys<T>];
 export type OneOrMany<T> = T | T[];
 export type MaybeUndefined<T> = T | undefined;
 
+export type Newable = { new (...args: any[]): any };
