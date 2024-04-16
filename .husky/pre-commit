@@ -1,1 +1,1 @@
-echo "x"
+pnpm lint
