@@ -2,3 +2,12 @@
 /coverage
 /dist/
 /pnpm-lock.yaml
+.eslintrc.json
+renovate.json
+.vscode/settings.json
+README.md
+knip.jsonc
+package.json
+tsconfig.base.json
+tsconfig.build.json
+tsconfig.json
