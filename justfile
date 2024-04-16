@@ -15,7 +15,7 @@ alias c:= clean
 @setup:
     #!/bin/zsh
     source ~/.zshrc 
-    nvm install 20.8.1 && nvm use 20.8.1
+    nvm install 18.17.0 && nvm use 18.17.0
     pnpm i
     pnpm hooks
 
