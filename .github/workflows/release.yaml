@@ -27,7 +27,6 @@ jobs:
     uses: ./.github/workflows/test.yml
 
   npm:
-    if: startsWith(github.ref, 'refs/tags/')
     needs:
       - lint
       - check-dependencies
