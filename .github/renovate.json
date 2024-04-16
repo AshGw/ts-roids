@@ -1,0 +1,57 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+      ":ignoreModulesAndTests",
+      "replacements:all",
+      "workarounds:all",
+      "group:allNonMajor",
+      "group:monorepos",
+      "group:recommended",
+      ":automergeAll",
+      ":automergePr",
+      ":semanticCommits",
+      ":prHourlyLimitNone",
+      ":prConcurrentLimitNone",
+      "helpers:disableTypesNodeMajor",
+      "schedule:weekly"
+    ],
+    "labels": ["Type: Maintenance", ":blue_heart:"],
+    "automergeStrategy": "rebase",
+    "postUpdateOptions": ["pnpmDedupe"],
+    "packageRules": [
+      {
+        "matchManagers": ["npm"],
+        "matchDepTypes": ["dependencies"],
+        "rangeStrategy": "update-lockfile",
+        "semanticCommitType": "chore",
+        "semanticCommitScope": "deps",
+        "major": {
+          "semanticCommitType": "build"
+        }
+      },
+      {
+        "matchManagers": ["npm"],
+        "matchDepTypes": ["devDependencies"],
+        "rangeStrategy": "pin",
+        "semanticCommitType": "chore",
+        "semanticCommitScope": "dev-deps"
+      },
+      {
+        "matchManagers": ["npm"],
+        "matchDepTypes": ["peerDependencies"],
+        "rangeStrategy": "widen",
+        "semanticCommitType": "chore",
+        "semanticCommitScope": "peer-deps",
+        "major": {
+          "semanticCommitType": "build"
+        }
+      },
+      {
+        "matchManagers": ["github-actions"],
+        "rangeStrategy": "replace",
+        "semanticCommitType": "ci",
+        "semanticCommitScope": "dev-deps"
+      }
+    ]
+  }
+  
