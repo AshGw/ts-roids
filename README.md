@@ -15,12 +15,13 @@ import {
 } from 'ts-extended';
 
 export type F<A, R> = Callable<A[], R>;
+
 @locked
 @final
 export class Foo<F> {
-  private _bar: Maybe<F>;
-  constructor(bar: Maybe<F>) {
-    this._bar = bar ?? null;
+  private _foo: Maybe<F>;
+  constructor(foo: Maybe<F>) {
+    this._foo = _foo ?? null;
   }
 }
 ```
