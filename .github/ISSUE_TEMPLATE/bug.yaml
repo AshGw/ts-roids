@@ -1,0 +1,27 @@
+name: Bug report
+description: Create a bug report to help us improve
+labels: ['🐛 bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You can follow the sections in the template and provide as much information as possible about your problem.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce
+      description: Steps to reproduce the behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.

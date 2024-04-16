@@ -1,0 +1,10 @@
+name: Research request
+description: I think this idea needs further research ...
+labels: ['🔍 research']
+body:
+  - type: textarea
+    attributes:
+      label: Research
+      description: Describe the context, and the reasoning over why this reseach needs to be conducted
+    validations:
+      required: true

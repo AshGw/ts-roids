@@ -1,0 +1,10 @@
+name: Documentation request
+description: I think some parts of the project needs documenting, or some docs are not clear ...
+labels: ['📚 docs']
+body:
+  - type: textarea
+    attributes:
+      label: Documentation
+      description: What to document ?
+    validations:
+      required: true
