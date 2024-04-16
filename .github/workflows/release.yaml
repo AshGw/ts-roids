@@ -1,14 +1,54 @@
-name: Test
+name: Release
 
 on:
-  pull_request:
-  workflow_dispatch:
-  workflow_call:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: Release
+  cancel-in-progress: false
 
 jobs:
-  run:
+  check-formatting:
+    uses: ./.github/workflows/check-formatting.yml
+  lint:
+    uses: ./.github/workflows/lint.yml
+  check-dependencies:
+    uses: ./.github/workflows/check-dependencies.yml
+  check-spelling:
+    uses: ./.github/workflows/check-spelling.yml
+  test:
+    uses: ./.github/workflows/test.yml
+
+  npm:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - lint
+      - check-dependencies
+      - check-spelling
+      - check-formatting
+      - test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: ./.github/actions/prepare
-      - run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
+          npm publish --access public
