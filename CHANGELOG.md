@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.6.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.5.0...v1.6.0)
+
+### 🚀 Enhancements
+
+- **#35:** Finish `IsTruthy` ([ae683cf](https://github.com/ashgw/ts-extended/commit/ae683cf))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.5.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.4.0...v1.5.0)
