@@ -1,6 +1,51 @@
 # Changelog
 
 
+## v0.0.2
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v0.0.1...v0.0.2)
+
+### 🚀 Enhancements
+
+- Add `MaybeUndefined` ([4390496](https://github.com/ashgw/ts-extended/commit/4390496))
+- Add `Numeric` type ([0eea785](https://github.com/ashgw/ts-extended/commit/0eea785))
+- Add `Primitive` type ([af76189](https://github.com/ashgw/ts-extended/commit/af76189))
+- Add `Falsy` type ([3ea0bd9](https://github.com/ashgw/ts-extended/commit/3ea0bd9))
+- Add `IsFalsy` type ([587793b](https://github.com/ashgw/ts-extended/commit/587793b))
+- Add `IsTruthy` type ([911ec24](https://github.com/ashgw/ts-extended/commit/911ec24))
+- Add `IsNever` type ([2b75bdb](https://github.com/ashgw/ts-extended/commit/2b75bdb))
+- Add `IsUnknown` type ([63e134d](https://github.com/ashgw/ts-extended/commit/63e134d))
+- Add `Keys` type ([0fed916](https://github.com/ashgw/ts-extended/commit/0fed916))
+- Add `Vals` type ([66f812d](https://github.com/ashgw/ts-extended/commit/66f812d))
+- Add `OneOrMany` type ([1dd352f](https://github.com/ashgw/ts-extended/commit/1dd352f))
+- Add `MaybeUndefined` type ([cbef3fd](https://github.com/ashgw/ts-extended/commit/cbef3fd))
+- Add `Newable` type ([6dc2571](https://github.com/ashgw/ts-extended/commit/6dc2571))
+- Finish `Nullable` type ([3607191](https://github.com/ashgw/ts-extended/commit/3607191))
+
+### 🩹 Fixes
+
+- **gh-actions:** Typo ([fabf418](https://github.com/ashgw/ts-extended/commit/fabf418))
+- **actions:** Major typo ([c58c8a6](https://github.com/ashgw/ts-extended/commit/c58c8a6))
+- **actions:** Major typo ([0c609d0](https://github.com/ashgw/ts-extended/commit/0c609d0))
+- "any" problem ([6cfe74e](https://github.com/ashgw/ts-extended/commit/6cfe74e))
+
+### 🏡 Chore
+
+- **prettier:** Ignore more files ([2732444](https://github.com/ashgw/ts-extended/commit/2732444))
+- **prettierrc:** Cleanup ([2b813cd](https://github.com/ashgw/ts-extended/commit/2b813cd))
+- Add more works to the dictionary ([a4fe852](https://github.com/ashgw/ts-extended/commit/a4fe852))
+
+### 🤖 CI
+
+- Fix yaml typo ([1065590](https://github.com/ashgw/ts-extended/commit/1065590))
+- Add actions ([776f0c7](https://github.com/ashgw/ts-extended/commit/776f0c7))
+- Run all lints as a pre-commit hook ([170f08f](https://github.com/ashgw/ts-extended/commit/170f08f))
+- Ommit publishing for 24hrs ([e4349cc](https://github.com/ashgw/ts-extended/commit/e4349cc))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v0.0.1
 
 
