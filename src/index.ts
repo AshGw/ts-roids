@@ -78,7 +78,22 @@ export type IsNever<T> = [T] extends [never] ? true : false;
  */
 export type IsUnknown<T> = T extends unknown ? true : false;
 
+/**
+ * Represents the keys of a given type `T`.
+ * This type alias `Keys<T>` is equivalent to `keyof T`,
+ * which retrieves the union type of keys (property names) of type `T`.
+ * @returns Union type of keys (property names) of type `T`.
+ * @example
+ * type Person = {
+ *   name: string;
+ *   age: number;
+ *   email: string;
+ * };
+ *
+ * type PersonKeys = Keys<Person>; => "name" | "age" | "email"
+ */
 export type Keys<T> = keyof T;
+
 export type Vals<T> = T[Keys<T>];
 export type OneOrMany<T> = T | T[];
 export type MaybeUndefined<T> = T | undefined;
