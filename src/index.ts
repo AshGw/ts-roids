@@ -34,8 +34,8 @@ export type Falsy = false | '' | 0 | Nullable;
  * Checks if a given type `T` is `Falsy`.
  * @returns `true` if `T` is a subtype of `Falsy`, otherwise `false`.
  * @example
- * type TestFalsy = IsFalsy<''>; // TestFalsy is `true`
- * type TestTruthy = IsFalsy<10>; // TestTruthy is `false`
+ * type Falsy = IsFalsy<''>; // TestFalsy is tru`
+ * type Truthy = IsFalsy<10>; // TestTruthy is false
  */
 export type IsFalsy<T> = T extends Falsy ? true : false;
 
@@ -44,13 +44,22 @@ export type IsFalsy<T> = T extends Falsy ? true : false;
  * A truthy value is any value that is not a falsy value.
  * @returns `true` if `T` is not a subtype of `Falsy`, otherwise `false`.
  * @example
- * type TestTruthyString = IsTruthy<string>; // => `true`
- * type TestTruthyNumber = IsTruthy<10>; // => `true`
- * type TestFalsyNull = IsTruthy<null>; // => `false`
- * type TestFalsyEmptyString = IsTruthy<''>; => `false`
+ * type TruthyString = IsTruthy<string>; // => true
+ * type TruthyNumber = IsTruthy<10>; // => true
+ * type FalsyNull = IsTruthy<null>; // => false
+ * type FalsyEmptyString = IsTruthy<''>; => false
  */
 export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
 
+/**
+ * Checks if a given type `T` is `never`.
+ * The `never` type represents a value that never occurs,
+ * for example a function that always errors out.
+ * @returns `true` if `T` is `never`, otherwise `false`.
+ * @example
+ * type Never = IsNever<never>; => true
+ * type NotNever = IsNever<string>; => false
+ */
 export type IsNever<T> = [T] extends [never] ? true : false;
 export type IsUnknwon<T> = [T] extends [unknown] ? true : false;
 export type Keys<T> = keyof T;
