@@ -30,7 +30,16 @@ export type Primitive = string | boolean | symbol | Nullable | Numeric;
  */
 export type Falsy = false | '' | 0 | Nullable;
 
+/**
+ * Type utility to check if a given type `T` is a subtype of `Falsy`.
+ * @template T The type to check.
+ * @returns `true` if `T` is a subtype of `Falsy`, otherwise `false`.
+ * @example
+ * type TestFalsy = IsFalsy<''>; // TestFalsy is `true`
+ * type TestTruthy = IsFalsy<10>; // TestTruthy is `false`
+ */
 export type IsFalsy<T> = T extends Falsy ? true : false;
+
 export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
 export type IsNever<T> = [T] extends [never] ? true : false;
 export type IsUnknwon<T> = [T] extends [unknown] ? true : false;
