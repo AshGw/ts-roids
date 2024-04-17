@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.9.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.8.0...v1.9.0)
+
+### 🚀 Enhancements
+
+- Finish `Keys` ([81503b5](https://github.com/ashgw/ts-extended/commit/81503b5))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.8.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.7.0...v1.8.0)
