@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.1.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- **#32:** Finish `Primitive` ([1f1d979](https://github.com/ashgw/ts-extended/commit/1f1d979))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.2.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.1.0...v1.2.0)
