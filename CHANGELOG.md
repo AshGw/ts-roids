@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v0.0.2...v1.1.0)
+
 ## v0.0.2
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v0.0.1...v0.0.2)
