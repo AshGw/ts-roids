@@ -10,7 +10,17 @@ export type Nullable = null | undefined;
  */
 export type Numeric = number | bigint;
 
-export type Primitive = Nullable | Numeric | string | boolean | symbol;
+/**
+ * Represents all the primitive types in JavaScript.
+ * - `Nullable`: A value that can be either null or undefined.
+ * - `Numeric`: A value that can be either a number or a bigint.
+ * - `string`: Represents textual data.
+ * - `boolean`: Represents a logical value (true or false).
+ * - `symbol`: Represents a unique and immutable value.
+ * @type {Primitive}
+ */
+export type Primitive = string | boolean | symbol | Nullable | Numeric;
+
 export type Falsy = false | '' | 0 | Nullable;
 export type IsFalsy<T> = T extends Falsy ? true : false;
 export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
