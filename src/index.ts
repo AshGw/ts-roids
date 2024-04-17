@@ -61,7 +61,23 @@ export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
  * type NotNever = IsNever<string>; => false
  */
 export type IsNever<T> = [T] extends [never] ? true : false;
-export type IsUnknwon<T> = [T] extends [unknown] ? true : false;
+
+/**
+ * Checks if a given type `T` is `unknown`.
+ * The `unknown` type is the type-safe counterpart of `any`.
+ * Values of type `unknown` can hold any value, similar to `any`, but with stricter type safety.
+ * Unlike `any`, you cannot perform operations directly on values of type `unknown`
+ * without type assertion or type narrowing.
+ * @returns `true` if `T` is `unknown`, otherwise `false`.
+ * @example
+ * type UnknownValue = unknown;
+ * type IsUnknownValue = IsUnknown<UnknownValue>; =>  true
+ *
+ * type KnownValue = string;
+ * type IsNotUnknownValue = IsUnknown<KnownValue>; => true
+ */
+export type IsUnknown<T> = T extends unknown ? true : false;
+
 export type Keys<T> = keyof T;
 export type Vals<T> = T[Keys<T>];
 export type OneOrMany<T> = T | T[];
