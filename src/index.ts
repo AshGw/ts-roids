@@ -31,8 +31,7 @@ export type Primitive = string | boolean | symbol | Nullable | Numeric;
 export type Falsy = false | '' | 0 | Nullable;
 
 /**
- * Type utility to check if a given type `T` is a subtype of `Falsy`.
- * @template T The type to check.
+ * Checks if a given type `T` is `Falsy`.
  * @returns `true` if `T` is a subtype of `Falsy`, otherwise `false`.
  * @example
  * type TestFalsy = IsFalsy<''>; // TestFalsy is `true`
@@ -40,7 +39,18 @@ export type Falsy = false | '' | 0 | Nullable;
  */
 export type IsFalsy<T> = T extends Falsy ? true : false;
 
+/**
+ * Checks if a given type `T` is a truthy value.
+ * A truthy value is any value that is not a falsy value.
+ * @returns `true` if `T` is not a subtype of `Falsy`, otherwise `false`.
+ * @example
+ * type TestTruthyString = IsTruthy<string>; // => `true`
+ * type TestTruthyNumber = IsTruthy<10>; // => `true`
+ * type TestFalsyNull = IsTruthy<null>; // => `false`
+ * type TestFalsyEmptyString = IsTruthy<''>; => `false`
+ */
 export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
+
 export type IsNever<T> = [T] extends [never] ? true : false;
 export type IsUnknwon<T> = [T] extends [unknown] ? true : false;
 export type Keys<T> = keyof T;
