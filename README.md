@@ -2,19 +2,25 @@
 Bullet proof TypeScript even more
 ### Installation 
 ```bash
+# npm 
 npm i ts-extended
+
+# pnpm
+pnpm i ts-extended
+
+# yarn 
+yarn add ts-extended
 ```
 
 ### Example
 ```ts
-import { 
-    locked,
-    final,
+import type { 
     Maybe,
     Primitive,
     Newable,
     Callable
 } from 'ts-extended';
+import { locked, final } from 'ts-extended';
 
 export type F<A extends Primitive, R extends Newable> = Callable<A[], R>;
 
