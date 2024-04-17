@@ -21,7 +21,15 @@ export type Numeric = number | bigint;
  */
 export type Primitive = string | boolean | symbol | Nullable | Numeric;
 
+/**
+ * Represents a type that includes falsy values in JavaScript.
+ * Falsy values are those that coerce to false when used in a boolean context.
+ * This includes `false`, an empty string (`''`), numeric zero (`0`), `null`,
+ * and `undefined`.
+ * @type {Falsy}
+ */
 export type Falsy = false | '' | 0 | Nullable;
+
 export type IsFalsy<T> = T extends Falsy ? true : false;
 export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
 export type IsNever<T> = [T] extends [never] ? true : false;

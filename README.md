@@ -1,5 +1,3 @@
-# ts-extended
-Bullet proof TypeScript even more
 ### Installation 
 ```bash
 # npm 
