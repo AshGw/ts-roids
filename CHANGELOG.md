@@ -1,13 +1,21 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.1.0...v1.2.0)
+
+### 🚀 Enhancements
+
+- Finish `Numeric` type ([487ef42](https://github.com/ashgw/ts-extended/commit/487ef42))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.1.0
 
-[compare changes](https://github.com/ashgw/ts-extended/compare/v0.0.2...v1.1.0)
-
-## v0.0.2
-
-[compare changes](https://github.com/ashgw/ts-extended/compare/v0.0.1...v0.0.2)
+[compare changes](https://github.com/ashgw/ts-extended/compare/v0.0.1...v1.1.0)
 
 ### 🚀 Enhancements
 
