@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.6.0...v1.7.0)
+
+### 🚀 Enhancements
+
+- **#36:** Finish `IsNever` ([fa62b73](https://github.com/ashgw/ts-extended/commit/fa62b73))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.6.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.5.0...v1.6.0)
