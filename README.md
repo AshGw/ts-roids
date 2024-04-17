@@ -1,13 +1,6 @@
 ### Installation 
 ```bash
-# npm 
 npm i ts-extended
-
-# pnpm
-pnpm i ts-extended
-
-# yarn 
-yarn add ts-extended
 ```
 
 ### Example

@@ -49,5 +49,5 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          # echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
-          # npm publish --access public
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
+          npm publish --access public
