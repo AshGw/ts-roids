@@ -2,7 +2,7 @@ import { IsUnknown } from 'src';
 import { expect, test, expectTypeOf } from 'vitest';
 
 test('Unknown is a type-safe counterpart of any, so it passes on all', () => {
-  const unknownValue: unknown = 'Hello';
+  const unknownValue: unknown = 'bar';
   expect<IsUnknown<typeof unknownValue>>(true).toBe(true);
   expect<IsUnknown<number>>(true).toBe(true);
   expect<IsUnknown<string | unknown>>(true).toBe(true);

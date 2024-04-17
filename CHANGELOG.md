@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.8.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.7.0...v1.8.0)
+
+### 🚀 Enhancements
+
+- **#37:** Finish `IsUnknown` ([2e85b89](https://github.com/ashgw/ts-extended/commit/2e85b89))
+
+### 💅 Refactors
+
+- Rename `release.yaml` to `ci.yaml` ([064e0da](https://github.com/ashgw/ts-extended/commit/064e0da))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.7.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.6.0...v1.7.0)
