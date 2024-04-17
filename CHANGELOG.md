@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/ashgw/ts-extended/compare/v1.3.0...v1.4.0)
+
+### 🚀 Enhancements
+
+- **#33:** Finish `Falsy` ([216e73b](https://github.com/ashgw/ts-extended/commit/216e73b))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.3.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.1.0...v1.3.0)
