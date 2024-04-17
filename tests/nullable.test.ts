@@ -2,9 +2,8 @@ import { Nullable } from 'src';
 import { describe, assertType, expect, expectTypeOf, test, it } from 'vitest';
 
 test.fails('fail test', () => {
-  type _T = { foo: boolean };
-  // @ts-expect-error, it cannot be _T, it should error out
-  expect(assertType<_T>(null)).rejects.toBe(true);
+  // @ts-expect-error, it cannot be this type, it should error out
+  expect(assertType<Nullable>({ foo: boolean })).rejects.toBe(true);
 });
 
 test('concrete types', () => {

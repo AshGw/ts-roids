@@ -14,13 +14,13 @@ yarn add ts-extended
 
 ### Example
 ```ts
+import { locked, final } from 'ts-extended';
 import type { 
     Maybe,
     Primitive,
     Newable,
     Callable
 } from 'ts-extended';
-import { locked, final } from 'ts-extended';
 
 export type F<A extends Primitive, R extends Newable> = Callable<A[], R>;
 
