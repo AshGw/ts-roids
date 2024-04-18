@@ -38,6 +38,9 @@ devDependencies:
   '@semantic-release/release-notes-generator':
     specifier: 12.1.0
     version: 12.1.0(semantic-release@23.0.2)
+  '@types/eslint':
+    specifier: 8.56.10
+    version: 8.56.10
   '@types/node':
     specifier: 20.10.7
     version: 20.10.7
@@ -88,7 +91,7 @@ devDependencies:
     version: 1.2.1
   eslint-plugin-prettier:
     specifier: 5.1.2
-    version: 5.1.2(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.1)
+    version: 5.1.2(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.1)
   eslint-plugin-promise:
     specifier: 6.1.1
     version: 6.1.1(eslint@8.56.0)
@@ -1842,6 +1845,13 @@ packages:
 
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+    dev: true
+
+  /@types/eslint@8.56.10:
+    resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
+    dependencies:
+      '@types/estree': 1.0.5
+      '@types/json-schema': 7.0.15
     dev: true
 
   /@types/estree@1.0.5:
@@ -3625,7 +3635,7 @@ packages:
       regexp-tree: 0.1.27
     dev: true
 
-  /eslint-plugin-prettier@5.1.2(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.1):
+  /eslint-plugin-prettier@5.1.2(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.1):
     resolution: {integrity: sha512-dhlpWc9vOwohcWmClFcA+HjlvUpuyynYs0Rf+L/P6/0iQE6vlHW9l5bkfzN62/Stm9fbq8ku46qzde76T1xlSg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -3639,6 +3649,7 @@ packages:
       eslint-config-prettier:
         optional: true
     dependencies:
+      '@types/eslint': 8.56.10
       eslint: 8.56.0
       eslint-config-prettier: 9.1.0(eslint@8.56.0)
       prettier: 3.1.1

@@ -130,6 +130,10 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   ? true
   : false;
 
+// Typesafer way han maybe, think about hwen you have optional return types of
+// functions, shoud u `return` ?  with maybe ure free to do it or not
+// but optional u have to return null, so the use case and handling are superior
+
 export type Optional<T> = T | null;
 export type Maybe<T> = T | Nullable;
 export type MaybeUnknown<T> = T | unknown;
@@ -213,6 +217,37 @@ export type SwapKeysWithVals<T extends Record<Keys<T>, Keys<any>>> = {
     [K in Keys<T>]: T[K] extends P ? K : never;
   }[keyof T];
 };
+
+declare const __s: unique symbol;
+
+/**
+ * This type alias defines a mechanism similar to Python's [`NewType`](https://docs.python.org/3/library/typing.html#newtype).
+ * In TypeScript world it's refered to as 'Branding'.
+ * The `NewType<N>` encapsulates `N`, thus creating a distinct type that
+ * TypeScript's type system recognizes as separate from its underlying type.
+ * @example
+ * type Foo = NewType<string>;
+ * type Bar = NewType<number>;
+ * type Baz = NewType<boolean>;
+ *
+ * function fooBarBaz(foo: Foo, bar: Bar): Baz {
+ *   foo.concat(); // Allowed since Foo is an underlying string
+ *   bar.toExponential(); // Allowed since Bar is based on number
+ *   const baz = true as Baz; // Valid
+ *
+ *   // The following lines will result in a compiler error:
+ *   foo.toExponential(); // Compiler Error, Foo is based on string
+ *   const notBaz = 'str' as Baz; // Compiler Error, Baz is based on boolean
+ * return baz;
+ * }
+ */
+export type NewType<N> = {
+  /**
+   * Property `__s` is not intended for direct access or modification.
+   * @internal
+   */
+  [__s]: true;
+} & N;
 
 export type Stretch<T> = T extends object
   ? T extends infer P
