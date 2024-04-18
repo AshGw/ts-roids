@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.11.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.10.0...v1.11.0)
+
+### 🚀 Enhancements
+
+- Finish `OneOrMany` ([45d3d90](https://github.com/ashgw/ts-roids/commit/45d3d90))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.10.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.9.0...v1.10.0)
