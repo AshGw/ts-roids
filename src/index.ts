@@ -118,7 +118,109 @@ export type Vals<T> = T[Keys<T>];
  * const value2: OneOrMany<number> = [20, 30]; // Valid, value2 is an array of numbers
  */
 export type OneOrMany<T> = T | T[];
-export type MaybeUndefined<T> = T | undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Newable = { new (...args: any[]): any };
+
+export type ExcludeNullable<T> = Exclude<T, Nullable>;
+export type ExcludeUndefined<T> = Exclude<T, undefined>;
+export type ExcludeNull<T> = Exclude<T, null>;
+export type DeepExcludeNullable<T> = {
+  [P in Keys<T>]-?: ExcludeNullable<T[P]>;
+};
+
+export type Maybe<T> = T | Nullable;
+export type MaybeUnknown<T> = T | unknown;
+export type MaybeUndefined<T> = T | undefined;
+export type Optional<T> = T | null;
+
+export type DeepPartial<T> = {
+  [P in Keys<T>]?: DeepPartial<T[P]>;
+};
+
+export type Mutate<T> = {
+  -readonly [K in Keys<T>]: T[K];
+};
+export type IsMutable<T> = T extends DeepMutate<T> ? true : false;
+
+export type DeepMutate<T> = {
+  -readonly [K in Keys<T>]: DeepMutate<T[K]>;
+};
+
+export type Immutate<T> = {
+  +readonly [K in Keys<T>]: T[K];
+};
+
+export type DeepImmutate<T> = {
+  +readonly [K in Keys<T>]: DeepImmutate<T[K]>;
+};
+
+export type IsNewable<T> = T extends Newable ? true : false;
+
+export type AlterKeyType<T, K extends Keys<T>, R> = Pick<
+  T,
+  Exclude<Keys<T>, K>
+> & { [P in K]: R };
+
+export type SwapKeysWithVals<T extends Record<Keys<T>, Keys<any>>> = {
+  [P in T[Keys<T>]]: {
+    [K in Keys<T>]: T[K] extends P ? K : never;
+  }[keyof T];
+};
+
+export type Stretch<T> = T extends object
+  ? T extends infer P
+    ? { [K in Keys<P>]: Stretch<P[K]> }
+    : never
+  : T;
+
+const _ = Symbol('_');
+export type TypeGuard<T> = (_: any) => _ is T;
+
+export type FilterBy<T, P> = {
+  [K in Keys<T>]: K extends P ? K : never;
+}[Keys<T>];
+
+export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
+export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
+
+export type EmptyObject = Record<string, never>;
+
+export type NullableKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
+}[keyof T];
+
+export type DeepNullableKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? NullableKeys<K> : never;
+}[keyof T];
+
+export type NonNullableKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
+}[keyof T];
+
+export type DeepNonNullableKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : NonNullableKeys<K>;
+}[keyof T];
+
+export type Callable<A extends any[], R> = (...args: A) => R;
+
+export function locked(constructor: Newable): void {
+  function _sealAndFreeze(obj: object): void {
+    Object.seal(obj);
+    Object.freeze(obj);
+    Object.preventExtensions(obj);
+  }
+  _sealAndFreeze(constructor);
+  _sealAndFreeze(constructor.prototype);
+}
+
+export function final<T extends Newable>(target: T): T {
+  return class Final extends target {
+    constructor(...args: any[]) {
+      if (new.target !== Final) {
+        throw new Error(`${target.name} is final, you cannot extend it`);
+      }
+      super(...args);
+    }
+  };
+}

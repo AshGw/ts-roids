@@ -4,3 +4,4 @@ npmjs
 lintstagedrc
 Unknwon
 Vals
+Immutate
