@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.12.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.11.0...v1.12.0)
+
+### 🚀 Enhancements
+
+- **#43:** Add `TestType` ([935cef3](https://github.com/ashgw/ts-roids/commit/935cef3))
+
+### 📦 Build
+
+- **eslint:** Allow any ([c2d8157](https://github.com/ashgw/ts-roids/commit/c2d8157))
+
+### 🏡 Chore
+
+- Setup PoC for all types ([efbcb07](https://github.com/ashgw/ts-roids/commit/efbcb07))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.11.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.10.0...v1.11.0)
