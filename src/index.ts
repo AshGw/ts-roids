@@ -108,6 +108,15 @@ export type Keys<T> = keyof T;
  * type PersonValues = Vals<Person>; => string | number
  */
 export type Vals<T> = T[Keys<T>];
+
+/**
+ * Represents a type that can be either a single value of type `T` or an array of values of type `T`.
+ * @example
+ * type SingleOrArray<T> = OneOrMany<T>;
+ *
+ * const value1: OneOrMany<number> = 10; // Valid, value1 is a single number
+ * const value2: OneOrMany<number> = [20, 30]; // Valid, value2 is an array of numbers
+ */
 export type OneOrMany<T> = T | T[];
 export type MaybeUndefined<T> = T | undefined;
 
