@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.14.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.13.0...v1.14.0)
+
+### 🚀 Enhancements
+
+- **#49:** Finsih `NewType<T>` ([c48abce](https://github.com/ashgw/ts-roids/commit/c48abce))
+
+### 💅 Refactors
+
+- Rename `Filter<T,P>` to `FilterArray<T,P>` ([2fa5e3d](https://github.com/ashgw/ts-roids/commit/2fa5e3d))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.13.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.12.0...v1.13.0)
