@@ -3,7 +3,8 @@
 npm i ts-roids
 ```
 
-### Example
+### Examples
+#### Lock a class (make it immutable) and finalize it (prohibit further extension)
 ```ts
 import { locked, final } from 'ts-roids';
 import type { 
@@ -24,6 +25,12 @@ export class Foo<F> {
   }
 }
 ```
+#### Quickly validates types using IntelliSense
+```typescript 
+type ResultType = TestType<Type1, Type2, true>;
+```
+``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you think they match, false otherwise). The resulting ``ResultType`` will tell if the choice is correct, true if the types actually match, else false.
+
 ### Docs
 Checkout the inline documentation in `/src` along with `/tests` to see how it works.
 ### License 

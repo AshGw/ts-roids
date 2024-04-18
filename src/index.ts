@@ -147,6 +147,51 @@ export type DeepMutate<T> = {
   -readonly [K in Keys<T>]: DeepMutate<T[K]>;
 };
 
+type X = {
+  readonly a: () => 1;
+  readonly b: string;
+  readonly c: {
+    readonly d: boolean;
+    readonly e: {
+      readonly g: {
+        readonly h: {
+          readonly i: true;
+          readonly j: 's';
+        };
+        readonly k: 'hello';
+      };
+    };
+  };
+};
+
+type Expected = {
+  a: () => 1;
+  b: string;
+  c: {
+    d: boolean;
+    e: {
+      g: {
+        h: {
+          i: true;
+          j: 's';
+        };
+        k: 'hello';
+      };
+    };
+  };
+};
+
+export type DeepMutable<T extends Record<Keys<any>, any>> = T extends Callable<
+  OneOrMany<any>,
+  any
+>
+  ? T
+  : {
+      -readonly [K in Keys<T>]: DeepMutable<T[K]>;
+    };
+
+export type ResultType = TestType<DeepMutable<X>, Expected, true>;
+
 export type Immutate<T> = {
   +readonly [K in Keys<T>]: T[K];
 };
@@ -203,6 +248,42 @@ export type DeepNonNullableKeys<T> = {
 
 export type Callable<A extends any[], R> = (...args: A) => R;
 
+export type IfSame<T, P, Yes, No> = T extends P ? Yes : No;
+export type ShallowEquals<X, Y> = X extends Y ? true : false;
+export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
+  T,
+>() => T extends Y ? true : false
+  ? true
+  : false;
+
+export type MutableKeys<T> = keyof {
+  [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
+    ? never
+    : P]: never;
+};
+
+export type ImmutableKeys<T> = keyof {
+  [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
+    ? P
+    : never]: never;
+};
+
+declare function _testType<T1, T2, E extends boolean>(): Equals<
+  Equals<T1, T2>,
+  E
+>;
+export type TestType<T1, T2, Expected extends boolean> = ReturnType<
+  typeof _testType<T1, T2, Expected>
+>;
+// TODO: clean this shit
+type Type1 = string;
+type Type2 = string;
+type Type3 = number;
+
+export type Result1 = TestType<Type1, Type2, true>;
+export type Result2 = TestType<Type1, Type3, false>;
+
+/* class is fucking lockedin ong! */
 export function locked(constructor: Newable): void {
   function _sealAndFreeze(obj: object): void {
     Object.seal(obj);
@@ -223,17 +304,3 @@ export function final<T extends Newable>(target: T): T {
     }
   };
 }
-
-export type IfSame<T, P, Yes, No> = T extends P ? Yes : No;
-export type ShallowEquals<X, Y> = X extends Y ? true : false;
-export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
-  T,
->() => T extends Y ? true : false
-  ? true
-  : false;
-
-export type MutableKeys<T> = keyof {
-  [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
-    ? never
-    : P]: never;
-};
