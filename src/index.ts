@@ -94,6 +94,20 @@ export type IsUnknown<T> = T extends unknown ? true : false;
  */
 export type Keys<T> = keyof T;
 
+/**
+ * Represents the union type of values of properties in a given type `T`.
+ * This type alias `Vals<T>` retrieves the union type of values corresponding
+ * to the keys (property names) of type `T`.
+ * @returns Union type of values of properties in type `T`.
+ * @example
+ * type Person = {
+ *   name: string;
+ *   age: number;
+ *   email: string;
+ * };
+ *
+ * type PersonValues = Vals<Person>; // Equivalent to string | number
+ */
 export type Vals<T> = T[Keys<T>];
 export type OneOrMany<T> = T | T[];
 export type MaybeUndefined<T> = T | undefined;

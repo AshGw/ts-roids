@@ -4,6 +4,7 @@ alias t:= test
 alias l:= lint
 alias b:= build
 alias c:= clean
+alias f:= format
 
 @help:
     just --list
@@ -29,6 +30,9 @@ alias c:= clean
 @lint:
     pnpm lint
 
+@format:
+    pnpm format
+    
 @clean:
     rm -rf coverage dist 
 
