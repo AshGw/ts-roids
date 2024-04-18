@@ -1,6 +1,6 @@
 {
   "name": "ts-roids",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "private": false,
   "description": "Extending the TS library with types and decorators that should've been built-in",
   "keywords": [
@@ -40,7 +40,7 @@
     "build:node": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "hooks": "husky init",
     "test": "vitest --coverage --run",
-    "lint": "pnpm format-check && pnpm lint:ts && pnpm lint:spelling && pnpm lint:knip",
+    "lint": "pnpm format && pnpm lint:ts && pnpm lint:spelling && pnpm lint:knip",
     "lint:ts": "tsc --noEmit; eslint .",
     "lint:knip": "knip --production --strict --exclude exports,nsExports,types,nsTypes",
     "format": "prettier . --write",

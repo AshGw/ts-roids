@@ -374,6 +374,16 @@ export type IsInArray<T extends unknown[], I> = T extends [infer S, ...infer E]
     : IsInArray<E, I>
   : false;
 
+/**
+ * A type that constructs a new array containing only unique elements from a given array type.
+ * @typeParam T The input array type from which unique elements are extracted.
+ * @example
+ * ```typescript
+ * type UArr = UniqueArray<
+  [unknown, unknown, 'foo', any, never, never, '33', 33, '33']
+>; // =>  [unknown, 'foo', any, never, '33', 33]
+ * ```
+ */
 export type UniqueArray<T, R extends any[] = []> = T extends [
   infer S,
   ...infer E,

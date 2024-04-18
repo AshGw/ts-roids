@@ -39,21 +39,22 @@ function fooBar(foo: string, bar: string) {
   }
 }
 ```
-What are we returning exactly? Is it a string? what does the string represent? 
-maybe we're not returning anything.
+What are we returning exactly? Is it a string? what does the string represent even? 
+It might not return anything too..
 
 There are so many ways thing can go wrong here. 
-Here's how to fix it
+Here's how to fix it.
 ```typescript 
 import { NewType, Optional } from 'ts-roids' 
 
 type Baz = NewType<string>;
 
-function _fooBarBaz(foo: string, bar: string): Optional<Baz> {
+function fooBar(foo: string, bar: string): Optional<Baz> {
   if (condition(foo, bar)) {
     return 'baz' as Baz;
   }
-  return null; // if you do not return here, meaning undefined you'll get an error
+  return null; 
+  // you must explicitly return null here, otherwise it will Error.
 }
 ```
 ### Docs

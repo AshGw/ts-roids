@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.15.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.14.0...v1.15.0)
+
+### 🚀 Enhancements
+
+- **#51:** Finish `IsInArray<T,E>` ([988d33a](https://github.com/ashgw/ts-roids/commit/988d33a))
+
+### 💅 Refactors
+
+- Rename `FilterArray<T,P>` to `ArrayFilter<T,P>` for ease of imports ([075a966](https://github.com/ashgw/ts-roids/commit/075a966))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.14.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.13.0...v1.14.0)
