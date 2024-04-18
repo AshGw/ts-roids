@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.17.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.16.0...v1.17.0)
+
+### 🚀 Enhancements
+
+- **#50:** Finish `UniqueArray<T>` ([d713ccc](https://github.com/ashgw/ts-roids/commit/d713ccc))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.16.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.14.0...v1.16.0)
