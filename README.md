@@ -1,17 +1,17 @@
 ### Installation 
 ```bash
-npm i ts-extended
+npm i ts-roids
 ```
 
 ### Example
 ```ts
-import { locked, final } from 'ts-extended';
+import { locked, final } from 'ts-roids';
 import type { 
     Maybe,
     Primitive,
     Newable,
     Callable
-} from 'ts-extended';
+} from 'ts-roids';
 
 export type F<A extends Primitive, R extends Newable> = Callable<A[], R>;
 

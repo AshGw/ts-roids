@@ -1,5 +1,5 @@
 {
-  "name": "ts-extended",
+  "name": "ts-roids",
   "version": "1.9.0",
   "private": false,
   "description": "Extending the TS library with types and decorators that should've been built-in",
@@ -7,13 +7,13 @@
     "types",
     "decorators"
   ],
-  "homepage": "https://github.com/ashgw/ts-extended",
+  "homepage": "https://github.com/ashgw/ts-roids",
   "bugs": {
-    "url": "https://github.com/ashgw/ts-extended/issues"
+    "url": "https://github.com/ashgw/ts-roids/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ashgw/ts-extended.git"
+    "url": "git+https://github.com/ashgw/ts-roids.git"
   },
   "license": "GPL-3.0-only",
   "author": {
