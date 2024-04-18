@@ -275,13 +275,13 @@ export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
  * type FilteredNumbers = Filter<Numbers, 0 | 1>; // Results in [0, 1]
  * ```
  */
-export type FilterArray<T extends unknown[], P> = T extends [
+export type ArrayFilter<T extends unknown[], P> = T extends [
   infer S,
   ...infer E,
 ]
   ? S extends P
-    ? [S, ...FilterArray<E, P>]
-    : FilterArray<E, P>
+    ? [S, ...ArrayFilter<E, P>]
+    : ArrayFilter<E, P>
   : [];
 
 export type EmptyObject = Exclude<object, Nullable>;
@@ -355,3 +355,9 @@ export function final<T extends Newable>(target: T): T {
     }
   };
 }
+
+export type Includes<T, U> = U extends [infer S, ...infer E]
+  ? Equals<S, T> extends true
+    ? true
+    : Includes<T, E>
+  : false;
