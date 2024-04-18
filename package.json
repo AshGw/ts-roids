@@ -1,6 +1,6 @@
 {
   "name": "ts-roids",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "private": false,
   "description": "Extending the TS library with types and decorators that should've been built-in",
   "keywords": [

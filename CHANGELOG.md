@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.13.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.12.0...v1.13.0)
+
+### 🚀 Enhancements
+
+- **#45:** Finish `Filter<T,P>` ([3fc6c13](https://github.com/ashgw/ts-roids/commit/3fc6c13))
+
+### ✅ Tests
+
+- **#46:** Start using the native   instead of  's test types ([9de73aa](https://github.com/ashgw/ts-roids/commit/9de73aa))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.12.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.11.0...v1.12.0)
