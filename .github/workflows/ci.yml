@@ -1,4 +1,4 @@
-name: Release
+name: CI
 
 on:
   push:
@@ -15,13 +15,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  check-formatting:
+  format:
     uses: ./.github/workflows/check-formatting.yml
   lint:
     uses: ./.github/workflows/lint.yml
-  check-dependencies:
+  dependencies:
     uses: ./.github/workflows/check-dependencies.yml
-  check-spelling:
+  spelling:
     uses: ./.github/workflows/check-spelling.yml
   test:
     uses: ./.github/workflows/test.yml
@@ -29,9 +29,9 @@ jobs:
   npm:
     needs:
       - lint
-      - check-dependencies
-      - check-spelling
-      - check-formatting
+      - dependencies
+      - spelling
+      - format
       - test
     runs-on: ubuntu-latest
     steps:

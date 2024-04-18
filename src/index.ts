@@ -60,7 +60,7 @@ export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
  * type Never = IsNever<never>; => true
  * type NotNever = IsNever<string>; => false
  */
-export type IsNever<T> = [T] extends [never] ? true : false;
+export type IsNever<T> = T extends never ? true : false;
 
 /**
  * Checks if a given type `T` is `unknown`.
@@ -114,37 +114,37 @@ export type Vals<T> = T[Keys<T>];
  * @example
  * type SingleOrArray<T> = OneOrMany<T>;
  *
- * const value1: OneOrMany<number> = 10; // Valid, value1 is a single number
- * const value2: OneOrMany<number> = [20, 30]; // Valid, value2 is an array of numbers
+ * const value1: OneOrMany<number> = 10; // Valid
+ * const value2: OneOrMany<number> = [20, 30]; // Also valid
  */
-export type OneOrMany<T> = T | T[];
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type EitherOneOrMany<T> = T | T[];
 export type Newable = { new (...args: any[]): any };
+export type IsNewable<T> = T extends Newable ? true : false;
+export type AnyFunction = (...args: any[]) => any;
+export type UnknownFunction = (...args: unknown[]) => unknown;
+export type Callable<A extends any[], R> = (...args: A) => R;
+export type IfExtends<T, P, Do, Else> = T extends P ? Do : Else;
+export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
+  T,
+>() => T extends Y ? true : false
+  ? true
+  : false;
+
+export type Optional<T> = T | null;
+export type Maybe<T> = T | Nullable;
+export type MaybeUnknown<T> = T | unknown;
+export type MaybeUndefined<T> = T | undefined;
 
 export type ExcludeNullable<T> = Exclude<T, Nullable>;
 export type ExcludeUndefined<T> = Exclude<T, undefined>;
 export type ExcludeNull<T> = Exclude<T, null>;
-export type DeepExcludeNullable<T> = {
-  [P in Keys<T>]-?: ExcludeNullable<T[P]>;
-};
 
-export type Maybe<T> = T | Nullable;
-export type MaybeUnknown<T> = T | unknown;
-export type MaybeUndefined<T> = T | undefined;
-export type Optional<T> = T | null;
+export type DeepExcludeNullable<T> = {
+  [P in Keys<T>]: DeepExcludeNullable<ExcludeNullable<T[P]>>;
+};
 
 export type DeepPartial<T> = {
   [P in Keys<T>]?: DeepPartial<T[P]>;
-};
-
-export type Mutate<T> = {
-  -readonly [K in Keys<T>]: T[K];
-};
-export type IsMutable<T> = T extends DeepMutate<T> ? true : false;
-
-export type DeepMutate<T> = {
-  -readonly [K in Keys<T>]: DeepMutate<T[K]>;
 };
 
 type X = {
@@ -181,28 +181,29 @@ type Expected = {
   };
 };
 
-export type DeepMutable<T extends Record<Keys<any>, any>> = T extends Callable<
-  OneOrMany<any>,
-  any
->
+export type DeepMutable<T> = T extends UnknownFunction
   ? T
   : {
-      -readonly [K in Keys<T>]: DeepMutable<T[K]>;
+      -readonly [K in Keys<T>]: T[K] extends unknown ? DeepMutable<T[K]> : T[K];
     };
 
+export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
 export type ResultType = TestType<DeepMutable<X>, Expected, true>;
 
-export type Immutate<T> = {
-  +readonly [K in Keys<T>]: T[K];
-};
+export type DeepImmutable<T> = T extends UnknownFunction
+  ? T
+  : {
+      readonly [K in Keys<T>]: T[K] extends unknown
+        ? DeepImmutable<T[K]>
+        : T[K];
+    };
 
-export type DeepImmutate<T> = {
-  +readonly [K in Keys<T>]: DeepImmutate<T[K]>;
-};
+export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
+export type ResultType1 = TestType<IsDeepImmutable<X>, true, true>;
+export type ResultType2 = TestType<DeepImmutable<Expected>, X, true>;
+export type ResultType3 = DeepImmutable<Expected>;
 
-export type IsNewable<T> = T extends Newable ? true : false;
-
-export type AlterKeyType<T, K extends Keys<T>, R> = Pick<
+export type AlterKeyTypeWith<T, K extends Keys<T>, R> = Pick<
   T,
   Exclude<Keys<T>, K>
 > & { [P in K]: R };
@@ -219,7 +220,7 @@ export type Stretch<T> = T extends object
     : never
   : T;
 
-export type TypeGuard<T> = (_: any) => _ is T;
+export type TypeGuard<T> = (_: unknown) => _ is T;
 
 export type FilterBy<T, P> = {
   [K in Keys<T>]: K extends P ? K : never;
@@ -228,33 +229,41 @@ export type FilterBy<T, P> = {
 export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
 export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
 
+/**
+ * Represents a type that filters elements from an array based on a given predicate type.
+ * The `Filter` type takes an array type `T` and a predicate type `P`.
+ * @typeParam T The array type to filter.
+ * @typeParam P The predicate type used for filtering elements from `T`.
+ * @returns a new array type containing only the elements of `T` that match `P`.
+ * @example
+ * ```typescript
+ * type Numbers = [0, 1, 2, 3];
+ * type FilteredNumbers = Filter<Numbers, 0 | 1>; // Results in [0, 1]
+ * ```
+ */
+export type Filter<T extends unknown[], P> = T extends [infer S, ...infer E]
+  ? S extends P
+    ? [S, ...Filter<E, P>]
+    : Filter<E, P>
+  : [];
+
 export type EmptyObject = Record<string, never>;
 
-export type NullableKeys<T> = {
+export type OptionalKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
 }[keyof T];
 
-export type DeepNullableKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? NullableKeys<K> : never;
+export type DeepOptionalKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? OptionalKeys<K> : never;
 }[keyof T];
 
-export type NonNullableKeys<T> = {
+export type RequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
 }[keyof T];
 
-export type DeepNonNullableKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : NonNullableKeys<K>;
+export type DeepRequiredKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
-
-export type Callable<A extends any[], R> = (...args: A) => R;
-
-export type IfSame<T, P, Yes, No> = T extends P ? Yes : No;
-export type ShallowEquals<X, Y> = X extends Y ? true : false;
-export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
-  T,
->() => T extends Y ? true : false
-  ? true
-  : false;
 
 export type MutableKeys<T> = keyof {
   [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
@@ -275,13 +284,6 @@ declare function _testType<T1, T2, E extends boolean>(): Equals<
 export type TestType<T1, T2, Expected extends boolean> = ReturnType<
   typeof _testType<T1, T2, Expected>
 >;
-// TODO: clean this shit
-type Type1 = string;
-type Type2 = string;
-type Type3 = number;
-
-export type Result1 = TestType<Type1, Type2, true>;
-export type Result2 = TestType<Type1, Type3, false>;
 
 /* class is fucking lockedin ong! */
 export function locked(constructor: Newable): void {

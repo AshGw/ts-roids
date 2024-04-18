@@ -1,4 +1,4 @@
-import { IsNever } from 'src';
+import { IsNever, TestType } from 'src';
 import { expect, test } from 'vitest';
 
 test('IsNever correctly identifies non-never type', () => {
@@ -28,6 +28,10 @@ test('IsNever correctly identifies function return types with never as non-never
   const fnReturningNever = (): never => {
     throw new Error('This function never returns');
   };
-
-  expect<IsNever<ReturnType<typeof fnReturningNever>>>(true).toBe(true);
+  const result: TestType<
+    ReturnType<typeof fnReturningNever>,
+    never,
+    true
+  > = true;
+  expect(result).toBe(true);
 });
