@@ -24,3 +24,8 @@ test('_', () => {
   > = true;
   expect(result).toBe(true);
 });
+
+test('_', () => {
+  const result: TestType<Filter<[0, 1, 2, null], 0 | ''>, [0], true> = true;
+  expect(result).toBe(true);
+});

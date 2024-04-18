@@ -231,7 +231,6 @@ export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
 
 /**
  * Represents a type that filters elements from an array based on a given predicate type.
- * The `Filter` type takes an array type `T` and a predicate type `P`.
  * @typeParam T The array type to filter.
  * @typeParam P The predicate type used for filtering elements from `T`.
  * @returns a new array type containing only the elements of `T` that match `P`.
