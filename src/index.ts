@@ -220,7 +220,7 @@ export type Stretch<T> = T extends object
     : never
   : T;
 
-export type TypeGuard<T> = (_: unknown) => _ is T;
+export type TypeGuard<T> = (U: unknown) => U is T;
 
 export type FilterBy<T, P> = {
   [K in Keys<T>]: K extends P ? K : never;
@@ -240,13 +240,16 @@ export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
  * type FilteredNumbers = Filter<Numbers, 0 | 1>; // Results in [0, 1]
  * ```
  */
-export type Filter<T extends unknown[], P> = T extends [infer S, ...infer E]
+export type FilterArray<T extends unknown[], P> = T extends [
+  infer S,
+  ...infer E,
+]
   ? S extends P
-    ? [S, ...Filter<E, P>]
-    : Filter<E, P>
+    ? [S, ...FilterArray<E, P>]
+    : FilterArray<E, P>
   : [];
 
-export type EmptyObject = Record<string, never>;
+export type EmptyObject = Exclude<object, Nullable>;
 
 export type OptionalKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
@@ -270,11 +273,23 @@ export type MutableKeys<T> = keyof {
     : P]: never;
 };
 
+export type Result3 = TestType<
+  MutableKeys<{ a: number; readonly b: string }>,
+  'a',
+  true
+>;
+
 export type ImmutableKeys<T> = keyof {
   [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
     ? P
     : never]: never;
 };
+
+export type Result4 = TestType<
+  ImmutableKeys<{ a: number; readonly b: string }>,
+  'b',
+  true
+>;
 
 declare function _testType<T1, T2, E extends boolean>(): Equals<
   Equals<T1, T2>,
@@ -286,11 +301,11 @@ export type TestType<T1, T2, Expected extends boolean> = ReturnType<
 
 /* class is fucking lockedin ong! */
 export function locked(constructor: Newable): void {
-  function _sealAndFreeze(obj: object): void {
+  const _sealAndFreeze = (obj: object): void => {
     Object.seal(obj);
     Object.freeze(obj);
     Object.preventExtensions(obj);
-  }
+  };
   _sealAndFreeze(constructor);
   _sealAndFreeze(constructor.prototype);
 }
