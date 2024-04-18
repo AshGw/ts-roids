@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.10.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.9.0...v1.10.0)
+
+### 🚀 Enhancements
+
+- Finish `Vals` ([4c95569](https://github.com/ashgw/ts-roids/commit/4c95569))
+
+### 💅 Refactors
+
+- Change lib name to `ts-roids` ([a0cd2c5](https://github.com/ashgw/ts-roids/commit/a0cd2c5))
+
+### 🤖 CI
+
+- Publish to `npm` ([1c14e87](https://github.com/ashgw/ts-roids/commit/1c14e87))
+- **just:** Add `j f` alias ([531ae8a](https://github.com/ashgw/ts-roids/commit/531ae8a))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.9.0
 
 [compare changes](https://github.com/ashgw/ts-extended/compare/v1.8.0...v1.9.0)
