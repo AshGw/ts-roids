@@ -356,8 +356,29 @@ export function final<T extends Newable>(target: T): T {
   };
 }
 
-export type Includes<T, U> = U extends [infer S, ...infer E]
-  ? Equals<S, T> extends true
+/**
+ * Represents a type that checks if a specified element type exists within an array.
+ * @typeParam T The array type to search within.
+ * @typeParam I The element type to check for existence in `T`.
+ * @returns `true` if `I` is found within `T`, otherwise `false`.
+ * @example
+ * ```typescript
+ * type Numbers = [0, 1, 2];
+ * type CheckZero = IsInArray<Numbers, 0>; // true
+ * type CheckThree = IsInArray<Numbers, 3>; // false
+ * ```
+ */
+export type IsInArray<T extends unknown[], I> = T extends [infer S, ...infer E]
+  ? Equals<S, I> extends true
     ? true
-    : Includes<T, E>
+    : IsInArray<E, I>
   : false;
+
+export type UniqueArray<T, R extends any[] = []> = T extends [
+  infer S,
+  ...infer E,
+]
+  ? IsInArray<R, S> extends true
+    ? UniqueArray<E, R>
+    : UniqueArray<E, [...R, S]>
+  : R;

@@ -30,7 +30,32 @@ export class Foo<F> {
 type ResultType = TestType<Type1, Type2, true>;
 ```
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you think they match, false otherwise). The resulting ``ResultType`` will tell if the choice is correct, true if it is, else false.
+#### Create your own type 
+Instead of this loosely typed function
+```typescript 
+function fooBar(foo: string, bar: string) {
+  if (condition(foo, bar)) {
+    return 'baz';
+  }
+}
+```
+What are we returning exactly? Is it a string? what does the string represent? 
+maybe we're not returning anything.
 
+There are so many ways thing can go wrong here. 
+Here's how to fix it
+```typescript 
+import { NewType, Optional } from 'ts-roids' 
+
+type Baz = NewType<string>;
+
+function _fooBarBaz(foo: string, bar: string): Optional<Baz> {
+  if (condition(foo, bar)) {
+    return 'baz' as Baz;
+  }
+  return null; // if you do not return here, meaning undefined you'll get an error
+}
+```
 ### Docs
 Checkout the inline documentation in `/src` along with `/tests` to see how it works.
 ### License 
