@@ -185,15 +185,24 @@ type Expected = {
   };
 };
 
+/**
+ * A type that recursively mutates all the proprties within a given object type `T`.
+ */
 export type DeepMutable<T> = T extends UnknownFunction
   ? T
   : {
       -readonly [K in Keys<T>]: T[K] extends unknown ? DeepMutable<T[K]> : T[K];
     };
 
+/**
+ * Checks if all the nested properties of a given object T is actually mutable.
+ */
 export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
 export type ResultType = TestType<DeepMutable<X>, Expected, true>;
 
+/**
+ * A type that recursively turns the proprties within a given object type `T` immutable.
+ */
 export type DeepImmutable<T> = T extends UnknownFunction
   ? T
   : {
@@ -202,6 +211,9 @@ export type DeepImmutable<T> = T extends UnknownFunction
         : T[K];
     };
 
+/**
+ * Checks if all the nested properties of a given object T is actually immutable.
+ */
 export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
 export type ResultType1 = TestType<IsDeepImmutable<X>, true, true>;
 export type ResultType2 = TestType<DeepImmutable<Expected>, X, true>;
@@ -243,7 +255,7 @@ declare const __s: unique symbol;
  */
 export type NewType<N> = {
   /**
-   * Property `__s` is not intended for direct access or modification.
+   * Property `__s` is not intended for direct access nor modification.
    * @internal
    */
   [__s]: true;
@@ -330,6 +342,14 @@ declare function _testType<T1, T2, E extends boolean>(): Equals<
   Equals<T1, T2>,
   E
 >;
+/**
+ * Represents a type validation utility to determine if two types match.
+ * @template T1 The first type to compare.
+ * @template T2 The second type to compare.
+ * @template Expected A boolean literal indicating whether `T1` should match `T2`.
+ * If you expect the types to match, set this to true; if not, set it to false.
+ * This utility will return a boolean that is true if your expectation was correct, otherwise false.
+ */
 export type TestType<T1, T2, Expected extends boolean> = ReturnType<
   typeof _testType<T1, T2, Expected>
 >;

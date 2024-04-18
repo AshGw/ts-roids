@@ -31,7 +31,7 @@ type ResultType = TestType<Type1, Type2, true>;
 ```
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you think they match, false otherwise). The resulting ``ResultType`` will tell if the choice is correct, true if it is, else false.
 #### Create your own type 
-Instead of this loosely typed function
+Check this loosely typed function
 ```typescript 
 function fooBar(foo: string, bar: string) {
   if (condition(foo, bar)) {
