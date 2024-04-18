@@ -174,7 +174,6 @@ export type Stretch<T> = T extends object
     : never
   : T;
 
-const _ = Symbol('_');
 export type TypeGuard<T> = (_: any) => _ is T;
 
 export type FilterBy<T, P> = {
@@ -224,3 +223,17 @@ export function final<T extends Newable>(target: T): T {
     }
   };
 }
+
+export type IfSame<T, P, Yes, No> = T extends P ? Yes : No;
+export type ShallowEquals<X, Y> = X extends Y ? true : false;
+export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
+  T,
+>() => T extends Y ? true : false
+  ? true
+  : false;
+
+export type MutableKeys<T> = keyof {
+  [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
+    ? never
+    : P]: never;
+};
