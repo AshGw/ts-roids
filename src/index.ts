@@ -151,40 +151,6 @@ export type DeepPartial<T> = {
   [P in Keys<T>]?: DeepPartial<T[P]>;
 };
 
-type X = {
-  readonly a: () => 1;
-  readonly b: string;
-  readonly c: {
-    readonly d: boolean;
-    readonly e: {
-      readonly g: {
-        readonly h: {
-          readonly i: true;
-          readonly j: 's';
-        };
-        readonly k: 'hello';
-      };
-    };
-  };
-};
-
-type Expected = {
-  a: () => 1;
-  b: string;
-  c: {
-    d: boolean;
-    e: {
-      g: {
-        h: {
-          i: true;
-          j: 's';
-        };
-        k: 'hello';
-      };
-    };
-  };
-};
-
 /**
  * A type that recursively mutates all the proprties within a given object type `T`.
  */
@@ -198,7 +164,6 @@ export type DeepMutable<T> = T extends UnknownFunction
  * Checks if all the nested properties of a given object T is actually mutable.
  */
 export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
-export type ResultType = TestType<DeepMutable<X>, Expected, true>;
 
 /**
  * A type that recursively turns the proprties within a given object type `T` immutable.
@@ -215,9 +180,6 @@ export type DeepImmutable<T> = T extends UnknownFunction
  * Checks if all the nested properties of a given object T is actually immutable.
  */
 export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
-export type ResultType1 = TestType<IsDeepImmutable<X>, true, true>;
-export type ResultType2 = TestType<DeepImmutable<Expected>, X, true>;
-export type ResultType3 = DeepImmutable<Expected>;
 
 export type AlterKeyTypeWith<T, K extends Keys<T>, R> = Pick<
   T,
@@ -314,36 +276,58 @@ export type DeepRequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
 
-export type MutableKeys<T> = keyof {
-  [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
+/**
+ * Retrieves the keys that are mutable from an object of type T.
+ * @example
+ * ```typescript
+ * type ExampleType = {
+ *   a: number;
+ *   readonly b: string;
+ *   c: {
+ *     a: string;
+ *     d: { readonly x: Nullable; v: Maybe<Newable> };
+ *   };
+ * };
+ *
+ * type MutableKeysOfExampleType = MutableKeys<ExampleType>;
+ * // Result: 'a' | 'c'
+ * ```
+ */
+export type MutableKeys<T> = {
+  [P in Keys<T>]: Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
     ? never
-    : P]: never;
-};
+    : P;
+}[Keys<T>];
 
-export type Result3 = TestType<
-  MutableKeys<{ a: number; readonly b: string }>,
-  'a',
-  true
->;
-
-export type ImmutableKeys<T> = keyof {
-  [P in Keys<T> as Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
+/**
+ * Retrieves the keys that are immutable (readonly) from an object of type T.
+ * @example
+ * ```typescript
+ * type ExampleType = {
+ *   a: number;
+ *   readonly b: string;
+ *   c: {
+ *     a: string;
+ *     d: { readonly x: Nullable; v: Maybe<Newable> };
+ *   };
+ * };
+ *
+ * type ImmutableKeysOfExampleType = ImmutableKeys<ExampleType>;
+ * // Result: 'b'
+ * ```
+ */
+export type ImmutableKeys<T> = {
+  [P in Keys<T>]: Equals<Pick<T, P>, Readonly<Pick<T, P>>> extends true
     ? P
-    : never]: never;
-};
-
-export type Result4 = TestType<
-  ImmutableKeys<{ a: number; readonly b: string }>,
-  'b',
-  true
->;
+    : never;
+}[Keys<T>];
 
 declare function _testType<T1, T2, E extends boolean>(): Equals<
   Equals<T1, T2>,
   E
 >;
 /**
- * Represents a type validation utility to determine if two types match.
+ * Determines if two types match.
  * @template T1 The first type to compare.
  * @template T2 The second type to compare.
  * @template Expected A boolean literal indicating whether `T1` should match `T2`.

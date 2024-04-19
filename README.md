@@ -1,6 +1,8 @@
 ### Installation 
 ```bash
-npm i ts-roids
+npm i --save-dev ts-roids
+# or 
+pnpm i -D ts-roids 
 ```
 
 ### Examples
