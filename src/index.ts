@@ -118,27 +118,77 @@ export type Vals<T> = T[Keys<T>];
  * const value2: OneOrMany<number> = [20, 30]; // Also valid
  */
 export type EitherOneOrMany<T> = T | T[];
+
+/**
+ * Represents a type that can be used to construct a new instance.
+ * This type is typically used to describe constructor functions or classes
+ * that can be invoked using the `new` keyword.
+ */
 export type Newable = { new (...args: any[]): any };
+
+/**
+ * Checks if a given type `T` is a type that can be used to construct a new instance (i.e., a `Newable` type).
+ * The `Newable` type typically represents constructor functions or classes that can be invoked using the `new` keyword.
+ * @returns `true` if `T` is a `Newable`, otherwise `false`.
+ */
 export type IsNewable<T> = T extends Newable ? true : false;
+
+/**
+ * Represents a type that describes any function accepting any arguments
+ *  and returning any value.
+ */
 export type AnyFunction = (...args: any[]) => any;
+
+/**
+ * Represents a type that describes any function accepting and retruning `unknown`s
+ */
 export type UnknownFunction = (...args: unknown[]) => unknown;
-export type Callable<A extends any[], R> = (...args: A) => R;
+
+/**
+ * Conditional type that checks if type `T` extends type `P`.
+ * If `T` extends `P`, the type resolves to `Do`; otherwise, it resolves to `Else`.
+ * @example
+ * // Basic usage:
+ * type Result1 = IfExtends<string, string | number, true, false>; // Result1 is true
+ * type Result2 = IfExtends<number, string | number, true, false>; // Result2 is true
+ * type Result3 = IfExtends<boolean, string | number, true, false>; // Result3 is false
+ *
+ * // Using with conditional branch:
+ * type IsString<T> = IfExtends<T, string, true, false>; // Checks if T is a string
+ * type IsNumber<T> = IfExtends<T, number, true, false>; // Checks if T is a number
+ *
+ * type TestString = IsString<string>; // TestString is true
+ * type TestNumber = IsNumber<number>; // TestNumber is true
+ * type TestBoolean = IsNumber<boolean>; // TestBoolean is false
+ */
 export type IfExtends<T, P, Do, Else> = T extends P ? Do : Else;
+
 export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   T,
 >() => T extends Y ? true : false
   ? true
   : false;
 
-// Typesafer way han maybe, think about hwen you have optional return types of
-// functions, shoud u `return` ?  with maybe ure free to do it or not
-// but optional u have to return null, so the use case and handling are superior
-
+/**
+ * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types. It solves
+ * the common pitfall associated with optional types in TypeScript, where using the `?`
+ * operator yields `T | undefined | null`. `Optional<T>`  promotes more predictable code
+ * by enforcing explicit handling of nullable scenarios by requiring functions
+ * to return `null` specifically when a value is absent.
+ */
 export type Optional<T> = T | null;
+
+/*
+This is the same as the `?` operator, try to use `Optional<T>` instead 
+*/
 export type Maybe<T> = T | Nullable;
+
 export type MaybeUnknown<T> = T | unknown;
 export type MaybeUndefined<T> = T | undefined;
 
+/*
+ A type that excludes `null` and `undefined` properties from type `T`.
+ */
 export type ExcludeNullable<T> = Exclude<T, Nullable>;
 export type ExcludeUndefined<T> = Exclude<T, undefined>;
 export type ExcludeNull<T> = Exclude<T, null>;
