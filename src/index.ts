@@ -488,6 +488,49 @@ export type Stretch<T> = T extends object
 
 export type TypeGuard<T> = (U: unknown) => U is T;
 
+/**
+ * `FilterBy<T, P>` filters keys from the object type `T` based on a specified property `P`.
+ * The resulting type consists of keys from `T` that match the type or value specified by `P`.
+ *
+ * Note: This type performs a shallow filtering of keys within `T` and does not check deeply nested types
+ * or complex structures within the object type.
+ *
+ * For example, given an object type `T`:
+ *
+ * ```typescript
+ * type T = {
+ *   a: () => 1;
+ *   x: string;
+ *   s: {
+ *     q: Nullable;
+ *     s: {
+ *       i: {
+ *         x: {
+ *           o: boolean;
+ *           n: Falsy;
+ *         };
+ *         e: 'foo';
+ *       };
+ *     };
+ *   };
+ * };
+ *
+ * ```
+ * ```typescript
+ * type _ = FilterBy<T, 'a'>
+ * ```
+ * Results in the type `'a'`, which includes only the key `'a'` from `T`.
+ * ```typescript
+ * type _ = FilterBy<T, Falsy>
+ * ```
+ * Results in the type `never`, indicating that no keys in `T` match the type `Falsy`.
+ *
+ * ```typescript
+ * type _ = FilterBy<T, string>
+ * ```
+ * Results in the type `'a' | 'x' | 's'`, which includes all top-level keys of `T`
+ * that are of type `string`. It did not pick up on 'e' as it is nested down.
+ */
 export type FilterBy<T, P> = {
   [K in Keys<T>]: K extends P ? K : never;
 }[Keys<T>];
