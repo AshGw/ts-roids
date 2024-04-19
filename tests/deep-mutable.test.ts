@@ -12,13 +12,13 @@ import { test, expect } from 'vitest';
 type Actual = {
   readonly a: () => 1;
   readonly x: string;
-  readonly s: {
+  readonly s?: {
     readonly q: Nullable;
     readonly s: {
       readonly i: {
-        readonly x: {
+        readonly x?: {
           readonly o: Maybe<Primitive>;
-          readonly n: Falsy;
+          readonly n?: Falsy;
         };
         readonly e: 'foo';
       };
@@ -28,13 +28,13 @@ type Actual = {
 type Expected = {
   a: () => 1;
   x: string;
-  s: {
+  s?: {
     q: Nullable;
     s: {
       i: {
-        x: {
+        x?: {
           o: Maybe<Primitive>;
-          n: Falsy;
+          n?: Falsy;
         };
         e: 'foo';
       };

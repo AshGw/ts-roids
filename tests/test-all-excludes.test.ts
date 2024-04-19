@@ -1,9 +1,4 @@
-import {
-  ExcludeNullable,
-  Nullable,
-  Primitive,
-  TestType,
-} from 'src';
+import { ExcludeNullable, Nullable, Primitive, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {

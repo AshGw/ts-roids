@@ -1,10 +1,10 @@
 ### Installation 
 ```bash
-npm i --save-dev ts-roids
+npm i ts-roids
 # or 
-pnpm i -D ts-roids 
+pnpm i ts-roids 
 ```
-
+If you're only using types, you can install it as a dev dependency.
 ### Examples
 #### Lock a class (make it immutable) and finalize it (prohibit further extension)
 ```ts
