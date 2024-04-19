@@ -275,27 +275,31 @@ export type NewType<N> = {
   [__s]: true;
 } & N;
 
-export type obj = {
-  person: {
-    name: string;
-    age: {
-      value: number;
-    };
-  };
-};
-
-export type DeepOmit<T, Str extends string> = Str extends `${string}.${infer R}`
+/**
+ * Type that recursively omits specified nested properties from an object type.
+ * @template T The input object type.
+ * @template P A string literal representing the path of properties to omit (e.g., 'person.name.value').
+ * @example
+ * ```typescript
+ * type T =
+ *   a: {
+ *     b: string;
+ *     b2: {
+ *       c: {
+ *         d: number;
+ *       };
+ *     };
+ *   };
+ * }
+ *
+ * DeepOmit<T, 'a.b2.c'> // Results in: { a: { b: string; b2: {} } }
+ * ```
+ */
+export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
   ? {
-      [K in Keys<T>]: DeepOmit<T[K], R>;
+      [KT in Keys<T>]: KT extends K ? DeepOmit<T[KT], R> : T[KT];
     }
-  : T extends unknown
-    ? Omit<T, Str>
-    : T;
-
-export type test1 = DeepOmit<obj, 'person'>; // {}
-export type test2 = DeepOmit<obj, 'person.name'>; // { person: { age: { value: number } } }
-export type test3 = DeepOmit<obj, 'name'>; // { person: { name: string; age: { value: number } } }
-export type test4 = DeepOmit<obj, 'person.age.value'>; // { person: { name: string; age: {} } }
+  : Omit<T, P>;
 
 export type EmptyArray = [];
 /**
@@ -327,9 +331,9 @@ export type ArrayTranspose<
       };
     };
 
-export type Matrix = ArrayTranspose<[[1]]>; //[[1]]
-export type Matrix1 = ArrayTranspose<[[1, 'i'], [3, 4]]>; // [[1, 3], ["i", 4]]
-export type Matrix2 = ArrayTranspose<[[1, true, 3], [4, 5, 6]]>; // [[1, 4], [true, 5], [3, 6]]
+export type Matrix2 = ArrayTranspose<
+  [[1, Optional<number>, Nullable, 3], [4, 5, 6]]
+>; // [[1, 4], [true, 5], [3, 6]]
 
 export type AlterKeyTypeWith<T, K extends Keys<T>, R> = Pick<
   T,
@@ -359,9 +363,9 @@ export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
 
 /**
  * Represents a export type that filters elements from an array based on a given predicate export type.
- * @typeParam T The array export type to filter.
- * @typeParam P The predicate export type used for filtering elements from `T`.
- * @returns a new array export type containing only the elements of `T` that match `P`.
+ * @typeParam T The array to filter.
+ * @typeParam P The predicate used for filtering elements from `T`.
+ * @returns a new array type containing only the elements of `T` that match `P`.
  * @example
  * ```typescript
  * export type Numbers = [0, 1, 2, 3];
@@ -377,7 +381,8 @@ export type ArrayFilter<T extends unknown[], P> = T extends [
     : ArrayFilter<E, P>
   : [];
 
-export type EmptyObject = Exclude<object, Nullable>;
+export type EmptyObject = NonNullable<unknown>;
+export type EmptyObject3 = Exclude<object, Nullable>;
 export type EmptyObject2 = Record<string, never>;
 export type OptionalKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;

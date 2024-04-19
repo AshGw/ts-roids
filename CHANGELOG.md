@@ -1,6 +1,82 @@
 # Changelog
 
 
+## v1.20.1
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.17.0...v1.20.1)
+
+### 🚀 Enhancements
+
+- **#52:** Finish  `ImmutableKeys` & `MutableKeys` ([17482f9](https://github.com/ashgw/ts-roids/commit/17482f9))
+- Set `IfExtends` ([a1625d0](https://github.com/ashgw/ts-roids/commit/a1625d0))
+
+### 🏡 Chore
+
+- **release:** V1.18.0 ([68f1d2d](https://github.com/ashgw/ts-roids/commit/68f1d2d))
+- Cleanup source file ([fd40124](https://github.com/ashgw/ts-roids/commit/fd40124))
+- Cleanup ([e384ba9](https://github.com/ashgw/ts-roids/commit/e384ba9))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
+## v1.20.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.17.0...v1.20.0)
+
+### 🚀 Enhancements
+
+- **#52:** Finish  `ImmutableKeys` & `MutableKeys` ([17482f9](https://github.com/ashgw/ts-roids/commit/17482f9))
+- Set `IfExtends` ([a1625d0](https://github.com/ashgw/ts-roids/commit/a1625d0))
+
+### 🏡 Chore
+
+- **release:** V1.18.0 ([68f1d2d](https://github.com/ashgw/ts-roids/commit/68f1d2d))
+- Cleanup source file ([fd40124](https://github.com/ashgw/ts-roids/commit/fd40124))
+- Cleanup ([e384ba9](https://github.com/ashgw/ts-roids/commit/e384ba9))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
+## v1.19.1
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.17.0...v1.19.1)
+
+### 🚀 Enhancements
+
+- **#52:** Finish  `ImmutableKeys` & `MutableKeys` ([17482f9](https://github.com/ashgw/ts-roids/commit/17482f9))
+- Set `IfExtends` ([a1625d0](https://github.com/ashgw/ts-roids/commit/a1625d0))
+
+### 🏡 Chore
+
+- **release:** V1.18.0 ([68f1d2d](https://github.com/ashgw/ts-roids/commit/68f1d2d))
+- Cleanup source file ([fd40124](https://github.com/ashgw/ts-roids/commit/fd40124))
+- Cleanup ([e384ba9](https://github.com/ashgw/ts-roids/commit/e384ba9))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
+## v1.19.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.17.0...v1.19.0)
+
+### 🚀 Enhancements
+
+- **#52:** Finish  `ImmutableKeys` & `MutableKeys` ([17482f9](https://github.com/ashgw/ts-roids/commit/17482f9))
+- Set `IfExtends` ([a1625d0](https://github.com/ashgw/ts-roids/commit/a1625d0))
+
+### 🏡 Chore
+
+- **release:** V1.18.0 ([68f1d2d](https://github.com/ashgw/ts-roids/commit/68f1d2d))
+- Cleanup source file ([fd40124](https://github.com/ashgw/ts-roids/commit/fd40124))
+- Cleanup ([e384ba9](https://github.com/ashgw/ts-roids/commit/e384ba9))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.18.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.16.0...v1.18.0)
