@@ -448,17 +448,36 @@ export type UniqueArray<T, R extends any[] = []> = T extends [
     : UniqueArray<E, [...R, S]>
   : R;
 
-export type EmptyObject = NonNullable<unknown>;
-
-export type AlterKeyTypeWith<T, K extends Keys<T>, R> = Pick<
-  T,
-  Exclude<Keys<T>, K>
-> & { [P in K]: R };
-
-export type SwapKeysWithVals<T extends Record<Keys<T>, Keys<any>>> = {
-  [P in T[Keys<T>]]: {
-    [K in Keys<T>]: T[K] extends P ? K : never;
-  }[keyof T];
+/**
+ * Infers a mapping from values to their corresponding keys within a given object type `T`.
+ * The resulting type provides a reverse lookup, which allows to to retrieve the keys based on specific values.
+ *
+ * Note: This type only works with simple object types without nested structures or complex types.
+ * It may not behave as expected with objects containing nested properties, union types, intersections, or other
+ * advanced constructs.
+ *
+ * For example, given a simple object type `T`:
+ *
+ * ```typescript
+ * type SimpleObjectType = {
+ *   name: 'Zee';
+ *   age: 29;
+ *   city: 'Zion';
+ * };
+ *
+ * type T =  KeysToValues<SimpleObjectType> // results in:
+ *
+ * {
+ *   Zee : 'name';
+ *   29: 'age';
+ *   'Zion': 'city';
+ * }
+ * ```
+ */
+export type KeysToValues<T extends Record<Keys<T>, Keys<any>>> = {
+  [K in T[Keys<T>]]: {
+    [K1 in Keys<T>]: T[K1] extends K ? K1 : never;
+  }[Keys<T>];
 };
 
 export type Stretch<T> = T extends object
@@ -475,6 +494,8 @@ export type FilterBy<T, P> = {
 
 export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
 export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
+
+export type EmptyObject = NonNullable<unknown>;
 
 export type OptionalKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
