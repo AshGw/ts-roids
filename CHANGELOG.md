@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.18.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.16.0...v1.18.0)
+
+### 🚀 Enhancements
+
+- **#50:** Finish `UniqueArray<T>` ([d713ccc](https://github.com/ashgw/ts-roids/commit/d713ccc))
+- **#52:** Finish  `ImmutableKeys` & `MutableKeys` ([cebb07e](https://github.com/ashgw/ts-roids/commit/cebb07e))
+
+### 🏡 Chore
+
+- **release:** V1.17.0 ([71399b1](https://github.com/ashgw/ts-roids/commit/71399b1))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.17.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.16.0...v1.17.0)
