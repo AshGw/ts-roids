@@ -148,21 +148,27 @@ export type UnknownFunction = (...args: unknown[]) => unknown;
  * Conditional type that checks if type `T` extends type `P`.
  * If `T` extends `P`, the type resolves to `Do`; otherwise, it resolves to `Else`.
  * @example
- * // Basic usage:
- * type Result1 = IfExtends<string, string | number, true, false>; // Result1 is true
- * type Result2 = IfExtends<number, string | number, true, false>; // Result2 is true
- * type Result3 = IfExtends<boolean, string | number, true, false>; // Result3 is false
+ * type Result1 = IfExtends<string, string | number, true, false>; // is true
+ * type Result2 = IfExtends<number, string | number, true, false>; // is true
+ * type Result3 = IfExtends<boolean, string | number, true, false>; // is false
  *
- * // Using with conditional branch:
- * type IsString<T> = IfExtends<T, string, true, false>; // Checks if T is a string
- * type IsNumber<T> = IfExtends<T, number, true, false>; // Checks if T is a number
+ * type IsString<T> = IfExtends<T, string, true, false>;
+ * type IsNumber<T> = IfExtends<T, number, true, false>;
  *
- * type TestString = IsString<string>; // TestString is true
- * type TestNumber = IsNumber<number>; // TestNumber is true
- * type TestBoolean = IsNumber<boolean>; // TestBoolean is false
+ * type TestString = IsString<string>; // is true
+ * type TestNumber = IsNumber<number>; // is true
+ * type TestBoolean = IsNumber<boolean>; // is false
  */
 export type IfExtends<T, P, Do, Else> = T extends P ? Do : Else;
 
+/**
+ * Conditional type that checks if two types `X` and `Y` are exactly equal.
+ * If `X` is equal to `Y`, the type resolves to `true`; otherwise, it resolves to `false`.
+ * @example
+ * type Result1 = Equals<string, string>; // is true
+ * type Result2 = Equals<number, string>; // is false
+ * type Result3 = Equals<boolean | string, string | boolean>; // is true
+ */
 export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   T,
 >() => T extends Y ? true : false
@@ -182,23 +188,31 @@ export type Optional<T> = T | null;
 This is the same as the `?` operator, try to use `Optional<T>` instead 
 */
 export type Maybe<T> = T | Nullable;
-
 export type MaybeUnknown<T> = T | unknown;
 export type MaybeUndefined<T> = T | undefined;
 
-/*
+/** 
  A type that excludes `null` and `undefined` properties from type `T`.
+ * @example
+ Type Str = ExcludeNullable<string | null> // Result:  string 
  */
 export type ExcludeNullable<T> = Exclude<T, Nullable>;
+/** 
+ A type that excludes `undefined` properties from type `T`.
+ * @example
+ Type Str = ExcludeNullable<string | undefined> // Result:  string 
+ */
 export type ExcludeUndefined<T> = Exclude<T, undefined>;
+
+/** 
+ A type that excludes `null` properties from type `T`.
+ * @example
+ Type Str = ExcludeNullable<string | null> // Result:  string 
+ */
 export type ExcludeNull<T> = Exclude<T, null>;
 
-export type DeepExcludeNullable<T> = {
-  [P in Keys<T>]: DeepExcludeNullable<ExcludeNullable<T[P]>>;
-};
-
-export type DeepPartial<T> = {
-  [P in Keys<T>]?: DeepPartial<T[P]>;
+export type DeepNotRequired<T> = {
+  [P in Keys<T>]?: DeepNotRequired<T[P]>;
 };
 
 /**

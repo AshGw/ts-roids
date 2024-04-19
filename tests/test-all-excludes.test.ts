@@ -1,41 +1,54 @@
-import { IfExtends, TestType } from 'src';
+import {
+  ExcludeNullable,
+  Nullable,
+  Primitive,
+  TestType,
+} from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
+  const result: TestType<ExcludeNullable<string>, string, true> = true;
+  expect(result).toBe(true);
+});
+
+test('_', () => {
+  const result: TestType<ExcludeNullable<string | null>, string, true> = true;
+  expect(result).toBe(true);
+});
+
+test('_', () => {
+  const result: TestType<ExcludeNullable<null>, never, true> = true;
+  expect(result).toBe(true);
+});
+
+test('only works on unions', () => {
   const result: TestType<
-    IfExtends<string, string | number, true, false>,
-    true,
+    ExcludeNullable<null | Primitive | string>,
+    string | number | bigint | boolean | symbol,
     true
   > = true;
   expect(result).toBe(true);
 });
 
-test('_', () => {
+test('does not work on objects', () => {
   const result: TestType<
-    IfExtends<number, string | number, true, false>,
-    true,
+    ExcludeNullable<{
+      a: string;
+      b: Nullable;
+      c: unknown;
+      d: {
+        e: null;
+      };
+    }>,
+    {
+      a: string;
+      b: Nullable;
+      c: unknown;
+      d: {
+        e: null;
+      };
+    },
     true
   > = true;
-  expect(result).toBe(true);
-});
-
-test('_', () => {
-  const result: TestType<
-    IfExtends<boolean, string | number, true, false>,
-    false,
-    true
-  > = true;
-  expect(result).toBe(true);
-});
-
-test('_', () => {
-  type _IsString<T> = IfExtends<T, string, true, false>;
-  const result: TestType<_IsString<string>, true, true> = true;
-  expect(result).toBe(true);
-});
-
-test('_', () => {
-  type _IsNumber<T> = IfExtends<T, number, true, false>;
-  const result: TestType<_IsNumber<number>, true, true> = true;
   expect(result).toBe(true);
 });

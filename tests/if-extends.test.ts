@@ -1,4 +1,4 @@
-import {  IfExtends, TestType } from 'src';
+import { IfExtends, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
