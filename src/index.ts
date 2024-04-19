@@ -331,36 +331,6 @@ export type ArrayTranspose<
       };
     };
 
-export type Matrix2 = ArrayTranspose<
-  [[1, Optional<number>, Nullable, 3], [4, 5, 6]]
->; // [[1, 4], [true, 5], [3, 6]]
-
-export type AlterKeyTypeWith<T, K extends Keys<T>, R> = Pick<
-  T,
-  Exclude<Keys<T>, K>
-> & { [P in K]: R };
-
-export type SwapKeysWithVals<T extends Record<Keys<T>, Keys<any>>> = {
-  [P in T[Keys<T>]]: {
-    [K in Keys<T>]: T[K] extends P ? K : never;
-  }[keyof T];
-};
-
-export type Stretch<T> = T extends object
-  ? T extends infer P
-    ? { [K in Keys<P>]: Stretch<P[K]> }
-    : never
-  : T;
-
-export type TypeGuard<T> = (U: unknown) => U is T;
-
-export type FilterBy<T, P> = {
-  [K in Keys<T>]: K extends P ? K : never;
-}[Keys<T>];
-
-export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
-export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
-
 /**
  * Represents a export type that filters elements from an array based on a given predicate export type.
  * @typeParam T The array to filter.
@@ -380,25 +350,6 @@ export type ArrayFilter<T extends unknown[], P> = T extends [
     ? [S, ...ArrayFilter<E, P>]
     : ArrayFilter<E, P>
   : [];
-
-export type EmptyObject = NonNullable<unknown>;
-export type EmptyObject3 = Exclude<object, Nullable>;
-export type EmptyObject2 = Record<string, never>;
-export type OptionalKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
-}[keyof T];
-
-export type DeepOptionalKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? OptionalKeys<K> : never;
-}[keyof T];
-
-export type RequiredKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
-}[keyof T];
-
-export type DeepRequiredKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
-}[keyof T];
 
 /**
  * Retrieves the keys that are mutable from an object of export type T.
@@ -462,28 +413,6 @@ export type TestType<T1, T2, Expected extends boolean> = ReturnType<
   typeof _testType<T1, T2, Expected>
 >;
 
-/* class is fucking lockedin ong! */
-export function locked(constructor: Newable): void {
-  const _sealAndFreeze = (obj: object): void => {
-    Object.seal(obj);
-    Object.freeze(obj);
-    Object.preventExtensions(obj);
-  };
-  _sealAndFreeze(constructor);
-  _sealAndFreeze(constructor.prototype);
-}
-
-export function final<T extends Newable>(target: T): T {
-  return class Final extends target {
-    constructor(...args: any[]) {
-      if (new.target !== Final) {
-        throw new Error(`${target.name} is final, you cannot extend it`);
-      }
-      super(...args);
-    }
-  };
-}
-
 /**
  * Represents a export type that checks if a specified element export type exists within an array.
  * @typeParam T The array export type to search within.
@@ -520,3 +449,69 @@ export type UniqueArray<T, R extends any[] = []> = T extends [
     ? UniqueArray<E, R>
     : UniqueArray<E, [...R, S]>
   : R;
+
+export type EmptyObject = NonNullable<unknown>;
+
+export type AlterKeyTypeWith<T, K extends Keys<T>, R> = Pick<
+  T,
+  Exclude<Keys<T>, K>
+> & { [P in K]: R };
+
+export type SwapKeysWithVals<T extends Record<Keys<T>, Keys<any>>> = {
+  [P in T[Keys<T>]]: {
+    [K in Keys<T>]: T[K] extends P ? K : never;
+  }[keyof T];
+};
+
+export type Stretch<T> = T extends object
+  ? T extends infer P
+    ? { [K in Keys<P>]: Stretch<P[K]> }
+    : never
+  : T;
+
+export type TypeGuard<T> = (U: unknown) => U is T;
+
+export type FilterBy<T, P> = {
+  [K in Keys<T>]: K extends P ? K : never;
+}[Keys<T>];
+
+export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
+export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
+
+export type OptionalKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
+}[keyof T];
+
+export type DeepOptionalKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? OptionalKeys<K> : never;
+}[keyof T];
+
+export type RequiredKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
+}[keyof T];
+
+export type DeepRequiredKeys<T> = {
+  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
+}[keyof T];
+
+/* class is fucking lockedin ong! */
+export function locked(constructor: Newable): void {
+  const _sealAndFreeze = (obj: object): void => {
+    Object.seal(obj);
+    Object.freeze(obj);
+    Object.preventExtensions(obj);
+  };
+  _sealAndFreeze(constructor);
+  _sealAndFreeze(constructor.prototype);
+}
+
+export function final<T extends Newable>(target: T): T {
+  return class Final extends target {
+    constructor(...args: any[]) {
+      if (new.target !== Final) {
+        throw new Error(`${target.name} is final, you cannot extend it`);
+      }
+      super(...args);
+    }
+  };
+}
