@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.22.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.21.0...v1.22.0)
+
+### 🚀 Enhancements
+
+- **#56:** Finish `KeysToValues<T>` ([2bcc390](https://github.com/ashgw/ts-roids/commit/2bcc390))
+
+### 🏡 Chore
+
+- Cleanup docs ([7414c31](https://github.com/ashgw/ts-roids/commit/7414c31))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.21.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.17.0...v1.21.0)
