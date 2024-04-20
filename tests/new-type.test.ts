@@ -2,7 +2,7 @@ import { NewType } from 'src';
 import { ESLint } from 'eslint';
 import { describe, test, expect } from 'vitest';
 
-type Username = NewType<string>;
+type Username = NewType<'Username', string>;
 const username = 'john doe' as Username;
 
 describe('NewType', () => {
@@ -16,8 +16,8 @@ describe('NewType', () => {
     expect(() => username.toExponential()).toThrowError();
   });
 
-  test('number methods should work on age', () => {
-    type Age = NewType<number>;
+  test('works for numbers', () => {
+    type Age = NewType<'Age', number>;
     const age = 30 as Age;
     const Thirty = 30;
     const toExp = 2;
@@ -26,7 +26,7 @@ describe('NewType', () => {
   });
 
   test('boolean value should be accessible for isActive', () => {
-    type IsActive = NewType<boolean>;
+    type IsActive = NewType<'IsActive', boolean>;
     const isActive = true as IsActive;
     expect(isActive).toBe(true);
   });
@@ -38,7 +38,7 @@ test(`ESLint should detect one error: Conversion of type 'string' to type 'ID'
   const code = `
     import { NewType } from 'src';
 
-    type ID = NewType<number>;
+    type ID = NewType<'ID',number>;
     const id = '30' as ID;
   `;
   const results = await eslint.lintText(code);
@@ -46,7 +46,8 @@ test(`ESLint should detect one error: Conversion of type 'string' to type 'ID'
   expect(errorCount).toEqual(1);
 });
 
-test(`This is the one limitation of this type, ESLint should detect one error:
+test(`You have to cast the type with 'as', this is the one limitation of this type. 
+ESLint should detect one error:
 Type 'number' is not assignable to type 'ID'. 
 Type 'number' is not assignable to type '{ [__s]: true; }'.
 `, async () => {
@@ -54,7 +55,7 @@ Type 'number' is not assignable to type '{ [__s]: true; }'.
   const code = `
     import { NewType } from 'src';
 
-    type ID = NewType<number>;
+    type ID = NewType<'ID',number>;
     const id: ID = 30;
   `;
   const results = await eslint.lintText(code);

@@ -245,33 +245,34 @@ export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
 declare const __s: unique symbol;
 
 /**
- * This  type alias defines a mechanism similar to Python's [`NewType`](https://docs.python.org/3/library/typing.html#newtype).
- * In TypeScript world it's refered to as 'Branding'.
- * The `NewType<N>` encapsulates `N`, thus creating a distinct  type that
- * TypeScript's  type system recognizes as separate from its underlying  type.
+ * This type represents a new unique type derived from an existing base type.
+ * It defines a mechanism similar to Python's [`NewType`](https://docs.python.org/3/library/typing.html#newtype).
+ * In TypeScript world it's refered to as 'Type Branding'.
+ *
+ * @template N The unique identifier for the new type.
+ * @template T The base type of the new type.
+ *
  * @example
- *  type Foo = NewType<string>;
- *  type Bar = NewType<number>;
- *  type Baz = NewType<boolean>;
+ * type FooID = NewType<'FooID', string>;
+ * type BarID = NewType<'BarID', string>;
  *
- * function fooBarBaz(foo: Foo, bar: Bar): Baz {
- *   foo.concat(); // Allowed since Foo is an underlying string
- *   bar.toExponential(); // Allowed since Bar is based on number
- *   const baz = true as Baz; // Valid
+ * const fooId: FooID = 'foo123' as FooID;
+ * const barId: BarID = 'bar456' as BarID;
  *
- *   // The following lines will result in a compiler error:
- *   foo.toExponential(); // Compiler Error, Foo is based on string
- *   const notBaz = 'str' as Baz; // Compiler Error, Baz is based on boolean
- * return baz;
- * }
+ * // Here's a potential bug:
+ * const buggyFooBar = (foo: string, bar: string) => {};
+ * buggyFooBar('bar456', 'foo123'); // this works but it's an undetected bug.
+ *
+ * // Bug mitigation:
+ * const safeFooBar = (foo: FooID, bar: BarID) => {};
+ * safeFooBar('bar456', 'foo123'); // TypeScript error: Argument of type 'string' is not assignable to parameter of type 'FooID'.
  */
-export type NewType<N> = {
+export type NewType<N, T> = T & {
   /**
    * Property `__s` is not intended for direct access nor modification.
    * @internal
-   */
-  [__s]: true;
-} & N;
+   */ [__s]: N;
+};
 
 /**
  * Type that recursively omits specified nested properties from an object type.
