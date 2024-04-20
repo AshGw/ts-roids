@@ -2,8 +2,10 @@
   "name": "ts-roids",
   "version": "1.22.0",
   "private": false,
-  "description": "Extending the TS library with types and decorators that should've been built-in",
+  "description": "Bullet-proof TS even more",
   "keywords": [
+    "typescript",
+    "utility",
     "types",
     "decorators"
   ],
