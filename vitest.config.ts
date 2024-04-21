@@ -6,6 +6,7 @@ export default defineConfig({
   test: {
     includeSource: ['src/**/[!index]*.ts'],
     coverage: {
+      provider: 'istanbul',
       reporter: ['lcov', 'text', 'json', 'html'],
       all: true,
       include: ['src/**/*'],

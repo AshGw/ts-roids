@@ -52,8 +52,8 @@ type Bar = {
 const baz = requestBaz(foo.id, bar.fooID);
 const baz2 = requestBaz(bar.fooID, foo.id);
 ```
-What are we returning exactly? Is it a string? what does the string represent even?  
-Is there any undefined behavior? fooID and barID are both srings so if you mix and match both parameter for `requestBaz()` like ``baz`` and ``baz2`` here, the code will run, but the logic breaks and the bug goes undetected.
+What does `requestBaz()` return exactly? Is it a string? If so can any string do?  
+Is there any undefined behavior? ``fooID`` and ``barID`` are both strings so if you mix and match both parameter for `requestBaz()` like ``baz`` and ``baz2`` here, the code will run, but the logic breaks and the bug goes undetected.
 
 As you can see, there are so many ways this can go south. 
 So here's how to fix it.
