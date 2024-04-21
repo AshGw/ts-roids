@@ -8,33 +8,35 @@ And if you're using the decorators, then set this property inside `compilerOptio
   "experimentalDecorators": true,
 ```
 ### Usage
-#### Final classes and methods
+#### Final classes 
 ```ts
 import { FinalClass } from 'ts-roids';
-import type { Optional } from 'ts-roids';
 
 @FinalClass
 export class Foo<F> {
-  private _foo: Optional<F>;
-  constructor(foo: Optional<F>) {
-    this._foo = foo ?? null; // Anything other than null | F will error out
-  }
-  fooFunc(): string {
-    return 'foo';
+  private _foo: F;
+  constructor(foo: F) {
+    this._foo = foo;
   }
 }
+
+class SubFoo extends Foo<string> {
+  constructor(foo: string) {
+    super(foo);
+  }
+}
+
+// No problem with instantiation
+const foo = new Foo<string>('foo');
+// The line below will cause a TypeError: Cannot inherit from the finl class Foo
+const sub = new SubFoo('sub');
 ```
 
 The TypeScript team has not yet introduced a built-in final modifier, check [this](https://github.com/microsoft/TypeScript/issues/1534), [this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests. 
 Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) which is supposed to be the 
 opposite of `final`.
 
-Decorators like ``@FinalClass`` provide a limited way to emulate final behavior, these are merely "band-aids" for now, they only provide compile time checks, until TS officially supports a true final modifier.
-#### Quickly test types
-```typescript 
-type ResultType = TestType<Type1, Type2, true>;
-```
-``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting ``ResultType`` will tell if your expectation is correct, true if it is, else false.
+Decorators like ``@FinalClass`` provide a limited way to emulate final behavior, these are merely "band-aids" for now, until TS officially supports a true final modifier.
 #### Runtime safety
 Can you figure out how many things that can go wrong here?
 ```typescript 
@@ -105,6 +107,12 @@ const baz = requestBaz(foo.id, bar.fooID);
     Type 'FooID' is not assignable to type 'number' 
   */
 ```
+#### A type for testing types
+```typescript 
+type ResultType = TestType<Type1, Type2, true>;
+```
+``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting ``ResultType`` will tell if your expectation is correct, true if it is, else false.
+
 ### Docs
 Checkout the inline documentation in `/src` along with `/tests` to see how it works for now.
 ### License 
