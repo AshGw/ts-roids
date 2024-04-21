@@ -30,7 +30,7 @@ The TypeScript team has not yet introduced a built-in final modifier, ignoring [
 Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) which is supposed to be the 
 opposite of `final`.
 
-Decorators like ``@FinalClass`` and ``@FinalMethod`` provide a limited way to emulate final behavior in TypeScript, these are merely "band-aids" for now, they only provide compile time checks, until TS officially supports a true final modifier.
+Decorators like ``@FinalClass`` and ``@FinalMethod`` provide a limited way to emulate final behavior, these are merely "band-aids" for now, they only provide compile time checks, until TS officially supports a true final modifier.
 #### Quickly test types
 ```typescript 
 type ResultType = TestType<Type1, Type2, true>;
@@ -68,7 +68,7 @@ Is there any undefined behavior? ``fooID`` and ``barID`` are both strings so if 
 As you can see, there are so many ways this can go south. 
 So here's how to fix it.
 ```typescript 
-import { NewType, Optional } from 'ts-roids' 
+import type { NewType, Optional } from 'ts-roids' 
 
 // New types must be unique to get detected.
 // type FooID = NewType<'BarID', string>; will not detect any errors.

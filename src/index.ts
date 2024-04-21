@@ -556,3 +556,34 @@ export type RequiredKeys<T> = {
 export type DeepRequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
+
+/**
+ * Marks a class as final, preventing inheritance from this class.
+ * When applied to a class, any attempt to extend this class will result in a TypeError at runtime.
+ * 
+ * @remarks
+ * Does not prevent instantiation of the final class itself.
+ * 
+ * @see {@link https://github.com/microsoft/TypeScript/issues/1534| Issue #1}
+ * @see {@link https://github.com/microsoft/TypeScript/issues/8306| Issue #2}
+ * @see {@link https://github.com/microsoft/TypeScript/issues/50532| Issue #3}
+
+ */
+export const FinalClass = <CST extends Newable>(cst: CST): CST => {
+  class F extends cst {
+    constructor(...args: any[]) {
+      super(...args);
+      const newTarget = new.target as unknown as typeof F;
+      if (newTarget !== F) {
+        throw new TypeError(`Cannot inherit from final class`);
+      }
+    }
+  }
+
+  Reflect.defineProperty(F, 'name', {
+    // eslint-disable-next-line 
+    value: (cst as any).name || 'UnknownClass',
+  });
+
+  return F as CST;
+};
