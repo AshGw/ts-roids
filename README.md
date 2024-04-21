@@ -3,24 +3,34 @@
 npm i ts-roids
 ```
 If you're only using types, you can install it as a dev dependency.
-### Examples
-#### Lock a class (make it immutable) and finalize it (prohibit further extension)
+And if you're using decorators, then go in `compilerOptions` in your `tsconfig.json`, set  this property.
+```json
+  "experimentalDecorators": true,
+```
+### Usage
+#### Final classes and methods
 ```ts
-import { locked } from 'ts-roids';
-import type { 
-    Optional,
-    Primitive,
-    Newable
-} from 'ts-roids';
+import { FinalClass, FinalMethod } from 'ts-roids';
+import type { Optional } from 'ts-roids';
 
-@locked
+@FinalClass
 export class Foo<F> {
   private _foo: Optional<F>;
   constructor(foo: Optional<F>) {
-    this._foo = foo ?? null; // anything other than null or F will error out
+    this._foo = foo ?? null; // Anything other than null | F will error out
+  }
+  @FinalMethod
+  fooFunc(): string {
+    return 'foo';
   }
 }
 ```
+
+The TypeScript team has not yet introduced a built-in final modifier, ignoring [this](https://github.com/microsoft/TypeScript/issues/1534), [this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests. 
+Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) which is supposed to be the 
+opposite of `final`.
+
+Decorators like ``@FinalClass`` and ``@FinalMethod`` provide a way to emulate final behavior in TypeScript, these are merely "band-aids" for now, they're quite limited, they only provide compile time checks, until TS officially supports a true final modifier.
 #### Quickly test types
 ```typescript 
 type ResultType = TestType<Type1, Type2, true>;
@@ -79,23 +89,24 @@ type Bar = {
 type Baz = NewType<'Baz', string>;
 
 async function requestBaz(barID: BarID, fooID: FooID): Promise<Optional<Baz>> {
-  // string methods work for fooID and barID, since they're both strings.
+  // String methods work for fooID and barID, since they're both strings.
   if (
     fooID.concat().toLowerCase() === 'fooid' &&
     barID.concat().toLowerCase() === 'barid'
   ) {
-  return null; // you have to explicitly return null here.
+  return null; // You have to explicitly return null here.
 }
 const foo = {} as Foo;
 const bar = {} as Bar;
 
-// the code below will fail.
-const baz = requestBaz(foo.id, bar.fooID); /* TypeError: 
+// The code below will fail.
+const baz = requestBaz(foo.id, bar.fooID); 
+/* TypeError: 
     Argument of type 'FooID' is not assignable to parameter of type 'BarID'.
     Type 'FooID' is not assignable to type 'number' 
   */
 ```
 ### Docs
-Checkout the inline documentation in `/src` along with `/tests` to see how it works.
+Checkout the inline documentation in `/src` along with `/tests` to see how it works for now.
 ### License 
 [GPL-3](/LICENSE)

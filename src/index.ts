@@ -557,29 +557,3 @@ export type DeepRequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
 
-/**
- *
- * @param constructor
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze}
- */
-export function locked(constructor: Newable): void {
-  const _sealAndFreeze = (obj: object): void => {
-    Object.seal(obj);
-    Object.freeze(obj);
-    Object.preventExtensions(obj);
-  };
-  _sealAndFreeze(constructor);
-  _sealAndFreeze(constructor.prototype);
-}
-
-// https://github.com/microsoft/TypeScript/issues/8306
-export function final<C extends Newable>(cst: C): C & Newable {
-  return class F extends cst {
-    constructor(...args: any[]) {
-      if (F !== new.target) {
-        throw new TypeError(`Cannot inherit from final ${cst.name}`);
-      }
-      super(...args);
-    }
-  };
-}
