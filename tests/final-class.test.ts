@@ -28,3 +28,10 @@ test('Should not allow inheritance; a TypeError should be thrown', () => {
     const _ = new SubbedFoo();
   }).toThrowError(TypeError);
 });
+
+test('Should allow instantiation of a final class with no problems', () => {
+  expect(() => {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const _ = new Foo('foo');
+  }).toBeTruthy();
+});

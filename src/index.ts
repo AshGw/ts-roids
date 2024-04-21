@@ -575,13 +575,13 @@ export const FinalClass = <CST extends Newable>(cst: CST): CST => {
       super(...args);
       const newTarget = new.target as unknown as typeof F;
       if (newTarget !== F) {
-        throw new TypeError(`Cannot inherit from final class`);
+        throw new TypeError(`Cannot inherit from a final class`);
       }
     }
   }
 
   Reflect.defineProperty(F, 'name', {
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     value: (cst as any).name || 'UnknownClass',
   });
 
