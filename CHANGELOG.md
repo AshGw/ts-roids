@@ -1,6 +1,38 @@
 # Changelog
 
 
+## v1.23.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.21.0...v1.23.0)
+
+### 🚀 Enhancements
+
+- **#56:** Finish `KeysToValues<T>` ([2bcc390](https://github.com/ashgw/ts-roids/commit/2bcc390))
+- **#57:** Finish `Filter<T,P>` ([a646c31](https://github.com/ashgw/ts-roids/commit/a646c31))
+
+### 📖 Documentation
+
+- Add `NewType` example to `README` ([abd304e](https://github.com/ashgw/ts-roids/commit/abd304e))
+- Enhance documentation for `NewType<N,T>` ([affd9b3](https://github.com/ashgw/ts-roids/commit/affd9b3))
+- Solves  Inform users they have to set "experimentalDecorators": true if they want to use decorators ([#67](https://github.com/ashgw/ts-roids/pull/67))
+
+### 📦 Build
+
+- **vitest:** Add istanbul for coverage ([fc6e283](https://github.com/ashgw/ts-roids/commit/fc6e283))
+
+### 🏡 Chore
+
+- Cleanup docs ([7414c31](https://github.com/ashgw/ts-roids/commit/7414c31))
+- **release:** V1.22.0 ([a3d2171](https://github.com/ashgw/ts-roids/commit/a3d2171))
+
+### 🤖 CI
+
+- Add "possible fix" label for bug issue template ([4f80086](https://github.com/ashgw/ts-roids/commit/4f80086))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.22.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.21.0...v1.22.0)
