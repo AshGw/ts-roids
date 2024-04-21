@@ -3,7 +3,7 @@
 npm i ts-roids
 ```
 If you're only using types, you can install it as a dev dependency.
-And if you're using decorators, then go in `compilerOptions` in your `tsconfig.json`, set  this property.
+And if you're using the decorators, then set this property inside `compilerOptions` in your `tsconfig.json` file.
 ```json
   "experimentalDecorators": true,
 ```
@@ -30,7 +30,7 @@ The TypeScript team has not yet introduced a built-in final modifier, ignoring [
 Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) which is supposed to be the 
 opposite of `final`.
 
-Decorators like ``@FinalClass`` and ``@FinalMethod`` provide a way to emulate final behavior in TypeScript, these are merely "band-aids" for now, they're quite limited, they only provide compile time checks, until TS officially supports a true final modifier.
+Decorators like ``@FinalClass`` and ``@FinalMethod`` provide a limited way to emulate final behavior in TypeScript, these are merely "band-aids" for now, they only provide compile time checks, until TS officially supports a true final modifier.
 #### Quickly test types
 ```typescript 
 type ResultType = TestType<Type1, Type2, true>;
