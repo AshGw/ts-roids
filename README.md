@@ -36,7 +36,7 @@ The TypeScript team has not yet introduced a built-in final modifier, check [thi
 Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) which is supposed to be the 
 opposite of `final`.
 
-Decorators like ``@FinalClass`` provide a limited way to emulate final behavior, these are merely "band-aids" for now, until TS officially supports a true final modifier.
+Decorators like ``@FinalClass`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
 #### Runtime safety
 Can you figure out how many things that can go wrong here?
 ```typescript 

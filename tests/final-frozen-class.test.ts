@@ -1,26 +1,8 @@
-import {  Frozen } from 'src';
+import { Final, Frozen, FinalTypeError } from 'src';
 import { test, expect } from 'vitest';
 
-test('is the object actually frozen', () => {
-  @Frozen
-  class Foo<T> {
-    private _foo: T;
-    bar: string;
-
-    constructor(foo: T) {
-      this._foo = foo;
-      this.bar = 'bar';
-    }
-    someFoo(): T {
-      return this._foo;
-    }
-  }
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  const foo = new Foo('foo');
-  expect(Object.isFrozen(foo)).toBeTruthy();
-});
-
-test('Should have no problem with instantiation', () => {
+test('Should not allow inheritance of a final frozen class. "FinalTypeError" should be thrown', () => {
+  @Final
   @Frozen
   class Foo<T> {
     private _foo: T;
@@ -35,13 +17,19 @@ test('Should have no problem with instantiation', () => {
     }
   }
 
+  class SubFoo extends Foo<string> {
+    constructor(foo: string) {
+      super(foo);
+    }
+  }
   expect(() => {
     /* eslint-disable @typescript-eslint/no-unused-vars */
-    const _ = new Foo('subbedFoo');
-  }).not.toThrow();
+    const _ = new SubFoo('subbedFoo');
+  }).toThrowError(FinalTypeError);
 });
 
-test('No problem with instantiation of the frozen class, or the subbed class', () => {
+test('Should allow instantiation of a final frozen class with no problems', () => {
+  @Final
   @Frozen
   class Foo<T> {
     private _foo: T;
@@ -55,47 +43,14 @@ test('No problem with instantiation of the frozen class, or the subbed class', (
       return this._foo;
     }
   }
-  class SubFoo extends Foo<string> {
-    constructor(foo: string) {
-      super(foo);
-    }
-  }
   expect(() => {
-    new Foo('foo');
-    new SubFoo('foo');
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const _ = new Foo('foo');
   }).not.toThrow();
 });
 
-test('No problem with instantiation of the frozen already subbed class, or the subbed class from the frozen class', () => {
-  abstract class BaseFoo<T> {
-    abstract someFoo(): T;
-  }
-  @Frozen
-  class Foo<T> extends BaseFoo<T> {
-    private _foo: T;
-    bar: string;
-
-    constructor(foo: T) {
-      super();
-      this._foo = foo;
-      this.bar = 'bar';
-    }
-    someFoo(): T {
-      return this._foo;
-    }
-  }
-  class SubFoo extends Foo<string> {
-    constructor(foo: string) {
-      super(foo);
-    }
-  }
-  expect(() => {
-    new Foo('foo');
-    new SubFoo('foo');
-  }).not.toThrow();
-});
-
-test('Should not allow to mutate the attributes of a frozen object', () => {
+test('Should bot allow to alter  attributes of the final frozen class, throws TypeError since it is frozen', () => {
+  @Final
   @Frozen
   class Foo<T> {
     private _foo: T;
@@ -115,10 +70,11 @@ test('Should not allow to mutate the attributes of a frozen object', () => {
   }).toThrow(TypeError);
 });
 
-test('Should work when the final class is a subclass itself', () => {
+test('Should work when the final sealed class is a subclass itself, TypeError should be thrown', () => {
   abstract class BaseFoo<T> {
     abstract someFoo(): T;
   }
+  @Final
   @Frozen
   class Foo<T> extends BaseFoo<T> {
     private _foo: T;
@@ -136,5 +92,37 @@ test('Should work when the final class is a subclass itself', () => {
   expect(() => {
     /* eslint-disable @typescript-eslint/no-unused-vars */
     const _ = new Foo('foo').bar;
-  }).not.toThrow();
+  }).not.toThrow(TypeError);
+});
+
+test(`Should not allow inheritance, of the final class, when the final class
+  is a subclass itself, a TypeError should be thrown`, () => {
+  abstract class BaseFoo<T> {
+    abstract someFoo(): T;
+  }
+  @Final
+  @Frozen
+  class Foo<T> extends BaseFoo<T> {
+    private _foo: T;
+    bar: string;
+
+    constructor(foo: T) {
+      super();
+      this._foo = foo;
+      this.bar = 'bar';
+    }
+    someFoo(): T {
+      return this._foo;
+    }
+  }
+
+  class SubFoo extends Foo<string> {
+    constructor(foo: string) {
+      super(foo);
+    }
+  }
+  expect(() => {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const _ = new SubFoo('foo').bar;
+  }).toThrow(FinalTypeError);
 });
