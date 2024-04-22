@@ -1,7 +1,6 @@
 # Changelog
 
 
-
 ## v1.24.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.23.0...v1.24.0)
@@ -16,6 +15,7 @@
 
 - Create `FinalClassTypeError` This is here to differentiate between different type error types ([83e7880](https://github.com/ashgw/ts-roids/commit/83e7880))
 - Cleanup docs ([d14a223](https://github.com/ashgw/ts-roids/commit/d14a223))
+- Cleanup docs ([96a6663](https://github.com/ashgw/ts-roids/commit/96a6663))
 
 ### ✅ Tests
 
