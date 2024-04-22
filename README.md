@@ -8,15 +8,27 @@ And if you're using the decorators, then set this property inside `compilerOptio
   "experimentalDecorators": true,
 ```
 ### Usage
-#### Final classes 
+#### Finalize and freeze objects
 ```ts
-import { FinalClass } from 'ts-roids';
+import { FinalClass, Frozen } from 'ts-roids';
 
-@FinalClass
-export class Foo<F> {
-  private _foo: F;
-  constructor(foo: F) {
+abstract class BaseFoo<T> {
+  abstract someFoo(): T;
+}
+
+@Final
+@Frozen
+class Foo<T> extends BaseFoo<T> {
+  private _foo: T;
+  bar: string;
+
+  constructor(foo: T) {
+    super();
     this._foo = foo;
+    this.bar = 'bar';
+  }
+  someFoo(): T {
+    return this._foo;
   }
 }
 
@@ -28,15 +40,24 @@ class SubFoo extends Foo<string> {
 
 // No problem with instantiation
 const foo = new Foo<string>('foo');
+
 // The line below will cause a TypeError: Cannot inherit from the finl class Foo
 const sub = new SubFoo('sub');
+
+// The line below will cause a TypeError: Cannot add property someFoo, object is not extensible
+foo.someFoo = () => {
+  return 'not foo';
+};
+
+// The line below will cause a TypeError: Cannot assign to read only property 'bar'
+foo.bar = 'not bar';
 ```
 
 The TypeScript team has not yet introduced a built-in final modifier, check [this](https://github.com/microsoft/TypeScript/issues/1534), [this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests. 
 Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) which is supposed to be the 
 opposite of `final`.
 
-Decorators like ``@FinalClass`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
+Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
 #### Runtime safety
 Can you figure out how many things that can go wrong here?
 ```typescript 

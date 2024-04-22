@@ -1,4 +1,4 @@
-import {  Frozen } from 'src';
+import { Frozen } from 'src';
 import { test, expect } from 'vitest';
 
 test('is the object actually frozen', () => {
