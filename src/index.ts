@@ -523,14 +523,6 @@ export type KeysToValues<T extends Record<Keys<T>, Keys<any>>> = {
   }[Keys<T>];
 };
 
-export type Stretch<T> = T extends object
-  ? T extends infer P
-    ? { [K in Keys<P>]: Stretch<P[K]> }
-    : never
-  : T;
-
-export type TypeGuard<T> = (U: unknown) => U is T;
-
 /**
  * `FilterBy<T, P>` filters keys from the object type `T` based on a specified property `P`.
  * The resulting type consists of keys from `T` that match the type or value specified by `P`.
@@ -580,7 +572,13 @@ export type FilterBy<T, P> = {
 
 export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
 export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
+export type Stretch<T> = T extends object
+  ? T extends infer P
+    ? { [K in Keys<P>]: Stretch<P[K]> }
+    : never
+  : T;
 
+export type TypeGuard<T> = (U: unknown) => U is T;
 export type EmptyObject = NonNullable<unknown>;
 
 export type OptionalKeys<T> = {
@@ -631,11 +629,10 @@ export const Final = <CST extends Newable>(cst: CST): CST => {
   return F as CST;
 };
 /**
- * When applied to a method, it marks the method as final within a class, thus preventing method overriding.
- *
- * @throws {TypeError} - If an attempt is made to override a final method.
- */
-export const finalMethod = (
+  TODO: figure it out 
+*/
+/* eslint-disable @typescript-eslint/no-unused-vars */
+const finalMethod = (
   target: object,
   propertyKey: MaybeUndefined<string | symbol>,
   descriptor: PropertyDescriptor
