@@ -444,7 +444,7 @@ export type ImmutableKeys<T> = {
  * @template T2 The second  type to compare.
  * @template Expected A boolean literal indicating whether `T1` should match `T2`.
  * If you expect the types to match, set this to true; if not, set it to false.
- * @returns 
+ * @returns
  * Boolean that is true, if your expectation was correct, otherwise false.
  */
 export declare function testType<T1, T2, E extends boolean>(): Equals<
@@ -589,21 +589,35 @@ export type Stretch<T> = T extends object
 
 export type TypeGuard<T> = (U: unknown) => U is T;
 export type EmptyObject = NonNullable<unknown>;
-
-export type OptionalKeys<T> = {
+/**
+ * Why is it not called OptionalKeys ?
+ * Optional in this library represents a type T that can be either null or T. So creating
+ * OptionalKeys type would mean it would remove any type that can be null, which is not the intention here
+ * NonRequiredKeys simply removes non required keys, as in any property of an object that is
+ * marked with "?" operator
+ * @example
+ *
+ * Extracts keys from a type `T` that represent required/ non-optional properties.
+ * Optional properties are marked with `?`.
+ * @example
+ * ```ts
+ * type T = RequiredKeys<{ a: number; b?: string }> // Result:  'a'
+ * ```
+ */
+export type NonRequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
 }[keyof T];
 
-export type DeepOptionalKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? OptionalKeys<K> : never;
-}[keyof T];
-
+/**
+ * Extracts keys from a type `T` that represent required properties.
+ * Properties that are not marked with `?`.
+ * @example
+ * ```ts
+ * type T = RequiredKeys<{ a: number; b?: string }> // Result:  'a'
+ * ```
+ */
 export type RequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
-}[keyof T];
-
-export type DeepRequiredKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
 
 export class FinalTypeError extends TypeError {}

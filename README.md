@@ -3,7 +3,7 @@
 npm i ts-roids
 ```
 If you're only using types, you can install it as a dev dependency.
-And if you're using the decorators, then set this property inside `compilerOptions` in your `tsconfig.json` file.
+And if you're using the decorators, then set this property inside `compilerOptions` in  `tsconfig.json`.
 ```json
   "experimentalDecorators": true,
 ```
