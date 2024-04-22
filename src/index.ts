@@ -557,11 +557,10 @@ export type DeepRequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
 
-export class FinalClassTypeError extends TypeError {}
-
+export class FinalTypeError extends TypeError {}
 /**
  * Marks a class as final, preventing inheritance from this class.
- * When applied to a class, any attempt to extend this class will result in a TypeError at runtime.
+ * When applied, any attempt to extend this class will result in a TypeError at runtime.
  * 
  * @remarks
  * Does not prevent instantiation of the final class itself.
@@ -571,21 +570,59 @@ export class FinalClassTypeError extends TypeError {}
  * @see {@link https://github.com/microsoft/TypeScript/issues/50532| Issue #3}
 
  */
-export const FinalClass = <CST extends Newable>(cst: CST): CST => {
+export const Final = <CST extends Newable>(cst: CST): CST => {
   class F extends cst {
     constructor(...args: any[]) {
       super(...args);
       const newTarget = new.target as unknown as typeof F;
       if (newTarget !== F) {
-        throw new FinalClassTypeError(`Cannot inherit from a final class`);
+        throw new FinalTypeError(`Cannot inherit from a final class`);
       }
     }
   }
 
   Reflect.defineProperty(F, 'name', {
     // eslint-disable-next-line
-    value: (cst as any).name || 'UnknownClass',
+    value: (cst as any).name || 'Final',
   });
 
   return F as CST;
 };
+
+export const finalMethod = (
+  target: object,
+  propertyKey: MaybeUndefined<string | symbol>,
+  descriptor: PropertyDescriptor
+): PropertyDescriptor => {
+  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function (...args: any[]) {
+    if (new.target !== target.constructor) {
+      throw new TypeError(
+        `Cannot override final method '${String(propertyKey)}' in class '${
+          target.constructor.name
+        }'`
+      );
+    }
+
+    /* eslint-disable @typescript-eslint/no-unsafe-call */
+    /* eslint-disable  @typescript-eslint/no-unsafe-return */
+    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    return originalMethod.apply(this, ...args);
+  };
+
+  return descriptor;
+};
+
+const _freeze = (obj: object) => {
+  Object.freeze(obj);
+};
+export function Frozen<T extends Newable>(cst: T): T & Newable {
+  return class Locked extends cst {
+    constructor(...args: any[]) {
+      super(...args);
+      _freeze(this);
+    }
+  };
+}
