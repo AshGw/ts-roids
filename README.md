@@ -10,7 +10,7 @@ And if you're using the decorators, then set this property inside `compilerOptio
 ### Usage
 #### Finalize and freeze objects
 ```ts
-import { FinalClass, Frozen } from 'ts-roids';
+import { FinalClass, Frozen, Optional } from 'ts-roids';
 
 abstract class BaseFoo<T> {
   abstract someFoo(): T;
@@ -19,16 +19,16 @@ abstract class BaseFoo<T> {
 @Final
 @Frozen
 class Foo<T> extends BaseFoo<T> {
-  private _foo: T;
-  bar: string;
+  foo: T;
+  bar: Optional<string>;
 
-  constructor(foo: T) {
+  constructor(foo: T, bar?: string) {
     super();
-    this._foo = foo;
-    this.bar = 'bar';
+    this.foo = foo;
+    this.bar = bar ?? null;
   }
   someFoo(): T {
-    return this._foo;
+    return this.foo;
   }
 }
 
@@ -42,9 +42,9 @@ class SubFoo extends Foo<string> {
 const foo = new Foo<string>('foo');
 
 // The line below will cause a TypeError: Cannot inherit from the finl class Foo
-const sub = new SubFoo('sub');
+const sub = new SubFoo('subFoo');
 
-// The line below will cause a TypeError: Cannot add property someFoo, object is not extensible
+// The line below will cause a TypeError: Cannot add property 'someFoo', object is not extensible
 foo.someFoo = () => {
   return 'not foo';
 };

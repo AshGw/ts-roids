@@ -174,16 +174,15 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   : false;
 
 /**
- * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types. It solves
- * the common pitfall associated with optional types in TypeScript, where using the `?`
- * operator yields `T | undefined | null`. `Optional<T>`  promotes more predictable code
+ * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
+ * `Optional<T>`  promotes more predictable code, 
  * by enforcing explicit handling of optional scenarios by requiring functions
  * to return `null` specifically when a value is absent.
  */
 export type Optional<T> = T | null;
 
 /**
-This is the same as the `?` operator, try to use `Optional<T>` instead 
+ Represnets a type that might be nullable.
 */
 export type Maybe<T> = T | Nullable;
 export type MaybeUnknown<T> = T | unknown;
@@ -534,11 +533,11 @@ export type KeysToValues<T extends Record<Keys<T>, Keys<any>>> = {
 
 /**
  * `FilterBy<T, P>` filters keys from the object type `T` based on a specified property `P`.
- * The resulting type consists of keys from `T` that match the type or value specified by `P`.
  *
  * Note: This type performs a shallow filtering of keys within `T` and does not check deeply nested types
  * or complex structures within the object type.
- *
+ * @remark
+ * It does not return the key as a whole object, it just returns the key itself
  * For example, given an object type `T`:
  *
  * ```typescript
@@ -579,29 +578,26 @@ export type FilterBy<T, P> = {
   [K in Keys<T>]: K extends P ? K : never;
 }[Keys<T>];
 
-export type PickBy<T, P> = Pick<T, FilterBy<T, P>>;
-export type OmitBy<T, P> = Omit<T, FilterBy<T, P>>;
 export type Stretch<T> = T extends object
   ? T extends infer P
     ? { [K in Keys<P>]: Stretch<P[K]> }
     : never
   : T;
 
-export type TypeGuard<T> = (U: unknown) => U is T;
+/**
+ * Presents any non-nullish value
+ */
 export type EmptyObject = NonNullable<unknown>;
 /**
- * Why is it not called OptionalKeys ?
- * Optional in this library represents a type T that can be either null or T. So creating
- * OptionalKeys type would mean it would remove any type that can be null, which is not the intention here
- * NonRequiredKeys simply removes non required keys, as in any property of an object that is
- * marked with "?" operator
- * @example
+ * Why not call it ``OptionalKeys`` ?
+ * ``Optional<T>`` in this library represents a type ``T`` that can be either ``T`` or ``null``. So creating
+ * ``OptionalKeys`` type would entail removing any type that can be null, which is not the intention here.
  *
- * Extracts keys from a type `T` that represent required/ non-optional properties.
- * Optional properties are marked with `?`.
+ * ``NonRequiredKeys<T>`` simply removes non required keys, as in any property of an object that is
+ * marked with `?` operator
  * @example
  * ```ts
- * type T = RequiredKeys<{ a: number; b?: string }> // Result:  'a'
+ * type T = NonRequiredKeys<{ a: number; b?: string }> // Result:  'b'
  * ```
  */
 export type NonRequiredKeys<T> = {
