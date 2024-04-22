@@ -26,13 +26,23 @@ jobs:
   test:
     uses: ./.github/workflows/test.yml
 
-  npm:
+  green-light:
+    if: always()
     needs:
       - lint
       - dependencies
       - spelling
       - format
       - test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        id: all-green
+        with:
+          jobs: ${{ toJSON(needs)}}
+  npm:
+    needs:
+      - green-light
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
