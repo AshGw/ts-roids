@@ -438,7 +438,16 @@ export type ImmutableKeys<T> = {
     : never;
 }[Keys<T>];
 
-declare function _testType<T1, T2, E extends boolean>(): Equals<
+/**
+ * A function to determines if two types match.
+ * @template T1 The first  type to compare.
+ * @template T2 The second  type to compare.
+ * @template Expected A boolean literal indicating whether `T1` should match `T2`.
+ * If you expect the types to match, set this to true; if not, set it to false.
+ * @returns 
+ * Boolean that is true, if your expectation was correct, otherwise false.
+ */
+export declare function testType<T1, T2, E extends boolean>(): Equals<
   Equals<T1, T2>,
   E
 >;
@@ -451,7 +460,7 @@ declare function _testType<T1, T2, E extends boolean>(): Equals<
  * This utility will return a boolean that is true if your expectation was correct, otherwise false.
  */
 export type TestType<T1, T2, Expected extends boolean> = ReturnType<
-  typeof _testType<T1, T2, Expected>
+  typeof testType<T1, T2, Expected>
 >;
 
 /**
