@@ -1,7 +1,7 @@
-import { FinalClass } from 'src';
+import { FinalClass, FinalClassTypeError } from 'src';
 import { test, expect } from 'vitest';
 
-test('Should not allow inheritance; a TypeError should be thrown', () => {
+test('Should not allow inheritance; a FinalTypeError should be thrown', () => {
   @FinalClass
   class Foo<T> {
     private _foo: T;
@@ -24,7 +24,7 @@ test('Should not allow inheritance; a TypeError should be thrown', () => {
   expect(() => {
     /* eslint-disable @typescript-eslint/no-unused-vars */
     const _ = new SubFoo('subbedFoo');
-  }).toThrowError(TypeError);
+  }).toThrowError(FinalClassTypeError);
 });
 
 test('Should allow instantiation of a final class with no problems', () => {
@@ -119,5 +119,5 @@ test(`Should not allow inheritance, of the final class, when the final class
   expect(() => {
     /* eslint-disable @typescript-eslint/no-unused-vars */
     const _ = new SubFoo('foo').bar;
-  }).toThrow(TypeError);
+  }).toThrow(FinalClassTypeError);
 });

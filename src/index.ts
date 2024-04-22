@@ -557,6 +557,8 @@ export type DeepRequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : RequiredKeys<K>;
 }[keyof T];
 
+export class FinalClassTypeError extends TypeError {}
+
 /**
  * Marks a class as final, preventing inheritance from this class.
  * When applied to a class, any attempt to extend this class will result in a TypeError at runtime.
@@ -575,7 +577,7 @@ export const FinalClass = <CST extends Newable>(cst: CST): CST => {
       super(...args);
       const newTarget = new.target as unknown as typeof F;
       if (newTarget !== F) {
-        throw new TypeError(`Cannot inherit from a final class`);
+        throw new FinalClassTypeError(`Cannot inherit from a final class`);
       }
     }
   }
