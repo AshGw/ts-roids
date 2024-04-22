@@ -175,7 +175,7 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
 
 /**
  * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
- * `Optional<T>`  promotes more predictable code, 
+ * `Optional<T>`  promotes more predictable code,
  * by enforcing explicit handling of optional scenarios by requiring functions
  * to return `null` specifically when a value is absent.
  */

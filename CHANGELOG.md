@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v1.26.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.25.0...v1.26.0)
+
+### 🚀 Enhancements
+
+- Add `testType()` ([dbbf0f7](https://github.com/ashgw/ts-roids/commit/dbbf0f7))
+- Add `RequiredKeys<T>` ([ea1353a](https://github.com/ashgw/ts-roids/commit/ea1353a))
+- Add `NonRequiredKeys<T>` ([da3b4a2](https://github.com/ashgw/ts-roids/commit/da3b4a2))
+
+### 🏡 Chore
+
+- Do not expot `@finalMethod` ([8736176](https://github.com/ashgw/ts-roids/commit/8736176))
+- **#27:** Format on save ([d2d2ae2](https://github.com/ashgw/ts-roids/commit/d2d2ae2))
+- Clean up `array-filter.test.ts` ([752397c](https://github.com/ashgw/ts-roids/commit/752397c))
+
+### 🤖 CI
+
+- **#30:** Add branch protection CI check ([af2ef26](https://github.com/ashgw/ts-roids/commit/af2ef26))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.25.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.24.0...v1.25.0)
