@@ -300,12 +300,34 @@ export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
     }
   : Omit<T, P>;
 
-export type UnionToIntersection<U> = (
+type UnionToIntersection<U> = (
   U extends unknown ? (arg: U) => unknown : never
 ) extends (arg: infer I) => void
   ? I
   : never;
 
+/**
+ * Utility type to deeply pick properties from a nested object type.
+ * @template T The target object.
+ * @template P A dot-separated string literal representing the path of properties to pick.
+ * @example
+ * type T = {
+  one: string;
+  two: {
+    a: boolean;
+    b: null;
+    c: 'c' | 'C';
+  };
+  thee: number;
+};
+ * DeepPick<T, 'two.c'> // Results in: 
+{
+    two: {
+      c: 'c' | 'C';
+    };
+  }
+ *
+ */
 export type DeepPick<
   T extends Record<string, any>,
   P extends string,
@@ -323,8 +345,7 @@ export type DeepPick<
 
 export type EmptyArray = [];
 /**
- * Represents a  type that transposes a given 2D array `M`.
- * It flips the matrix over its diagonal, switching its row and column indices.
+ * Transposes a given 2D array `M`, flipping the matrix over its diagonal, switching its row and column indices.
  * @template M - 2D array of any primitive  type values.
  *
  * @example
