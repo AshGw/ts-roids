@@ -588,7 +588,11 @@ export const Final = <CST extends Newable>(cst: CST): CST => {
 
   return F as CST;
 };
-
+/**
+ * When applied to a method, it marks the method as final within a class, thus preventing method overriding.
+ *
+ * @throws {TypeError} - If an attempt is made to override a final method.
+ */
 export const finalMethod = (
   target: object,
   propertyKey: MaybeUndefined<string | symbol>,
@@ -618,6 +622,9 @@ export const finalMethod = (
 const _freeze = (obj: object) => {
   Object.freeze(obj);
 };
+/**
+ * When applied to a class it creates a frozen instance of the provided class, thuspreventing modifications to instance properties after instantiation.
+ */
 export function Frozen<T extends Newable>(cst: T): T & Newable {
   return class Locked extends cst {
     constructor(...args: any[]) {

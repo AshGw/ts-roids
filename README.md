@@ -58,7 +58,7 @@ Weird, since they introduced `overrides` in [`v4.3`](https://www.typescriptlang.
 opposite of `final`.
 
 Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
-#### Runtime safety
+#### Runtime safety with branded types
 Can you figure out how many things that can go wrong here?
 ```typescript 
 async function requestBaz(barID: string, fooID: string) {
@@ -75,14 +75,14 @@ type Foo = {
 };
 
 type Bar = {
-  fooID: string;
+  id: string;
   bar: string;
 };
 
 // ...
 
-const baz = requestBaz(foo.id, bar.fooID);
-const baz2 = requestBaz(bar.fooID, foo.id);
+const baz = requestBaz(foo.id, bar.id);
+const baz2 = requestBaz(bar.id, foo.id);
 ```
 What does `requestBaz()` return exactly? Is it a string? If so can any string do?  
 Is there any undefined behavior? ``fooID`` and ``barID`` are both strings so if you mix and match both parameter for `requestBaz()` like ``baz`` and ``baz2`` here, the code will run, but the logic breaks and the bug goes undetected.
@@ -104,7 +104,7 @@ type Foo = {
 };
 
 type Bar = {
-  fooID: FooID;
+  id: BarID;
   bar: string;
 };
 
@@ -116,16 +116,22 @@ async function requestBaz(barID: BarID, fooID: FooID): Promise<Optional<Baz>> {
     fooID.concat().toLowerCase() === 'fooid' &&
     barID.concat().toLowerCase() === 'barid'
   ) {
-  return null; // You have to explicitly return null here.
+    return 'baz' as Baz; 
+  }
+    return null; // You have to explicitly return null here.
 }
 const foo = {} as Foo;
 const bar = {} as Bar;
 
-// The code below will fail.
-const baz = requestBaz(foo.id, bar.fooID); 
+// The line below will work just fine.
+const baz1 = requestBaz(bar.id, foo.id); 
+
+
+// Below will fail.
+const baz2 = requestBaz(foo.id, bar.id); 
 /* TypeError: 
     Argument of type 'FooID' is not assignable to parameter of type 'BarID'.
-    Type 'FooID' is not assignable to type 'number' 
+    Type 'FooID' is not assignable to type '"BarID"' 
   */
 ```
 #### A type for testing types
