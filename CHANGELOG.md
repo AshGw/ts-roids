@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v1.25.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.24.0...v1.25.0)
+
+### 🚀 Enhancements
+
+- **#59:** Finish `DeepPick<T,P>` ([315b479](https://github.com/ashgw/ts-roids/commit/315b479))
+
+### 🩹 Fixes
+
+- Husky bug runs tests when it is set to lint ([c918b65](https://github.com/ashgw/ts-roids/commit/c918b65))
+
+### 📖 Documentation
+
+- Add docs for final decorators ([d24c700](https://github.com/ashgw/ts-roids/commit/d24c700))
+
+### ✅ Tests
+
+- `DeepPick<T,P>` ([037dba8](https://github.com/ashgw/ts-roids/commit/037dba8))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.24.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.23.0...v1.24.0)
