@@ -2,6 +2,35 @@
 
 
 
+## v1.24.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.23.0...v1.24.0)
+
+### 🚀 Enhancements
+
+- **#64:** Add `@FinalClass` ([37a5049](https://github.com/ashgw/ts-roids/commit/37a5049))
+- Set the prototype for `@finalMethod` ([057b542](https://github.com/ashgw/ts-roids/commit/057b542))
+- **#66:** Add `@Frozen` ([b2c234c](https://github.com/ashgw/ts-roids/commit/b2c234c))
+
+### 🏡 Chore
+
+- Create `FinalClassTypeError` This is here to differentiate between different type error types ([83e7880](https://github.com/ashgw/ts-roids/commit/83e7880))
+- Cleanup docs ([d14a223](https://github.com/ashgw/ts-roids/commit/d14a223))
+
+### ✅ Tests
+
+- Add an instantiation test case for final classes decorator ([3eec6fb](https://github.com/ashgw/ts-roids/commit/3eec6fb))
+- Add testing for final classes with abstract classes ([303855e](https://github.com/ashgw/ts-roids/commit/303855e))
+- Both `@Frozen` with `@Final` ([4b132c1](https://github.com/ashgw/ts-roids/commit/4b132c1))
+
+### 🤖 CI
+
+- Lint all for pre-commit ([aeef8c0](https://github.com/ashgw/ts-roids/commit/aeef8c0))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.23.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.21.0...v1.23.0)
