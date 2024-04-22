@@ -1,10 +1,9 @@
-import { Falsy, testType, ArrayFilter, Nullable, TestType } from 'src';
+import { Falsy, ArrayFilter, Nullable, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
-  const res = testType<ArrayFilter<[0, 1, 2], Falsy>, [0], true>();
   const result: TestType<ArrayFilter<[0, 1, 2], Falsy>, [0], true> = true;
-  expect(res).toBe(true);
+  expect(result).toBe(true);
 });
 
 test('_', () => {
