@@ -300,6 +300,27 @@ export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
     }
   : Omit<T, P>;
 
+export type UnionToIntersection<U> = (
+  U extends unknown ? (arg: U) => unknown : never
+) extends (arg: infer I) => void
+  ? I
+  : never;
+
+export type DeepPick<
+  T extends Record<string, any>,
+  P extends string,
+> = UnionToIntersection<
+  P extends P
+    ? P extends `${infer K}.${infer R}`
+      ? {
+          [K1 in K]: DeepPick<T[K1], R>;
+        }
+      : P extends Keys<T>
+        ? Pick<T, P>
+        : never
+    : never
+>;
+
 export type EmptyArray = [];
 /**
  * Represents a  type that transposes a given 2D array `M`.
