@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.28.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.27.1...v1.28.0)
+
+### 🚀 Enhancements
+
+- **#82:** Finish `ArrayIncludes<P>` ([c9a1189](https://github.com/ashgw/ts-roids/commit/c9a1189))
+- **#83:** Finish `OmitByType<T,P>` ([ba431c4](https://github.com/ashgw/ts-roids/commit/ba431c4))
+
+### 💅 Refactors
+
+- Rename `Max` to `ArrayMax` ([59c70ae](https://github.com/ashgw/ts-roids/commit/59c70ae))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.27.1
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.27.0...v1.27.1)
