@@ -6,7 +6,7 @@ test('_', () => {
   expect(result).toBe(true);
 });
 
-test('not a limitation', () => {
+test('_', () => {
   const result: TestType<IsInteger<1000000>, true, true> = true;
   expect(result).toBe(true);
 });
