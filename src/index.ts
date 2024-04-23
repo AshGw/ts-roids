@@ -339,6 +339,27 @@ export type _MaxInTwoNums<
     : _ChecktNumericString<A, B>;
 
 /**
+ * Gets the min value from two numeric values, regardless of the sign
+ * @example
+ * ```ts
+ * _MinInTwoNums<54,-78>; // Result: -78
+ * _MinInTwoNums<-999,-78>; // Result: -999
+ * ```
+ * @private
+ * exported for tests, use `Min<Arr>` instead
+ */
+export type _MinInTwoNums<
+  A extends Numeric,
+  B extends Numeric,
+> = IsPositive<A> extends true
+  ? IsPositive<B> extends true
+    ? _ChecktNumericString<Abs<A>, Abs<B>, true, A, B>
+    : B
+  : IsPositive<B> extends true
+    ? A
+    : _ChecktNumericString<A, B>;
+
+/**
  * Represents a type that extracts the maximum numeric value in a given Array
  * @example
  * ```ts
@@ -356,6 +377,18 @@ export type ArrayMax<
     : M
   : Arr extends [infer A extends Numeric, ...infer B extends Numeric[]]
     ? ArrayMax<B, _MaxInTwoNums<A, M>, false>
+    : M;
+
+export type ArrayMin<
+  Arr extends Numeric[],
+  M extends Numeric = Arr[0],
+  Initial extends boolean = true,
+> = Arr['length'] extends 0
+  ? Initial extends true
+    ? never
+    : M
+  : Arr extends [infer A extends Numeric, ...infer B extends Numeric[]]
+    ? ArrayMin<B, _MinInTwoNums<A, M>, false>
     : M;
 
 /**
