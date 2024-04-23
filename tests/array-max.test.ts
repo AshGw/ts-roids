@@ -12,6 +12,10 @@ test('_', () => {
 });
 
 test('_', () => {
-  const result: TestType<ArrayMax<[-54, -2, -90, -72, -69, -202]>, -2, true> = true;
+  const result: TestType<
+    ArrayMax<[-54, -2, -90, -72, -69, -202]>,
+    -2,
+    true
+  > = true;
   expect(result).toBe(true);
 });

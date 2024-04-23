@@ -318,6 +318,25 @@ export type ArrayMax<
     : M;
 
 /**
+ * Checks if a given type is in an array type
+ * @example
+ * ```ts
+ * ArrayIncludes<[bigint, true, 2, 3, 5, 6, 'seven'], true> // Result: true
+ *
+ * type T = NewType<'T',string >;
+ * ArrayIncludes<[T, 2, 3, 5, 6, 7], string>; // Result: false
+ * // Since NewType creates unique 'branded' types
+ * ```
+ * @returns
+ * `true` if found, else `false`
+ */
+export type ArrayIncludes<Arr, P> = Arr extends [infer S, ...infer E]
+  ? Equals<S, P> extends true
+    ? true
+    : ArrayIncludes<E, P>
+  : false;
+
+/**
  * Represents a  type that can be used to construct a new instance.
  * This type is typically used to describe constructor functions or classes
  * that can be invoked using the `new` keyword.
