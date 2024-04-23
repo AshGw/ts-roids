@@ -180,8 +180,14 @@ type MaxInTwoPositiveNums<
   : areAllNegative extends true
     ? B1
     : A1;
-
-type Strlen<
+/**
+ * Get the length of a given string type S
+ * @example
+ * ```ts
+ * Strlen<'foo'>; // Result: 3
+ * ```
+ */
+export type Strlen<
   S extends string,
   Arr extends any[] = EmptyArray,
 > = S extends `${infer L}${infer R}` ? Strlen<R, [...Arr, L]> : Arr['length'];
