@@ -13,7 +13,7 @@
     "parserOptions": {
       "project": ["./tsconfig.json"]
     },
-    "ignorePatterns": ["/playground/"],
+    "ignorePatterns": ["/playground/","/docs/"],
     "plugins": ["@typescript-eslint"],
     "rules": {
       "@typescript-eslint/no-empty-function": "error",
