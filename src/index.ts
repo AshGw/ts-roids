@@ -97,9 +97,7 @@ export type IsTuple<T> = T extends readonly unknown[]
     ? false
     : true
   : false;
-type __ = IsTuple<[4, 544, 454, 54]>;
-type _ = IsTuple<65[]>;
-
+ 
 /**
  * @returns `true` if `T` is `number`, otherwise `false`.
  */
