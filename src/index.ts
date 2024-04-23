@@ -97,7 +97,7 @@ export type IsTuple<T> = T extends readonly unknown[]
     ? false
     : true
   : false;
- 
+
 /**
  * @returns `true` if `T` is `number`, otherwise `false`.
  */
@@ -112,6 +112,10 @@ export type IsBigInt<T> = T extends bigint ? true : false;
  * @returns `true` if `T` is `symbol`, otherwise `false`.
  */
 export type IsSymbol<T> = T extends symbol ? true : false;
+/**
+ * If ``T`` is ``any``, return ``true``, otherwise, return ``false``.
+ */
+export type IsAny<T> = Equals<T, any>;
 
 /**
  * Represents the keys of a given  type `T`.
