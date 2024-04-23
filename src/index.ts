@@ -305,7 +305,7 @@ export type _MaxInTwoNums<
  * Max<[-54,-2,-90,-72,-69,-202]>; // Result: -2
  * ```
  */
-export type Max<
+export type ArrayMax<
   Arr extends Numeric[],
   M extends Numeric = Arr[0],
   Initial extends boolean = true,
@@ -314,7 +314,7 @@ export type Max<
     ? never
     : M
   : Arr extends [infer A extends Numeric, ...infer B extends Numeric[]]
-    ? Max<B, _MaxInTwoNums<A, M>, false>
+    ? ArrayMax<B, _MaxInTwoNums<A, M>, false>
     : M;
 
 /**
