@@ -379,6 +379,14 @@ export type ArrayMax<
     ? ArrayMax<B, _MaxInTwoNums<A, M>, false>
     : M;
 
+/**
+ * Represents a type that extracts the minimum numeric value in a given Array
+ * @example
+ * ```ts
+ * Max<[-54,2,0,999,69,2]>; // Result: -54
+ * Max<[-54,-2,-90,-72,-69,-202]>; // Result: -202
+ * ```
+ */
 export type ArrayMin<
   Arr extends Numeric[],
   M extends Numeric = Arr[0],
@@ -391,7 +399,7 @@ export type ArrayMin<
     ? ArrayMin<B, _MinInTwoNums<A, M>, false>
     : M;
 
-/**
+    /**
  * Checks if a given type is in an array type
  * @example
  * ```ts
