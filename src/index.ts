@@ -192,7 +192,12 @@ export type Strlen<
   Arr extends any[] = EmptyArray,
 > = S extends `${infer L}${infer R}` ? Strlen<R, [...Arr, L]> : Arr['length'];
 
-type IsEqualStrlen<S1 extends string, S2 extends string> = Equals<
+/**
+ * Check if two strings S1 and S2 have the same length
+ * @returns
+ * true if they do, else flase
+ */
+export type EqualStrlen<S1 extends string, S2 extends string> = Equals<
   Strlen<S1>,
   Strlen<S2>
 >;
@@ -205,7 +210,7 @@ type Compare<
   B1 extends Numeric = B,
   AS extends string = StringifyNum<A>,
   BS extends string = StringifyNum<B>,
-> = IsEqualStrlen<AS, BS> extends true
+> = EqualStrlen<AS, BS> extends true
   ? AS extends `${infer L1 extends Numeric}${infer R1}`
     ? BS extends `${infer L2 extends Numeric}${infer R2}`
       ? Equals<L1, L2> extends true
@@ -257,7 +262,7 @@ type Test8 = Strlen<'str'>; // 3
 type Test9 = Strlen<'999999999'>; // 9
 type Test10 = MinInTwoPositiveNums<10, 40>; // 10
 type Test11 = MinInTwoPositiveNums<0, 54>; // 0
-type Test12 = IsEqualStrlen<'Test8', 'Test9'>;
+type Test12 = EqualStrlen<'Test8', 'Test9'>;
 type Test13 = Abs<-87>; // 87
 type Test14 = Abs<87>; // 87
 type Test15 = MaxInTwoNums<-87, 87>; // 87
