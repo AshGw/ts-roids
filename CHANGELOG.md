@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v1.27.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.26.0...v1.27.0)
+
+### 🚀 Enhancements
+
+- **#73:** Finish `Stringify<N>` ([760a76d](https://github.com/ashgw/ts-roids/commit/760a76d))
+- **#72:** Finish `IsNegative<N>` ([83d3807](https://github.com/ashgw/ts-roids/commit/83d3807))
+- **#71:** Finish `IsPositive<N>` ([9377caf](https://github.com/ashgw/ts-roids/commit/9377caf))
+- **#70:** Finish `Abs<N>` ([683e8a8](https://github.com/ashgw/ts-roids/commit/683e8a8))
+- **#69:** Finish `Strlen<S>` ([f810532](https://github.com/ashgw/ts-roids/commit/f810532))
+- **#79:** Finish `EqualStrlen<S1,S2>` ([2e19abd](https://github.com/ashgw/ts-roids/commit/2e19abd))
+- **#76:** Finish `_MinInTwoPositiveNums<N1,N2>` ([cf50397](https://github.com/ashgw/ts-roids/commit/cf50397))
+- **#74:** Finish `_MaxInTwoPositiveNums<N1,N2>` ([af65dfd](https://github.com/ashgw/ts-roids/commit/af65dfd))
+- **#74:** Finish `MaxInTwoNums<N1,N2>` ([47728ea](https://github.com/ashgw/ts-roids/commit/47728ea))
+- **#77:** Finish `Max<Arr>` ([f67825f](https://github.com/ashgw/ts-roids/commit/f67825f))
+- **#80:** Finish `IsInteger<Arr>` ([c8190c4](https://github.com/ashgw/ts-roids/commit/c8190c4))
+- **#81:** Finish `IsFloat<Arr>` ([52d5caf](https://github.com/ashgw/ts-roids/commit/52d5caf))
+- Add `Integer` & `Float` types ([376dc8d](https://github.com/ashgw/ts-roids/commit/376dc8d))
+
+### 🩹 Fixes
+
+- Add  for test files that don't ([ab6bb9f](https://github.com/ashgw/ts-roids/commit/ab6bb9f))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.26.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.25.0...v1.26.0)
