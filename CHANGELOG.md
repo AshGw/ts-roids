@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.29.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.28.0...v1.29.0)
+
+### 🚀 Enhancements
+
+- Add primitive types' type guards ([1bfaec5](https://github.com/ashgw/ts-roids/commit/1bfaec5))
+- Add `IsTuple` ([874b5d5](https://github.com/ashgw/ts-roids/commit/874b5d5))
+- **#86:** Add `IsAny` ([df12d61](https://github.com/ashgw/ts-roids/commit/df12d61))
+- **#87:** Add `_MinInTwoNums<N1,N2>` ([5e5b06b](https://github.com/ashgw/ts-roids/commit/5e5b06b))
+- **#88:** Add `ArrayMin<Arr>` ([513c186](https://github.com/ashgw/ts-roids/commit/513c186))
+
+### 💅 Refactors
+
+- Rename `test-vals.ts` to `vals.test.ts` ([a781f63](https://github.com/ashgw/ts-roids/commit/a781f63))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.28.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.27.1...v1.28.0)

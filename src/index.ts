@@ -399,7 +399,7 @@ export type ArrayMin<
     ? ArrayMin<B, _MinInTwoNums<A, M>, false>
     : M;
 
-    /**
+/**
  * Checks if a given type is in an array type
  * @example
  * ```ts
