@@ -125,10 +125,14 @@ export type EitherOneOrMany<T> = T | T[];
  */
 export type StringifyNum<N extends Numeric> = `${N}`;
 
+/**
+ * Checks if a given numeric value is negative
+ * @returns
+ * true if it is, otherwise false
+ */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-type IsNegative<N extends Numeric> = StringifyNum<N> extends `-${infer U}`
-  ? true
-  : false;
+export type IsNegative<N extends Numeric> =
+  StringifyNum<N> extends `-${infer U}` ? true : false;
 export type IsPositive<N extends Numeric> = N extends N
   ? Numeric extends N
     ? boolean
