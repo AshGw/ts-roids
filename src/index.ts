@@ -240,7 +240,16 @@ type _ChecktNumericString<
     : AreNegative extends false
       ? A1
       : B1;
-
+/**
+ * Gets the max from two numeric values, regardless of the sign
+ * @example
+ * ```ts
+ * _MaxInTwoNums<54,-78>; // Result: 54
+ * _MaxInTwoNums<-999,-78>; // Result: -78
+ * ```
+ * @private
+ * exported for tests, use `Max<Arr>` instead
+ */
 export type _MaxInTwoNums<
   A extends Numeric,
   B extends Numeric,
@@ -252,7 +261,15 @@ export type _MaxInTwoNums<
     ? A
     : _ChecktNumericString<A, B>;
 
-type Max<
+/**
+ * Represents a type that extracts the maximum numeric value in a given Array
+ * @example
+ * ```ts
+ * Max<[-54,2,0,999,69,2]>; // Result: 999
+ * Max<[-54,-2,-90,-72,-69,-202]>; // Result: -2
+ * ```
+ */
+export type Max<
   Arr extends Numeric[],
   M extends Numeric = Arr[0],
   Initial extends boolean = true,
@@ -263,33 +280,6 @@ type Max<
   : Arr extends [infer A extends Numeric, ...infer B extends Numeric[]]
     ? Max<B, _MaxInTwoNums<A, M>, false>
     : M;
-
-type Test1 = IsNegative<5>; // true
-type Test2 = IsNegative<0>; // false
-type Test3 = IsNegative<10>; // false
-type Test4 = IsPositive<-10>; // true
-type Test5 = IsPositive<0>; // true
-type Test55 = IsPositive<10>; // true
-
-type Test6 = _MaxInTwoPositiveNums<10, 40>;
-type Test7 = _MinInTwoPositiveNums<10, 40>;
-
-type Test8 = Strlen<'str'>; // 3
-type Test9 = Strlen<'999999999'>; // 9
-type Test10 = _MinInTwoPositiveNums<10, 40>; // 10
-type Test11 = _MinInTwoPositiveNums<0, 54>; // 0
-type Test12 = EqualStrlen<'Test8', 'Test9'>;
-type Test13 = Abs<-87>; // 87
-type Test14 = Abs<87>; // 87
-type Test15 = _MaxInTwoNums<-87, 87>; // 87
-type Test16 = _MaxInTwoNums<87, 87>; // 87
-type Test17 = _MaxInTwoNums<0, 0>; // 0
-type Test18 = _MaxInTwoNums<-871, -999>; // -871
-type Test19 = _MaxInTwoNums<-871, -999>; // -871
-type arr2 = Max<[-10, -200000, -2000, -1500000000]>; // -10
-type Test122 = _ChecktNumericString<-871, 999>; // -871
-type Test1292 = _ChecktNumericString<871, 999>; // 999
-type Test292 = _ChecktNumericString<871, -999>; // -999
 
 /**
  * Represents a  type that can be used to construct a new instance.
