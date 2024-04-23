@@ -126,13 +126,19 @@ export type EitherOneOrMany<T> = T | T[];
 export type StringifyNum<N extends Numeric> = `${N}`;
 
 /**
- * Checks if a given numeric value is negative
+ * Checks if a given numeric value is in ]-∞,0[
  * @returns
  * true if it is, otherwise false
  */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export type IsNegative<N extends Numeric> =
   StringifyNum<N> extends `-${infer U}` ? true : false;
+
+/**
+ * Checks if a given numeric value is in [0,+∞[
+ * @returns
+ * true if it is, otherwise false
+ */
 export type IsPositive<N extends Numeric> = N extends N
   ? Numeric extends N
     ? boolean
