@@ -2,19 +2,16 @@
 
 # ts-roids
 
-Collection of utility types, decorators and helper functions to bullet proof TypeScript one bit at a time.
+Collection of utility types, decorators and helper functions to bullet proof TypeScript even more.
 
-[![ci](https://github.com/AshGw/ts-roids/actions/workflows/ci.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/ci.yml)
-
+[![release](https://github.com/AshGw/ts-roids/actions/workflows/ci.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/ci.yml)
 [![tests](https://github.com/AshGw/ts-roids/actions/workflows/test.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/test.yml)
-
 [![@latest](https://img.shields.io/npm/v/ts-roids.svg)](https://www.npmjs.com/package/ts-roids)
-[![npm downloads per month](https://img.shields.io/npm/dm/utility-types.svg)](https://www.npmjs.com/package/ts-roids)
+[![npm downloads](https://img.shields.io/npm/dm/ts-utils.svg)](https://www.npmjs.com/package/ts-roids)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/utility-types.svg)](https://www.npmjs.com/package/ts-roids)
-
-                                    No 3rd party Dependencies
 <hr/><br/>
 </div>
+
 ### Installation 
 **npm**
 ```bash
