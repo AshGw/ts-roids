@@ -217,7 +217,7 @@ export type EqualStrlen<S1 extends string, S2 extends string> = Equals<
   Strlen<S2>
 >;
 
-type Compare<
+type _ChecktNumericString<
   A extends Numeric,
   B extends Numeric,
   AreNegative extends boolean = false,
@@ -229,7 +229,7 @@ type Compare<
   ? AS extends `${infer L1 extends Numeric}${infer R1}`
     ? BS extends `${infer L2 extends Numeric}${infer R2}`
       ? Equals<L1, L2> extends true
-        ? Compare<A, B, AreNegative, A1, B1, R1, R2>
+        ? _ChecktNumericString<A, B, AreNegative, A1, B1, R1, R2>
         : _MaxInTwoPositiveNums<L1, L2, A1, B1, AreNegative>
       : A1
     : A1
@@ -240,18 +240,19 @@ type Compare<
     : AreNegative extends false
       ? A1
       : B1;
-export type MaxInTwoNums<
+
+export type _MaxInTwoNums<
   A extends Numeric,
   B extends Numeric,
 > = IsNegative<A> extends true
   ? IsNegative<B> extends true
-    ? Compare<Abs<A>, Abs<B>, true, A, B>
+    ? _ChecktNumericString<Abs<A>, Abs<B>, true, A, B>
     : B
   : IsNegative<B> extends true
     ? A
-    : Compare<A, B>;
+    : _ChecktNumericString<A, B>;
 
-type ArrayMax<
+type Max<
   Arr extends Numeric[],
   M extends Numeric = Arr[0],
   Initial extends boolean = true,
@@ -260,7 +261,7 @@ type ArrayMax<
     ? never
     : M
   : Arr extends [infer A extends Numeric, ...infer B extends Numeric[]]
-    ? ArrayMax<B, MaxInTwoNums<A, M>, false>
+    ? Max<B, _MaxInTwoNums<A, M>, false>
     : M;
 
 type Test1 = IsNegative<5>; // true
@@ -280,12 +281,15 @@ type Test11 = _MinInTwoPositiveNums<0, 54>; // 0
 type Test12 = EqualStrlen<'Test8', 'Test9'>;
 type Test13 = Abs<-87>; // 87
 type Test14 = Abs<87>; // 87
-type Test15 = MaxInTwoNums<-87, 87>; // 87
-type Test16 = MaxInTwoNums<87, 87>; // 87
-type Test17 = MaxInTwoNums<0, 0>; // 0
-type Test18 = MaxInTwoNums<-871, -999>; // -871
-type Test19 = MaxInTwoNums<-871, -999>; // -871
-type test20 = Compare<-54, -87>;
+type Test15 = _MaxInTwoNums<-87, 87>; // 87
+type Test16 = _MaxInTwoNums<87, 87>; // 87
+type Test17 = _MaxInTwoNums<0, 0>; // 0
+type Test18 = _MaxInTwoNums<-871, -999>; // -871
+type Test19 = _MaxInTwoNums<-871, -999>; // -871
+type arr2 = Max<[-10, -200000, -2000, -1500000000]>; // -10
+type Test122 = _ChecktNumericString<-871, 999>; // -871
+type Test1292 = _ChecktNumericString<871, 999>; // 999
+type Test292 = _ChecktNumericString<871, -999>; // -999
 
 /**
  * Represents a  type that can be used to construct a new instance.
