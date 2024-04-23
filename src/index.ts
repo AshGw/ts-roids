@@ -147,8 +147,15 @@ export type IsPositive<N extends Numeric> = N extends N
       : true
   : never;
 
-type ____ = IsPositive<54>;
-type _____ = IsPositive<-54>;
+/**
+ * Get the absolute value of a numeric N
+ * @returns
+ * Abs<N> = |N|
+ */
+export type Abs<N extends Numeric> = `${N}` extends `-${infer M extends
+  Numeric}`
+  ? M
+  : N;
 
 type MinInTwoPositiveNums<
   N1 extends Numeric,
@@ -173,10 +180,6 @@ type MaxInTwoPositiveNums<
   : areAllNegative extends true
     ? B1
     : A1;
-
-type Abs<T extends Numeric> = `${T}` extends `-${infer A extends Numeric}`
-  ? A
-  : T;
 
 type Strlen<
   S extends string,
