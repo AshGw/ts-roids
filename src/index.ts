@@ -92,6 +92,14 @@ export type IsBoolean<T> = T extends boolean ? true : false;
  */
 export type IsNumeric<T> = T extends Numeric ? true : false;
 
+export type IsTuple<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? false
+    : true
+  : false;
+type __ = IsTuple<[4, 544, 454, 54]>;
+type _ = IsTuple<65[]>;
+
 /**
  * @returns `true` if `T` is `number`, otherwise `false`.
  */
