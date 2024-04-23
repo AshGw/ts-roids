@@ -238,7 +238,7 @@ export type Abs<N extends Numeric> = `${N}` extends `-${infer M extends
  * ```ts
  * MinInTwoPositiveNums<21,0>; // Result: 0
  * ```
- * @private
+ * @hidden
  * only exported for tests
  */
 export type _MinInTwoPositiveNums<
@@ -256,7 +256,7 @@ export type _MinInTwoPositiveNums<
  * ```ts
  * MaxInTwoPositiveNums<21,0>; // Result: 21
  * ```
- * @private
+ * @hidden
  * only exported for testing
  */
 export type _MaxInTwoPositiveNums<
@@ -324,7 +324,7 @@ type _ChecktNumericString<
  * _MaxInTwoNums<54,-78>; // Result: 54
  * _MaxInTwoNums<-999,-78>; // Result: -78
  * ```
- * @private
+ * @hidden
  * exported for tests, use `Max<Arr>` instead
  */
 export type _MaxInTwoNums<
@@ -345,7 +345,7 @@ export type _MaxInTwoNums<
  * _MinInTwoNums<54,-78>; // Result: -78
  * _MinInTwoNums<-999,-78>; // Result: -999
  * ```
- * @private
+ * @hidden
  * exported for tests, use `Min<Arr>` instead
  */
 export type _MinInTwoNums<
@@ -950,6 +950,9 @@ export type RequiredKeys<T> = {
   [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
 }[keyof T];
 
+/**
+ * @hidden
+ */
 export class FinalTypeError extends TypeError {}
 /**
  * Marks a class as final, preventing inheritance from this class.
