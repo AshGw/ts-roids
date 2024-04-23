@@ -161,6 +161,16 @@ export type IsFloat<N extends Numeric> = number extends N
     : never;
 
 /**
+ * Type representing an integer
+ */
+export type Integer<N extends Numeric> = IsInteger<N> extends true ? N : never;
+
+/**
+ * Type representing a float
+ */
+export type Float<N extends Numeric> = IsFloat<N> extends true ? N : never;
+
+/**
  * Checks if a given numeric value is in [0,+∞[
  * @returns
  * true if it is, otherwise false
