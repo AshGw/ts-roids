@@ -40,6 +40,21 @@ jobs:
         id: all-green
         with:
           jobs: ${{ toJSON(needs)}}
+  docs:
+    runs-on: ubuntu-latest
+    needs:
+      - green-light
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/prepare
+      - run: pnpm run build:docs
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./docs
+          keep_files: true
   npm:
     needs:
       - green-light
