@@ -156,8 +156,15 @@ export type Abs<N extends Numeric> = `${N}` extends `-${infer M extends
   Numeric}`
   ? M
   : N;
-
-type MinInTwoPositiveNums<
+/**
+ * @example
+ * ```ts
+ * MinInTwoPositiveNums<21,0>; // Result: 0
+ * ```
+ * @private
+ * only exported for tests
+ */
+export type _MinInTwoPositiveNums<
   N1 extends Numeric,
   N2 extends Numeric,
   L extends any[] = EmptyArray,
@@ -165,15 +172,21 @@ type MinInTwoPositiveNums<
   ? L['length'] extends N1
     ? N1
     : N2
-  : MinInTwoPositiveNums<N1, N2, [-1, ...L]>;
+  : _MinInTwoPositiveNums<N1, N2, [-1, ...L]>;
 
-type MaxInTwoPositiveNums<
+/**
+ * @example
+ * ```ts
+ * MinInTwoPositiveNums<21,0>; // Result: 21
+ * ```
+ */
+export type MaxInTwoPositiveNums<
   A extends Numeric,
   B extends Numeric,
   A1 extends Numeric = A,
   B1 extends Numeric = B,
   areAllNegative extends boolean = false,
-> = A extends MinInTwoPositiveNums<A, B>
+> = A extends _MinInTwoPositiveNums<A, B>
   ? areAllNegative extends true
     ? A1
     : B1
@@ -218,14 +231,14 @@ type Compare<
         : MaxInTwoPositiveNums<L1, L2, A1, B1, AreNegative>
       : A1
     : A1
-  : Strlen<AS> extends MinInTwoPositiveNums<Strlen<AS>, Strlen<BS>>
+  : Strlen<AS> extends _MinInTwoPositiveNums<Strlen<AS>, Strlen<BS>>
     ? AreNegative extends false
       ? B1
       : A1
     : AreNegative extends false
       ? A1
       : B1;
-type MaxInTwoNums<
+export type MaxInTwoNums<
   A extends Numeric,
   B extends Numeric,
 > = IsNegative<A> extends true
@@ -256,12 +269,12 @@ type Test5 = IsPositive<0>; // true
 type Test55 = IsPositive<10>; // true
 
 type Test6 = MaxInTwoPositiveNums<10, 40>;
-type Test7 = MinInTwoPositiveNums<10, 40>;
+type Test7 = _MinInTwoPositiveNums<10, 40>;
 
 type Test8 = Strlen<'str'>; // 3
 type Test9 = Strlen<'999999999'>; // 9
-type Test10 = MinInTwoPositiveNums<10, 40>; // 10
-type Test11 = MinInTwoPositiveNums<0, 54>; // 0
+type Test10 = _MinInTwoPositiveNums<10, 40>; // 10
+type Test11 = _MinInTwoPositiveNums<0, 54>; // 0
 type Test12 = EqualStrlen<'Test8', 'Test9'>;
 type Test13 = Abs<-87>; // 87
 type Test14 = Abs<87>; // 87
