@@ -177,10 +177,12 @@ export type _MinInTwoPositiveNums<
 /**
  * @example
  * ```ts
- * MinInTwoPositiveNums<21,0>; // Result: 21
+ * MaxInTwoPositiveNums<21,0>; // Result: 21
  * ```
+ * @private
+ * only exported for testing
  */
-export type MaxInTwoPositiveNums<
+export type _MaxInTwoPositiveNums<
   A extends Numeric,
   B extends Numeric,
   A1 extends Numeric = A,
@@ -228,7 +230,7 @@ type Compare<
     ? BS extends `${infer L2 extends Numeric}${infer R2}`
       ? Equals<L1, L2> extends true
         ? Compare<A, B, AreNegative, A1, B1, R1, R2>
-        : MaxInTwoPositiveNums<L1, L2, A1, B1, AreNegative>
+        : _MaxInTwoPositiveNums<L1, L2, A1, B1, AreNegative>
       : A1
     : A1
   : Strlen<AS> extends _MinInTwoPositiveNums<Strlen<AS>, Strlen<BS>>
@@ -268,7 +270,7 @@ type Test4 = IsPositive<-10>; // true
 type Test5 = IsPositive<0>; // true
 type Test55 = IsPositive<10>; // true
 
-type Test6 = MaxInTwoPositiveNums<10, 40>;
+type Test6 = _MaxInTwoPositiveNums<10, 40>;
 type Test7 = _MinInTwoPositiveNums<10, 40>;
 
 type Test8 = Strlen<'str'>; // 3
