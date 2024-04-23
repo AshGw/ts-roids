@@ -77,6 +77,37 @@ export type IsNever<T> = T extends never ? true : false;
 export type IsUnknown<T> = T extends unknown ? true : false;
 
 /**
+ * @returns `true` if `T` is `string`, otherwise `false`.
+ */
+export type IsString<T> = T extends string ? true : false;
+
+/**
+ * @returns `true` if `T` is `boolean`, otherwise `false`.
+ */
+export type IsBoolean<T> = T extends boolean ? true : false;
+
+/**
+ * A numeric type iincludes `number` and `bigint`.
+ * @returns `true` if `T` is a numeric type, otherwise `false`.
+ */
+export type IsNumeric<T> = T extends Numeric ? true : false;
+
+/**
+ * @returns `true` if `T` is `number`, otherwise `false`.
+ */
+export type IsNumber<T> = T extends number ? true : false;
+
+/**
+ * @returns `true` if `T` is `bigint`, otherwise `false`.
+ */
+export type IsBigInt<T> = T extends bigint ? true : false;
+
+/**
+ * @returns `true` if `T` is `symbol`, otherwise `false`.
+ */
+export type IsSymbol<T> = T extends symbol ? true : false;
+
+/**
  * Represents the keys of a given  type `T`.
  * This  type alias `Keys<T>` is equivalent to `keyof T`,
  * which retrieves the union  type of keys (property names) of  type `T`.
