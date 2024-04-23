@@ -5,3 +5,4 @@ lintstagedrc
 Unknwon
 Vals
 Immutate
+roids

@@ -1,9 +1,35 @@
+<div align="center">
+
+# ts-roids
+
+Collection of utility types, decorators and helper functions to bullet proof TypeScript one bit at a time.
+
+[![ci](https://github.com/AshGw/ts-roids/actions/workflows/ci.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/ci.yml)
+
+[![tests](https://github.com/AshGw/ts-roids/actions/workflows/test.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/test.yml)
+
+[![@latest](https://img.shields.io/npm/v/ts-roids.svg)](https://www.npmjs.com/package/ts-roids)
+[![npm downloads per month](https://img.shields.io/npm/dm/utility-types.svg)](https://www.npmjs.com/package/ts-roids)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/utility-types.svg)](https://www.npmjs.com/package/ts-roids)
+
+                                    No 3rd party Dependencies
+<hr/><br/>
+</div>
 ### Installation 
+**npm**
 ```bash
 npm i ts-roids
 ```
+**pnpm**
+```bash
+pnpm i ts-roids
+```
+**yarn**
+```bash
+yarn add ts-roids
+```
 If you're only using types, you can install it as a dev dependency.
-And if you're using the decorators, then set this property inside `compilerOptions` in  `tsconfig.json`.
+And if you're using the decorators, set this property inside `compilerOptions` in  `tsconfig.json`.
 ```json
   "experimentalDecorators": true,
 ```
@@ -84,17 +110,17 @@ type Bar = {
 const baz = requestBaz(foo.id, bar.id);
 const baz2 = requestBaz(bar.id, foo.id);
 ```
-What does `requestBaz()` return exactly? Is it a string? If so can any string do?  
-Is there any undefined behavior? ``fooID`` and ``barID`` are both strings so if you mix and match both parameter for `requestBaz()` like ``baz`` and ``baz2`` here, the code will run, but the logic breaks and the bug goes undetected.
+What does `requestBaz()` return exactly? Suppose it does, Is it a string? If so, would any string do?  
+
+ ``fooID`` and ``barID`` are both strings so if you mistakenly mix both parameter for `requestBaz()` like ``baz`` and ``baz2`` here, the code will run, but the logic breaks and the bug goes undetected.
 
 As you can see, there are so many ways this can go south. 
 So here's how to fix it.
 ```typescript 
 import type { NewType, Optional } from 'ts-roids' 
 
-// New types must be unique to get detected.
-// type FooID = NewType<'BarID', string>; will not detect any errors.
-// Even though the type declaration itself is different.
+// New types must be unique to get flagged by linters if used wrong.
+// type FooID = NewType<'BarID', string>; //  will not help detect any errors. Even though the type declaration itself is different.
 type FooID = NewType<'FooID', string>;
 type BarID = NewType<'BarID', string>;
 
@@ -127,7 +153,7 @@ const bar = {} as Bar;
 const baz1 = requestBaz(bar.id, foo.id); 
 
 
-// Below will fail.
+// But this will fail.
 const baz2 = requestBaz(foo.id, bar.id); 
 /* TypeError: 
     Argument of type 'FooID' is not assignable to parameter of type 'BarID'.
@@ -138,7 +164,7 @@ const baz2 = requestBaz(foo.id, bar.id);
 ```typescript 
 type ResultType = TestType<Type1, Type2, true>;
 ```
-``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting ``ResultType`` will tell if your expectation is correct, true if it is, else false.
+``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
 
 ### Docs
 Checkout the inline documentation in `/src` along with `/tests` to see how it works for now.

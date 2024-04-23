@@ -116,6 +116,137 @@ export type Vals<T> = T[Keys<T>];
  * const value2: OneOrMany<number> = [20, 30]; // Also valid
  */
 export type EitherOneOrMany<T> = T | T[];
+/**
+ * Turns a given numeric value (number or bigint) into its string representation
+ * @example
+ * ```ts
+ * type _ = StringifyNum<45> // Result: '45'
+ * ```
+ */
+export type StringifyNum<N extends Numeric> = `${N}`;
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+type IsNegative<N extends Numeric> = StringifyNum<N> extends `-${infer U}`
+  ? true
+  : false;
+export type IsPositive<N extends Numeric> = N extends N
+  ? Numeric extends N
+    ? boolean
+    : `${N}` extends `-${Numeric}`
+      ? false
+      : true
+  : never;
+
+type ____ = IsPositive<54>;
+type _____ = IsPositive<-54>;
+
+type MinInTwoPositiveNums<
+  N1 extends Numeric,
+  N2 extends Numeric,
+  L extends any[] = EmptyArray,
+> = L['length'] extends N1 | N2
+  ? L['length'] extends N1
+    ? N1
+    : N2
+  : MinInTwoPositiveNums<N1, N2, [-1, ...L]>;
+
+type MaxInTwoPositiveNums<
+  A extends Numeric,
+  B extends Numeric,
+  A1 extends Numeric = A,
+  B1 extends Numeric = B,
+  areAllNegative extends boolean = false,
+> = A extends MinInTwoPositiveNums<A, B>
+  ? areAllNegative extends true
+    ? A1
+    : B1
+  : areAllNegative extends true
+    ? B1
+    : A1;
+
+type Abs<T extends Numeric> = `${T}` extends `-${infer A extends Numeric}`
+  ? A
+  : T;
+
+type Strlen<
+  S extends string,
+  Arr extends any[] = EmptyArray,
+> = S extends `${infer L}${infer R}` ? Strlen<R, [...Arr, L]> : Arr['length'];
+
+type IsEqualStrlen<S1 extends string, S2 extends string> = Equals<
+  Strlen<S1>,
+  Strlen<S2>
+>;
+
+type Compare<
+  A extends Numeric,
+  B extends Numeric,
+  AreNegative extends boolean = false,
+  A1 extends Numeric = A,
+  B1 extends Numeric = B,
+  AS extends string = StringifyNum<A>,
+  BS extends string = StringifyNum<B>,
+> = IsEqualStrlen<AS, BS> extends true
+  ? AS extends `${infer L1 extends Numeric}${infer R1}`
+    ? BS extends `${infer L2 extends Numeric}${infer R2}`
+      ? Equals<L1, L2> extends true
+        ? Compare<A, B, AreNegative, A1, B1, R1, R2>
+        : MaxInTwoPositiveNums<L1, L2, A1, B1, AreNegative>
+      : A1
+    : A1
+  : Strlen<AS> extends MinInTwoPositiveNums<Strlen<AS>, Strlen<BS>>
+    ? AreNegative extends false
+      ? B1
+      : A1
+    : AreNegative extends false
+      ? A1
+      : B1;
+type MaxInTwoNums<
+  A extends Numeric,
+  B extends Numeric,
+> = IsNegative<A> extends true
+  ? IsNegative<B> extends true
+    ? Compare<Abs<A>, Abs<B>, true, A, B>
+    : B
+  : IsNegative<B> extends true
+    ? A
+    : Compare<A, B>;
+
+type ArrayMax<
+  Arr extends Numeric[],
+  M extends Numeric = Arr[0],
+  Initial extends boolean = true,
+> = Arr['length'] extends 0
+  ? Initial extends true
+    ? never
+    : M
+  : Arr extends [infer A extends Numeric, ...infer B extends Numeric[]]
+    ? ArrayMax<B, MaxInTwoNums<A, M>, false>
+    : M;
+
+type Test1 = IsNegative<5>; // true
+type Test2 = IsNegative<0>; // false
+type Test3 = IsNegative<10>; // false
+type Test4 = IsPositive<-10>; // true
+type Test5 = IsPositive<0>; // true
+type Test55 = IsPositive<10>; // true
+
+type Test6 = MaxInTwoPositiveNums<10, 40>;
+type Test7 = MinInTwoPositiveNums<10, 40>;
+
+type Test8 = Strlen<'str'>; // 3
+type Test9 = Strlen<'999999999'>; // 9
+type Test10 = MinInTwoPositiveNums<10, 40>; // 10
+type Test11 = MinInTwoPositiveNums<0, 54>; // 0
+type Test12 = IsEqualStrlen<'Test8', 'Test9'>;
+type Test13 = Abs<-87>; // 87
+type Test14 = Abs<87>; // 87
+type Test15 = MaxInTwoNums<-87, 87>; // 87
+type Test16 = MaxInTwoNums<87, 87>; // 87
+type Test17 = MaxInTwoNums<0, 0>; // 0
+type Test18 = MaxInTwoNums<-871, -999>; // -871
+type Test19 = MaxInTwoNums<-871, -999>; // -871
+type test20 = Compare<-54, -87>;
 
 /**
  * Represents a  type that can be used to construct a new instance.
@@ -342,7 +473,7 @@ export type DeepPick<
     : never
 >;
 
-export type EmptyArray = [];
+type EmptyArray = [];
 /**
  * Transposes a given 2D array `M`, flipping the matrix over its diagonal, switching its row and column indices.
  * @template M - 2D array of any primitive  type values.
@@ -681,7 +812,8 @@ const _freeze = (obj: object) => {
   Object.freeze(obj);
 };
 /**
- * When applied to a class it creates a frozen instance of the provided class, thuspreventing modifications to instance properties after instantiation.
+ * When applied to a class it creates a frozen instance of it,
+ * thus preventing modifications to instance properties after instantiation.
  */
 export function Frozen<T extends Newable>(cst: T): T & Newable {
   return class Locked extends cst {
