@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.27.1
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.27.0...v1.27.1)
+
+### 🩹 Fixes
+
+- Fix distorted readme ([3e5a673](https://github.com/ashgw/ts-roids/commit/3e5a673))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.27.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.26.0...v1.27.0)
