@@ -164,6 +164,27 @@ export type IsArray<T> = T extends unknown[] ? true : false;
 export type IsArrayIncludesTypeof<Arr, T> = Arr extends T[] ? true : false;
 
 /**
+ * Checks if a given type `Arr` is exactly an array of elements of type `T`.
+ * @template Arr The type to check if it's an array of elements of type `T`.
+ * @template T The element type expected in the array.
+ * @returns `true` if `Arr` is exactly an array of elements of type `T`, otherwise `false`.
+ * An array of elements of type `T` is defined as `Arr` being exactly `T[]`.
+ * @example
+ * ```
+ * IsArrayOf<string[], string & boolean>; // false
+ * IsArrayOf<Record<string, number>[], number>; // false
+ * IsArrayOf<Record<string, number>[], string | number>; // false
+ * IsArrayOf<Record<string, number>[], Record<symbol, boolean>>; // false
+ * IsArrayOf<Record<string, number>[], Record<string, unknown>>; // false ('unknown' does not get a pass)
+ * IsArrayOf<Record<string, number>[], Record<string, any>>; // false ('any' does not get a pass)
+ * IsArrayOf<Record<string, number>[], Record<string, number>>; // true
+ * IsArrayOf<string[], string>; // true
+ * IsArrayOf<string[], string | 'string'>; // true
+ * ```
+ */
+export type IsArrayOf<Arr, T> = Equals<Arr, T[]>;
+
+/**
  * Type utility that checks if a given type `T` is an `AnyFunction` (any function type).
  * @template T The type to check.
  * @returns `true` if `T` is an `AnyFunction`, otherwise `false`.

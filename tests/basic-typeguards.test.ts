@@ -4,6 +4,7 @@ import { describe } from 'node:test';
 import {
   IsArray,
   IsArrayIncludesTypeof,
+  IsArrayOf,
   IsNullable,
   IsAnyFunction,
   IsFunction,
@@ -97,7 +98,7 @@ describe('Test IsArray<T>', () => {
   });
 });
 
-describe('Test IsArrayOf<T>', () => {
+describe('Test IsArrayIncludesTypeof<T>', () => {
   test('_', () => {
     const result: TestType<
       IsArrayIncludesTypeof<string[], string | boolean>,
@@ -174,6 +175,103 @@ describe('Test IsArrayOf<T>', () => {
     const result: TestType<
       IsArrayIncludesTypeof<Record<string, number>[], Record<symbol, boolean>>,
       true,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+});
+
+describe('Test IsArrayOf<T>', () => {
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<string[], string | boolean>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<string[], string & boolean>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsArrayOf<string[], string>, true, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<string[], null | boolean>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<string | boolean[], string | boolean>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<Record<string, number>[], number>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<Record<string, number>[], string | number>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<Record<string, number>[], Record<string, number>>,
+      true,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('unknown does not get a pass here', () => {
+    const result: TestType<
+      IsArrayOf<Record<string, number>[], Record<string, unknown>>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('any does not get a pass here too', () => {
+    const result: TestType<
+      IsArrayOf<Record<string, number>[], Record<string, any>>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsArrayOf<Record<string, number>[], Record<symbol, boolean>>,
+      false,
       true
     > = true;
     expect(result).toBe(true);
