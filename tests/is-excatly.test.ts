@@ -6,6 +6,8 @@ import {
   IsExactlySymbol,
   IsBigInt,
   IsExactlyNumber,
+  IsExactlyString,
+  IsExactlyUnknown,
 } from 'src';
 import { test, expect } from 'vitest';
 
@@ -142,6 +144,91 @@ describe('test IsExactlyNumber', () => {
   test('_', () => {
     const result: TestType<
       IsExactlyNumber<number | Nullable>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+});
+
+describe('test IsExactlyUnknown', () => {
+  test('_', () => {
+    const result: TestType<IsExactlyUnknown<undefined>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyUnknown<number>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyUnknown<unknown>, true, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('any is over unknown', () => {
+    const result: TestType<IsExactlyUnknown<any | unknown>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('any is over unknown', () => {
+    const result: TestType<IsExactlyAny<any | unknown>, true, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('once unknown, always unknown', () => {
+    const result: TestType<
+      IsExactlyUnknown<unknown | string>,
+      true,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsExactlyUnknown<number | Nullable>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+});
+
+describe('test IsExactlyString', () => {
+  test('_', () => {
+    const result: TestType<IsExactlyString<undefined>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyString<number>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyString<string>, true, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyString<any | string>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsExactlyString<unknown | string>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsExactlyString<number | Nullable>,
       false,
       true
     > = true;

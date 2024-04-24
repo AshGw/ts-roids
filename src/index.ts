@@ -68,18 +68,40 @@ export type IsNever<T> = Equals<T, never>;
  * without  type assertion or  type narrowing.
  * @returns `true` if `T` is `unknown`, otherwise `false`.
  * @example
- *  type UnknownValue = unknown;
- *  type IsUnknownValue = IsUnknown<UnknownValue>; =>  true
- *
- *  type KnownValue = string;
- *  type IsNotUnknownValue = IsUnknown<KnownValue>; => true
+ *  type IsUnknownValue = IsUnknown<unknown>; //  true
+ *  type IsNotUnknownValue = IsUnknown<string>; // also true
+ * @remarks
+ * > If you want `unknown` to be exact, use `IsExactlyUnknown`
  */
 export type IsUnknown<T> = T extends unknown ? true : false;
+
+/**
+ * Checks if a given  type `T` is exactly `unknown`.
+ * @example
+ * ````ts
+  IsExactlyUnknown<any | unknown>; // false, since the union evaluates to any
+  IsExactlyAny<any | unknown>; // true
+  IsExactlyUnknown<unknown | string> // true 
+  IsExactlyUnknown<string>; // flase 
+ * ````
+ */
+export type IsExactlyUnknown<T> = Equals<T, unknown>;
 
 /**
  * @returns `true` if `T` is `string`, otherwise `false`.
  */
 export type IsString<T> = T extends string ? true : false;
+
+/**
+ * @returns `true` if `T` is excatly `string`, otherwise `false`.
+ * @example
+ * ````ts
+  IsExactlyString<number>; //  false;
+  IsExactlyString<any | string>; // false
+  IsExactlyString<unknown | string>; //  false 
+ * ````
+ */
+export type IsExactlyString<T> = Equals<T, string>;
 
 /**
  * @returns `true` if `T` is `boolean`, otherwise `false`.
