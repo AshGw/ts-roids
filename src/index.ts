@@ -226,8 +226,13 @@ export type IsPositive<N extends Numeric> = N extends N
 
 /**
  * Get the absolute value of a numeric N
+ * @example
+ * ```ts
+ * Abs<-54>; // Result: 54
+ * Abs<54>; // Result: 54
+ * ```
  * @returns
- * Abs<N> = |N|
+ * |N|
  */
 export type Abs<N extends Numeric> = `${N}` extends `-${infer M extends
   Numeric}`
@@ -360,7 +365,7 @@ export type _MinInTwoNums<
     : _ChecktNumericString<A, B>;
 
 /**
- * Represents a type that extracts the maximum numeric value in a given Array
+ * Extracts the maximum numeric value in a given Array
  * @example
  * ```ts
  * Max<[-54,2,0,999,69,2]>; // Result: 999
@@ -380,7 +385,7 @@ export type ArrayMax<
     : M;
 
 /**
- * Represents a type that extracts the minimum numeric value in a given Array
+ * Extracts the minimum numeric value in a given Array
  * @example
  * ```ts
  * Max<[-54,2,0,999,69,2]>; // Result: -54
@@ -419,7 +424,7 @@ export type ArrayIncludes<Arr, P> = Arr extends [infer S, ...infer E]
   : false;
 
 /**
- * Represents a  type that can be used to construct a new instance.
+ * Can be used to construct a new instance.
  * This type is typically used to describe constructor functions or classes
  * that can be invoked using the `new` keyword.
  */
@@ -433,13 +438,13 @@ export type Newable = { new (...args: any[]): any };
 export type IsNewable<T> = T extends Newable ? true : false;
 
 /**
- * Represents a  type that describes any function accepting any arguments
+ * Describes any function accepting any arguments
  *  and returning any value.
  */
 export type AnyFunction = (...args: any[]) => any;
 
 /**
- * Represents a  type that describes any function accepting and retruning `unknown`s
+ * Describes any function accepting and retruning `unknown`s
  */
 export type UnknownFunction = (...args: unknown[]) => unknown;
 
@@ -483,7 +488,7 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
 export type Optional<T> = T | null;
 
 /**
- Represnets a type that might be nullable.
+ Represnets a type that might be nullable, as in it might be `null` or `undefined`.
 */
 export type Maybe<T> = T | Nullable;
 export type MaybeUnknown<T> = T | unknown;
@@ -514,6 +519,43 @@ export type ExcludeNull<T> = Exclude<T, null>;
 
 /**
  * A  type that recursively mutates all the proprties within a given object  type `T`.
+ * @example
+ * ````ts
+type Actual = {
+  readonly a: () => 1;
+  readonly x: string;
+  readonly s: {
+    readonly q: Nullable;
+    readonly s: {
+      readonly i: {
+        readonly x: {
+          readonly o: Maybe<Primitive>;
+          readonly n: Falsy;
+        };
+        readonly e: 'foo';
+      };
+    };
+  };
+};
+
+type Expected = {
+  a: () => 1;
+  x: string;
+  s: {
+    q: Nullable;
+    s: {
+      i: {
+        x: {
+          o: Maybe<Primitive>;
+          n: Falsy;
+        };
+        e: 'foo';
+      };
+    };
+  };
+};
+type T = DeepMutable<Actual>; // T Results in: Expected
+ * ````
  */
 export type DeepMutable<T> = T extends UnknownFunction
   ? T
@@ -528,7 +570,44 @@ export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
 
 /**
  * A  type that recursively turns the proprties within a given object  type `T` immutable.
- */
+ * @example
+ * ````ts
+type Actual = {
+  a: () => 1;
+  x: string;
+  s: {
+    q: Nullable;
+    s: {
+      i: {
+        x: {
+          o: Maybe<Primitive>;
+          n: Falsy;
+        };
+        e: 'foo';
+      };
+    };
+  };
+};
+
+type Expected = {
+  readonly a: () => 1;
+  readonly x: string;
+  readonly s: {
+    readonly q: Nullable;
+    readonly s: {
+      readonly i: {
+        readonly x: {
+          readonly o: Maybe<Primitive>;
+          readonly n: Falsy;
+        };
+        readonly e: 'foo';
+      };
+    };
+  };
+};
+type T = DeepImmutable<Actual>; // T Results in: Expected
+ * ````
+ * */
 export type DeepImmutable<T> = T extends UnknownFunction
   ? T
   : {
@@ -577,7 +656,7 @@ export type NewType<N, T> = T & {
 /**
  * Type that recursively omits specified nested properties from an object type.
  * @template T The input object type.
- * @template P A string literal representing the path of properties to omit (e.g., 'person.name.value').
+ * @template P A **string** literal representing the path of properties to omit (e.g., 'person.name.value').
  * @example
  * ```typescript
  * type T =
@@ -645,7 +724,7 @@ export type DeepPick<
 
 type EmptyArray = [];
 /**
- * Transposes a given 2D array `M`, flipping the matrix over its diagonal, switching its row and column indices.
+ * Transposes a given 2D array or matrix `M`, flipping the matrix over its diagonal, switching its row and column indices.
  * @template M - 2D array of any primitive  type values.
  *
  * @example
@@ -676,7 +755,7 @@ export type ArrayTranspose<
  * Represents a  type that filters elements from an array based on a given predicate  type.
  * @typeParam T The array to filter.
  * @typeParam P The predicate used for filtering elements from `T`.
- * @returns a new array type containing only the elements of `T` that match `P`.
+ * @returns A new array type containing only the elements of `T` that match `P`.
  * @example
  * ```typescript
  *  type Numbers = [0, 1, 2, 3];
@@ -746,6 +825,7 @@ export type ImmutableKeys<T> = {
  * If you expect the types to match, set this to true; if not, set it to false.
  * @returns
  * Boolean that is true, if your expectation was correct, otherwise false.
+ * @hidden
  */
 export declare function testType<T1, T2, E extends boolean>(): Equals<
   Equals<T1, T2>,
@@ -957,14 +1037,34 @@ export class FinalTypeError extends TypeError {}
 /**
  * Marks a class as final, preventing inheritance from this class.
  * When applied, any attempt to extend this class will result in a TypeError at runtime.
- * 
  * @remarks
- * Does not prevent instantiation of the final class itself.
- * 
+ * This decorator does not prevent instantiation of the final class itself.
+ * @example 
+ * ```ts
+ * @Final
+ * class Foo<T> {
+ *   private _foo: T;
+ *   bar: string;
+ *
+ *   constructor(foo: T) {
+ *     this._foo = foo;
+ *     this.bar = 'bar';
+ *   }
+ *
+ *   someFoo(): T {
+ *     return this._foo;
+ *   }
+ * }
+ *
+ * // No problem with instantiation
+ * const foo = new Foo<string>('foo');
+
+ * // The line below will cause a TypeError: Cannot inherit from the finl class Foo
+ * const sub = new SubFoo('subFoo');
+ * ```
  * @see {@link https://github.com/microsoft/TypeScript/issues/1534| Issue #1}
  * @see {@link https://github.com/microsoft/TypeScript/issues/8306| Issue #2}
  * @see {@link https://github.com/microsoft/TypeScript/issues/50532| Issue #3}
-
  */
 export const Final = <CST extends Newable>(cst: CST): CST => {
   class F extends cst {
@@ -1020,6 +1120,29 @@ const _freeze = (obj: object) => {
 /**
  * When applied to a class it creates a frozen instance of it,
  * thus preventing modifications to instance properties after instantiation.
+ *
+ * @example
+ * ```ts
+ * @Frozen
+ * class Foo<T> {
+ *   private _foo: T;
+ *   bar: string;
+ *
+ *   constructor(foo: T) {
+ *     this._foo = foo;
+ *     this.bar = 'bar';
+ *   }
+ *
+ *   someFoo(): T {
+ *     return this._foo;
+ *   }
+ * }
+ *
+ * const foo = new Foo('foo');
+ * // The line below will cause a TypeError: Cannot assign to read only property 'bar'
+ * foo.bar = 'altered bar';
+ * ```
+ *
  */
 export function Frozen<T extends Newable>(cst: T): T & Newable {
   return class Locked extends cst {
