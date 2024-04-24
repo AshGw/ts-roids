@@ -124,23 +124,44 @@ export type IsSymbol<T> = T extends symbol ? true : false;
  */
 export type IsLiterallyAny<T> = Equals<T, any>;
 
+/**
+ * Conditional type: if `Cond` is `true`, return `Do`, otherwise return `Else`.
+ */
 export type If<Cond extends boolean, Do, Else> = Cond extends true ? Do : Else;
-export type Not<A extends boolean> = A extends true ? false : true;
-export type And<A extends boolean, B extends boolean> = If<
-  A,
-  If<B, true, false>,
+/**
+ * Negates a boolean type `B`.
+ */
+export type Not<B extends boolean> = B extends true ? false : true;
+
+/**
+ * Logical AND between two boolean types `B1` and `B2`.
+ */
+export type And<B1 extends boolean, B2 extends boolean> = If<
+  B1,
+  If<B2, true, false>,
   false
 >;
-export type Or<A extends boolean, B extends boolean> = If<
-  A,
+
+/**
+ * Logical OR between two boolean types `A` and `B`.
+ */
+export type Or<B1 extends boolean, B2 extends boolean> = If<
+  B1,
   true,
-  If<B, true, false>
+  If<B2, true, false>
 >;
-export type Xor<A extends boolean, B extends boolean> = Or<
-  And<A, Not<B>>,
-  And<Not<A>, B>
+/**
+ * Exclusive OR (XOR) between two boolean types `B1` and `B2`.
+ */
+export type Xor<B1 extends boolean, B2 extends boolean> = Or<
+  And<B1, Not<B2>>,
+  And<Not<B1>, B2>
 >;
-export type Nand<A extends boolean, B extends boolean> = Not<And<A, B>>;
+
+/**
+ * Logical NAND between two boolean types `B1` and `B2`.
+ */
+export type Nand<B1 extends boolean, B2 extends boolean> = Not<And<B1, B2>>;
 
 /**
  * Represents the keys of a given  type `T`.
