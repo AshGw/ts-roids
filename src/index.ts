@@ -145,17 +145,23 @@ export type IsTuple<T> = T extends readonly unknown[]
 export type IsArray<T> = T extends unknown[] ? true : false;
 
 /**
- * @returns `true` if `Arr` is an array of elements of type `T`, otherwise `false`.
+ * @returns `true` if `Arr` is an array that includes elements of type `T`, otherwise `false`.
  * An array of elements of type `T` is defined as `Arr` being a subtype of `T[]`.
  * @example
  * ```
- * IsArrayOf<number[], number>; // true (number[] is an array of numbers)
- * IsArrayOf<string[], number>; // false (string[] is not an array of numbers)
- * IsArrayOf<number[], string>; // false (number[] is not an array of strings)
- * IsArrayOf<(number | string)[], number>; // false ((number | string)[] is not an array of numbers)
+ * IsArrayOf<number[], number>; // true
+ * IsArrayOf<string[], number>; // false
+ * IsArrayOf<number[], string>; // false
+ * IsArrayOf<(number | string)[], number>; // false
+ * IsArrayIncludeTypeof<Record<string, number>[], number> // false
+ * IsArrayIncludeTypeof<string[], null | boolean> // false
+ * ArrayIncludeTypeof<string[], string | boolean> // true
+ * IsArrayIncludeTypeof<Record<string, number>[], Record<symbol, boolean>> // true,
  * ```
+ * @see
+ * If you want more type narrowing use IsArrayOf<Arr,T>
  */
-export type IsArrayOf<Arr, T> = Arr extends T[] ? true : false;
+export type IsArrayIncludesTypeof<Arr, T> = Arr extends T[] ? true : false;
 
 /**
  * Type utility that checks if a given type `T` is an `AnyFunction` (any function type).
