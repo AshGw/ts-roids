@@ -92,6 +92,13 @@ export type IsBoolean<T> = T extends boolean ? true : false;
  */
 export type IsNumeric<T> = T extends Numeric ? true : false;
 
+/**
+ * Check if a given type `T` is indeed a tuple
+ * @example
+ * ````ts
+ * IsTuple<[69]>; // Result: true
+ * IsTuple<69[]; // Result: false
+ */
 export type IsTuple<T> = T extends readonly unknown[]
   ? number extends T['length']
     ? false
@@ -113,7 +120,7 @@ export type IsBigInt<T> = T extends bigint ? true : false;
  */
 export type IsSymbol<T> = T extends symbol ? true : false;
 /**
- * If ``T`` is ``any``, return ``true``, otherwise, return ``false``.
+ * If ``T`` is literally``any``, return ``true``, otherwise, return ``false``.
  */
 export type IsAny<T> = Equals<T, any>;
 
@@ -423,8 +430,7 @@ export type ArrayIncludes<Arr, P> = Arr extends [infer S, ...infer E]
   : false;
 
 /**
- * Can be used to construct a new instance.
- * This type is typically used to describe constructor functions or classes
+ * This type is used to describe constructor functions or classes
  * that can be invoked using the `new` keyword.
  */
 export type Newable = { new (...args: any[]): any };
@@ -860,24 +866,6 @@ export type TestType<T1, T2, Expected extends boolean> = ReturnType<
 >;
 
 /**
- * Represents a  type that checks if a specified element  type exists within an array.
- * @typeParam T The array  type to search within.
- * @typeParam I The element  type to check for existence in `T`.
- * @returns `true` if `I` is found within `T`, otherwise `false`.
- * @example
- * ```typescript
- *  type Numbers = [0, 1, 2];
- *  type CheckZero = IsInArray<Numbers, 0>; // true
- *  type CheckThree = IsInArray<Numbers, 3>; // false
- * ```
- */
-export type IsInArray<T extends unknown[], I> = T extends [infer S, ...infer E]
-  ? Equals<S, I> extends true
-    ? true
-    : IsInArray<E, I>
-  : false;
-
-/**
  * A  type that constructs a new array containing only unique elements from a given array type.
  * @typeParam T The input array  type from which unique elements are extracted.
  * @example
@@ -891,7 +879,7 @@ export type ArrayUnique<T, R extends any[] = []> = T extends [
   infer S,
   ...infer E,
 ]
-  ? IsInArray<R, S> extends true
+  ? ArrayIncludes<R, S> extends true
     ? ArrayUnique<E, R>
     : ArrayUnique<E, [...R, S]>
   : R;
@@ -1076,7 +1064,7 @@ export class FinalTypeError extends TypeError {}
  * // No problem with instantiation
  * const foo = new Foo<string>('foo');
 
- * // The line below will cause a TypeError: Cannot inherit from the finl class Foo
+ * // The line below will cause a TypeError: Cannot inherit from the final class Foo
  * const sub = new SubFoo('subFoo');
  * ```
  * @see {@link https://github.com/microsoft/TypeScript/issues/1534| Issue #1}
