@@ -9,9 +9,9 @@ import {
 import { test, expect } from 'vitest';
 
 test('_', () => {
-  type ExcpectedToBe = true;
+  type ExcpectedToBe = true & true & true;
   const result: TestType<
-    UnionToIntersection<true & true & true>,
+    UnionToIntersection<true | true | true>,
     ExcpectedToBe,
     true
   > = true;
