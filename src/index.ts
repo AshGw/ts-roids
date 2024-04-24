@@ -58,7 +58,7 @@ export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
  *  type Never = IsNever<never>; => true
  *  type NotNever = IsNever<string>; => false
  */
-export type IsNever<T> = T extends never ? true : false;
+export type IsNever<T> = Equals<T, never>;
 
 /**
  * Checks if a given  type `T` is `unknown`.
