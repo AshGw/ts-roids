@@ -119,10 +119,28 @@ export type IsBigInt<T> = T extends bigint ? true : false;
  * @returns `true` if `T` is `symbol`, otherwise `false`.
  */
 export type IsSymbol<T> = T extends symbol ? true : false;
+
 /**
- * If ``T`` is literally``any``, return ``true``, otherwise, return ``false``.
+ * @returns `true` if `T` is exactly `symbol`, otherwise `false`.
+ * @example 
+ * ````ts
+  IsExactlySymbol<symbol>; // true
+  IsExactlySymbol<any | symbol>; // false
+  IsExactlySymbol<Integer<2>>; // false
+ * ````
  */
-export type IsLiterallyAny<T> = Equals<T, any>;
+export type IsExactlySymbol<T> = Equals<T, symbol>;
+/**
+ * If ``T`` is exactly``any``, return ``true``, otherwise, return ``false``.
+ * @exmaple 
+ * ````ts
+  IsExactlyAny<any | Nullable>; // true, once unsafe, always unsafe 
+  IsExactlyAny<Numeric | Nullable>; // false
+  IsExactlyAny<unknown>; // false 
+  IsExactlyAny<any>, true
+ * ````
+ */
+export type IsExactlyAny<T> = Equals<T, any>;
 
 /**
  * Conditional type: if `Cond` is `true`, return `Do`, otherwise return `Else`.
