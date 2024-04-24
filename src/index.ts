@@ -122,7 +122,25 @@ export type IsSymbol<T> = T extends symbol ? true : false;
 /**
  * If ``T`` is literally``any``, return ``true``, otherwise, return ``false``.
  */
-export type IsAny<T> = Equals<T, any>;
+export type IsLiterallyAny<T> = Equals<T, any>;
+
+export type If<Cond extends boolean, Do, Else> = Cond extends true ? Do : Else;
+export type Not<A extends boolean> = A extends true ? false : true;
+export type And<A extends boolean, B extends boolean> = If<
+  A,
+  If<B, true, false>,
+  false
+>;
+export type Or<A extends boolean, B extends boolean> = If<
+  A,
+  true,
+  If<B, true, false>
+>;
+export type Xor<A extends boolean, B extends boolean> = Or<
+  And<A, Not<B>>,
+  And<Not<A>, B>
+>;
+export type Nand<A extends boolean, B extends boolean> = Not<And<A, B>>;
 
 /**
  * Represents the keys of a given  type `T`.
@@ -1089,7 +1107,8 @@ export const Final = <CST extends Newable>(cst: CST): CST => {
   return F as CST;
 };
 /**
-  TODO: figure it out 
+  TODO: figure it out, maybe use the new stage 3 decorators 
+  see [this](https://github.com/microsoft/TypeScript/pull/50820) 
 */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const finalMethod = (
