@@ -151,8 +151,6 @@ export type Vals<T> = T[Keys<T>];
 /**
  * Represents a  type that can be either a single value of  type `T` or an array of values of  type `T`.
  * @example
- *  type SingleOrArray<T> = OneOrMany<T>;
- *
  * const value1: OneOrMany<number> = 10; // Valid
  * const value2: OneOrMany<number> = [20, 30]; // Also valid
  */
@@ -279,6 +277,7 @@ export type _MaxInTwoPositiveNums<
     : A1;
 /**
  * Get the length of a given string type S
+ *
  * @example
  * ```ts
  * Strlen<'foo'>; // Result: 3
@@ -450,7 +449,7 @@ export type UnknownFunction = (...args: unknown[]) => unknown;
 
 /**
  * Conditional  type that checks if  type `T` extends  type `P`.
- * If `T` extends `P`, the  type resolves to `Do`; otherwise, it resolves to `Else`.
+ * If `T` extends `P`, the  type resolves to `Do`; otherwise `Else`.
  * @example
  *  type Result1 = IfExtends<string, string | number, true, false>; // is true
  *  type Result2 = IfExtends<number, string | number, true, false>; // is true
@@ -466,8 +465,25 @@ export type UnknownFunction = (...args: unknown[]) => unknown;
 export type IfExtends<T, P, Do, Else> = T extends P ? Do : Else;
 
 /**
+ * Conditional type that checks if type `T` is equal to type `P`.
+ * If `T` is equal to `P`, the type resolves to `Do`, otherwise `Else`.
+ * @example
+ *  type Result1 = IfEquals<string, string, true, false>; // is true
+ *  type Result2 = IfEquals<number, string, true, false>; // is false
+ *  type Result3 = IfEquals<boolean, boolean, true, false>; // is true
+ *
+ *  type IsExactlyString<T> = IfEquals<T, string, true, false>;
+ *  type IsExactlyNumber<T> = IfEquals<T, number, true, false>;
+ *
+ *  type TestString = IsExactlyString<string>; // is true
+ *  type TestNumber = IsExactlyNumber<number>; // is false
+ *  type TestBoolean = IsExactlyString<boolean>; // is false
+ */
+export type IfEquals<T, P, Do, Else> = Equals<T, P> extends true ? Do : Else;
+
+/**
  * Conditional  type that checks if two types `X` and `Y` are exactly equal.
- * If `X` is equal to `Y`, the  type resolves to `true`; otherwise, it resolves to `false`.
+ * If `X` is equal to `Y`, the  type resolves to `true`; otherwise `false`.
  * @example
  *  type Result1 = Equals<string, string>; // is true
  *  type Result2 = Equals<number, string>; // is false
@@ -686,7 +702,7 @@ type UnionToIntersection<U> = (
   : never;
 
 /**
- * Utility type to deeply pick properties from a nested object type.
+ * Deeply pick properties from a nested object type.
  * @template T The target object.
  * @template P A dot-separated string literal representing the path of properties to pick.
  * @example
@@ -724,7 +740,7 @@ export type DeepPick<
 
 type EmptyArray = [];
 /**
- * Transposes a given 2D array or matrix `M`, flipping the matrix over its diagonal, switching its row and column indices.
+ * Transposes a given 2xN array or matrix `M`, flipping the matrix over its diagonal, switching its row and column indices.
  * @template M - 2D array of any primitive  type values.
  *
  * @example
@@ -758,8 +774,8 @@ export type ArrayTranspose<
  * @returns A new array type containing only the elements of `T` that match `P`.
  * @example
  * ```typescript
- *  type Numbers = [0, 1, 2, 3];
- *  type FilteredNumbers = Filter<Numbers, 0 | 1>; // Results in [0, 1]
+ *  ArrayFilter<[0, 1, 2, 3], 0 | 1>; // Results in [0, 1]
+ *  ArrayFilter<[0, 1, 2], Falsy>; // Results in [0]
  * ```
  */
 export type ArrayFilter<T extends unknown[], P> = T extends [
@@ -883,8 +899,8 @@ export type UniqueArray<T, R extends any[] = []> = T extends [
 /**
  * Infers a mapping from values to their corresponding keys within a given object type `T`.
  * The resulting type provides a reverse lookup, which allows to to retrieve the keys based on specific values.
- *
- * Note: This type only works with simple object types without nested structures or complex types.
+ * @remarks
+ * > This type only works with simple object types without nested structures or complex types.
  * It may not behave as expected with objects containing nested properties, union types, intersections, or other
  * advanced constructs.
  *
@@ -915,10 +931,11 @@ export type KeysToValues<T extends Record<Keys<T>, Keys<any>>> = {
 /**
  * `FilterBy<T, P>` filters keys from the object type `T` based on a specified property `P`.
  *
- * Note: This type performs a shallow filtering of keys within `T` and does not check deeply nested types
- * or complex structures within the object type.
  * @remark
- * It does not return the key as a whole object, it just returns the key itself
+ * > This type performs a shallow filtering of keys within `T` and does not check deeply nested types
+ * or complex structures within the object type.
+ *
+ * > It does not return the key as a whole object, it just returns the key itself
  * For example, given an object type `T`:
  *
  * ```typescript
