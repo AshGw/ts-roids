@@ -82,7 +82,6 @@ test('_', () => {
   expect(result).toBe(true);
 });
 
-
 test('_', () => {
   type ExcpectedToBe = true;
   const result: TestType<

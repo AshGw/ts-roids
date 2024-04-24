@@ -898,7 +898,24 @@ export declare function testType<T1, T2, E extends boolean>(): Equals<
  * @template Expected A boolean literal indicating whether `T1` should match `T2`.
  * If you expect the types to match, set this to true; if not, set it to false.
  * This utility will return a boolean that is true if your expectation was correct, otherwise false.
- */
+ * @example
+ * ````ts
+ type ExcpectedToBe = true;
+  declare const result: TestType<
+    If<IsNever<never>, true, false>,
+    ExcpectedToBe,
+    true
+  >
+  // result type is true
+
+  const result2: TestType<
+    If<IsFloat<5.5>, true, false>,
+    ExcpectedToBe,
+    true
+  >
+  // result type is true 
+ * ````
+ * */
 export type TestType<T1, T2, Expected extends boolean> = ReturnType<
   typeof testType<T1, T2, Expected>
 >;
