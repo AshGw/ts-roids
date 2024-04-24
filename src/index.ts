@@ -878,7 +878,7 @@ export type IsInArray<T extends unknown[], I> = T extends [infer S, ...infer E]
   : false;
 
 /**
- * A  type that constructs a new array containing only unique elements from a given array export type.
+ * A  type that constructs a new array containing only unique elements from a given array type.
  * @typeParam T The input array  type from which unique elements are extracted.
  * @example
  * ```typescript
@@ -887,13 +887,13 @@ export type IsInArray<T extends unknown[], I> = T extends [infer S, ...infer E]
 >; // =>  [unknown, 'foo', any, never, '33', 33]
  * ```
  */
-export type UniqueArray<T, R extends any[] = []> = T extends [
+export type ArrayUnique<T, R extends any[] = []> = T extends [
   infer S,
   ...infer E,
 ]
   ? IsInArray<R, S> extends true
-    ? UniqueArray<E, R>
-    : UniqueArray<E, [...R, S]>
+    ? ArrayUnique<E, R>
+    : ArrayUnique<E, [...R, S]>
   : R;
 
 /**
