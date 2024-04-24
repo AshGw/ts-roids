@@ -116,6 +116,17 @@ export type IsNumber<T> = T extends number ? true : false;
 export type IsBigInt<T> = T extends bigint ? true : false;
 
 /**
+ * @returns `true` if `T` is exactly `bigint`, otherwise `false`.
+ * @example 
+ * ````ts
+  IsBigInt<unknown | bigint>; // false
+  IsBigInt<symbol | Nullable>; // false 
+  IsBigInt<bigint>; // true 
+ * ````
+ */
+export type IsExactlyBigInt<T> = Equals<T, bigint>;
+
+/**
  * @returns `true` if `T` is `symbol`, otherwise `false`.
  */
 export type IsSymbol<T> = T extends symbol ? true : false;

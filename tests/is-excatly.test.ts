@@ -1,5 +1,11 @@
 import { describe } from 'node:test';
-import { IsExactlyAny, Nullable, TestType, IsExactlySymbol } from 'src';
+import {
+  IsExactlyAny,
+  Nullable,
+  TestType,
+  IsExactlySymbol,
+  IsBigInt,
+} from 'src';
 import { test, expect } from 'vitest';
 
 describe('test IsExactlyAny', () => {
@@ -66,6 +72,38 @@ describe('test IsExactlySymbol', () => {
       false,
       true
     > = true;
+    expect(result).toBe(true);
+  });
+});
+
+describe('test IsBigInt', () => {
+  test('_', () => {
+    const result: TestType<IsBigInt<undefined>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsBigInt<string>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsBigInt<bigint>, true, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('one limitation though is that it returns a base boolean with any', () => {
+    const result: TestType<IsBigInt<any | bigint>, boolean, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('does not have the same effect with unknown', () => {
+    const result: TestType<IsBigInt<unknown | bigint>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsBigInt<symbol | Nullable>, false, true> = true;
     expect(result).toBe(true);
   });
 });
