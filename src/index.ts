@@ -187,14 +187,14 @@ export type IsExactlySymbol<T> = Equals<T, symbol>;
 export type IsExactlyAny<T> = Equals<T, any>;
 
 /**
- * Conditional type: if `Cond` is `true`, return `Do`, otherwise return `Else`.
+ * Conditional type: if the condition `C` is `true`, return `Do`, otherwise return `Else`.
  * @example 
  * ````ts
    If<IsNever<never>, true, false>; // true
    If<Not<IsNever<never>>, true, false>; // false  
  * ```` 
 */
-export type If<Cond extends boolean, Do, Else> = Cond extends true ? Do : Else;
+export type If<C extends boolean, Do, Else> = C extends true ? Do : Else;
 
 /**
  * Negates a boolean type `B`.
@@ -281,8 +281,8 @@ export type Vals<T> = T[Keys<T>];
 /**
  * Represents a  type that can be either a single value of  type `T` or an array of values of  type `T`.
  * @example
- * const value1: OneOrMany<number> = 10; // Valid
- * const value2: OneOrMany<number> = [20, 30]; // Also valid
+ * type T1 = EitherOneOrMany<number>; 10; // Valid
+ * type T2 = EitherOneOrMany<number>;  [20, 30]; // Also valid
  */
 export type EitherOneOrMany<T> = T | T[];
 /**
@@ -541,7 +541,7 @@ export type ArrayMin<
  *
  * type T = NewType<'T',string >;
  * ArrayIncludes<[T, 2, 3, 5, 6, 7], string>; // Result: false
- * // Since NewType creates unique 'branded' types
+ * ArrayIncludes<[string, 2, 3, 5, 6, 7], string>; // Result: true
  * ```
  * @returns
  * `true` if found, else `false`
@@ -643,7 +643,7 @@ export type MaybeUndefined<T> = T | undefined;
  Type Str = ExcludeNullable<string | null> //  string 
  Type Str2 = ExcludeNullable<string | null | undefined> //  string 
  Type Str3 = ExcludeNullable<string | undefined> //  string 
-
+ * 
  */
 export type ExcludeNullable<T> = Exclude<T, Nullable>;
 /** 
@@ -654,7 +654,7 @@ export type ExcludeNullable<T> = Exclude<T, Nullable>;
 export type ExcludeUndefined<T> = Exclude<T, undefined>;
 
 /** 
- A  type that excludes `null` from  type `T`.
+ * A  type that excludes `null` from  type `T`.
  * @example
  Type Str = ExcludeNullable<string | null> // Result:  string 
  */
@@ -662,6 +662,7 @@ export type ExcludeNull<T> = Exclude<T, null>;
 
 /**
  * A  type that recursively mutates all the proprties within a given object  type `T`.
+ * 
  * @example
  * ````ts
 type Actual = {
@@ -822,11 +823,18 @@ export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
     }
   : Omit<T, P>;
 
-type UnionToIntersection<U> = (
+export type UnionToIntersection<U> = (
   U extends unknown ? (arg: U) => unknown : never
 ) extends (arg: infer I) => void
   ? I
   : never;
+
+/**
+ * Defines an intersection type of all union items.
+ * @param U Union of any types that will be intersected.
+ * @returns U items intersected
+ * @see https://stackoverflow.com/a/50375286/9259330
+ */
 
 /**
  * Deeply pick properties from a nested object type.
@@ -904,6 +912,7 @@ export type ArrayTranspose<
  *  ArrayFilter<[0, 1, 2, 3], 0 | 1>; // Results in [0, 1]
  *  ArrayFilter<[0, 1, 2], Falsy>; // Results in [0]
  *  ArrayFilter<['7', 1, 2], Falsy>; // Results in []
+ *  ArrayFilter<['7', 1, 2, 7, 7, 7, 7], 7>; // Results in [7, 7, 7, 7]
  * ```
  */
 export type ArrayFilter<T extends unknown[], P> = T extends [
@@ -1056,14 +1065,14 @@ export type KeysToValues<T extends Record<Keys<T>, Keys<any>>> = {
 };
 
 /**
- * `FilterBy<T, P>` filters keys from the object type `T` based on a specified property `P`.
+ * `FilterBy<T, P>` filters keys from the object type `T` based on a specified predicate `P`.
  *
  * @remark
  * > This type performs a shallow filtering of keys within `T` and does not check deeply nested types
  * or complex structures within the object type.
  *
  * > It does not return the key as a whole object, it just returns the key itself
- * For example, given an object type `T`:
+ * @example
  *
  * ```typescript
  * type T = {

@@ -25,9 +25,14 @@ pnpm i ts-roids
 yarn add ts-roids
 ```
 If you're only using types, you can install it as a dev dependency.
-And if you're using the decorators, set this property inside `compilerOptions` in  `tsconfig.json`.
+And if you're using the decorators, set this property inside `tsconfig.json`.
 ```json
-  "experimentalDecorators": true,
+{
+  "compilerOptions": {
+    // ...
+    "experimentalDecorators": true
+  }
+}
 ```
 ### Usage
 #### Finalize and freeze objects
@@ -162,6 +167,6 @@ type ResultType = TestType<Type1, Type2, true>;
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
 
 ### Docs
-Checkout the inline documentation in `/src` along with `/tests` to see how it works for now.
+You can checkout the [API reference](https://ashgw.github.io/ts-roids/).
 ### License 
 [GPL-3](/LICENSE)
