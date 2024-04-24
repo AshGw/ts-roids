@@ -62,7 +62,7 @@ export type IsNever<T> = T extends never ? true : false;
 
 /**
  * Checks if a given  type `T` is `unknown`.
- * The `unknown`  type is the export type-safe counterpart of `any`.
+ *
  * Values of  type `unknown` can hold any value, similar to `any`, but with stricter  type safety.
  * Unlike `any`, you cannot perform operations directly on values of  type `unknown`
  * without  type assertion or  type narrowing.
@@ -436,8 +436,6 @@ export type ArrayIncludes<Arr, P> = Arr extends [infer S, ...infer E]
 export type Newable = { new (...args: any[]): any };
 
 /**
- * Checks if a given type `T` is a type that can be used to construct a new instance (i.e., a `Newable`  type).
- * The `Newable` type typically represents constructor functions or classes that can be invoked using the `new` keyword.
  * @returns `true` if `T` is a `Newable`, otherwise `false`.
  */
 export type IsNewable<T> = T extends Newable ? true : false;
@@ -503,8 +501,8 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
 
 /**
  * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
- * `Optional<T>`  promotes more predictable code,
- * by enforcing explicit handling of optional scenarios by requiring functions
+ * It promotes more predictable code,
+ * by enforcing explicit handling of optional scenarios, e.g: requiring functions
  * to return `null` specifically when a value is absent.
  */
 export type Optional<T> = T | null;
@@ -782,6 +780,7 @@ export type ArrayTranspose<
  * ```typescript
  *  ArrayFilter<[0, 1, 2, 3], 0 | 1>; // Results in [0, 1]
  *  ArrayFilter<[0, 1, 2], Falsy>; // Results in [0]
+ *  ArrayFilter<['7', 1, 2], Falsy>; // Results in []
  * ```
  */
 export type ArrayFilter<T extends unknown[], P> = T extends [
