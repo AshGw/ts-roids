@@ -109,6 +109,17 @@ export type IsTuple<T> = T extends readonly unknown[]
  * @returns `true` if `T` is `number`, otherwise `false`.
  */
 export type IsNumber<T> = T extends number ? true : false;
+/**
+ * @returns `true` if `T` is exactly of type `number`, otherwise `false`.
+ * @example 
+ * ````ts
+  IsExactlyNumber<any | number>; // false 
+  IsExactlyNumber<unknown | number> // false 
+  IsExactlyNumber<number> // true 
+  IsExactlyNumber<87> // false 
+ * ````
+ */
+export type IsExactlyNumber<T> = Equals<T, number>;
 
 /**
  * @returns `true` if `T` is `bigint`, otherwise `false`.

@@ -5,6 +5,7 @@ import {
   TestType,
   IsExactlySymbol,
   IsBigInt,
+  IsExactlyNumber,
 } from 'src';
 import { test, expect } from 'vitest';
 
@@ -76,7 +77,7 @@ describe('test IsExactlySymbol', () => {
   });
 });
 
-describe('test IsBigInt', () => {
+describe('test IsExactlyBigInt', () => {
   test('_', () => {
     const result: TestType<IsBigInt<undefined>, false, true> = true;
     expect(result).toBe(true);
@@ -104,6 +105,46 @@ describe('test IsBigInt', () => {
 
   test('_', () => {
     const result: TestType<IsBigInt<symbol | Nullable>, false, true> = true;
+    expect(result).toBe(true);
+  });
+});
+
+describe('test IsExactlyNumber', () => {
+  test('_', () => {
+    const result: TestType<IsExactlyNumber<undefined>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyNumber<string>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyNumber<number>, true, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<IsExactlyNumber<any | number>, false, true> = true;
+    expect(result).toBe(true);
+  });
+
+  test('does not have the same effect with unknown', () => {
+    const result: TestType<
+      IsExactlyNumber<unknown | number>,
+      false,
+      true
+    > = true;
+    expect(result).toBe(true);
+  });
+
+  test('_', () => {
+    const result: TestType<
+      IsExactlyNumber<number | Nullable>,
+      false,
+      true
+    > = true;
     expect(result).toBe(true);
   });
 });
