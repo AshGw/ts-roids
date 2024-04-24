@@ -126,16 +126,28 @@ export type IsLiterallyAny<T> = Equals<T, any>;
 
 /**
  * Conditional type: if `Cond` is `true`, return `Do`, otherwise return `Else`.
- */
+ * @example 
+ * ````ts
+   If<IsNever<never>, true, false>; // true
+   If<Not<IsNever<never>>, true, false>; // false  
+ * ```` 
+*/
 export type If<Cond extends boolean, Do, Else> = Cond extends true ? Do : Else;
+
 /**
  * Negates a boolean type `B`.
- */
+ * @example
+   Not<true>; // false
+   Not<false>; // true
+*/
 export type Not<B extends boolean> = B extends true ? false : true;
 
 /**
  * Logical AND between two boolean types `B1` and `B2`.
- */
+ * @example
+   And<true, false>; // false
+   And<true, true>; // true
+*/
 export type And<B1 extends boolean, B2 extends boolean> = If<
   B1,
   If<B2, true, false>,
@@ -143,16 +155,23 @@ export type And<B1 extends boolean, B2 extends boolean> = If<
 >;
 
 /**
- * Logical OR between two boolean types `A` and `B`.
- */
+ * Logical OR between two boolean types `B1` and `B2`.
+ * @example
+   Or<true, false>; // true
+   Or<false, false>; // false
+*/
 export type Or<B1 extends boolean, B2 extends boolean> = If<
   B1,
   true,
   If<B2, true, false>
 >;
+
 /**
  * Exclusive OR (XOR) between two boolean types `B1` and `B2`.
- */
+ * @example
+   Xor<true, false>; // true
+   Xor<true, true>; // false
+*/
 export type Xor<B1 extends boolean, B2 extends boolean> = Or<
   And<B1, Not<B2>>,
   And<Not<B1>, B2>
@@ -160,7 +179,10 @@ export type Xor<B1 extends boolean, B2 extends boolean> = Or<
 
 /**
  * Logical NAND between two boolean types `B1` and `B2`.
- */
+ * @example
+   Nand<true, false>; // true
+   Nand<true, true>; // false
+*/
 export type Nand<B1 extends boolean, B2 extends boolean> = Not<And<B1, B2>>;
 
 /**
