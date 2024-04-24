@@ -1,6 +1,41 @@
 # Changelog
 
 
+## v1.30.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.29.0...v1.30.0)
+
+### 🚀 Enhancements
+
+- **#91:** Add `IfEquals<U,V,Do,Else>` ([f312f49](https://github.com/ashgw/ts-roids/commit/f312f49))
+
+### 💅 Refactors
+
+- **typedoc:** Turn `@private` marker to `@hidden` `@private` might be deprecated in future releases, plus `@hidden` exists anyway ([b5c77cc](https://github.com/ashgw/ts-roids/commit/b5c77cc))
+- Rename `UniqueArray<Arr>` to `ArrayUnique<Arr>` ([a8f72ed](https://github.com/ashgw/ts-roids/commit/a8f72ed))
+
+### 📖 Documentation
+
+- Improve inline docs for immutable/mutable types ([2352386](https://github.com/ashgw/ts-roids/commit/2352386))
+- Improve inline docs for array types ([a02d232](https://github.com/ashgw/ts-roids/commit/a02d232))
+
+### 🏡 Chore
+
+- Ignore `/docs` ([66e452a](https://github.com/ashgw/ts-roids/commit/66e452a))
+
+### ✅ Tests
+
+- Add more test cases for `ArrayIncludes` type ([fc75c13](https://github.com/ashgw/ts-roids/commit/fc75c13))
+
+### 🤖 CI
+
+- **#89:** Publish on tags ([8b4a34e](https://github.com/ashgw/ts-roids/commit/8b4a34e))
+- **#90:** Add `docs` deployment action job ([f92316f](https://github.com/ashgw/ts-roids/commit/f92316f))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.29.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.28.0...v1.29.0)
