@@ -61,6 +61,12 @@ export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
 export type IsNever<T> = Equals<T, never>;
 
 /**
+ * A nullable type is a type that might be null, undefined or both
+ * @returns
+ * `true` if it is, else `false`
+ */
+export type IsNullable<T> = T extends Nullable ? true : false;
+/**
  * Checks if a given  type `T` is `unknown`.
  *
  * Values of  type `unknown` can hold any value, similar to `any`, but with stricter  type safety.
@@ -126,6 +132,81 @@ export type IsTuple<T> = T extends readonly unknown[]
     ? false
     : true
   : false;
+
+/**
+ * Is a given type `T` an array?
+ * @returns `true` if `T` it is, otherwise `false`.
+ * @example
+ * ```
+ * IsArray<number[]>; // true
+ * IsArray<string>; // false
+ * ```
+ */
+export type IsArray<T> = T extends unknown[] ? true : false;
+
+/**
+ * @returns `true` if `Arr` is an array of elements of type `T`, otherwise `false`.
+ * An array of elements of type `T` is defined as `Arr` being a subtype of `T[]`.
+ * @example
+ * ```
+ * IsArrayOf<number[], number>; // true (number[] is an array of numbers)
+ * IsArrayOf<string[], number>; // false (string[] is not an array of numbers)
+ * IsArrayOf<number[], string>; // false (number[] is not an array of strings)
+ * IsArrayOf<(number | string)[], number>; // false ((number | string)[] is not an array of numbers)
+ * ```
+ */
+export type IsArrayOf<Arr, T> = Arr extends T[] ? true : false;
+
+/**
+ * Type utility that checks if a given type `T` is an `AnyFunction` (any function type).
+ * @template T The type to check.
+ * @returns `true` if `T` is an `AnyFunction`, otherwise `false`.
+ * An `AnyFunction` is defined as a function type that accepts any arguments and returns any value.
+ * @example
+ * ```
+ * IsAnyFunction<() => void>; // true (matches AnyFunction)
+ * IsAnyFunction<(x: number) => string>; // true (matches AnyFunction)
+ * IsAnyFunction<string>; // false (string is not a function type)
+ * ```
+ */
+export type IsAnyFunction<T> = T extends AnyFunction ? true : false;
+
+/**
+ * Type utility that checks if a given type `T` is a `Function` (function type accepting `unknown` arguments and returning `unknown`).
+ * @template T The type to check.
+ * @returns `true` if `T` is a `Function`, otherwise `false`.
+ * A `Function` is defined as a function type that accepts arguments of type `unknown` and returns a value of type `unknown`.
+ * @example
+ * ```
+ * IsFunction<() => void>; // true (matches Function)
+ * IsFunction<(x: number) => string>; // true (matches Function)
+ * IsFunction<string>; // false (string is not a function type)
+ * ```
+ */
+export type IsFunction<T> = T extends UnknownFunction ? true : false;
+
+/**
+ * Checks if a given type `T` qualifie as an object.
+ * @returns `true` if it is, otherwise `false`.
+ * An object in this context is defined as a non-null object (excluding functions and arrays).
+ * @example
+ * ```
+  IsObject<object>; // true
+  IsObject<{ name: string }>; // true
+  IsObject<string>; // false
+  IsObject<Function>; // true, yes, the built-in Function type is an interface with a bunch of methods, so yes it's an object.
+  // if you want to use the function type use this: 
+  IsObject<UnknownFunction>; // false
+  // or this 
+  IsObject<AnyFunction>; // false
+  IsObject<any[]>; // false
+  IsObject<null>; // false
+ * ```
+ */
+export type IsObject<T> = And<
+  T extends object ? true : false,
+  And<Not<IsFunction<T>>, Not<IsArray<T>>>
+>;
 
 /**
  * @returns `true` if `T` is `number`, otherwise `false`.
@@ -421,7 +502,7 @@ export type Strlen<
 /**
  * Check if two strings S1 and S2 have the same length
  * @returns
- * true if they do, else flase
+ * ``true`` if they do, else ``false``
  */
 export type EqualStrlen<S1 extends string, S2 extends string> = Equals<
   Strlen<S1>,
