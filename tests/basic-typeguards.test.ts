@@ -1,13 +1,8 @@
-/* eslint-disable */
-import { BlobOptions } from 'node:buffer';
 import { describe } from 'node:test';
 import {
   IsArray,
   IsArrayIncludesTypeof,
   IsArrayOf,
-  IsNullable,
-  IsAnyFunction,
-  IsFunction,
   IsObject,
   UnknownFunction,
   AnyFunction,
