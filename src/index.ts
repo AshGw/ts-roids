@@ -1104,9 +1104,15 @@ export type UnionToIntersection<U> = (
     // Results in { d: 'first objects d'; x: 'also first objects x' }
  * ````
  */
-export type CommonKeys<T extends object, U extends object> = Pick<
+export type PickCommonKeys<T extends object, U extends object> = Pick<
   T,
   Extract<Keys<T>, Keys<U>> & Extract<Keys<U>, Keys<T>>
+>;
+
+
+export type OmitCommonKeys<T extends object, U extends object> = Pick<
+  T,
+  Exclude<keyof T, keyof U>
 >;
 
 /**

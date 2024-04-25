@@ -1,9 +1,9 @@
-import { CommonKeys, EmptyObject, TestType } from 'src';
+import { PickCommonKeys, EmptyObject, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
   const result: TestType<
-    CommonKeys<{ d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>,
+    PickCommonKeys<{ d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>,
     EmptyObject,
     true
   > = true;
@@ -12,7 +12,7 @@ test('_', () => {
 
 test('_', () => {
   const result: TestType<
-    CommonKeys<{ d: 'd' }, { d: { d: 'a' }; p: { b: 'b' }; x: { c: 'c' } }>,
+    PickCommonKeys<{ d: 'd' }, { d: { d: 'a' }; p: { b: 'b' }; x: { c: 'c' } }>,
     { d: 'd' },
     true
   > = true;
@@ -21,7 +21,7 @@ test('_', () => {
 
 test('_', () => {
   const result: TestType<
-    CommonKeys<
+    PickCommonKeys<
       { d: 'first objects d' },
       { d: 'd'; p: { b: 'b' }; x: { c: 'c' } }
     >,
@@ -33,7 +33,7 @@ test('_', () => {
 
 test('_', () => {
   const result: TestType<
-    CommonKeys<
+    PickCommonKeys<
       { d: 'first objects d'; x: 'also first objects x' },
       { d: 'd'; p: { b: 'b' }; x: { c: 'c' } }
     >,
