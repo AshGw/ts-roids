@@ -1,15 +1,15 @@
-import { Numeric, ObjectProperties, TestType } from 'src';
+import { Numeric, ObjectMethods, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
   const result: TestType<
-    ObjectProperties<{
+    ObjectMethods<{
       foo: () => void;
       bar: (a: any) => string;
       barBaz: string;
       bazBar: Numeric;
     }>,
-    'barBaz' | 'bazBar',
+    'foo' | 'bar',
     true
   > = true;
   expect(result).toBe(true);
@@ -17,31 +17,31 @@ test('_', () => {
 
 test('Does not work on deep nested objects', () => {
   const result: TestType<
-    ObjectProperties<{
+    ObjectMethods<{
       foo: () => void;
       bar: (a: any) => string;
-      barBaz: string;
-      x: {
-        t: number;
-      };
-      bazBar: Numeric;
-    }>,
-    'x' | 'barBaz' | 'bazBar',
-    true
-  > = true;
-  expect(result).toBe(true);
-});
-
-test('_', () => {
-  const result: TestType<
-    ObjectProperties<{
       barBaz: string;
       x: {
         a: () => number;
       };
       bazBar: Numeric;
     }>,
-    'bazBar' | 'barBaz' | 'x',
+    'foo' | 'bar',
+    true
+  > = true;
+  expect(result).toBe(true);
+});
+
+test('should be never when no method is found', () => {
+  const result: TestType<
+    ObjectMethods<{
+      barBaz: string;
+      x: {
+        a: () => number;
+      };
+      bazBar: Numeric;
+    }>,
+    never,
     true
   > = true;
   expect(result).toBe(true);
@@ -49,7 +49,7 @@ test('_', () => {
 
 test('', () => {
   const result: TestType<
-    ObjectProperties<{
+    ObjectMethods<{
       barBaz: string;
       x: {
         a: () => number;
@@ -57,7 +57,7 @@ test('', () => {
       bazBar: Numeric;
       i: (x: string, b: symbol) => () => void;
     }>,
-    'x' | 'bazBar' | 'barBaz',
+    'i',
     true
   > = true;
   expect(result).toBe(true);

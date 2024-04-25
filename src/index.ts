@@ -311,7 +311,7 @@ export type ObjectMethods<T extends object> = {
 }[Keys<T>];
 
 /**
- * Get the literal names of keys that are data propeties (non-methods) in object type `T`
+ * Get the literal names of keys that are propeties, basically anything that's not a method in object type `T`
  * @example
  * ````ts
  ObjectMethods<{
