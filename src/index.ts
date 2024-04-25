@@ -1284,6 +1284,39 @@ export type OmitByType<T, P> = {
 };
 
 /**
+ * Get a set of properties from `T` whose type exactly matches `P`.
+ * @example
+ * ````ts
+type OneLevelDeep = {
+  foo: boolean;
+  bar?: Numeric;
+  baz: Nullable;
+  fooBaz: bigint;
+  bazFoo: string | boolean;
+};
+type A = OmitExactlyByType<OneLevelDeep, bigint>
+// A results in: 
+{
+      foo: boolean;
+      bar?: Numeric;
+      baz: Nullable;
+      bazFoo: string | boolean;
+    }
+type B = OmitExactlyByType<OneLevelDeep, string | boolean>
+// B results in 
+{
+      foo: boolean;
+      bar?: Numeric;
+      baz: Nullable;
+      fooBaz: bigint;
+  }
+ * ````
+ */
+export type OmitExactlyByType<T, P> = {
+  [K in Keys<T> as If<Equals<T[K], P>, never, K>]: T[K];
+};
+
+/**
  * From ``T``, pick a set of properties whose type are assignable to ``P``.
  * @example
  * ````ts
