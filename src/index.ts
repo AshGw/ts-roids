@@ -34,7 +34,6 @@ export type Falsy = false | '' | 0 | Nullable;
  */
 export type Newable = { new (...args: any[]): any };
 
-
 /**
  * Describes any function accepting any arguments
  *  and returning any value.
@@ -49,13 +48,17 @@ export type UnknownFunction = (...args: unknown[]) => unknown;
 /**
  * Type representing an integer
  */
-export type Integer<N extends Numeric> = IfExtends<IsInteger<N>,true,N,never>;
+export type Integer<N extends Numeric> = IfExtends<
+  IsInteger<N>,
+  true,
+  N,
+  never
+>;
 
 /**
  * Type representing a float
  */
-export type Float<N extends Numeric> = IfExtends<IsFloat<N>,true,N,never>;
-
+export type Float<N extends Numeric> = IfExtends<IsFloat<N>, true, N, never>;
 
 /**
  * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
@@ -83,7 +86,7 @@ export type EmptyObject = NonNullable<unknown>;
  * type Falsy = IsFalsy<''>; // TestFalsy is tru`
  * type Truthy = IsFalsy<10>; // TestTruthy is false
  */
-export type IsFalsy<T> = IfExtends<T,Falsy,true,false>;
+export type IsFalsy<T> = IfExtends<T, Falsy, true, false>;
 
 /**
  * Checks if a given  type `T` is a truthy value.
@@ -95,7 +98,7 @@ export type IsFalsy<T> = IfExtends<T,Falsy,true,false>;
  *  type FalsyNull = IsTruthy<null>; // => false
  *  type FalsyEmptyString = IsTruthy<''>; => false
  */
-export type IsTruthy<T> = IfExtends<T,Exclude<T, Falsy>,true,false>;
+export type IsTruthy<T> = IfExtends<T, Exclude<T, Falsy>, true, false>;
 
 /**
  * Checks if a given  type `T` is `never`.
@@ -113,7 +116,7 @@ export type IsNever<T> = Equals<T, never>;
  * @returns
  * `true` if it is, else `false`
  */
-export type IsNullable<T> = IfExtends<T,Nullable,true,false>;
+export type IsNullable<T> = IfExtends<T, Nullable, true, false>;
 /**
  * Checks if a given  type `T` is `unknown`.
  *
@@ -127,7 +130,7 @@ export type IsNullable<T> = IfExtends<T,Nullable,true,false>;
  * @remarks
  * > If you want `unknown` to be exact, use `IsExactlyUnknown`
  */
-export type IsUnknown<T> = IfExtends<T,unknown,true,false>;
+export type IsUnknown<T> = IfExtends<T, unknown, true, false>;
 
 /**
  * Checks if a given  type `T` is exactly `unknown`.
@@ -144,7 +147,7 @@ export type IsExactlyUnknown<T> = Equals<T, unknown>;
 /**
  * @returns `true` if `T` is `string`, otherwise `false`.
  */
-export type IsString<T> = IfExtends<T,string,true,false>;
+export type IsString<T> = IfExtends<T, string, true, false>;
 
 /**
  * @returns `true` if `T` is excatly `string`, otherwise `false`.
@@ -160,13 +163,13 @@ export type IsExactlyString<T> = Equals<T, string>;
 /**
  * @returns `true` if `T` is `boolean`, otherwise `false`.
  */
-export type IsBoolean<T> = IfExtends<T,boolean,true,false>;
+export type IsBoolean<T> = IfExtends<T, boolean, true, false>;
 
 /**
  * A numeric type iincludes `number` and `bigint`.
  * @returns `true` if `T` is a numeric type, otherwise `false`.
  */
-export type IsNumeric<T> = IfExtends<T,Numeric,true,false>;
+export type IsNumeric<T> = IfExtends<T, Numeric, true, false>;
 
 /**
  * Check if a given type `T` is indeed a tuple
@@ -181,8 +184,6 @@ export type IsTuple<T> = T extends readonly unknown[]
     : true
   : false;
 
-
-  
 /**
  * Is a given type `T` an array?
  * @returns `true` if `T` it is, otherwise `false`.
@@ -192,7 +193,7 @@ export type IsTuple<T> = T extends readonly unknown[]
  * IsArray<string>; // false
  * ```
  */
-export type IsArray<T> = IfExtends<T,unknown[],true,false>;
+export type IsArray<T> = IfExtends<T, unknown[], true, false>;
 
 /**
  * @returns `true` if `Arr` is an array that includes elements of type `T`, otherwise `false`.
@@ -211,7 +212,7 @@ export type IsArray<T> = IfExtends<T,unknown[],true,false>;
  * @see
  * If you want more type narrowing use IsArrayOf<Arr,T>
  */
-export type IsArrayIncludesTypeof<Arr, T> = IfExtends<Arr,T[],true,false>;
+export type IsArrayIncludesTypeof<Arr, T> = IfExtends<Arr, T[], true, false>;
 
 /**
  * Checks if a given type `Arr` is exactly an array of elements of type `T`.
@@ -246,7 +247,7 @@ export type IsArrayOf<Arr, T> = Equals<Arr, T[]>;
  * IsAnyFunction<string>; // false (string is not a function type)
  * ```
  */
-export type IsAnyFunction<T> = IfExtends<T,AnyFunction,true,false>;
+export type IsAnyFunction<T> = IfExtends<T, AnyFunction, true, false>;
 
 /**
  * Type utility that checks if a given type `T` is a `Function` (function type accepting `unknown` arguments and returning `unknown`).
@@ -260,7 +261,7 @@ export type IsAnyFunction<T> = IfExtends<T,AnyFunction,true,false>;
  * IsFunction<string>; // false (string is not a function type)
  * ```
  */
-export type IsFunction<T> = IfExtends<T,UnknownFunction,true,false>;
+export type IsFunction<T> = IfExtends<T, UnknownFunction, true, false>;
 
 /**
  * Checks if a given type `T` qualifie as an object.
@@ -281,14 +282,14 @@ export type IsFunction<T> = IfExtends<T,UnknownFunction,true,false>;
  * ```
  */
 export type IsObject<T> = And<
-  IfExtends<T,object,true,false>,
+  IfExtends<T, object, true, false>,
   And<Not<IsFunction<T>>, Not<IsArray<T>>>
 >;
 
 /**
  * @returns `true` if `T` is `number`, otherwise `false`.
  */
-export type IsNumber<T> = IfExtends<T,number,true,false>;
+export type IsNumber<T> = IfExtends<T, number, true, false>;
 /**
  * @returns `true` if `T` is exactly of type `number`, otherwise `false`.
  * @example 
@@ -304,7 +305,7 @@ export type IsExactlyNumber<T> = Equals<T, number>;
 /**
  * @returns `true` if `T` is `bigint`, otherwise `false`.
  */
-export type IsBigInt<T> = IfExtends<T,bigint,true,false>;
+export type IsBigInt<T> = IfExtends<T, bigint, true, false>;
 
 /**
  * @returns `true` if `T` is exactly `bigint`, otherwise `false`.
@@ -391,11 +392,10 @@ export type IsFloat<N extends Numeric> = number extends N
       : false
     : never;
 
-    /**
+/**
  * @returns `true` if `T` is a `Newable`, otherwise `false`.
  */
-export type IsNewable<T> = IfExtends<T,Newable,true,false>;
-
+export type IsNewable<T> = IfExtends<T, Newable, true, false>;
 
 /**
  * Conditional type: if the condition `C` is `true`, return `Do`, otherwise return `Else`.
@@ -405,7 +405,7 @@ export type IsNewable<T> = IfExtends<T,Newable,true,false>;
    If<Not<IsNever<never>>, true, false>; // false  
  * ```` 
 */
-export type If<C extends boolean, Do, Else> = IfExtends<C,true, Do, Else>;
+export type If<C extends boolean, Do, Else> = IfExtends<C, true, Do, Else>;
 
 /**
  * Negates a boolean type `B`.
@@ -646,7 +646,7 @@ export type _MinInTwoNums<
     ? A
     : _ChecktNumericString<A, B>;
 
-    type EmptyArray = [];
+type EmptyArray = [];
 /**
  * Transposes a given 2xN array or matrix `M`, flipping the matrix over its diagonal, switching its row and column indices.
  * @template M - 2D array of any primitive  type values.
@@ -674,7 +674,6 @@ export type ArrayTranspose<
         [KM in Keys<M>]: KN extends Keys<M[KM]> ? M[KM][KN] : never;
       };
     };
-
 
 /**
  * Represents a  type that filters elements from an array based on a given predicate  type.
@@ -792,8 +791,6 @@ export type ArrayIntersection<Arr extends unknown[]> = Arr extends [
   ? (S extends unknown[] ? S[number] : S) & ArrayIntersection<E>
   : unknown;
 
-
-  
 /**
  * Conditional  type that checks if  type `T` extends  type `P`.
  * If `T` extends `P`, the  type resolves to `Do`; otherwise `Else`.
@@ -842,7 +839,6 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   ? true
   : false;
 
-
 /** 
  A  type that excludes `null` and `undefined` from  type `T`.
  * @example
@@ -866,8 +862,6 @@ export type ExcludeUndefined<T> = Exclude<T, undefined>;
  */
 export type ExcludeNull<T> = Exclude<T, null>;
 
-
-
 /**
  * Get the literal names of keys that are functions in object type `T`
  * @example
@@ -880,11 +874,11 @@ export type ExcludeNull<T> = Exclude<T, null>;
     }> // Result: 'foo' | 'bar'
  * ````
  */
-    export type ObjectMethods<T extends object> = {
-      [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? K : never;
-    }[Keys<T>];
-    
-    /**
+export type ObjectMethods<T extends object> = {
+  [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? K : never;
+}[Keys<T>];
+
+/**
      * Get the literal names of keys that are propeties, basically anything that's not a method in object type `T`
      * @example
      * ````ts
@@ -894,10 +888,10 @@ export type ExcludeNull<T> = Exclude<T, null>;
         }> // Result: 'barBaz' | 'bazBar'
      * ````
      */
-    export type ObjectProperties<T extends object> = {
-      [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? never : K;
-    }[Keys<T>];
-    
+export type ObjectProperties<T extends object> = {
+  [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? never : K;
+}[Keys<T>];
+
 /**
  * A  type that recursively mutates all the proprties within a given object  type `T`.
  * 
@@ -1002,7 +996,6 @@ export type DeepImmutable<T> = T extends UnknownFunction
         ? DeepImmutable<T[K]>
         : T[K];
     };
-
 
 declare const __s: unique symbol;
 
@@ -1259,8 +1252,6 @@ export type DeepPick<
     : never
 >;
 
-
-
 /**
  * Retrieves the keys that are mutable from an object of  type T.
  * @example
@@ -1317,7 +1308,8 @@ export type ImmutableKeys<T> = {
  * Boolean that is true, if your expectation was correct, otherwise false.
  * @hidden
  */
- declare function testType<T1, T2, E extends boolean>(): Equals<Equals<T1, T2>,
+declare function testType<T1, T2, E extends boolean>(): Equals<
+  Equals<T1, T2>,
   E
 >;
 /**
