@@ -59,6 +59,9 @@ devDependencies:
   '@vitest/coverage-v8':
     specifier: 1.2.2
     version: 1.2.2(vitest@1.5.0)
+  can-npm-publish:
+    specifier: 1.3.6
+    version: 1.3.6
   cspell:
     specifier: 8.3.2
     version: 8.3.2
@@ -2672,6 +2675,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /builtins@1.0.3:
+    resolution: {integrity: sha512-uYBjakWipfaO/bXI7E8rq6kpwHRZK5cNYrUv2OzZSI/FvmdMyXJ2tG9dKcjEC5YHmHpUAwsargWIZNWdxb/bnQ==}
+    dev: true
+
   /builtins@2.0.1:
     resolution: {integrity: sha512-XkkVe5QAb6guWPXTzpSrYpSlN3nqEmrrE2TkAr/tp7idSF6+MONh9WvKrAuR3HiKLvoSgmbs8l1U9IPmMrIoLw==}
     dependencies:
@@ -2717,6 +2724,17 @@ packages:
   /camelcase@5.3.1:
     resolution: {integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==}
     engines: {node: '>=6'}
+    dev: true
+
+  /can-npm-publish@1.3.6:
+    resolution: {integrity: sha512-geMBfsTBe7KO/vzeggU4oEXRFFVLtxZT7MUhQ7T1zZb+22ip6+n5if92EXvgULQFleJV4rNmu9P34UD3miGd7Q==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      extract-first-json: 1.0.1
+      meow: 9.0.0
+      read-pkg: 5.2.0
+      validate-npm-package-name: 3.0.0
     dev: true
 
   /caniuse-lite@1.0.30001610:
@@ -4037,6 +4055,13 @@ packages:
       onetime: 6.0.0
       signal-exit: 4.1.0
       strip-final-newline: 3.0.0
+    dev: true
+
+  /extract-first-json@1.0.1:
+    resolution: {integrity: sha512-L4XmAoZaHyXawEy8fJuLfIjRH9rG9D3bLz6fiMepVMiw/0Mpu+OSYH3/XmJ6sCPjui8a8ayz6c46fWlQFhdLvA==}
+    dependencies:
+      parse-json-object: 2.0.1
+      reduce-first: 1.0.1
     dev: true
 
   /fast-deep-equal@3.1.3:
@@ -5486,6 +5511,24 @@ packages:
       yargs-parser: 20.2.9
     dev: true
 
+  /meow@9.0.0:
+    resolution: {integrity: sha512-+obSblOQmRhcyBt62furQqRAQpNyWXo8BuQ5bN7dG8wmwQ+vwHKp/rCFD4CrTP8CsDQD1sjoZ94K417XEUk8IQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@types/minimist': 1.2.5
+      camelcase-keys: 6.2.2
+      decamelize: 1.2.0
+      decamelize-keys: 1.1.1
+      hard-rejection: 2.1.0
+      minimist-options: 4.1.0
+      normalize-package-data: 3.0.3
+      read-pkg-up: 7.0.1
+      redent: 3.0.0
+      trim-newlines: 3.0.1
+      type-fest: 0.18.1
+      yargs-parser: 20.2.9
+    dev: true
+
   /merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: true
@@ -6047,6 +6090,12 @@ packages:
       is-hexadecimal: 1.0.4
     dev: true
 
+  /parse-json-object@2.0.1:
+    resolution: {integrity: sha512-/oF7PUUBjCqHmMEE6xIQeX5ZokQ9+miudACzPt4KBU2qi6CxZYPdisPXx4ad7wpZJYi2ZpcW2PacLTU3De3ebw==}
+    dependencies:
+      types-json: 1.2.2
+    dev: true
+
   /parse-json@4.0.0:
     resolution: {integrity: sha512-aOIos8bujGN93/8Ox/jPLh7RwVnPEysynVFE+fQZyg6jKELEHwzgKdLRFHUgXJL6kylijVSBC4BvN9OmsB48Rw==}
     engines: {node: '>=4'}
@@ -6417,6 +6466,10 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: true
+
+  /reduce-first@1.0.1:
+    resolution: {integrity: sha512-/jBjEiF5Oe1xsa7CeCscbOIxSlFJcn4h1gj3OvUHPtxnThCbZ1Wh72uqO/o1zHNSGU4EgFclvCdc5TLJyt1hOQ==}
     dev: true
 
   /regexp-tree@0.1.27:
@@ -7419,6 +7472,10 @@ packages:
       typescript: 5.3.3
     dev: true
 
+  /types-json@1.2.2:
+    resolution: {integrity: sha512-VfVLISHypS7ayIHvhacOESOTib4Sm4mAhnsgR8fzQdGp89YoBwMqvGmqENjtYehUQzgclT+7NafpEXkK/MHKwA==}
+    dev: true
+
   /typescript@5.3.3:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
@@ -7539,6 +7596,12 @@ packages:
     dependencies:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
+    dev: true
+
+  /validate-npm-package-name@3.0.0:
+    resolution: {integrity: sha512-M6w37eVCMMouJ9V/sdPGnC5H4uDr73/+xdq0FBLO3TFFX1+7wiUY6Es328NN+y43tmY+doUdN9g9J21vqB7iLw==}
+    dependencies:
+      builtins: 1.0.3
     dev: true
 
   /validate-npm-package-name@4.0.0:

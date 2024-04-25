@@ -168,6 +168,22 @@ type ResultType = TestType<Type1, Type2, true>;
 ```
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
 
+## Changelog
+
+See [Releases page](https://github.com/ashgw/ts-roids/releases).
+
+## Running tests
+
+Install dependencies then run `npm test`:
+```shell
+npm i -d && npm test
+```
+## Contributing
+
+Pull requests and stars are always welcome.
+
+For bugs, docs and feature requests, yu can submit [an issue](https://github.com/AshGw/ts-roids/issues/new/choose).
+
 
 ### License 
 [GPL-3](/LICENSE)
