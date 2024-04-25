@@ -55,21 +55,19 @@ export type Integer<N extends Numeric> = IfExtends<
   never
 >;
 
-
-
 /**
  * Is it a negative integer ?
- * @return 
+ * @return
  * `true` if it is, else `false`
  */
-export type IsNegativeInteger<F extends Numeric> = IsNegative<Integer<F>>
+export type IsNegativeInteger<F extends Numeric> = IsNegative<Integer<F>>;
 
 /**
- * Is it a postive integer ?
- * @return 
+ * Is it a positive integer ?
+ * @return
  * `true` if it is, else `false`
  */
-export type IsPositiveInteger<F extends Numeric> = IsPositive<Integer<F>>
+export type IsPositiveInteger<F extends Numeric> = IsPositive<Integer<F>>;
 /**
  * Type representing a float
  */
@@ -77,17 +75,17 @@ export type Float<N extends Numeric> = IfExtends<IsFloat<N>, true, N, never>;
 
 /**
  * Is it a negative float ?
- * @return 
+ * @return
  * `true` if it is, else `false`
  */
-export type IsNegativeFloat<F extends Numeric> = IsNegative<Float<F>>
+export type IsNegativeFloat<F extends Numeric> = IsNegative<Float<F>>;
 
 /**
- * Is it a postive float ?
- * @return 
+ * Is it a positive float ?
+ * @return
  * `true` if it is, else `false`
  */
-export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>
+export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>;
 
 /**
  * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
@@ -382,7 +380,6 @@ export type IsExactlyAny<T> = Equals<T, any>;
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export type IsNegative<N extends Numeric> =
   StringifyNum<N> extends `-${infer U}` ? true : false;
-
 
 /**
  * Checks if a given numeric value is in [0,+∞[

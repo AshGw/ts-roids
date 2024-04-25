@@ -31,10 +31,10 @@ And if you're using the decorators, set this property inside `tsconfig.json`.
 }
 ```
 Requires TypesScript `v5.0`+
-### Docs
-You can checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples. Below is a couple of things you can do using the library.
+### Documentation
+Checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples with details. Below are a couple of things you can do using the library.
 
-#### Finalize and freeze objects
+#### Finalize and [freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) objects
 ```ts
 import { FinalClass, Frozen, Optional } from 'ts-roids';
 
@@ -83,10 +83,31 @@ The TypeScript team has not yet introduced a built-in final modifier, check [thi
 Although they introduced `override` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) .
 
 Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
+
+
+#### A type for testing types
+```typescript 
+type ResultType = TestType<Type1, Type2, true>;
+```
+``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
+
+You can use it however you want, maybe to test a type with your eyes real quick, or, 
+test using a testing framework. Here's an example with [`vitest`](https://vitest.dev)
+
+````ts
+import type { Abs, TestType } from 'ts-roids';
+import { test, expect , expectTypeOf} from 'vitest';
+
+test('|-54| should be 54'() => {
+  type ShouldPass = true;
+  expectTypeOf<TestType<Abs<-54>, 54, ShouldPass>>().toEqualTypeOf<true>();
+});
+````
+
 #### Runtime safety with branded types
 Can you figure out how many things that can go wrong here?
 ```typescript 
-async function requestBaz(barID: string, fooID: string) {
+function requestBaz(barID: string, fooID: string) {
   if (
     fooID.concat().toLowerCase() === 'fooid' &&
     barID.concat().toLowerCase() === 'barid'
@@ -135,7 +156,7 @@ type Bar = {
 
 type Baz = NewType<'Baz', string>;
 
-async function requestBaz(barID: BarID, fooID: FooID): Promise<Optional<Baz>> {
+function requestBaz(barID: BarID, fooID: FooID): Optional<Baz> {
   // String methods work for fooID and barID, since they're both strings.
   if (
     fooID.concat().toLowerCase() === 'fooid' &&
@@ -159,32 +180,16 @@ const baz2 = requestBaz(foo.id, bar.id);
     Type 'FooID' is not assignable to type '"BarID"' 
   */
 ```
-#### A type for testing types
-```typescript 
-type ResultType = TestType<Type1, Type2, true>;
-```
-``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
+Why `NewType` and not `Brand` or `Branded`? Well Python [has](https://docs.python.org/3/library/typing.html#newtype) it already so let's give it the same name.
 
 ## Changelog
 
 See [releases](https://github.com/ashgw/ts-roids/releases).
 
-## Running tests
 
-**npm** 
-```shell
-npm i -d && npm test
-```
-**pnpm**
-```shell
-pnpm i -D && pnpm test
-```
 ## Contributing
 
-Pull requests and stars are always welcome.
-
-For bugs, docs and feature requests, you can submit [an issue](https://github.com/AshGw/ts-roids/issues/new/choose).
-
+Pull requests are always welcome, but it's preferable not to submit a bare PR. It's best when a PR addresses a specific issue. Therefore, for bugs, documentation, or feature requests, consider submitting [an issue](https://github.com/AshGw/ts-roids/issues/new/choose) first.
 
 ### License 
 [GPL-3](/LICENSE)
