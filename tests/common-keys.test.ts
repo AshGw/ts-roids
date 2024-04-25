@@ -3,7 +3,7 @@ import { test, expect } from 'vitest';
 
 test('_', () => {
   const result: TestType<
-    PickCommonKeys<{ d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>,
+    PickCommonKeys<{ j: 'j' }, { d: { d: 'a' }; p: { b: 'b' }; x: { c: 'c' } }>,
     EmptyObject,
     true
   > = true;
