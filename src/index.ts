@@ -690,6 +690,13 @@ export type ArrayIncludes<Arr, P> = Arr extends [infer S, ...infer E]
     : ArrayIncludes<E, P>
   : false;
 
+export type ArrayIntersection<Arr extends unknown[]> = Arr extends [
+  infer S,
+  ...infer E,
+]
+  ? (S extends unknown[] ? S[number] : S) & ArrayIntersection<E>
+  : unknown;
+
 /**
  * This type is used to describe constructor functions or classes
  * that can be invoked using the `new` keyword.
