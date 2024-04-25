@@ -81,6 +81,35 @@ export type DeepToPrimitive<T> = {
 };
 
 /**
+ * @hidden
+ */
+type __Merge<T, S> = {
+  [K in Keys<T> | Keys<S>]: K extends Keys<S> ? S[K] : T[K & Keys<T>];
+};
+
+/**
+ * Copies all enumerable own properties from one target object
+ * to a source array of objects. 
+ * @example 
+ * ````ts
+ type T = Assign<{ a: 'd'; d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>
+ // Result: 
+ {
+      a: 'a';
+      b: 'b';
+      c: 'c';
+      d: 'd';
+    }
+ * ````
+ */
+export type Assign<
+  T extends Record<string, unknown>,
+  Arr extends unknown[],
+> = Arr extends [infer S, ...infer E]
+  ? Assign<S extends object ? __Merge<T, S> : T, E>
+  : T;
+
+/**
  * Represents a type that includes falsy values in JavaScript.
  * Falsy values are those that coerce to false when used in a boolean context.
  * This includes `false`, an empty string (`''`), numeric zero (`0`), `null`,
