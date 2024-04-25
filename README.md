@@ -34,7 +34,10 @@ And if you're using the decorators, set this property inside `tsconfig.json`.
   }
 }
 ```
-### Usage
+### Docs
+You can checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples.
+
+### Example
 #### Finalize and freeze objects
 ```ts
 import { FinalClass, Frozen, Optional } from 'ts-roids';
@@ -166,7 +169,6 @@ type ResultType = TestType<Type1, Type2, true>;
 ```
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (true if you expected them to match, false otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
 
-### Docs
-You can checkout the [API reference](https://ashgw.github.io/ts-roids/).
+
 ### License 
 [GPL-3](/LICENSE)

@@ -1,6 +1,52 @@
 # Changelog
 
 
+## v1.31.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.30.0...v1.31.0)
+
+### 🚀 Enhancements
+
+- Add `IsLiterallyAny<T>` ([0885db8](https://github.com/ashgw/ts-roids/commit/0885db8))
+- **#92:** Add logical operator types ([c8c7ea3](https://github.com/ashgw/ts-roids/commit/c8c7ea3))
+- **#92:** Done, docs added ([2590a05](https://github.com/ashgw/ts-roids/commit/2590a05))
+- **#93:** Finish `IsExactkySymbol` ([c2e8bee](https://github.com/ashgw/ts-roids/commit/c2e8bee))
+- **#93:** Finish `IsExactlyBigInt<T>` ([d522931](https://github.com/ashgw/ts-roids/commit/d522931))
+- **#93:** Finish `IsExactlyNumber<T>` ([5357f5a](https://github.com/ashgw/ts-roids/commit/5357f5a))
+- **#93:** Finish `IsExactlyUnknown<T>` ([98353d8](https://github.com/ashgw/ts-roids/commit/98353d8))
+- **#98:** Finish `IsObject<T>` ([43b89ba](https://github.com/ashgw/ts-roids/commit/43b89ba))
+- **#98:** Finish `IsArrayIncludesTypeof<Arr,T>` ([5feb9ba](https://github.com/ashgw/ts-roids/commit/5feb9ba))
+- **#98:** Finish `IsArrayOf<Arr,T>` ([a04f07f](https://github.com/ashgw/ts-roids/commit/a04f07f))
+- **#100:** Finish `ObjectMethods<T>` ([0f30c7e](https://github.com/ashgw/ts-roids/commit/0f30c7e))
+- **#101:** Finish `ObjectProperties<T>` ([3b2f2e4](https://github.com/ashgw/ts-roids/commit/3b2f2e4))
+- **#103:** Finish `PickExactlyByType<T>` ([d95cdd4](https://github.com/ashgw/ts-roids/commit/d95cdd4))
+- **#104:** Finish `OmitExactlyByType<T>` ([8c2edde](https://github.com/ashgw/ts-roids/commit/8c2edde))
+
+### 📖 Documentation
+
+- Add more examples for `TestType<T1,T2,Expected>` ([7769d40](https://github.com/ashgw/ts-roids/commit/7769d40))
+- **#96:** Add docs for `UnionToIntersection<T>`, done ([2915690](https://github.com/ashgw/ts-roids/commit/2915690))
+
+### 🏡 Chore
+
+- Cleanup some docs typos ([8819646](https://github.com/ashgw/ts-roids/commit/8819646))
+- Cleanup tests ([fdc1b65](https://github.com/ashgw/ts-roids/commit/fdc1b65))
+
+### ✅ Tests
+
+- **#92:** Finish  logical operator types ([188f0cf](https://github.com/ashgw/ts-roids/commit/188f0cf))
+- **#92:** Finish  `If`  operator testing with other lib types ([e1a33af](https://github.com/ashgw/ts-roids/commit/e1a33af))
+- **#96:** Add additional tests for `UnionToIntersection<T>` ([f87ad17](https://github.com/ashgw/ts-roids/commit/f87ad17))
+- **#100:** Add more test cases for `ObjectMethods<T>` ([455baad](https://github.com/ashgw/ts-roids/commit/455baad))
+
+### 🤖 CI
+
+- Remove publishing on tag ([c41efbb](https://github.com/ashgw/ts-roids/commit/c41efbb))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.30.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.29.0...v1.30.0)
