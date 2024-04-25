@@ -1091,6 +1091,25 @@ export type UnionToIntersection<U> = (
   : never;
 
 /**
+ * Get the common keys between two objects, if a key is found to be shared between both,
+ * then the type of that key will take the first object's key type
+ * @returns
+ * An object that consist of what's common in both, else never
+ * @example
+ * ````ts
+ CommonKeys<
+      { d: 'first objects d'; x: 'also first objects x' },
+      { d: 'd'; p: { b: 'b' }; x: { c: 'c' } }
+    >
+    // Results in { d: 'first objects d'; x: 'also first objects x' }
+ * ````
+ */
+export type CommonKeys<T extends object, U extends object> = Pick<
+  T,
+  Extract<Keys<T>, Keys<U>> & Extract<Keys<U>, Keys<T>>
+>;
+
+/**
  * Defines an intersection type of all union items.
  * @param U Union of any types that will be intersected.
  * @returns U items intersected
