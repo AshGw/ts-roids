@@ -5,7 +5,7 @@ inputs:
   node-version:
     required: false
     description: '`node-version` passed to `actions/setup-node`.'
-    default: latest
+    default: 18.17.0
 
 runs:
   using: 'composite'
@@ -18,7 +18,7 @@ runs:
     - uses: pnpm/action-setup@v2
     - uses: actions/setup-node@v4
       with:
-        node-version: 18.17.0
+        node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
     - run: pnpm install --frozen-lockfile --ignore-scripts
       shell: bash
