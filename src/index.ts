@@ -1482,7 +1482,7 @@ const _freeze = (obj: object) => {
   Object.freeze(obj);
 };
 /**
- * When applied to a class it creates a frozen instance of it,
+ * When applied to a class it creates a [frozen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) instance of it,
  * thus preventing modifications to instance properties after instantiation.
  *
  * @example
