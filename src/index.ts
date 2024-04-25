@@ -21,6 +21,31 @@ export type Numeric = number | bigint;
 export type Primitive = string | boolean | symbol | Nullable | Numeric;
 
 /**
+ * @hidden
+ */
+type _FindPrimitive<T> = T extends string
+  ? string
+  : T extends symbol
+    ? symbol
+    : T extends boolean
+      ? boolean
+      : T extends null
+        ? null
+        : T extends number
+          ? number
+          : T extends bigint
+            ? bigint
+            : T extends undefined
+              ? undefined
+              : never;
+
+export type DeepToPrimitive<T> = {
+  [K in Keys<T>]: T[K] extends object
+    ? DeepToPrimitive<T[K]>
+    : _FindPrimitive<T[K]>;
+};
+
+/**
  * Represents a type that includes falsy values in JavaScript.
  * Falsy values are those that coerce to false when used in a boolean context.
  * This includes `false`, an empty string (`''`), numeric zero (`0`), `null`,
@@ -707,6 +732,7 @@ export type ArrayIntersection<Arr extends unknown[]> = Arr extends [
   ? (S extends unknown[] ? S[number] : S) & ArrayIntersection<E>
   : unknown;
 
+export type ArrayCombo = any;
 /**
  * This type is used to describe constructor functions or classes
  * that can be invoked using the `new` keyword.
