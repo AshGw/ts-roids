@@ -295,6 +295,38 @@ export type IsExactlySymbol<T> = Equals<T, symbol>;
 export type IsExactlyAny<T> = Equals<T, any>;
 
 /**
+ * Get the literal names of keys that are functions in object type `T`
+ * @example
+ * ````ts
+ ObjectMethods<{
+      foo: () => void;
+      bar: (a: any) => string;
+      barBaz: string;
+      bazBar: Numeric;
+    }> // Result: 'foo' | 'bar'
+ * ````
+ */
+export type ObjectMethods<T extends object> = {
+  [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? K : never;
+}[Keys<T>];
+
+/**
+ * Get the literal names of keys that are non-functions in object type `T`
+ * @example
+ * ````ts
+ ObjectMethods<{
+      foo: () => void;
+      bar: (a: any) => string;
+      barBaz: string;
+      bazBar: Numeric;
+    }> // Result: 'foo' | 'bar'
+ * ````
+ */
+export type ObjectProperties<T extends object> = {
+  [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? never : K;
+}[Keys<T>];
+
+/**
  * Conditional type: if the condition `C` is `true`, return `Do`, otherwise return `Else`.
  * @example 
  * ````ts
@@ -1403,16 +1435,16 @@ const _freeze = (obj: object) => {
  * ```ts
  * @Frozen
  * class Foo<T> {
- *   private _foo: T;
+ *   foo: T;
  *   bar: string;
  *
  *   constructor(foo: T) {
- *     this._foo = foo;
+ *     this.foo = foo;
  *     this.bar = 'bar';
  *   }
  *
  *   someFoo(): T {
- *     return this._foo;
+ *     return this.foo;
  *   }
  * }
  *
