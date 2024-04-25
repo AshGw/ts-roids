@@ -30,6 +30,7 @@ And if you're using the decorators, set this property inside `tsconfig.json`.
   }
 }
 ```
+Requires TypesScript `v5.0`+
 ### Docs
 You can checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples. Below is a couple of things you can do using the library.
 
@@ -166,11 +167,10 @@ type ResultType = TestType<Type1, Type2, true>;
 
 ## Changelog
 
-See [Releases page](https://github.com/ashgw/ts-roids/releases).
+See [releases](https://github.com/ashgw/ts-roids/releases).
 
 ## Running tests
 
-Install dependencies then run:
 **npm** 
 ```shell
 npm i -d && npm test
@@ -183,7 +183,7 @@ pnpm i -D && pnpm test
 
 Pull requests and stars are always welcome.
 
-For bugs, docs and feature requests, yu can submit [an issue](https://github.com/AshGw/ts-roids/issues/new/choose).
+For bugs, docs and feature requests, you can submit [an issue](https://github.com/AshGw/ts-roids/issues/new/choose).
 
 
 ### License 

@@ -21,95 +21,6 @@ export type Numeric = number | bigint;
 export type Primitive = string | boolean | symbol | Nullable | Numeric;
 
 /**
- * @hidden
- */
-type _FindPrimitive<T> = T extends string
-  ? string
-  : T extends symbol
-    ? symbol
-    : T extends boolean
-      ? boolean
-      : T extends null
-        ? null
-        : T extends number
-          ? number
-          : T extends bigint
-            ? bigint
-            : T extends undefined
-              ? undefined
-              : never;
-/**
- * @example 
- * Recursively transforms an object type `T` into a type where all properties
- * are replaced with their corresponding primitive types.
- * ````ts
- type Actual = {
-    a: 'a';
-    b: 85;
-    c: true;
-    d: {
-      e: 'xxxxxxxxxxx';
-      f: 'eeeeeeeeeeeeeeeeee';
-      g: {
-        h: 1000000000000000;
-        i: undefined;
-        j: null;
-      };
-    };
-  };
-  type Expected = {
-    a: string;
-    b: number;
-    c: boolean;
-    d: {
-      e: string;
-      f: string;
-      g: {
-        h: number;
-        i: undefined;
-        j: null;
-      };
-    };
-  };
-  type Result = DeepToPrimitive<Actual>; // Expected
- * ````
- */
-export type DeepToPrimitive<T> = {
-  [K in Keys<T>]: T[K] extends object
-    ? DeepToPrimitive<T[K]>
-    : _FindPrimitive<T[K]>;
-};
-
-/**
- * @hidden
- */
-type __Merge<T, S> = {
-  [K in Keys<T> | Keys<S>]: K extends Keys<S> ? S[K] : T[K & Keys<T>];
-};
-
-/**
- * Copies all enumerable own properties from one target object
- * to a source array of objects. 
- * @example 
- * ````ts
- type T = Assign<{ a: 'd'; d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>
- // Result: 
- {
-      a: 'a';
-      b: 'b';
-      c: 'c';
-      d: 'd';
-    }
- * ````
- */
-export type Assign<
-  T extends Record<string, unknown>,
-  Arr extends unknown[],
-> = Arr extends [infer S, ...infer E]
-  ? Assign<S extends object ? __Merge<T, S> : T, E>
-  : T;
-
-/**
  * Represents a type that includes falsy values in JavaScript.
  * Falsy values are those that coerce to false when used in a boolean context.
  * This includes `false`, an empty string (`''`), numeric zero (`0`), `null`,
@@ -118,13 +29,61 @@ export type Assign<
 export type Falsy = false | '' | 0 | Nullable;
 
 /**
+ * This type is used to describe constructor functions or classes
+ * that can be invoked using the `new` keyword.
+ */
+export type Newable = { new (...args: any[]): any };
+
+
+/**
+ * Describes any function accepting any arguments
+ *  and returning any value.
+ */
+export type AnyFunction = (...args: any[]) => any;
+
+/**
+ * Describes any function accepting and retruning `unknown`s
+ */
+export type UnknownFunction = (...args: unknown[]) => unknown;
+
+/**
+ * Type representing an integer
+ */
+export type Integer<N extends Numeric> = IfExtends<IsInteger<N>,true,N,never>;
+
+/**
+ * Type representing a float
+ */
+export type Float<N extends Numeric> = IfExtends<IsFloat<N>,true,N,never>;
+
+
+/**
+ * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
+ * It promotes more predictable code,
+ * by enforcing explicit handling of optional scenarios, e.g: requiring functions
+ * to return `null` specifically when a value is absent.
+ */
+export type Optional<T> = T | null;
+
+/**
+ Represnets a type that might be nullable, as in it might be `null` or `undefined`.
+*/
+export type Maybe<T> = T | Nullable;
+export type MaybeUnknown<T> = T | unknown;
+export type MaybeUndefined<T> = T | undefined;
+
+/**
+ * Presents any non-nullish value
+ */
+export type EmptyObject = NonNullable<unknown>;
+/**
  * Checks if a given type `T` is `Falsy`.
  * @returns `true` if `T` is a subtype of `Falsy`, otherwise `false`.
  * @example
  * type Falsy = IsFalsy<''>; // TestFalsy is tru`
  * type Truthy = IsFalsy<10>; // TestTruthy is false
  */
-export type IsFalsy<T> = T extends Falsy ? true : false;
+export type IsFalsy<T> = IfExtends<T,Falsy,true,false>;
 
 /**
  * Checks if a given  type `T` is a truthy value.
@@ -136,7 +95,7 @@ export type IsFalsy<T> = T extends Falsy ? true : false;
  *  type FalsyNull = IsTruthy<null>; // => false
  *  type FalsyEmptyString = IsTruthy<''>; => false
  */
-export type IsTruthy<T> = T extends Exclude<T, Falsy> ? true : false;
+export type IsTruthy<T> = IfExtends<T,Exclude<T, Falsy>,true,false>;
 
 /**
  * Checks if a given  type `T` is `never`.
@@ -154,7 +113,7 @@ export type IsNever<T> = Equals<T, never>;
  * @returns
  * `true` if it is, else `false`
  */
-export type IsNullable<T> = T extends Nullable ? true : false;
+export type IsNullable<T> = IfExtends<T,Nullable,true,false>;
 /**
  * Checks if a given  type `T` is `unknown`.
  *
@@ -168,7 +127,7 @@ export type IsNullable<T> = T extends Nullable ? true : false;
  * @remarks
  * > If you want `unknown` to be exact, use `IsExactlyUnknown`
  */
-export type IsUnknown<T> = T extends unknown ? true : false;
+export type IsUnknown<T> = IfExtends<T,unknown,true,false>;
 
 /**
  * Checks if a given  type `T` is exactly `unknown`.
@@ -185,7 +144,7 @@ export type IsExactlyUnknown<T> = Equals<T, unknown>;
 /**
  * @returns `true` if `T` is `string`, otherwise `false`.
  */
-export type IsString<T> = T extends string ? true : false;
+export type IsString<T> = IfExtends<T,string,true,false>;
 
 /**
  * @returns `true` if `T` is excatly `string`, otherwise `false`.
@@ -201,13 +160,13 @@ export type IsExactlyString<T> = Equals<T, string>;
 /**
  * @returns `true` if `T` is `boolean`, otherwise `false`.
  */
-export type IsBoolean<T> = T extends boolean ? true : false;
+export type IsBoolean<T> = IfExtends<T,boolean,true,false>;
 
 /**
  * A numeric type iincludes `number` and `bigint`.
  * @returns `true` if `T` is a numeric type, otherwise `false`.
  */
-export type IsNumeric<T> = T extends Numeric ? true : false;
+export type IsNumeric<T> = IfExtends<T,Numeric,true,false>;
 
 /**
  * Check if a given type `T` is indeed a tuple
@@ -222,6 +181,8 @@ export type IsTuple<T> = T extends readonly unknown[]
     : true
   : false;
 
+
+  
 /**
  * Is a given type `T` an array?
  * @returns `true` if `T` it is, otherwise `false`.
@@ -231,7 +192,7 @@ export type IsTuple<T> = T extends readonly unknown[]
  * IsArray<string>; // false
  * ```
  */
-export type IsArray<T> = T extends unknown[] ? true : false;
+export type IsArray<T> = IfExtends<T,unknown[],true,false>;
 
 /**
  * @returns `true` if `Arr` is an array that includes elements of type `T`, otherwise `false`.
@@ -250,7 +211,7 @@ export type IsArray<T> = T extends unknown[] ? true : false;
  * @see
  * If you want more type narrowing use IsArrayOf<Arr,T>
  */
-export type IsArrayIncludesTypeof<Arr, T> = Arr extends T[] ? true : false;
+export type IsArrayIncludesTypeof<Arr, T> = IfExtends<Arr,T[],true,false>;
 
 /**
  * Checks if a given type `Arr` is exactly an array of elements of type `T`.
@@ -285,7 +246,7 @@ export type IsArrayOf<Arr, T> = Equals<Arr, T[]>;
  * IsAnyFunction<string>; // false (string is not a function type)
  * ```
  */
-export type IsAnyFunction<T> = T extends AnyFunction ? true : false;
+export type IsAnyFunction<T> = IfExtends<T,AnyFunction,true,false>;
 
 /**
  * Type utility that checks if a given type `T` is a `Function` (function type accepting `unknown` arguments and returning `unknown`).
@@ -299,7 +260,7 @@ export type IsAnyFunction<T> = T extends AnyFunction ? true : false;
  * IsFunction<string>; // false (string is not a function type)
  * ```
  */
-export type IsFunction<T> = T extends UnknownFunction ? true : false;
+export type IsFunction<T> = IfExtends<T,UnknownFunction,true,false>;
 
 /**
  * Checks if a given type `T` qualifie as an object.
@@ -320,14 +281,14 @@ export type IsFunction<T> = T extends UnknownFunction ? true : false;
  * ```
  */
 export type IsObject<T> = And<
-  T extends object ? true : false,
+  IfExtends<T,object,true,false>,
   And<Not<IsFunction<T>>, Not<IsArray<T>>>
 >;
 
 /**
  * @returns `true` if `T` is `number`, otherwise `false`.
  */
-export type IsNumber<T> = T extends number ? true : false;
+export type IsNumber<T> = IfExtends<T,number,true,false>;
 /**
  * @returns `true` if `T` is exactly of type `number`, otherwise `false`.
  * @example 
@@ -343,7 +304,7 @@ export type IsExactlyNumber<T> = Equals<T, number>;
 /**
  * @returns `true` if `T` is `bigint`, otherwise `false`.
  */
-export type IsBigInt<T> = T extends bigint ? true : false;
+export type IsBigInt<T> = IfExtends<T,bigint,true,false>;
 
 /**
  * @returns `true` if `T` is exactly `bigint`, otherwise `false`.
@@ -384,34 +345,57 @@ export type IsExactlySymbol<T> = Equals<T, symbol>;
 export type IsExactlyAny<T> = Equals<T, any>;
 
 /**
- * Get the literal names of keys that are functions in object type `T`
- * @example
- * ````ts
- ObjectMethods<{
-      foo: () => void;
-      bar: (a: any) => string;
-      barBaz: string;
-      bazBar: Numeric;
-    }> // Result: 'foo' | 'bar'
- * ````
+ * Checks if a given numeric value is in ]-∞,0[
+ * @returns
+ * true if it is, otherwise false
  */
-export type ObjectMethods<T extends object> = {
-  [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? K : never;
-}[Keys<T>];
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export type IsNegative<N extends Numeric> =
+  StringifyNum<N> extends `-${infer U}` ? true : false;
 
 /**
- * Get the literal names of keys that are propeties, basically anything that's not a method in object type `T`
- * @example
- * ````ts
- ObjectMethods<{
-      barBaz: string;
-      bazBar: Numeric;
-    }> // Result: 'barBaz' | 'bazBar'
- * ````
+ * Checks if a given numeric value is in [0,+∞[
+ * @returns
+ * true if it is, otherwise false
  */
-export type ObjectProperties<T extends object> = {
-  [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? never : K;
-}[Keys<T>];
+export type IsPositive<N extends Numeric> = N extends N
+  ? Numeric extends N
+    ? boolean
+    : `${N}` extends `-${Numeric}`
+      ? false
+      : true
+  : never;
+/**
+ * Check if a given numeric value is an integer
+ * @returns
+ * true if it is, else false
+ */
+export type IsInteger<N extends Numeric> = number extends N
+  ? false | true
+  : N extends N
+    ? `${N}` extends `${string}.${string}`
+      ? false
+      : true
+    : never;
+
+/**
+ * Check if a given numeric value is an float
+ * @returns
+ * true if it is, else false
+ */
+export type IsFloat<N extends Numeric> = number extends N
+  ? false | true
+  : N extends N
+    ? `${N}` extends `${string}.${string}`
+      ? true
+      : false
+    : never;
+
+    /**
+ * @returns `true` if `T` is a `Newable`, otherwise `false`.
+ */
+export type IsNewable<T> = IfExtends<T,Newable,true,false>;
+
 
 /**
  * Conditional type: if the condition `C` is `true`, return `Do`, otherwise return `Else`.
@@ -421,7 +405,7 @@ export type ObjectProperties<T extends object> = {
    If<Not<IsNever<never>>, true, false>; // false  
  * ```` 
 */
-export type If<C extends boolean, Do, Else> = C extends true ? Do : Else;
+export type If<C extends boolean, Do, Else> = IfExtends<C,true, Do, Else>;
 
 /**
  * Negates a boolean type `B`.
@@ -520,64 +504,6 @@ export type EitherOneOrMany<T> = T | T[];
  * ```
  */
 export type StringifyNum<N extends Numeric> = `${N}`;
-
-/**
- * Checks if a given numeric value is in ]-∞,0[
- * @returns
- * true if it is, otherwise false
- */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export type IsNegative<N extends Numeric> =
-  StringifyNum<N> extends `-${infer U}` ? true : false;
-
-/**
- * Check if a given numeric value is an integer
- * @returns
- * true if it is, else false
- */
-export type IsInteger<N extends Numeric> = number extends N
-  ? false | true
-  : N extends N
-    ? `${N}` extends `${string}.${string}`
-      ? false
-      : true
-    : never;
-
-/**
- * Check if a given numeric value is an float
- * @returns
- * true if it is, else false
- */
-export type IsFloat<N extends Numeric> = number extends N
-  ? false | true
-  : N extends N
-    ? `${N}` extends `${string}.${string}`
-      ? true
-      : false
-    : never;
-
-/**
- * Type representing an integer
- */
-export type Integer<N extends Numeric> = IsInteger<N> extends true ? N : never;
-
-/**
- * Type representing a float
- */
-export type Float<N extends Numeric> = IsFloat<N> extends true ? N : never;
-
-/**
- * Checks if a given numeric value is in [0,+∞[
- * @returns
- * true if it is, otherwise false
- */
-export type IsPositive<N extends Numeric> = N extends N
-  ? Numeric extends N
-    ? boolean
-    : `${N}` extends `-${Numeric}`
-      ? false
-      : true
-  : never;
 
 /**
  * Get the absolute value of a numeric N
@@ -720,6 +646,76 @@ export type _MinInTwoNums<
     ? A
     : _ChecktNumericString<A, B>;
 
+    type EmptyArray = [];
+/**
+ * Transposes a given 2xN array or matrix `M`, flipping the matrix over its diagonal, switching its row and column indices.
+ * @template M - 2D array of any primitive  type values.
+ *
+ * @example
+ * // Transpose a 1x1 matrix
+ *  type Matrix = ArrayTranspose<[[1]]>; // expected to be [[1]]
+ *
+ * @example
+ * // Transpose a 2x2 matrix
+ *  type Matrix1 = ArrayTranspose<[[1, 'i'], [3, 4]]>; // expected to be [[1, 3], ["i", 4]]
+ *
+ * @example
+ * // Transpose a 2x3 matrix
+ *  type Matrix2 = ArrayTranspose<[[1, true, 3], [4, 5, 6]]>; // expected to be [[1, 4], [true, 5], [3, 6]]
+ *
+ */
+export type ArrayTranspose<
+  M extends Primitive[][],
+  N extends Primitive[] = M[0],
+> = M extends EmptyArray
+  ? EmptyArray
+  : {
+      [KN in Keys<N>]: {
+        [KM in Keys<M>]: KN extends Keys<M[KM]> ? M[KM][KN] : never;
+      };
+    };
+
+
+/**
+ * Represents a  type that filters elements from an array based on a given predicate  type.
+ * @typeParam T The array to filter.
+ * @typeParam P The predicate used for filtering elements from `T`.
+ * @returns A new array type containing only the elements of `T` that match `P`.
+ * @example
+ * ```typescript
+ *  ArrayFilter<[0, 1, 2, 3], 0 | 1>; // Results in [0, 1]
+ *  ArrayFilter<[0, 1, 2], Falsy>; // Results in [0]
+ *  ArrayFilter<['7', 1, 2], Falsy>; // Results in []
+ *  ArrayFilter<['7', 1, 2, 7, 7, 7, 7], 7>; // Results in [7, 7, 7, 7]
+ * ```
+ */
+export type ArrayFilter<T extends unknown[], P> = T extends [
+  infer S,
+  ...infer E,
+]
+  ? S extends P
+    ? [S, ...ArrayFilter<E, P>]
+    : ArrayFilter<E, P>
+  : [];
+/**
+ * A  type that constructs a new array containing only unique elements from a given array type.
+ * @typeParam T The input array  type from which unique elements are extracted.
+ * @example
+ * ```typescript
+ *  type UArr = UniqueArray<
+  [unknown, unknown, 'foo', any, never, never, '33', 33, '33']
+>; // =>  [unknown, 'foo', any, never, '33', 33]
+ * ```
+ */
+export type ArrayUnique<T, R extends any[] = []> = T extends [
+  infer S,
+  ...infer E,
+]
+  ? ArrayIncludes<R, S> extends true
+    ? ArrayUnique<E, R>
+    : ArrayUnique<E, [...R, S]>
+  : R;
+
 /**
  * Extracts the maximum numeric value in a given Array
  * @example
@@ -796,29 +792,8 @@ export type ArrayIntersection<Arr extends unknown[]> = Arr extends [
   ? (S extends unknown[] ? S[number] : S) & ArrayIntersection<E>
   : unknown;
 
-export type ArrayCombo = any;
-/**
- * This type is used to describe constructor functions or classes
- * that can be invoked using the `new` keyword.
- */
-export type Newable = { new (...args: any[]): any };
 
-/**
- * @returns `true` if `T` is a `Newable`, otherwise `false`.
- */
-export type IsNewable<T> = T extends Newable ? true : false;
-
-/**
- * Describes any function accepting any arguments
- *  and returning any value.
- */
-export type AnyFunction = (...args: any[]) => any;
-
-/**
- * Describes any function accepting and retruning `unknown`s
- */
-export type UnknownFunction = (...args: unknown[]) => unknown;
-
+  
 /**
  * Conditional  type that checks if  type `T` extends  type `P`.
  * If `T` extends `P`, the  type resolves to `Do`; otherwise `Else`.
@@ -867,20 +842,6 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   ? true
   : false;
 
-/**
- * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
- * It promotes more predictable code,
- * by enforcing explicit handling of optional scenarios, e.g: requiring functions
- * to return `null` specifically when a value is absent.
- */
-export type Optional<T> = T | null;
-
-/**
- Represnets a type that might be nullable, as in it might be `null` or `undefined`.
-*/
-export type Maybe<T> = T | Nullable;
-export type MaybeUnknown<T> = T | unknown;
-export type MaybeUndefined<T> = T | undefined;
 
 /** 
  A  type that excludes `null` and `undefined` from  type `T`.
@@ -905,6 +866,38 @@ export type ExcludeUndefined<T> = Exclude<T, undefined>;
  */
 export type ExcludeNull<T> = Exclude<T, null>;
 
+
+
+/**
+ * Get the literal names of keys that are functions in object type `T`
+ * @example
+ * ````ts
+ ObjectMethods<{
+      foo: () => void;
+      bar: (a: any) => string;
+      barBaz: string;
+      bazBar: Numeric;
+    }> // Result: 'foo' | 'bar'
+ * ````
+ */
+    export type ObjectMethods<T extends object> = {
+      [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? K : never;
+    }[Keys<T>];
+    
+    /**
+     * Get the literal names of keys that are propeties, basically anything that's not a method in object type `T`
+     * @example
+     * ````ts
+     ObjectMethods<{
+          barBaz: string;
+          bazBar: Numeric;
+        }> // Result: 'barBaz' | 'bazBar'
+     * ````
+     */
+    export type ObjectProperties<T extends object> = {
+      [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? never : K;
+    }[Keys<T>];
+    
 /**
  * A  type that recursively mutates all the proprties within a given object  type `T`.
  * 
@@ -958,6 +951,11 @@ export type DeepMutable<T> = T extends UnknownFunction
 export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
 
 /**
+ * Checks if all the nested properties of a given object T is actually immutable.
+ */
+export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
+
+/**
  * A  type that recursively turns the proprties within a given object  type `T` immutable.
  * @example
  * ````ts
@@ -1005,10 +1003,6 @@ export type DeepImmutable<T> = T extends UnknownFunction
         : T[K];
     };
 
-/**
- * Checks if all the nested properties of a given object T is actually immutable.
- */
-export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
 
 declare const __s: unique symbol;
 
@@ -1091,6 +1085,95 @@ export type UnionToIntersection<U> = (
   : never;
 
 /**
+ * @hidden
+ */
+type _FindPrimitive<T> = T extends string
+  ? string
+  : T extends symbol
+    ? symbol
+    : T extends boolean
+      ? boolean
+      : T extends null
+        ? null
+        : T extends number
+          ? number
+          : T extends bigint
+            ? bigint
+            : T extends undefined
+              ? undefined
+              : never;
+/**
+* @example 
+* Recursively transforms an object type `T` into a type where all properties
+* are replaced with their corresponding primitive types.
+* ````ts
+type Actual = {
+  a: 'a';
+  b: 85;
+  c: true;
+  d: {
+    e: 'xxxxxxxxxxx';
+    f: 'eeeeeeeeeeeeeeeeee';
+    g: {
+      h: 1000000000000000;
+      i: undefined;
+      j: null;
+    };
+  };
+};
+type Expected = {
+  a: string;
+  b: number;
+  c: boolean;
+  d: {
+    e: string;
+    f: string;
+    g: {
+      h: number;
+      i: undefined;
+      j: null;
+    };
+  };
+};
+type Result = DeepToPrimitive<Actual>; // Expected
+* ````
+*/
+export type DeepToPrimitive<T> = {
+  [K in Keys<T>]: T[K] extends object
+    ? DeepToPrimitive<T[K]>
+    : _FindPrimitive<T[K]>;
+};
+
+/**
+ * @hidden
+ */
+type __Merge<T, S> = {
+  [K in Keys<T> | Keys<S>]: K extends Keys<S> ? S[K] : T[K & Keys<T>];
+};
+
+/**
+ * Copies all enumerable own properties from one target object
+ * to a source array of objects. 
+ * @example 
+ * ````ts
+ type T = Assign<{ a: 'd'; d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>
+ // Result: 
+ {
+      a: 'a';
+      b: 'b';
+      c: 'c';
+      d: 'd';
+    }
+ * ````
+ */
+export type Assign<
+  T extends Record<string, unknown>,
+  Arr extends unknown[],
+> = Arr extends [infer S, ...infer E]
+  ? Assign<S extends object ? __Merge<T, S> : T, E>
+  : T;
+
+/**
  * Get the common keys between two objects, if a key is found to be shared between both,
  * then the type of that key will take the first object's key type
  * @returns
@@ -1140,13 +1223,6 @@ export type OmitCommonKeys<
 > = Pick<T, Exclude<Keys<T>, Keys<U>>>;
 
 /**
- * Defines an intersection type of all union items.
- * @param U Union of any types that will be intersected.
- * @returns U items intersected
- * @see https://stackoverflow.com/a/50375286/9259330
- */
-
-/**
  * Deeply pick properties from a nested object type.
  * @template T The target object.
  * @template P A dot-separated string literal representing the path of properties to pick.
@@ -1183,56 +1259,7 @@ export type DeepPick<
     : never
 >;
 
-type EmptyArray = [];
-/**
- * Transposes a given 2xN array or matrix `M`, flipping the matrix over its diagonal, switching its row and column indices.
- * @template M - 2D array of any primitive  type values.
- *
- * @example
- * // Transpose a 1x1 matrix
- *  type Matrix = ArrayTranspose<[[1]]>; // expected to be [[1]]
- *
- * @example
- * // Transpose a 2x2 matrix
- *  type Matrix1 = ArrayTranspose<[[1, 'i'], [3, 4]]>; // expected to be [[1, 3], ["i", 4]]
- *
- * @example
- * // Transpose a 2x3 matrix
- *  type Matrix2 = ArrayTranspose<[[1, true, 3], [4, 5, 6]]>; // expected to be [[1, 4], [true, 5], [3, 6]]
- *
- */
-export type ArrayTranspose<
-  M extends Primitive[][],
-  N extends Primitive[] = M[0],
-> = M extends EmptyArray
-  ? EmptyArray
-  : {
-      [KN in Keys<N>]: {
-        [KM in Keys<M>]: KN extends Keys<M[KM]> ? M[KM][KN] : never;
-      };
-    };
 
-/**
- * Represents a  type that filters elements from an array based on a given predicate  type.
- * @typeParam T The array to filter.
- * @typeParam P The predicate used for filtering elements from `T`.
- * @returns A new array type containing only the elements of `T` that match `P`.
- * @example
- * ```typescript
- *  ArrayFilter<[0, 1, 2, 3], 0 | 1>; // Results in [0, 1]
- *  ArrayFilter<[0, 1, 2], Falsy>; // Results in [0]
- *  ArrayFilter<['7', 1, 2], Falsy>; // Results in []
- *  ArrayFilter<['7', 1, 2, 7, 7, 7, 7], 7>; // Results in [7, 7, 7, 7]
- * ```
- */
-export type ArrayFilter<T extends unknown[], P> = T extends [
-  infer S,
-  ...infer E,
-]
-  ? S extends P
-    ? [S, ...ArrayFilter<E, P>]
-    : ArrayFilter<E, P>
-  : [];
 
 /**
  * Retrieves the keys that are mutable from an object of  type T.
@@ -1290,8 +1317,7 @@ export type ImmutableKeys<T> = {
  * Boolean that is true, if your expectation was correct, otherwise false.
  * @hidden
  */
-export declare function testType<T1, T2, E extends boolean>(): Equals<
-  Equals<T1, T2>,
+ declare function testType<T1, T2, E extends boolean>(): Equals<Equals<T1, T2>,
   E
 >;
 /**
@@ -1322,25 +1348,6 @@ export declare function testType<T1, T2, E extends boolean>(): Equals<
 export type TestType<T1, T2, Expected extends boolean> = ReturnType<
   typeof testType<T1, T2, Expected>
 >;
-
-/**
- * A  type that constructs a new array containing only unique elements from a given array type.
- * @typeParam T The input array  type from which unique elements are extracted.
- * @example
- * ```typescript
- *  type UArr = UniqueArray<
-  [unknown, unknown, 'foo', any, never, never, '33', 33, '33']
->; // =>  [unknown, 'foo', any, never, '33', 33]
- * ```
- */
-export type ArrayUnique<T, R extends any[] = []> = T extends [
-  infer S,
-  ...infer E,
-]
-  ? ArrayIncludes<R, S> extends true
-    ? ArrayUnique<E, R>
-    : ArrayUnique<E, [...R, S]>
-  : R;
 
 /**
  * Infers a mapping from values to their corresponding keys within a given object type `T`.
@@ -1517,12 +1524,9 @@ type OneLevelDeep = {
 export type PickExactlyByType<T, P> = {
   [K in Keys<T> as If<Equals<T[K], P>, K, never>]: T[K];
 };
+
 /**
- * Presents any non-nullish value
- */
-export type EmptyObject = NonNullable<unknown>;
-/**
- * Why not call it ``OptionalKeys`` ?
+ * Why not call it ``OptionalKeys``?
  * ``Optional<T>`` in this library represents a type ``T`` that can be either ``T`` or ``null``. So creating
  * ``OptionalKeys`` type would entail removing any type that can be null, which is not the intention here.
  *
