@@ -1299,12 +1299,35 @@ export type OmitByType<T, P> = {
 export type PickByType<T, P> = {
   [K in Keys<T> as T[K] extends P ? K : never]: T[K];
 };
-export type Stretch<T> = T extends object
-  ? T extends infer P
-    ? { [K in Keys<P>]: Stretch<P[K]> }
-    : never
-  : T;
 
+/**
+ * From ``T``, pick a set of properties whose type excatly matches ``P``.
+ * @exmaple 
+ * ````ts
+type OneLevelDeep = {
+  foo: boolean;
+  bar?: Numeric;
+  baz: Nullable;
+  fooBaz: bigint;
+  bazFoo: string | boolean;
+  seven: 7;
+  aNum: number;
+};
+  type A = PickExactlyByType<OneLevelDeep, bigint>,
+  // A results in: 
+    {
+      fooBaz: bigint;
+    },
+  // Notice how it does not pick up seven
+ type B = PickExactlyByType<OneLevelDeep, number>,
+    {
+      aNum: number;
+    }
+ * ````
+ */
+export type PickExactlyByType<T, P> = {
+  [K in Keys<T> as If<Equals<T[K], P>, K, never>]: T[K];
+};
 /**
  * Presents any non-nullish value
  */
