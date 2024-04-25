@@ -311,15 +311,13 @@ export type ObjectMethods<T extends object> = {
 }[Keys<T>];
 
 /**
- * Get the literal names of keys that are non-functions in object type `T`
+ * Get the literal names of keys that are data propeties (non-methods) in object type `T`
  * @example
  * ````ts
  ObjectMethods<{
-      foo: () => void;
-      bar: (a: any) => string;
       barBaz: string;
       bazBar: Numeric;
-    }> // Result: 'foo' | 'bar'
+    }> // Result: 'barBaz' | 'bazBar'
  * ````
  */
 export type ObjectProperties<T extends object> = {

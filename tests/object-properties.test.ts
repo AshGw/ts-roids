@@ -46,3 +46,19 @@ test('should be never when no method is found', () => {
   > = true;
   expect(result).toBe(true);
 });
+
+test('', () => {
+  const result: TestType<
+    ObjectMethods<{
+      barBaz: string;
+      x: {
+        a: () => number;
+      };
+      bazBar: Numeric;
+      i: (x: string, b: symbol) => () => void;
+    }>,
+    'i',
+    true
+  > = true;
+  expect(result).toBe(true);
+});
