@@ -20,10 +20,6 @@ npm i ts-roids
 ```bash
 pnpm i ts-roids
 ```
-**yarn**
-```bash
-yarn add ts-roids
-```
 If you're only using types, you can install it as a dev dependency.
 And if you're using the decorators, set this property inside `tsconfig.json`.
 ```json
@@ -174,9 +170,14 @@ See [Releases page](https://github.com/ashgw/ts-roids/releases).
 
 ## Running tests
 
-Install dependencies then run `npm test`:
+Install dependencies then run:
+**npm** 
 ```shell
 npm i -d && npm test
+```
+**pnpm**
+```shell
+pnpm i -D && pnpm test
 ```
 ## Contributing
 
