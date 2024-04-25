@@ -38,7 +38,42 @@ type _FindPrimitive<T> = T extends string
             : T extends undefined
               ? undefined
               : never;
-
+/**
+ * @example 
+ * Recursively transforms an object type `T` into a type where all properties
+ * are replaced with their corresponding primitive types.
+ * ````ts
+ type Actual = {
+    a: 'a';
+    b: 85;
+    c: true;
+    d: {
+      e: 'xxxxxxxxxxx';
+      f: 'eeeeeeeeeeeeeeeeee';
+      g: {
+        h: 1000000000000000;
+        i: undefined;
+        j: null;
+      };
+    };
+  };
+  type Expected = {
+    a: string;
+    b: number;
+    c: boolean;
+    d: {
+      e: string;
+      f: string;
+      g: {
+        h: number;
+        i: undefined;
+        j: null;
+      };
+    };
+  };
+  type Result = DeepToPrimitive<Actual>; // Expected
+ * ````
+ */
 export type DeepToPrimitive<T> = {
   [K in Keys<T>]: T[K] extends object
     ? DeepToPrimitive<T[K]>
