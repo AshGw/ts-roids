@@ -35,9 +35,8 @@ And if you're using the decorators, set this property inside `tsconfig.json`.
 }
 ```
 ### Docs
-You can checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples.
+You can checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples. Below is a couple of things you can do using the library.
 
-### Example
 #### Finalize and freeze objects
 ```ts
 import { FinalClass, Frozen, Optional } from 'ts-roids';
