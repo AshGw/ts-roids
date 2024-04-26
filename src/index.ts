@@ -977,6 +977,25 @@ export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
 export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
 
 /**
+ * Check if all the properties of a given object (nested) are required
+ * @returns
+ * `true` if all the properties are, otherwise `false`
+ */
+export type IsDeepRequired<T> = IfExtends<T, DeepRequired<T>, true, false>;
+
+/**
+ * Check if all the properties of a given object (nested) are non required
+ * @returns
+ * `true` if all the properties are, otherwise `false`
+ */
+export type IsDeepNonRequired<T> = IfExtends<
+  T,
+  DeepNonRequired<T>,
+  true,
+  false
+>;
+
+/**
  * A  type that recursively turns the proprties within a given object  type `T` immutable.
  * @example
  * ````ts
@@ -1619,15 +1638,8 @@ export type DeepRequired<T> = T extends UnknownFunction
     };
 
 /**
- * Check if all the properties of a given object (nested) are required
- * @returns
- * `true` if all the properties are, otherwise `false`
- */
-export type IsDeepRequired<T> = IfExtends<T, DeepRequired<T>, true, false>;
-
-/**
  * Why not call it ``DeepOptional``?
- * ``Optional<T>`` in this library represents a type ``T`` that can be either ``T`` or ``null``. So creating
+ * ``Optional<T>`` in this library `Optional` represents a type ``T`` that can be either ``T`` or ``null``. So creating
  * ``DeepOptional`` type would entail adding null to every property, which is not the intention here.
  *
  * ``DeepNonRequired<T>`` turns all required keys in a given object (nested) to non required one.
@@ -1675,18 +1687,6 @@ export type DeepNonRequired<T> = T extends UnknownFunction
   : {
       [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
     };
-
-/**
- * Check if all the properties of a given object (nested) are non required
- * @returns
- * `true` if all the properties are, otherwise `false`
- */
-export type IsDeepNonRequired<T> = IfExtends<
-  T,
-  DeepNonRequired<T>,
-  true,
-  false
->;
 
 /**
  * @hidden
