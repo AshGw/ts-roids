@@ -8,7 +8,7 @@ Collection of utility types and decorators to bullet proof TypeScript even more.
 [![@latest](https://img.shields.io/npm/v/ts-roids.svg)](https://www.npmjs.com/package/ts-roids)
 [![npm downloads](https://img.shields.io/npm/dm/ts-utils.svg)](https://www.npmjs.com/package/ts-roids)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/utility-types.svg)](https://www.npmjs.com/package/ts-roids)
-<hr/><br/>
+<hr/>
 </div>
 
 ### Installation 
@@ -20,7 +20,7 @@ npm i ts-roids
 ```bash
 pnpm i ts-roids
 ```
-If you're only using types, you can install it as a dev dependency.
+If you're only using types, you can install it as a ``devDependency``.
 And if you're using the decorators, set this property inside `tsconfig.json`.
 ```json
 {
@@ -91,7 +91,7 @@ type ResultType = TestType<Type1, Type2, true>;
 ```
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
 
-You can use it however you want, maybe to test a type with your eyes real quick, or, 
+You can use it however you want, maybe to test a type on the go, or, 
 test using a testing framework. Here's an example with [`vitest`](https://vitest.dev)
 
 ````ts

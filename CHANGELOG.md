@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v1.33.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.32.0...v1.33.0)
+
+### 🚀 Enhancements
+
+- **#112:** Add `Is` positive or negative float or integer ([d49345a](https://github.com/ashgw/ts-roids/commit/d49345a))
+
+### 🩹 Fixes
+
+- `README.md` typo ([1c62dbd](https://github.com/ashgw/ts-roids/commit/1c62dbd))
+- **husky:** Lint pre-commit ([13af9f4](https://github.com/ashgw/ts-roids/commit/13af9f4))
+
+### 💅 Refactors
+
+- **#95:** Use `IfExtends` ([5eef2c8](https://github.com/ashgw/ts-roids/commit/5eef2c8))
+
+### 📖 Documentation
+
+- Improve `README.md` ([856b88a](https://github.com/ashgw/ts-roids/commit/856b88a))
+
+### 🤖 CI
+
+- **#111:** Check version before publishing ([47bce5d](https://github.com/ashgw/ts-roids/commit/47bce5d))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.32.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.31.0...v1.32.0)
