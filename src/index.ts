@@ -88,14 +88,14 @@ export type IsNegativeFloat<F extends Numeric> = IsNegative<Float<F>>;
 export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>;
 
 /**
- * Is a given integer numeric odd?
+ * Is a given number odd?
  * @returns
  * `true` if it is, else `false`
  * @example
  * ````ts
+ * IsOdd<2587967>; // true
+ * IsOdd<215848141>; // true
  * IsOdd<200000000000000>; // false
- * IsEven<2587967>; // true
- * IsEven<2397687561>; // true
  * ````
  */
 export type IsOdd<T extends Numeric> = IfExtends<
@@ -106,7 +106,7 @@ export type IsOdd<T extends Numeric> = IfExtends<
 >;
 
 /**
- * Is a given integer numeric even?
+ * Is a given number even?
  * @returns
  * `true` if it is, else `false`
  * @example
