@@ -1696,7 +1696,6 @@ export function Frozen<T extends Newable>(cst: T): T & Newable {
   };
 }
 
-
 const _seal = (obj: object) => {
   Object.seal(obj);
 };
@@ -1719,10 +1718,10 @@ const _seal = (obj: object) => {
  * john.age = 31; // Allowed
  *
  * // Existing properties cannot be re-configured or deleted
- * delete john.age; // TypeError: Cannot delete property 'age' 
-* }
-* ```
-* */
+ * delete john.age; // TypeError: Cannot delete property 'age'
+ * }
+ * ```
+ * */
 export function Sealed<T extends Newable>(cst: T): T & Newable {
   return class Locked extends cst {
     constructor(...args: any[]) {

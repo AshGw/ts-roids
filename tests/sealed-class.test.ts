@@ -114,23 +114,23 @@ test('Should be allowed to mutate the properties of a sealed object', () => {
 });
 
 test('Should not allow to delete the properties of a sealed object', () => {
-    @Sealed
-    class Foo<T> {
-      private _foo: T;
-      bar?: string;
-  
-      constructor(foo: T) {
-        this._foo = foo;
-        this.bar = 'bar';
-      }
-      someFoo(): T {
-        return this._foo;
-      }
+  @Sealed
+  class Foo<T> {
+    private _foo: T;
+    bar?: string;
+
+    constructor(foo: T) {
+      this._foo = foo;
+      this.bar = 'bar';
     }
-    expect(() => {
-      delete new Foo('foo').bar;
-    }).toThrow(TypeError);
-  });
+    someFoo(): T {
+      return this._foo;
+    }
+  }
+  expect(() => {
+    delete new Foo('foo').bar;
+  }).toThrow(TypeError);
+});
 
 test('Should work when the final class is a subclass itself', () => {
   abstract class BaseFoo<T> {
