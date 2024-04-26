@@ -100,7 +100,7 @@ export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>;
  */
 export type IsOdd<T extends Numeric> = IfExtends<
   StringifyNum<T>,
-  `${number | ''}${1 | 3 | 5 | 7 | 9}`,
+  `${Numeric | ''}${1 | 3 | 5 | 7 | 9}`,
   true,
   false
 >;
@@ -567,6 +567,20 @@ export type EitherOneOrMany<T> = T | T[];
  * ```
  */
 export type StringifyNum<N extends Numeric> = `${N}`;
+
+/**
+ * Turn a given string literal to a numeric 
+ * @example 
+ * ````ts`
+ NumerifyString<'54'>; // 54
+ NumerifyString<'699620.000000001'>; // 699620.000000001
+ IsNegativeFloat<NumerifyString<'-699620.000000001'>>; // true 
+ * ````
+ */
+export type NumerifyString<S extends string> = S extends `${infer N extends
+  Numeric}`
+  ? N
+  : never;
 
 /**
  * Get the absolute value of a numeric N
