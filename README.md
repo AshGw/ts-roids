@@ -116,9 +116,9 @@ test using a testing framework. Here's an example with [`vitest`](https://vitest
 import type { Abs, TestType } from 'ts-roids';
 import { test, expect , expectTypeOf} from 'vitest';
 
-test('|-54| should be 54'() => {
+test('|-54| should be 54',() => {
   type ShouldPass = true;
-  expectTypeOf<TestType<Abs<-54>, 54, ShouldPass>>().toEqualTypeOf<true>();
+  expectTypeOf<TestType<Abs<-54>, 54, true>>().toEqualTypeOf<ShouldPass>();
 });
 ````
 

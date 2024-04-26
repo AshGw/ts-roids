@@ -1666,24 +1666,26 @@ const _freeze = (obj: object) => {
  *
  * @example
  * ```ts
- * @Frozen
- * class Foo<T> {
- *   foo: T;
- *   bar: string;
- *
- *   constructor(foo: T) {
- *     this.foo = foo;
- *     this.bar = 'bar';
- *   }
- *
- *   someFoo(): T {
- *     return this.foo;
- *   }
- * }
- *
- * const foo = new Foo('foo');
- * // The line below will cause a TypeError: Cannot assign to read only property 'bar'
- * foo.bar = 'altered bar';
+@Frozen
+class Foo<T> {
+  foo: T;
+  bar?: MaybeUndefined<string>;
+
+  constructor(foo: T) {
+    this.foo = foo;
+    this.bar = 'bar';
+  }
+
+  someFoo(): T {
+    return this.foo;
+  }
+}
+
+const foo = new Foo('foo');
+// The line below will cause a TypeError: Cannot assign to read only property 'bar'
+foo.bar = 'altered bar';
+// The line below will cause a TypeError: Cannot delete property 'bar'
+delete foo.bar;
  * ```
  *
  */
