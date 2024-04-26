@@ -21,7 +21,7 @@ npm i ts-roids
 pnpm i ts-roids
 ```
 If you're only using types, you can install it as a ``devDependency``.
-And if you're using the decorators, set this property inside `tsconfig.json`.
+And if you're using decorators, set this property inside `tsconfig.json`.
 ```json
 {
   "compilerOptions": {
@@ -90,10 +90,11 @@ const john = new Person('John', 30);
 // Existing properties can still be modified
 john.age = 31; // No Errors
 
-// Trying to add a new property will throw an error
-(john as any).email = 'john@example.com'; // TypeError: Cannot add property email, object is not extensible
-
 // Existing properties cannot be re-configured nor deleted
+
+(john as any).email = 'john@example.com'; // TypeError: Cannot add property email,
+// object is not extensible
+
 delete john.age; // TypeError: Cannot delete property 'age' 
 ```
 There are many other decorators to choose from, check the [docs](#documentation) for more info.
@@ -107,7 +108,7 @@ Decorators like ``@Final`` provide a limited way to emulate final behavior, thes
 ```typescript 
 type ResultType = TestType<Type1, Type2, true>;
 ```
-``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.
+``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, ``true`` if it is, else ``false``.
 
 You can use it however you want, maybe to test a type on the go, or, 
 test using a testing framework. Here's an example with [`vitest`](https://vitest.dev)
@@ -122,7 +123,9 @@ test('|-54| should be 54',() => {
 });
 ````
 
-#### Runtime safety with branded types
+#### Branded types
+Here, it's called `NewType<N,T>`, why `NewType` and not `Brand` or `Branded`? Well Python [has](https://docs.python.org/3/library/typing.html#newtype) it already so let's give it the same name.
+
 Can you figure out how many things that can go wrong here?
 ```typescript 
 function requestBaz(barID: string, fooID: string) {
@@ -198,7 +201,6 @@ const baz2 = requestBaz(foo.id, bar.id);
     Type 'FooID' is not assignable to type '"BarID"' 
   */
 ```
-Why `NewType` and not `Brand` or `Branded`? Well Python [has](https://docs.python.org/3/library/typing.html#newtype) it already so let's give it the same name.
 
 ## Changelog
 

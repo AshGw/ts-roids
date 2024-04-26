@@ -1573,6 +1573,54 @@ export type RequiredKeys<T> = {
 }[keyof T];
 
 /**
+ * Make all object properties required
+ * @example 
+ * ```ts
+type Expected = {
+  a: () => 1;
+  x: string;
+  s: {
+    q: Nullable;
+    s: {
+      i: {
+        x: {
+          o: Maybe<Primitive>;
+          n: Falsy;
+        };
+        e: 'foo';
+      };
+    };
+  };
+};
+
+type Actual = {
+  a?: () => 1;
+  x?: string;
+  s?: {
+    q?: Nullable;
+    s?: {
+      i?: {
+        x?: {
+          o?: Maybe<Primitive>;
+          n?: Falsy;
+        };
+        e?: 'foo';
+      };
+    };
+  };
+};
+type T = DeepRequired<Actual>; // Result: Expected
+ * ```
+ */
+export type DeepRequired<T> = T extends UnknownFunction
+  ? T
+  : {
+      [K in Keys<T>]-?: IfExtends<T[K], unknown, DeepRequired<T[K]>, T[K]>;
+    };
+
+export type IsDeepRequired<T> = IfExtends<T, DeepRequired<T>, true, false>;
+
+/**
  * @hidden
  */
 export class FinalTypeError extends TypeError {}
@@ -1687,7 +1735,6 @@ foo.bar = 'altered bar';
 // The line below will cause a TypeError: Cannot delete property 'bar'
 delete foo.bar;
  * ```
- *
  */
 export function Frozen<T extends Newable>(cst: T): T & Newable {
   return class Locked extends cst {
