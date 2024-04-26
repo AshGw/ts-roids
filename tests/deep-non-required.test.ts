@@ -3,6 +3,7 @@ import {
   DeepNonRequired,
   Primitive,
   Maybe,
+  IsDeepNonRequired,
   Nullable,
   TestType,
 } from 'src';
@@ -44,5 +45,10 @@ type Expected = {
 
 test('_', () => {
   const result: TestType<DeepNonRequired<Actual>, Expected, true> = true;
+  expect(result).toBe(true);
+});
+
+test('_', () => {
+  const result: TestType<IsDeepNonRequired<Expected>, true, true> = true;
   expect(result).toBe(true);
 });

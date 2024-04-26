@@ -1675,6 +1675,19 @@ export type DeepNonRequired<T> = T extends UnknownFunction
   : {
       [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
     };
+
+/**
+ * Check if all the properties of a given object (nested) are non required
+ * @returns
+ * `true` if all the properties are, otherwise `false`
+ */
+export type IsDeepNonRequired<T> = IfExtends<
+  T,
+  DeepNonRequired<T>,
+  true,
+  false
+>;
+
 /**
  * @hidden
  */
