@@ -2,7 +2,7 @@ import {
   Falsy,
   DeepRequired,
   Primitive,
-  IsDeepMutable,
+  IsDeepRequired,
   Maybe,
   Nullable,
   TestType,
@@ -49,6 +49,6 @@ test('_', () => {
 });
 
 test('_', () => {
-  const result: TestType<IsDeepMutable<Expected>, true, true> = true;
+  const result: TestType<IsDeepRequired<Expected>, true, true> = true;
   expect(result).toBe(true);
 });

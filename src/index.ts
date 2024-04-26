@@ -1618,6 +1618,11 @@ export type DeepRequired<T> = T extends UnknownFunction
       [K in Keys<T>]-?: IfExtends<T[K], unknown, DeepRequired<T[K]>, T[K]>;
     };
 
+/**
+ * Check if all the properties of a given object (nested) are required
+ * @returns
+ * `true` if all the properties are, otherwise `false`
+ */
 export type IsDeepRequired<T> = IfExtends<T, DeepRequired<T>, true, false>;
 
 /**
