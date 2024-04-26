@@ -1626,6 +1626,56 @@ export type DeepRequired<T> = T extends UnknownFunction
 export type IsDeepRequired<T> = IfExtends<T, DeepRequired<T>, true, false>;
 
 /**
+ * Why not call it ``DeepOptional``?
+ * ``Optional<T>`` in this library represents a type ``T`` that can be either ``T`` or ``null``. So creating
+ * ``DeepOptional`` type would entail adding null to every property, which is not the intention here.
+ *
+ * ``DeepNonRequired<T>`` turns all required keys in a given object (nested) to non required one.
+ * non required as in: marked with `?` operator
+ * @example
+ * ```ts
+type Actual = {
+  a: () => 1;
+  x: string;
+  s: {
+    q: Nullable;
+    s: {
+      i: {
+        x: {
+          o: Maybe<Primitive>;
+          n: Falsy;
+        };
+        e: 'foo';
+      };
+    };
+  };
+};
+
+type Expected = {
+  a?: () => 1;
+  x?: string;
+  s?: {
+    q?: Nullable;
+    s?: {
+      i?: {
+        x?: {
+          o?: Maybe<Primitive>;
+          n?: Falsy;
+        };
+        e?: 'foo';
+      };
+    };
+  };
+};
+type T = DeepNonRequired<Actual>; // Result: Expected
+ * ```
+ */
+export type DeepNonRequired<T> = T extends UnknownFunction
+  ? T
+  : {
+      [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
+    };
+/**
  * @hidden
  */
 export class FinalTypeError extends TypeError {}
