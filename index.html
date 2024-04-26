@@ -5,7 +5,7 @@
 <a href="https://www.npmjs.com/package/ts-roids"><img src="https://img.shields.io/npm/v/ts-roids.svg" alt="@latest"></a>
 <a href="https://www.npmjs.com/package/ts-roids"><img src="https://img.shields.io/npm/dm/ts-utils.svg" alt="npm downloads"></a>
 <a href="https://www.npmjs.com/package/ts-roids"><img src="https://img.shields.io/bundlephobia/minzip/utility-types.svg" alt="bundle size"></a></p>
-<hr/><br/>
+<hr/>
 </div>
 
 <a id="md:installation" class="tsd-anchor"></a><h3><a href="#md:installation">Installation</a></h3><p><strong>npm</strong></p>
@@ -14,7 +14,7 @@
 <p><strong>pnpm</strong></p>
 <pre><code class="language-bash"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">ts-roids</span>
 </code><button>Copy</button></pre>
-<p>If you&#39;re only using types, you can install it as a dev dependency.
+<p>If you&#39;re only using types, you can install it as a <code>devDependency</code>.
 And if you&#39;re using the decorators, set this property inside <code>tsconfig.json</code>.</p>
 <pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-3">&quot;compilerOptions&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-4">// ...</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;experimentalDecorators&quot;</span><span class="hl-1">: </span><span class="hl-5">true</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
@@ -28,7 +28,7 @@ Although they introduced <code>override</code> in <a href="https://www.typescrip
 <a id="md:a-type-for-testing-types" class="tsd-anchor"></a><h4><a href="#md:a-type-for-testing-types">A type for testing types</a></h4><pre><code class="language-typescript"><span class="hl-5">type</span><span class="hl-1"> </span><span class="hl-8">ResultType</span><span class="hl-1"> = </span><span class="hl-8">TestType</span><span class="hl-1">&lt;</span><span class="hl-8">Type1</span><span class="hl-1">, </span><span class="hl-8">Type2</span><span class="hl-1">, </span><span class="hl-8">true</span><span class="hl-1">&gt;;</span>
 </code><button>Copy</button></pre>
 <p><code>TestType</code> accepts three arguments: the types you&#39;re comparing (<code>Type1</code> and <code>Type2</code>) and a boolean (<code>true</code> if you expected them to match, <code>false</code> otherwise). The resulting type will tell if your expectation is correct, true if it is, else false.</p>
-<p>You can use it however you want, maybe to test a type with your eyes real quick, or, 
+<p>You can use it however you want, maybe to test a type on the go, or, 
 test using a testing framework. Here&#39;s an example with <a href="https://vitest.dev"><code>vitest</code></a></p>
 <pre><code class="language-ts"><span class="hl-6">import</span><span class="hl-1"> </span><span class="hl-6">type</span><span class="hl-1"> { </span><span class="hl-7">Abs</span><span class="hl-1">, </span><span class="hl-7">TestType</span><span class="hl-1"> } </span><span class="hl-6">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ts-roids&#39;</span><span class="hl-1">;</span><br/><span class="hl-6">import</span><span class="hl-1"> { </span><span class="hl-7">test</span><span class="hl-1">, </span><span class="hl-7">expect</span><span class="hl-1"> , </span><span class="hl-7">expectTypeOf</span><span class="hl-1">} </span><span class="hl-6">from</span><span class="hl-1"> </span><span class="hl-2">&#39;vitest&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">test</span><span class="hl-1">(</span><span class="hl-2">&#39;|-54| should be 54&#39;</span><span class="hl-1">() </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">type</span><span class="hl-1"> </span><span class="hl-8">ShouldPass</span><span class="hl-1"> = </span><span class="hl-8">true</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-7">expectTypeOf</span><span class="hl-1">&lt;</span><span class="hl-7">TestType</span><span class="hl-1">&lt;</span><span class="hl-7">Abs</span><span class="hl-1">&lt;-</span><span class="hl-10">54</span><span class="hl-1">&gt;, </span><span class="hl-10">54</span><span class="hl-1">, </span><span class="hl-7">ShouldPass</span><span class="hl-1">&gt;&gt;().</span><span class="hl-0">toEqualTypeOf</span><span class="hl-1">&lt;</span><span class="hl-8">true</span><span class="hl-1">&gt;();</span><br/><span class="hl-1">});</span>
 </code><button>Copy</button></pre>
