@@ -78,12 +78,30 @@ foo.someFoo = () => {
 // The line below will cause a TypeError: Cannot assign to read only property 'bar'
 foo.bar = 'not bar';
 ```
+You can also [seal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) an object.
+```ts
+@Sealed
+class Person {
+  constructor(public name: string, public age?: number) {}
+}
 
-The TypeScript team has not yet introduced a built-in final modifier, check [this](https://github.com/microsoft/TypeScript/issues/1534), [this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests. 
+const john = new Person('John', 30);
+
+// Existing properties can still be modified
+john.age = 31; // No Errors
+
+// Trying to add a new property will throw an error
+(john as any).email = 'john@example.com'; // TypeError: Cannot add property email, object is not extensible
+
+// Existing properties cannot be re-configured nor deleted
+delete john.age; // TypeError: Cannot delete property 'age' 
+```
+There are many other decorators to choose from, check the [docs](#documentation) for more info.
+
+Speaking of `final`, The TypeScript team has not yet introduced a built-in final modifier yet, check [this](https://github.com/microsoft/TypeScript/issues/1534), [this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests. 
 Although they introduced `override` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) .
 
 Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
-
 
 #### A type for testing types
 ```typescript 

@@ -1695,3 +1695,39 @@ export function Frozen<T extends Newable>(cst: T): T & Newable {
     }
   };
 }
+
+
+const _seal = (obj: object) => {
+  Object.seal(obj);
+};
+/**
+ * When applied to a class, it creates a [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) instance of it,
+ * preventing extensions and making existing properties non-configurable.
+ *
+ * @example
+ * ```ts
+ * @Sealed
+ * class Person {
+ *   constructor(public name: string, public age?: number) {}
+ * }
+ *
+ * const john = new Person('John', 30);
+ * // Trying to add a new property will throw an error
+ * (john as any).email = 'john@example.com'; // TypeError: Cannot add property email, object is not extensible
+ *
+ * // Existing properties can still be modified
+ * john.age = 31; // Allowed
+ *
+ * // Existing properties cannot be re-configured or deleted
+ * delete john.age; // TypeError: Cannot delete property 'age' 
+* }
+* ```
+* */
+export function Sealed<T extends Newable>(cst: T): T & Newable {
+  return class Locked extends cst {
+    constructor(...args: any[]) {
+      super(...args);
+      _seal(this);
+    }
+  };
+}
