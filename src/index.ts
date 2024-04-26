@@ -88,6 +88,42 @@ export type IsNegativeFloat<F extends Numeric> = IsNegative<Float<F>>;
 export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>;
 
 /**
+ * Is a given integer numeric odd?
+ * @returns
+ * `true` if it is, else `false`
+ * @example
+ * ````ts
+ * IsOdd<200000000000000>; // false
+ * IsEven<2587967>; // true
+ * IsEven<2397687561>; // true
+ * ````
+ */
+export type IsOdd<T extends Numeric> = IfExtends<
+  StringifyNum<T>,
+  `${number | ''}${1 | 3 | 5 | 7 | 9}`,
+  true,
+  false
+>;
+
+/**
+ * Is a given integer numeric even?
+ * @returns
+ * `true` if it is, else `false`
+ * @example
+ * ````ts
+ * IsEven<200000000000000>; // true
+ * IsEven<258796>; // true
+ * IsEven<2000000000000001>; // false
+ * ````
+ */
+export type IsEven<T extends Numeric> = IfExtends<
+  StringifyNum<T>,
+  `${Numeric | ''}${2 | 4 | 6 | 8 | 0}`,
+  true,
+  false
+>;
+
+/**
  * `Optional<T>` is similar to Python's `Optional` and Rust's `Option` types.
  * It promotes more predictable code,
  * by enforcing explicit handling of optional scenarios, e.g: requiring functions
