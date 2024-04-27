@@ -48,30 +48,25 @@ export type UnknownFunction = (...args: unknown[]) => unknown;
 /**
  * Type representing an integer
  */
-export type Integer<N extends Numeric> = IfExtends<
-  IsInteger<N>,
-  true,
-  N,
-  never
->;
+export type Integer<N extends Numeric> = IfEquals<IsInteger<N>, true, N, never>;
 
 /**
  * Type representing an integer that's in [0,+∞[
  */
-export type PositiveInteger<N extends Numeric> = IfExtends<
+export type PositiveInteger<N extends Numeric> = IfEquals<
   IsPositiveInteger<N>,
   true,
-  N,
+  Integer<N>,
   never
 >;
 
 /**
  * Type representing an integer that's in ]-∞, 0[
  */
-export type NegativeInteger<N extends Numeric> = IfExtends<
+export type NegativeInteger<N extends Numeric> = IfEquals<
   IsNegativeInteger<N>,
   true,
-  N,
+  Integer<N>,
   never
 >;
 
