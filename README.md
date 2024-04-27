@@ -32,11 +32,17 @@ And if you're using decorators, set this property inside `tsconfig.json`.
 ```
 Requires TypesScript `v5.0`+
 ### Documentation
-Checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples with details. Below are a couple of things you can do using the library.
+Checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples with details. 
+#### Here are all the types
 
+#### Example using the decorators 
+This is how one might use the decorators:  
 #### Finalize and [freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) objects
 ```ts
-import { FinalClass, Frozen, Optional } from 'ts-roids';
+import type { Optional, NewType } from 'ts-roids';
+import { Final, Frozen } from 'ts-roids';
+
+type Bar = NewType<'Bar',string>; 
 
 abstract class BaseFoo<T> {
   abstract someFoo(): T;
@@ -46,14 +52,14 @@ abstract class BaseFoo<T> {
 @Frozen
 class Foo<T> extends BaseFoo<T> {
   foo: T;
-  bar: Optional<string>;
+  bar: Optional<Bar>;
 
-  constructor(foo: T, bar?: string) {
+  constructor(foo: T, bar?: MaybeUndefined<Bar>) {
     super();
     this.foo = foo;
     this.bar = bar ?? null;
   }
-  override  someFoo(): T {
+  override someFoo(): T {
     return this.foo;
   }
 }
@@ -67,8 +73,12 @@ class SubFoo extends Foo<string> {
 // No problem with instantiation
 const foo = new Foo<string>('foo');
 
+// Since the object is final: 
+
 // The line below will cause a TypeError: Cannot inherit from the finl class Foo
 const sub = new SubFoo('subFoo');
+
+// Since the object is frozen: 
 
 // The line below will cause a TypeError: Cannot add property 'someFoo', object is not extensible
 foo.someFoo = () => {
@@ -76,7 +86,7 @@ foo.someFoo = () => {
 };
 
 // The line below will cause a TypeError: Cannot assign to read only property 'bar'
-foo.bar = 'not bar';
+foo.bar =  'not bar' as Bar;
 ```
 You can also [seal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) an object.
 ```ts
@@ -103,24 +113,6 @@ Speaking of `final`, The TypeScript team has not yet introduced a built-in final
 Although they introduced `override` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) .
 
 Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
-
-#### A type for testing types
-```typescript 
-type ResultType = TestType<Type1, Type2, true>;
-```
-``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, ``true`` if it is, else ``false``.
-
-You can use it however you want, maybe to test a type on the go, or, 
-test using a testing framework. Here's an example with [`vitest`](https://vitest.dev)
-
-````ts
-import type { Abs, TestType } from 'ts-roids';
-import { test, expect , expectTypeOf} from 'vitest';
-
-test('|-54| should be 54',() => {
-  type ShouldPass = true;
-  expectTypeOf<TestType<Abs<-54>, 54, true>>().toEqualTypeOf<ShouldPass>();
-});
 ````
 
 ## Changelog

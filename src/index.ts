@@ -56,6 +56,26 @@ export type Integer<N extends Numeric> = IfExtends<
 >;
 
 /**
+ * Type representing an integer that's in [0,+∞[
+ */
+export type PositiveInteger<N extends Numeric> = IfExtends<
+  IsPositiveInteger<N>,
+  true,
+  N,
+  never
+>;
+
+/**
+ * Type representing an integer that's in ]-∞, 0[
+ */
+export type NegativeInteger<N extends Numeric> = IfExtends<
+  IsNegativeInteger<N>,
+  true,
+  N,
+  never
+>;
+
+/**
  * Is it a negative integer ?
  * @return
  * `true` if it is, else `false`
