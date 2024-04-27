@@ -1413,24 +1413,25 @@ declare function testType<T1, T2, E extends boolean>(): Equals<
  * @template T1 The first  type to compare.
  * @template T2 The second  type to compare.
  * @template Expected A boolean literal indicating whether `T1` should match `T2`.
- * If you expect the types to match, set this to true; if not, set it to false.
- * This utility will return a boolean that is true if your expectation was correct, otherwise false.
+ * If you expect the types to match, set this to ``true``; if not, set it to false.
+ * This utility will return a boolean that is ``true`` if your expectation was correct, otherwise false.
  * @example
- * ````ts
- type ExcpectedToBe = true;
-  declare const result: TestType<
-    If<IsNever<never>, true, false>,
-    ExcpectedToBe,
-    true
-  >
-  // result type is true
+```typescript 
+type ResultType = TestType<Type1, Type2, true>;
+```
+``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, ``true`` if it is, else ``false``.
 
-  const result2: TestType<
-    If<IsFloat<5.5>, true, false>,
-    ExcpectedToBe,
-    true
-  >
-  // result type is true 
+You can use it however you want, maybe to test a type on the go, or, 
+test using a testing framework. Here's an example with [`vitest`](https://vitest.dev)
+
+````ts
+import type { Abs, TestType } from 'ts-roids';
+import { test, expect , expectTypeOf} from 'vitest';
+
+test('|-54| should be 54',() => {
+  type ShouldPass = true;
+  expectTypeOf<TestType<Abs<-54>, 54, true>>().toEqualTypeOf<ShouldPass>();
+});
  * ````
  * */
 export type TestType<T1, T2, Expected extends boolean> = ReturnType<
