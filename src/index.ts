@@ -89,6 +89,16 @@ export type IsPositiveInteger<F extends Numeric> = IsPositive<Integer<F>>;
 export type Float<N extends Numeric> = IfExtends<IsFloat<N>, true, N, never>;
 
 /**
+ * Type representing a float that's in ]-∞, 0[
+ */
+export type NegativeFloat<N extends Numeric> = IfEquals<
+  IsNegativeFloat<N>,
+  true,
+  Float<N>,
+  never
+>;
+
+/**
  * Is it a negative float ?
  * @return
  * `true` if it is, else `false`
