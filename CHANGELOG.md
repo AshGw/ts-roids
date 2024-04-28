@@ -1,6 +1,44 @@
 # Changelog
 
 
+## v1.34.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.33.0...v1.34.0)
+
+### 🚀 Enhancements
+
+- **#113:** Finish `@Sealed` ([c9fd003](https://github.com/ashgw/ts-roids/commit/c9fd003))
+- **#101:** Finish `DeepRequired<T>` ([7a9d28a](https://github.com/ashgw/ts-roids/commit/7a9d28a))
+- **#114:** Finish `IsDeepRequired<T>` ([fe1ddfa](https://github.com/ashgw/ts-roids/commit/fe1ddfa))
+- **#102:** Finish `DeepNonRequired<T>` ([f85b154](https://github.com/ashgw/ts-roids/commit/f85b154))
+- **#114:** Finish `IsDeepNonRequired<T>` ([2891b4d](https://github.com/ashgw/ts-roids/commit/2891b4d))
+- **#115:** Finish `IsEven<I>` ([5690094](https://github.com/ashgw/ts-roids/commit/5690094))
+- **#116:** Finish `IsOdd<I>` ([25d5cd4](https://github.com/ashgw/ts-roids/commit/25d5cd4))
+- **#117:** Finish `NumerifyString<S>` ([b025d57](https://github.com/ashgw/ts-roids/commit/b025d57))
+- **#118:** Finish `PositiveInteger<N>` ([692be1f](https://github.com/ashgw/ts-roids/commit/692be1f))
+- **#118:** Finish `NegativeInteger<N>` ([7272c7d](https://github.com/ashgw/ts-roids/commit/7272c7d))
+- **#119:** Finish `NegativeFloat<F>` ([414c519](https://github.com/ashgw/ts-roids/commit/414c519))
+- **#119:** Finish `PositiveFloat<F>` ([5155461](https://github.com/ashgw/ts-roids/commit/5155461))
+
+### 🩹 Fixes
+
+- Formatting for CI ([cd39589](https://github.com/ashgw/ts-roids/commit/cd39589))
+
+### 📖 Documentation
+
+- Enhance docs for `@Frozen` ([610f0df](https://github.com/ashgw/ts-roids/commit/610f0df))
+- Enhance docs for `TestType` ([15dfcc5](https://github.com/ashgw/ts-roids/commit/15dfcc5))
+- Fix typos ([8b7af5d](https://github.com/ashgw/ts-roids/commit/8b7af5d))
+
+### 🏡 Chore
+
+- Organize types layout ([7332b2a](https://github.com/ashgw/ts-roids/commit/7332b2a))
+- Organize types layout ([56becf5](https://github.com/ashgw/ts-roids/commit/56becf5))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.33.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.32.0...v1.33.0)
