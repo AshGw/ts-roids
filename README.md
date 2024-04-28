@@ -119,7 +119,7 @@ john.age = 31; // No Errors
 
 // Existing properties cannot be re-configured nor deleted
 
-(john as any).email = 'john@example.com'; // TypeError: Cannot add property email,
+(john as any).email = 'john@doe.com'; // TypeError: Cannot add property email,
 // object is not extensible
 
 delete john.age; // TypeError: Cannot delete property 'age' 
