@@ -28,7 +28,7 @@ jobs:
   coverage:
     uses: ./.github/workflows/coverage.yml
 
-  green-light:
+  green-light: # branch protection 
     if: always()
     needs:
       - lint
