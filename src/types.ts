@@ -61,6 +61,26 @@ export type PositiveInteger<N extends Numeric> = IfEquals<
 >;
 
 /**
+ * Represents a positive integer parsed from a string.
+ * If the string does not represent a positive integer, it resolves to `never`, else 
+ * it resolves to its integer representation.
+ * @example 
+ * ````ts
+    PositiveIntegerString<'0'>; // works
+    PositiveIntegerString<'82739283293237'>; // works
+    PositiveIntegerString<'82739.283293237'>; // never
+    PositiveIntegerString<'-82739.283293237'>; // never
+    PositiveIntegerString<'-1'>; // never
+ * ````
+ */
+export type PositiveIntegerString<S extends string> = IfEquals<
+  IsPositiveInteger<Integer<NumerifyString<S>>>,
+  true,
+  Integer<NumerifyString<S>>,
+  never
+>;
+
+/**
  * Type representing an integer that's in ]-∞, 0[
  */
 export type NegativeInteger<N extends Numeric> = IfEquals<
