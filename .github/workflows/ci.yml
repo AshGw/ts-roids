@@ -25,6 +25,8 @@ jobs:
     uses: ./.github/workflows/check-spelling.yml
   test:
     uses: ./.github/workflows/test.yml
+  coverage:
+    uses: ./.github/workflows/coverage.yml
 
   green-light:
     if: always()
@@ -34,6 +36,7 @@ jobs:
       - spelling
       - format
       - test
+      - coverage
     runs-on: ubuntu-latest
     steps:
       - uses: re-actors/alls-green@release/v1
