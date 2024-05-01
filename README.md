@@ -33,10 +33,11 @@ And if you're using decorators, set this property inside `tsconfig.json`.
 Requires TypesScript `v5.0`+
 ## Documentation
 Checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples with details. 
-### All the types
+### API
+Below are all the available types and decorators.
 **TODO** 
-### Example using the decorators 
-#### Finalize and [freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) objects
+### Decorators example 
+Finalize and [freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) objects
 
 ```ts
 import type { Optional, NewType, MaybeUndefined } from 'ts-roids';
