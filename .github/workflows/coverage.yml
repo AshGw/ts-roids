@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/prepare
       - run: pnpm run test
-      - name: Codecov upload
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
