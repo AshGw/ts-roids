@@ -139,6 +139,27 @@ export type PositiveFloat<N extends Numeric> = IfEquals<
 >;
 
 /**
+ * Represents a positive float parsed from a string.
+ * If the string does not represent a positive float, it resolves to `never`, else 
+ * it resolves to its float representation.
+ * @example 
+ * ````ts
+    PositiveFloatString<'0'>; // never
+    PositiveFloatString<'82739283293237'>; // works
+    PositiveFloatString<'-82739.283293237'>; // never
+    PositiveFloatString<'-1'>; // never
+    PositiveFloatString<'1.98'>; // works
+    PositiveFloatString<'-1.98'>; // never
+ * ````
+ */
+export type PositiveFloatString<S extends string> = IfEquals<
+  IsPositiveFloat<Float<NumerifyString<S>>>,
+  true,
+  Float<NumerifyString<S>>,
+  never
+>;
+
+/**
  * Type representing a float that's in ]-∞, 0[
  */
 export type NegativeFloat<N extends Numeric> = IfEquals<
@@ -167,6 +188,7 @@ export type NegativeFloatString<S extends string> = IfEquals<
   Float<NumerifyString<S>>,
   never
 >;
+
 /**
  * Is it a negative float ?
  * @return

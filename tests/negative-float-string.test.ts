@@ -33,4 +33,3 @@ test(() => {
   const result: TestType<NegativeFloatString<'-1'>, never, true> = true;
   expect(result).toBe(true);
 });
-
