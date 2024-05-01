@@ -215,7 +215,7 @@ export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>;
  * ````
  */
 export type IsOdd<T extends Numeric> = IfExtends<
-  StringifyNum<T>,
+  StringifyPrimitive<T>,
   `${Numeric | ''}${1 | 3 | 5 | 7 | 9}`,
   true,
   false
@@ -233,7 +233,7 @@ export type IsOdd<T extends Numeric> = IfExtends<
  * ````
  */
 export type IsEven<T extends Numeric> = IfExtends<
-  StringifyNum<T>,
+  StringifyPrimitive<T>,
   `${Numeric | ''}${2 | 4 | 6 | 8 | 0}`,
   true,
   false
@@ -531,7 +531,7 @@ export type IsExactlyAny<T> = Equals<T, any>;
  */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export type IsNegative<N extends Numeric> =
-  StringifyNum<N> extends `-${infer U}` ? true : false;
+  StringifyPrimitive<N> extends `-${infer U}` ? true : false;
 
 /**
  * Checks if a given numeric value is in [0,+∞[
@@ -675,14 +675,19 @@ export type Vals<T> = T[Keys<T>];
  * type T2 = EitherOneOrMany<number>;  [20, 30]; // Also valid
  */
 export type EitherOneOrMany<T> = T | T[];
+
 /**
- * Turns a given numeric value (number or bigint) into its string representation
+ * Turns a given primitive value (except symbol) into its string representation
  * @example
  * ```ts
- * type _ = StringifyNum<45> // Result: '45'
+StringifyPrimitive<45> //  "45"
+StringifyPrimitive<boolean> //  "false" | "true"
+StringifyPrimitive<null> // "null"
+StringifyPrimitive<undefined> // "undefined"
  * ```
  */
-export type StringifyNum<N extends Numeric> = `${N}`;
+export type StringifyPrimitive<P extends Exclude<Primitive, symbol>> = `${P}`;
+
 
 /**
  * Turn a given string literal to a numeric 
@@ -780,8 +785,8 @@ type _ChecktNumericString<
   AreNegative extends boolean = false,
   A1 extends Numeric = A,
   B1 extends Numeric = B,
-  AS extends string = StringifyNum<A>,
-  BS extends string = StringifyNum<B>,
+  AS extends string = StringifyPrimitive<A>,
+  BS extends string = StringifyPrimitive<B>,
 > = EqualStrlen<AS, BS> extends true
   ? AS extends `${infer L1 extends Numeric}${infer R1}`
     ? BS extends `${infer L2 extends Numeric}${infer R2}`
@@ -1875,3 +1880,7 @@ export type Extends<T, U> = T extends never
   : T extends U
     ? true
     : false;
+
+type Flip<T extends Record<string, string | number | boolean>> = {
+  [P in keyof T as `${T[P]}`]: P;
+};
