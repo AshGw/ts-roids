@@ -1854,3 +1854,24 @@ export type DeepNonRequired<T> = T extends UnknownFunction
   : {
       [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
     };
+
+/**
+ * Evaluates whether one type `T` is assignable to another type `U`.
+ * @returns `true` if `T` is assignable to `U`, `false` otherwise.
+ *
+ * @example
+ * ```typescript
+ * type A = { x: number };
+ * type B = { x: number; y: string };
+ * type C = { x: number; y?: string };
+ *
+ * type Check1 = Extends<A, B>; // false, A does not extend B
+ * type Check2 = Extends<B, A>; // true, B extends A
+ * type Check3 = Extends<C, B>; // true, C extends B
+ * ```
+ */
+export type Extends<T, U> = T extends never
+  ? false
+  : T extends U
+    ? true
+    : false;
