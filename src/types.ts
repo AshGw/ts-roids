@@ -91,6 +91,26 @@ export type NegativeInteger<N extends Numeric> = IfEquals<
 >;
 
 /**
+ * Represents a negative integer parsed from a string.
+ * If the string does not represent a negative integer, it resolves to `never`, else 
+ * it resolves to its integer representation.
+ * @example 
+ * ````ts
+    NegativeIntegerString<'0'>; // never
+    NegativeIntegerString<'82739283293237'>; // never
+    NegativeIntegerString<'-82739.283293237'>; // works
+    NegativeIntegerString<'-82739.283293237'>; // never
+    NegativeIntegerString<'-1'>; // works
+ * ````
+ */
+export type NegativeIntegerString<S extends string> = IfEquals<
+  IsNegativeInteger<Integer<NumerifyString<S>>>,
+  true,
+  Integer<NumerifyString<S>>,
+  never
+>;
+
+/**
  * Is it a negative integer ?
  * @return
  * `true` if it is, else `false`
