@@ -1258,9 +1258,9 @@ export type IsDeepRequired<T> = IfExtends<T, DeepRequired<T>, true, false>;
  * @returns
  * `true` if all the properties are, otherwise `false`
  */
-export type IsDeepNonRequired<T> = IfExtends<
+export type IsDeepNotRequired<T> = IfExtends<
   T,
-  DeepNonRequired<T>,
+  DeepNotRequired<T>,
   true,
   false
 >;
@@ -1911,7 +1911,7 @@ export type DeepRequired<T> = T extends UnknownFunction
  * ``Optional<T>`` in this library `Optional` represents a type ``T`` that can be either ``T`` or ``null``. So creating
  * ``DeepOptional`` type would entail adding null to every property, which is not the intention here.
  *
- * ``DeepNonRequired<T>`` turns all required keys in a given object (nested) to non required one.
+ * ``DeepNotRequired<T>`` turns all required keys in a given object (nested) to non required one.
  * non required as in: marked with `?` operator
  * @example
  * ```ts
@@ -1948,11 +1948,11 @@ type Expected = {
     };
   };
 };
-type T = DeepNonRequired<Actual>; // Result: Expected
+type T = DeepNotRequired<Actual>; // Result: Expected
  * ```
  */
-export type DeepNonRequired<T> = T extends UnknownFunction
+export type DeepNotRequired<T> = T extends UnknownFunction
   ? T
   : {
-      [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
+      [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNotRequired<T[K]>, T[K]>;
     };

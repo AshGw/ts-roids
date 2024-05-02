@@ -35,7 +35,29 @@ Requires TypesScript `v5.0`+
 Checkout the [API reference](https://ashgw.github.io/ts-roids/) for all usage examples with details. 
 ### API
 Below are all the available types and decorators.
-**TODO** 
+
+- [`Abs<N>`](https://ashgw.github.io/ts-roids/types/Abs.htmlhttps://ashgw.github.io/ts-roids/types/Abs.html) - Get the absolute value of a [``Numeric``](https://ashgw.github.io/ts-roids/types/Abs.htmlhttps://ashgw.github.io/ts-roids/types/Numeric.html).
+- [`And<B1,B2>`]() - Logical AND between two boolean types.
+- [`AnyFunction`]() - Describes any function accepting any arguments and returning any value.
+- [`ArrayFilter<Arr,P`]() - Filters elements from an array based on a given predicate type.
+- [`ArrayIncludes<Arr,T>`]() - Checks if a given type is in an array.
+- [`ArrayIntersection<Arr>`]() - Calculates the intersection of the types within an array Arr of tuple types.
+- [`ArrayIntersection<Arr>`]() - Calculates the intersection of the types within an array Arr of tuple types.
+- [`ArrayMax<Arr>`]() - Extracts the maximum [``Numeric``]() (positive and negative) value in a given Array.
+- [`ArrayMin<Arr>`]() - Extracts the minimum [``Numeric``]() (positive and negative) value in a given Array.
+- [`ArrayTranspose<Arr>`]() - Transposes a given 2xN array or matrix ``M``, flipping the matrix over its diagonal, switching its row and column indices.
+- [`ArrayUnique<Arr>`]() - Constructs a new array containing only unique elements from a given array type.
+- [`Assign<Obj,ObjArr>`]() - Copies all enumerable own properties from one target object to a source array of objects.
+- [`DeepImmutable<Obj>`]() - Recursively turns the proprties within a given object type ``T`` immutable, as in have all the properties with the `readonly` modifier.
+- [`Deepmutable<Obj>`]() - Recursively mutates all the proprties within a given object type ``T``, as in have all the properties without the `readonly` modifier.
+- [`DeepRequired<Obj>`]() - Recursively make all object properties required.
+- [`DeepNotRequired<Obj>`]() - Recursively make all object properties not required.
+
+
+
+
+
+
 ### Decorators example 
 Finalize and [freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) objects
 
