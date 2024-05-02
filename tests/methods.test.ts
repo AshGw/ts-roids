@@ -1,9 +1,9 @@
-import { Numeric, ObjectMethods, TestType } from 'src';
+import { Numeric, Methods, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
   const result: TestType<
-    ObjectMethods<{
+    Methods<{
       foo: () => void;
       bar: (a: any) => string;
       barBaz: string;
@@ -17,7 +17,7 @@ test('_', () => {
 
 test('Does not work on deep nested objects', () => {
   const result: TestType<
-    ObjectMethods<{
+    Methods<{
       foo: () => void;
       bar: (a: any) => string;
       barBaz: string;
@@ -34,7 +34,7 @@ test('Does not work on deep nested objects', () => {
 
 test('should be never when no method is found', () => {
   const result: TestType<
-    ObjectMethods<{
+    Methods<{
       barBaz: string;
       x: {
         a: () => number;
@@ -49,7 +49,7 @@ test('should be never when no method is found', () => {
 
 test('', () => {
   const result: TestType<
-    ObjectMethods<{
+    Methods<{
       barBaz: string;
       x: {
         a: () => number;

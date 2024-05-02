@@ -1,5 +1,5 @@
 /**
- * `Nullable`  type allows representing a value that can be either null or undefined.
+ * Represents a type that can either be  ``null`` or ``undefined``.
  * @export type {Nullable}
  */
 export type Nullable = null | undefined;
@@ -115,14 +115,14 @@ export type NegativeIntegerString<S extends string> = IfEquals<
  * @return
  * `true` if it is, else `false`
  */
-export type IsNegativeInteger<F extends Numeric> = IsNegative<Integer<F>>;
+export type IsNegativeInteger<N extends Numeric> = IsNegative<Integer<N>>;
 
 /**
  * Is it a positive integer ?
  * @return
  * `true` if it is, else `false`
  */
-export type IsPositiveInteger<F extends Numeric> = IsPositive<Integer<F>>;
+export type IsPositiveInteger<N extends Numeric> = IsPositive<Integer<N>>;
 /**
  * Type representing a float
  */
@@ -194,14 +194,14 @@ export type NegativeFloatString<S extends string> = IfEquals<
  * @return
  * `true` if it is, else `false`
  */
-export type IsNegativeFloat<F extends Numeric> = IsNegative<Float<F>>;
+export type IsNegativeFloat<N extends Numeric> = IsNegative<Float<N>>;
 
 /**
  * Is it a positive float ?
  * @return
  * `true` if it is, else `false`
  */
-export type IsPositiveFloat<F extends Numeric> = IsPositive<Float<F>>;
+export type IsPositiveFloat<N extends Numeric> = IsPositive<Float<N>>;
 
 /**
  * Is a given number odd?
@@ -443,7 +443,7 @@ export type IsAnyFunction<T> = IfExtends<T, AnyFunction, true, false>;
 export type IsFunction<T> = IfExtends<T, UnknownFunction, true, false>;
 
 /**
- * Checks if a given type `T` qualifie as an object.
+ * Checks if a given type `T` qualifies as an object.
  * @returns `true` if it is, otherwise `false`.
  * An object in this context is defined as a non-null object (excluding functions and arrays).
  * @example
@@ -1088,10 +1088,10 @@ export type ExcludeUndefined<T> = Exclude<T, undefined>;
 export type ExcludeNull<T> = Exclude<T, null>;
 
 /**
- * Get the literal names of keys that are functions in object type `T`
+ * Get the literal names of keys that are methods in object type `T`
  * @example
  * ````ts
- ObjectMethods<{
+ Methods<{
       foo: () => void;
       bar: (a: any) => string;
       barBaz: string;
@@ -1099,7 +1099,7 @@ export type ExcludeNull<T> = Exclude<T, null>;
     }> // Result: 'foo' | 'bar'
  * ````
  */
-export type ObjectMethods<T extends object> = {
+export type Methods<T extends object> = {
   [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? K : never;
 }[Keys<T>];
 
@@ -1107,13 +1107,14 @@ export type ObjectMethods<T extends object> = {
      * Get the literal names of keys that are propeties, basically anything that's not a method in object type `T`
      * @example
      * ````ts
-     ObjectMethods<{
+     Properties<{
           barBaz: string;
           bazBar: Numeric;
+          bar: () => number; 
         }> // Result: 'barBaz' | 'bazBar'
      * ````
      */
-export type ObjectProperties<T extends object> = {
+export type Properties<T extends object> = {
   [K in Keys<T>]-?: ExcludeNullable<T[K]> extends AnyFunction ? never : K;
 }[Keys<T>];
 
@@ -1237,12 +1238,12 @@ export type DeepMutable<T> = T extends UnknownFunction
     };
 
 /**
- * Checks if all the nested properties of a given object T is actually mutable.
+ * Checks if all the nested properties of a given object T are actually mutable.
  */
 export type IsDeepMutable<T> = T extends DeepMutable<T> ? true : false;
 
 /**
- * Checks if all the nested properties of a given object T is actually immutable.
+ * Checks if all the nested properties of a given object T are actually immutable.
  */
 export type IsDeepImmutable<T> = T extends DeepImmutable<T> ? true : false;
 
@@ -1371,7 +1372,7 @@ export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
     }
   : Omit<T, P>;
 /**
- * As the name implies, it turns a union into anintersection
+ * As the name implies, it turns a union into an intersection
  * @example
   type ExpectedToBe = (() => 'foo') & ((baz: 88) => Optional<T>);
 

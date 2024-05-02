@@ -1,9 +1,9 @@
-import { Numeric, ObjectProperties, TestType } from 'src';
+import { Numeric, Properties, TestType } from 'src';
 import { test, expect } from 'vitest';
 
 test('_', () => {
   const result: TestType<
-    ObjectProperties<{
+    Properties<{
       foo: () => void;
       bar: (a: any) => string;
       barBaz: string;
@@ -17,7 +17,7 @@ test('_', () => {
 
 test('Does not work on deep nested objects', () => {
   const result: TestType<
-    ObjectProperties<{
+    Properties<{
       foo: () => void;
       bar: (a: any) => string;
       barBaz: string;
@@ -34,7 +34,7 @@ test('Does not work on deep nested objects', () => {
 
 test('_', () => {
   const result: TestType<
-    ObjectProperties<{
+    Properties<{
       barBaz: string;
       x: {
         a: () => number;
@@ -49,7 +49,7 @@ test('_', () => {
 
 test('', () => {
   const result: TestType<
-    ObjectProperties<{
+    Properties<{
       barBaz: string;
       x: {
         a: () => number;
