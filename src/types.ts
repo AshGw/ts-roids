@@ -1937,3 +1937,13 @@ export type StringStartsWith<T extends string, U extends string> = IfExtends<
   true,
   false
 >;
+
+export type StringEndsWith<T extends string, U extends string> = IfExtends<
+  T,
+  `${string}${U}`,
+  true,
+  false
+>;
+
+
+
