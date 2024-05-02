@@ -688,7 +688,6 @@ StringifyPrimitive<undefined> // "undefined"
  */
 export type StringifyPrimitive<P extends Exclude<Primitive, symbol>> = `${P}`;
 
-
 /**
  * Turn a given string literal to a numeric 
  * @example 
@@ -1881,6 +1880,31 @@ export type Extends<T, U> = T extends never
     ? true
     : false;
 
-type Flip<T extends Record<string, string | number | boolean>> = {
-  [P in keyof T as `${T[P]}`]: P;
+/**
+ * @hidden
+ */
+type _FlippableRecord = Record<string, string | number | boolean>;
+
+/**
+ * Constructs a new type that takes an object type `T` and returns a new object type where the keys of `T` become
+ * the values and the values become the keys.
+ *
+ * @example
+ * ```typescript
+ * type Object1 = { name: 'John'; age: 30; city: 'New York' };
+ * type Flipped1 = Flip<Object1>; // {'John': 'name', 30: 'age', 'New York': 'city'}
+ *
+ * type Object2 = { fruit: 'Apple'; color: 'Red'; price: 1.25 };
+ * type Flipped2 = Flip<Object2>; // {'Apple': 'fruit', 'Red': 'color', 1.25: 'price'}
+ *
+ * type Object3 = { optionA: true; optionB: false };
+ * type Flipped3 = Flip<Object3>; // {true: 'optionA', false: 'optionB'}
+ * ```
+ */
+export type Flip<T extends _FlippableRecord> = {
+  [P in Keys<T> as StringifyPrimitive<T[P]>]: P;
+};
+
+export type ReplaceKeys<U, T, Y> = {
+  [K in keyof U]: K extends T ? (K extends keyof Y ? Y[K] : never) : U[K];
 };

@@ -4,6 +4,7 @@ npmjs
 lintstagedrc
 Unknwon
 Vals
+Flippable
 Immutate
 roids
 Nums
