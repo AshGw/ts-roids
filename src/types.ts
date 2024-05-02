@@ -1090,6 +1090,78 @@ export type ObjectProperties<T extends object> = {
 }[Keys<T>];
 
 /**
+ * Evaluates whether one type `T` is assignable to another type `U`.
+ * @returns `true` if `T` is assignable to `U`, `false` otherwise.
+ *
+ * @example
+ * ```typescript
+ * type A = { x: number };
+ * type B = { x: number; y: string };
+ * type C = { x: number; y?: string };
+ *
+ * type Check1 = Extends<A, B>; // false, A does not extend B
+ * type Check2 = Extends<B, A>; // true, B extends A
+ * type Check3 = Extends<C, B>; // true, C extends B
+ * ```
+ */
+export type Extends<T, U> = T extends never
+  ? false
+  : T extends U
+    ? true
+    : false;
+
+/**
+ * @hidden
+ */
+type _FlippableRecord = Record<string, string | number | boolean>;
+
+/**
+ * Constructs a new type that takes an object type `T` and returns a new object type where the keys of `T` become
+ * the values and the values become the keys.
+ *
+ * @example
+ * ```typescript
+ * type Object1 = { name: 'John'; age: 30; city: 'New York' };
+ * type Flipped1 = Flip<Object1>; // {'John': 'name', 30: 'age', 'New York': 'city'}
+ *
+ * type Object2 = { fruit: 'Apple'; color: 'Red'; price: 1.25 };
+ * type Flipped2 = Flip<Object2>; // {'Apple': 'fruit', 'Red': 'color', 1.25: 'price'}
+ *
+ * type Object3 = { optionA: true; optionB: false };
+ * type Flipped3 = Flip<Object3>; // {true: 'optionA', false: 'optionB'}
+ * ```
+ */
+export type Flip<T extends _FlippableRecord> = {
+  [P in Keys<T> as StringifyPrimitive<T[P]>]: P;
+};
+
+/**
+ * Constructs a new type by replacing keys of type `T` in object type `U` with corresponding keys from object type `Y`.
+ * @template U The original object type.
+ * @template T The type of keys to replace.
+ * @template Y The object type containing replacement keys.
+ *
+ * @example
+ * ```typescript
+ * type Original = {
+ *   bar: string;
+ *   foo: number;
+ *   fooBar: string;
+ * };
+ *
+ * type Replacement = ReplaceKeys<Original, 'bar', { bar: number }>;
+ *
+ * // Result: { bar: number; foo: number; fooBar: string; }
+ *
+ * type AnotherReplacement = ReplaceKeys<Original, 'foo', { foo: boolean }>;
+ *
+ * // Result: { bar: string; foo: boolean; fooBar: string; }
+ * ```
+ */
+export type ReplaceKeys<U, T, Y> = {
+  [K in Keys<U>]: IfExtends<K, T, K extends Keys<Y> ? Y[K] : never, U[K]>;
+};
+/**
  * A  type that recursively mutates all the proprties within a given object  type `T`.
  * 
  * @example
@@ -1859,52 +1931,9 @@ export type DeepNonRequired<T> = T extends UnknownFunction
       [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
     };
 
-/**
- * Evaluates whether one type `T` is assignable to another type `U`.
- * @returns `true` if `T` is assignable to `U`, `false` otherwise.
- *
- * @example
- * ```typescript
- * type A = { x: number };
- * type B = { x: number; y: string };
- * type C = { x: number; y?: string };
- *
- * type Check1 = Extends<A, B>; // false, A does not extend B
- * type Check2 = Extends<B, A>; // true, B extends A
- * type Check3 = Extends<C, B>; // true, C extends B
- * ```
- */
-export type Extends<T, U> = T extends never
-  ? false
-  : T extends U
-    ? true
-    : false;
-
-/**
- * @hidden
- */
-type _FlippableRecord = Record<string, string | number | boolean>;
-
-/**
- * Constructs a new type that takes an object type `T` and returns a new object type where the keys of `T` become
- * the values and the values become the keys.
- *
- * @example
- * ```typescript
- * type Object1 = { name: 'John'; age: 30; city: 'New York' };
- * type Flipped1 = Flip<Object1>; // {'John': 'name', 30: 'age', 'New York': 'city'}
- *
- * type Object2 = { fruit: 'Apple'; color: 'Red'; price: 1.25 };
- * type Flipped2 = Flip<Object2>; // {'Apple': 'fruit', 'Red': 'color', 1.25: 'price'}
- *
- * type Object3 = { optionA: true; optionB: false };
- * type Flipped3 = Flip<Object3>; // {true: 'optionA', false: 'optionB'}
- * ```
- */
-export type Flip<T extends _FlippableRecord> = {
-  [P in Keys<T> as StringifyPrimitive<T[P]>]: P;
-};
-
-export type ReplaceKeys<U, T, Y> = {
-  [K in keyof U]: K extends T ? (K extends keyof Y ? Y[K] : never) : U[K];
-};
+export type StringStartsWith<T extends string, U extends string> = IfExtends<
+  T,
+  `${U}${string}`,
+  true,
+  false
+>;
