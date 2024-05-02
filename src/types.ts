@@ -62,9 +62,9 @@ export type PositiveInteger<N extends Numeric> = IfEquals<
 
 /**
  * Represents a positive integer parsed from a string.
- * If the string does not represent a positive integer, it resolves to `never`, else 
+ * If the string does not represent a positive integer, it resolves to `never`, else
  * it resolves to its integer representation.
- * @example 
+ * @example
  * ````ts
     PositiveIntegerString<'0'>; // works
     PositiveIntegerString<'82739283293237'>; // works
@@ -92,9 +92,9 @@ export type NegativeInteger<N extends Numeric> = IfEquals<
 
 /**
  * Represents a negative integer parsed from a string.
- * If the string does not represent a negative integer, it resolves to `never`, else 
+ * If the string does not represent a negative integer, it resolves to `never`, else
  * it resolves to its integer representation.
- * @example 
+ * @example
  * ````ts
     NegativeIntegerString<'0'>; // never
     NegativeIntegerString<'82739283293237'>; // never
@@ -140,9 +140,9 @@ export type PositiveFloat<N extends Numeric> = IfEquals<
 
 /**
  * Represents a positive float parsed from a string.
- * If the string does not represent a positive float, it resolves to `never`, else 
+ * If the string does not represent a positive float, it resolves to `never`, else
  * it resolves to its float representation.
- * @example 
+ * @example
  * ````ts
     PositiveFloatString<'0'>; // never
     PositiveFloatString<'82739283293237'>; // works
@@ -171,9 +171,9 @@ export type NegativeFloat<N extends Numeric> = IfEquals<
 
 /**
  * Represents a negative float parsed from a string.
- * If the string does not represent a negative float, it resolves to `never`, else 
+ * If the string does not represent a negative float, it resolves to `never`, else
  * it resolves to its float representation.
- * @example 
+ * @example
  * ````ts
     NegativeFloatString<'0'>; // never
     NegativeFloatString<'82739283293237'>; // never
@@ -317,8 +317,8 @@ export type IsUnknown<T> = IfExtends<T, unknown, true, false>;
  * ````ts
   IsExactlyUnknown<any | unknown>; // false, since the union evaluates to any
   IsExactlyAny<any | unknown>; // true
-  IsExactlyUnknown<unknown | string> // true 
-  IsExactlyUnknown<string>; // flase 
+  IsExactlyUnknown<unknown | string> // true
+  IsExactlyUnknown<string>; // flase
  * ````
  */
 export type IsExactlyUnknown<T> = Equals<T, unknown>;
@@ -334,7 +334,7 @@ export type IsString<T> = IfExtends<T, string, true, false>;
  * ````ts
   IsExactlyString<number>; //  false;
   IsExactlyString<any | string>; // false
-  IsExactlyString<unknown | string>; //  false 
+  IsExactlyString<unknown | string>; //  false
  * ````
  */
 export type IsExactlyString<T> = Equals<T, string>;
@@ -452,9 +452,9 @@ export type IsFunction<T> = IfExtends<T, UnknownFunction, true, false>;
   IsObject<{ name: string }>; // true
   IsObject<string>; // false
   IsObject<Function>; // true, yes, the built-in Function type is an interface with a bunch of methods, so yes it's an object.
-  // if you want to use the function type use this: 
+  // if you want to use the function type use this:
   IsObject<UnknownFunction>; // false
-  // or this 
+  // or this
   IsObject<AnyFunction>; // false
   IsObject<any[]>; // false
   IsObject<null>; // false
@@ -471,12 +471,12 @@ export type IsObject<T> = And<
 export type IsNumber<T> = IfExtends<T, number, true, false>;
 /**
  * @returns `true` if `T` is exactly of type `number`, otherwise `false`.
- * @example 
+ * @example
  * ````ts
-  IsExactlyNumber<any | number>; // false 
-  IsExactlyNumber<unknown | number> // false 
-  IsExactlyNumber<number> // true 
-  IsExactlyNumber<87> // false 
+  IsExactlyNumber<any | number>; // false
+  IsExactlyNumber<unknown | number> // false
+  IsExactlyNumber<number> // true
+  IsExactlyNumber<87> // false
  * ````
  */
 export type IsExactlyNumber<T> = Equals<T, number>;
@@ -488,11 +488,11 @@ export type IsBigInt<T> = IfExtends<T, bigint, true, false>;
 
 /**
  * @returns `true` if `T` is exactly `bigint`, otherwise `false`.
- * @example 
+ * @example
  * ````ts
   IsBigInt<unknown | bigint>; // false
-  IsBigInt<symbol | Nullable>; // false 
-  IsBigInt<bigint>; // true 
+  IsBigInt<symbol | Nullable>; // false
+  IsBigInt<bigint>; // true
  * ````
  */
 export type IsExactlyBigInt<T> = Equals<T, bigint>;
@@ -504,7 +504,7 @@ export type IsSymbol<T> = T extends symbol ? true : false;
 
 /**
  * @returns `true` if `T` is exactly `symbol`, otherwise `false`.
- * @example 
+ * @example
  * ````ts
   IsExactlySymbol<symbol>; // true
   IsExactlySymbol<any | symbol>; // false
@@ -514,11 +514,11 @@ export type IsSymbol<T> = T extends symbol ? true : false;
 export type IsExactlySymbol<T> = Equals<T, symbol>;
 /**
  * If ``T`` is exactly``any``, return ``true``, otherwise, return ``false``.
- * @exmaple 
+ * @exmaple
  * ````ts
-  IsExactlyAny<any | Nullable>; // true, once unsafe, always unsafe 
+  IsExactlyAny<any | Nullable>; // true, once unsafe, always unsafe
   IsExactlyAny<Numeric | Nullable>; // false
-  IsExactlyAny<unknown>; // false 
+  IsExactlyAny<unknown>; // false
   IsExactlyAny<any>, true
  * ````
  */
@@ -578,11 +578,11 @@ export type IsNewable<T> = IfExtends<T, Newable, true, false>;
 
 /**
  * Conditional type: if the condition `C` is `true`, return `Do`, otherwise return `Else`.
- * @example 
+ * @example
  * ````ts
    If<IsNever<never>, true, false>; // true
-   If<Not<IsNever<never>>, true, false>; // false  
- * ```` 
+   If<Not<IsNever<never>>, true, false>; // false
+ * ````
 */
 export type If<C extends boolean, Do, Else> = IfExtends<C, true, Do, Else>;
 
@@ -689,18 +689,46 @@ StringifyPrimitive<undefined> // "undefined"
 export type StringifyPrimitive<P extends Exclude<Primitive, symbol>> = `${P}`;
 
 /**
- * Turn a given string literal to a numeric 
- * @example 
+ * Turn a given string literal to a numeric
+ * @example
  * ````ts`
  NumerifyString<'54'>; // 54
  NumerifyString<'699620.000000001'>; // 699620.000000001
- IsNegativeFloat<NumerifyString<'-699620.000000001'>>; // true 
+ IsNegativeFloat<NumerifyString<'-699620.000000001'>>; // true
  * ````
  */
 export type NumerifyString<S extends string> = S extends `${infer N extends
   Numeric}`
   ? N
   : never;
+
+/**
+ * Check if a string starts with another string
+ * @example
+ * ```ts
+ * type Result = StringStartsWith<'hello world', 'hello'>; // Result: true
+ * ```
+ */
+export type StringStartsWith<T extends string, U extends string> = IfExtends<
+  T,
+  `${U}${string}`,
+  true,
+  false
+>;
+
+/**
+ * Check if a string ends with another string
+ * @example
+ * ```ts
+ * type Result = StringEndsWith<'hello world', 'world'>; // Result: true
+ * ```
+ */
+export type StringEndsWith<T extends string, U extends string> = IfExtends<
+  T,
+  `${string}${U}`,
+  true,
+  false
+>;
 
 /**
  * Get the absolute value of a numeric N
@@ -972,13 +1000,13 @@ export type ArrayIncludes<Arr, P> = Arr extends [infer S, ...infer E]
   : false;
 /**
  * Calculates the intersection of the types within an array `Arr` of tuple types.
- * @returns 
+ * @returns
  * The types that repeat, if exists
  * @example
  * ````ts
  ArrayIntersection<[[1, 0, 1], [0, 1, -1], [0, 0, 1]]>; // 0 | 1
  ArrayIntersection<[[1, 0], [0, 1], [0, 0]]>; // 0
- ArrayIntersection<[[1, 0], [-1, -1], [-8, -9]]> // never 
+ ArrayIntersection<[[1, 0], [-1, -1], [-8, -9]]> // never
  * ````
  */
 export type ArrayIntersection<Arr extends unknown[]> = Arr extends [
@@ -1036,26 +1064,26 @@ export type Equals<X, Y> = (<T>() => T extends X ? true : false) extends <
   ? true
   : false;
 
-/** 
+/**
  A  type that excludes `null` and `undefined` from  type `T`.
  * @example
- Type Str = ExcludeNullable<string | null> //  string 
- Type Str2 = ExcludeNullable<string | null | undefined> //  string 
- Type Str3 = ExcludeNullable<string | undefined> //  string 
- * 
+ Type Str = ExcludeNullable<string | null> //  string
+ Type Str2 = ExcludeNullable<string | null | undefined> //  string
+ Type Str3 = ExcludeNullable<string | undefined> //  string
+ *
  */
 export type ExcludeNullable<T> = Exclude<T, Nullable>;
-/** 
+/**
  A  type that excludes `undefined` from  type `T`.
  * @example
- Type Str = ExcludeNullable<string | undefined> // Result:  string 
+ Type Str = ExcludeNullable<string | undefined> // Result:  string
  */
 export type ExcludeUndefined<T> = Exclude<T, undefined>;
 
-/** 
+/**
  * A  type that excludes `null` from  type `T`.
  * @example
- Type Str = ExcludeNullable<string | null> // Result:  string 
+ Type Str = ExcludeNullable<string | null> // Result:  string
  */
 export type ExcludeNull<T> = Exclude<T, null>;
 
@@ -1163,7 +1191,7 @@ export type ReplaceKeys<U, T, Y> = {
 };
 /**
  * A  type that recursively mutates all the proprties within a given object  type `T`.
- * 
+ *
  * @example
  * ````ts
 type Actual = {
@@ -1343,8 +1371,8 @@ export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
     }
   : Omit<T, P>;
 /**
- * As the name implies, it turns a union into anintersection 
- * @example 
+ * As the name implies, it turns a union into anintersection
+ * @example
   type ExpectedToBe = (() => 'foo') & ((baz: 88) => Optional<T>);
 
   type T = NewType<'T', string>;
@@ -1357,7 +1385,7 @@ export type DeepOmit<T, P extends string> = P extends `${infer K}.${infer R}`
       IsFalsy<0> | IsDeepImmutable<{ a: string; readonly b: string }>
     >
     // Result 2: IsFalsy<0> & IsDeepImmutable<{ a: string; readonly b: string }> => true & true => evaluates to true
- * 
+ *
  */
 export type UnionToIntersection<U> = (
   U extends unknown ? (arg: U) => unknown : never
@@ -1384,7 +1412,7 @@ type _FindPrimitive<T> = T extends string
               ? undefined
               : never;
 /**
-* @example 
+* @example
 * Recursively transforms an object type `T` into a type where all properties
 * are replaced with their corresponding primitive types.
 * ````ts
@@ -1434,11 +1462,11 @@ type __Merge<T, S> = {
 
 /**
  * Copies all enumerable own properties from one target object
- * to a source array of objects. 
- * @example 
+ * to a source array of objects.
+ * @example
  * ````ts
  type T = Assign<{ a: 'd'; d: 'd' }, [{ a: 'a' }, { b: 'b' }, { c: 'c' }]>
- // Result: 
+ // Result:
  {
       a: 'a';
       b: 'b';
@@ -1474,13 +1502,13 @@ export type PickCommonKeys<
 > = Pick<T, Extract<Keys<T>, Keys<U>> & Extract<Keys<U>, Keys<T>>>;
 
 /**
- * Omit the common keys between the the two objects, 
- * @returns 
+ * Omit the common keys between the the two objects,
+ * @returns
  * An object that consist of what's unique in both, else never
  * @example
  * ````ts
  OmitCommonKeys<{ d: { d: 'a' }; p: { b: 'b' }; x: { c: 'c' } }, { d: 'd' }>
- // Result: 
+ // Result:
  {
       p: {
         b: 'b';
@@ -1494,7 +1522,7 @@ export type PickCommonKeys<
       { d: 'd'; k: 'k' },
       { d: 'd'; p: { b: 'b' }; x: { c: 'c' } }
     >
-  // Result: 
+  // Result:
   { k: 'k' }
  * ````
  */
@@ -1517,7 +1545,7 @@ export type OmitCommonKeys<
   };
   thee: number;
 };
- * DeepPick<T, 'two.c'> // Results in: 
+ * DeepPick<T, 'two.c'> // Results in:
 {
     two: {
       c: 'c' | 'C';
@@ -1608,12 +1636,12 @@ declare function testType<T1, T2, E extends boolean>(): Equals<
  * If you expect the types to match, set this to ``true``; if not, set it to false.
  * This utility will return a boolean that is ``true`` if your expectation was correct, otherwise false.
  * @example
-```typescript 
+```typescript
 type ResultType = TestType<Type1, Type2, true>;
 ```
 ``TestType`` accepts three arguments: the types you're comparing (``Type1`` and ``Type2``) and a boolean (``true`` if you expected them to match, ``false`` otherwise). The resulting type will tell if your expectation is correct, ``true`` if it is, else ``false``.
 
-You can use it however you want, maybe to test a type on the go, or, 
+You can use it however you want, maybe to test a type on the go, or,
 test using a testing framework. Here's an example with [`vitest`](https://vitest.dev)
 
 ````ts
@@ -1739,7 +1767,7 @@ type OneLevelDeep = {
   bazFoo: string | boolean;
 };
 type A = OmitExactlyByType<OneLevelDeep, bigint>
-// A results in: 
+// A results in:
 {
       foo: boolean;
       bar?: Numeric;
@@ -1747,7 +1775,7 @@ type A = OmitExactlyByType<OneLevelDeep, bigint>
       bazFoo: string | boolean;
     }
 type B = OmitExactlyByType<OneLevelDeep, string | boolean>
-// B results in 
+// B results in
 {
       foo: boolean;
       bar?: Numeric;
@@ -1779,7 +1807,7 @@ export type PickByType<T, P> = {
 
 /**
  * From ``T``, pick a set of properties whose type excatly matches ``P``.
- * @exmaple 
+ * @exmaple
  * ````ts
 type OneLevelDeep = {
   foo: boolean;
@@ -1791,7 +1819,7 @@ type OneLevelDeep = {
   aNum: number;
 };
   type A = PickExactlyByType<OneLevelDeep, bigint>,
-  // A results in: 
+  // A results in:
     {
       fooBaz: bigint;
     },
@@ -1807,6 +1835,18 @@ export type PickExactlyByType<T, P> = {
 };
 
 /**
+ * Extracts keys from a type `T` that represent required properties.
+ * Properties that are not marked with `?`.
+ * @example
+ * ```ts
+ * type T = RequiredKeys<{ a: number; b?: string }> // Result:  'a'
+ * ```
+ */
+export type RequiredKeys<T> = {
+  [K in Keys<T>]-?: IfExtends<EmptyObject, Pick<T, K>, never, K>;
+}[Keys<T>];
+
+/**
  * Why not call it ``OptionalKeys``?
  * ``Optional<T>`` in this library represents a type ``T`` that can be either ``T`` or ``null``. So creating
  * ``OptionalKeys`` type would entail removing any type that can be null, which is not the intention here.
@@ -1818,25 +1858,11 @@ export type PickExactlyByType<T, P> = {
  * type T = NonRequiredKeys<{ a: number; b?: string }> // Result:  'b'
  * ```
  */
-export type NonRequiredKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? K : never;
-}[keyof T];
-
-/**
- * Extracts keys from a type `T` that represent required properties.
- * Properties that are not marked with `?`.
- * @example
- * ```ts
- * type T = RequiredKeys<{ a: number; b?: string }> // Result:  'a'
- * ```
- */
-export type RequiredKeys<T> = {
-  [K in Keys<T>]-?: EmptyObject extends Pick<T, K> ? never : K;
-}[keyof T];
+export type NonRequiredKeys<T> = Exclude<Keys<T>, RequiredKeys<T>>;
 
 /**
  * Make all object properties required
- * @example 
+ * @example
  * ```ts
 type Expected = {
   a: () => 1;
@@ -1930,20 +1956,3 @@ export type DeepNonRequired<T> = T extends UnknownFunction
   : {
       [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNonRequired<T[K]>, T[K]>;
     };
-
-export type StringStartsWith<T extends string, U extends string> = IfExtends<
-  T,
-  `${U}${string}`,
-  true,
-  false
->;
-
-export type StringEndsWith<T extends string, U extends string> = IfExtends<
-  T,
-  `${string}${U}`,
-  true,
-  false
->;
-
-
-
