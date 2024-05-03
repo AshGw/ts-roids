@@ -35,7 +35,7 @@ Requires TypesScript `v5.0`+
 Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usage examples with details. 
 
 #### Types 
-- [`Abs<N>`](https://ashgw.github.io/ts-roids/types/Abs.htmlhttps://ashgw.github.io/ts-roids/types/Abs.html) - Get the absolute value of a [``Numeric``](https://ashgw.github.io/ts-roids/types/ArrayFilter.html).
+- [`Abs<N>`](https://ashgw.github.io/ts-roids/types/Abs.html) - Get the absolute value of a [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html).
 - [`And<B1,B2>`](https://ashgw.github.io/ts-roids/types/And.html) - Logical AND between two boolean types.
 - [`ArrayFilter<Arr,P`](https://ashgw.github.io/ts-roids/types/ArrayFilter.html) - Filters elements from an array based on a given predicate type.
 - [`ArrayIncludes<Arr,T>`](https://ashgw.github.io/ts-roids/types/ArrayIncludes.html) - Checks if a given type is in an array.
