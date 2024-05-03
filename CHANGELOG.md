@@ -1,6 +1,44 @@
 # Changelog
 
 
+## v1.35.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.34.0...v1.35.0)
+
+### 🚀 Enhancements
+
+- **#122:** Finish `PositiveIntegerString` ([3ac93f0](https://github.com/ashgw/ts-roids/commit/3ac93f0))
+- **#123:** Finish `NegativeIntegerString<S>` ([50c77c6](https://github.com/ashgw/ts-roids/commit/50c77c6))
+- **#124:** Finish `NegativeFloatString<S>` ([1ca8deb](https://github.com/ashgw/ts-roids/commit/1ca8deb))
+- **#125:** Finish `PositiveFloatString<S>` ([beea535](https://github.com/ashgw/ts-roids/commit/beea535))
+- **#127:** Add `Extends` ([373857e](https://github.com/ashgw/ts-roids/commit/373857e))
+- **#128:** Add `StringifyPrimitive` ([8002db5](https://github.com/ashgw/ts-roids/commit/8002db5))
+- **#129:** Add `Flip<Obj>` ([82c94ed](https://github.com/ashgw/ts-roids/commit/82c94ed))
+- **#130:** Add `StringStartsWith<T,U>` ([ff8a767](https://github.com/ashgw/ts-roids/commit/ff8a767))
+- **#131:** Add `StringEndsWith<T,U>` ([74b2a03](https://github.com/ashgw/ts-roids/commit/74b2a03))
+
+### 🩹 Fixes
+
+- `DeepNotRequired` typo ([0683e94](https://github.com/ashgw/ts-roids/commit/0683e94))
+
+### 💅 Refactors
+
+- Seperate types decorators ([ba5e010](https://github.com/ashgw/ts-roids/commit/ba5e010))
+- Seperate types decorators 2 ([cd90d53](https://github.com/ashgw/ts-roids/commit/cd90d53))
+
+### 📖 Documentation
+
+- **#132:** Add `README.md` API docs ([5b21e30](https://github.com/ashgw/ts-roids/commit/5b21e30))
+- **#132:** Finish `README.md` API docs ([f8c3a67](https://github.com/ashgw/ts-roids/commit/f8c3a67))
+
+### 🏡 Chore
+
+- Cleanup `types.ts` ([a286f90](https://github.com/ashgw/ts-roids/commit/a286f90))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.34.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.33.0...v1.34.0)
