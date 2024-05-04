@@ -254,6 +254,50 @@ export type MaybeUndefined<T> = T | undefined;
  * Presents any non-nullish value
  */
 export type EmptyObject = NonNullable<unknown>;
+
+/**
+ * Extracts truthy properties from an object type `T`.
+ * @example 
+ * ````ts
+type T = {
+  name: string;
+  age: number;
+  hasCar: boolean;
+  address?: string | null;
+}
+type R = TruthyProperties<T>;
+// Result: { name: string; age: number; hasCar: boolean; }
+ * ````
+ */
+export type TruthyProperties<T> = Pick<
+  T,
+  { [K in Keys<T>]: IsTruthy<T[K]> extends true ? K : never }[Keys<T>]
+>;
+
+/**
+ * Extracts falsy properties from an object type `T`.
+ * @example
+ * ````ts
+type T = {
+  a: string;
+  b: number;
+  c: boolean;
+  d?: string | null;
+  e: 0;
+  f: null;
+};
+type az = FalsyProperties<T>;
+// Result: {
+    e: 0;
+    f: null;
+}
+ * ````
+ */
+export type FalsyProperties<T> = Pick<
+  T,
+  { [K in Keys<T>]: IsFalsy<T[K]> extends true ? K : never }[Keys<T>]
+>;
+
 /**
  * Checks if a given type `T` is `Falsy`.
  * @returns `true` if `T` is a subtype of `Falsy`, otherwise `false`.
@@ -500,7 +544,7 @@ export type IsSymbol<T> = T extends symbol ? true : false;
 export type IsExactlySymbol<T> = Equals<T, symbol>;
 /**
  * If ``T`` is exactly``any``, return ``true``, otherwise, return ``false``.
- * @exmaple
+ * @example
  * ````ts
   IsExactlyAny<any | Nullable>; // true, once unsafe, always unsafe
   IsExactlyAny<Numeric | Nullable>; // false
@@ -1794,7 +1838,7 @@ export type PickByType<T, P> = {
 
 /**
  * From ``T``, pick a set of properties whose type excatly matches ``P``.
- * @exmaple
+ * @example
  * ````ts
 type OneLevelDeep = {
   foo: boolean;

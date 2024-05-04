@@ -259,10 +259,5 @@ delete john.age; // TypeError: Cannot delete property 'age'
 
 See [releases](https://github.com/ashgw/ts-roids/releases).
 
-
-## Contributing
-
-Pull requests are always welcome, but it's preferable not to submit a bare PR. It's best when a PR addresses a specific issue. Therefore, for bugs, documentation, or feature requests, consider submitting [an issue](https://github.com/AshGw/ts-roids/issues/new/choose) first.
-
 ## License 
 [GPL-3](/LICENSE)
