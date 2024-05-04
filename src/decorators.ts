@@ -1,4 +1,4 @@
-import { Newable, MaybeUndefined } from './types';
+import { Newable } from './types';
 
 /**
  * @hidden
