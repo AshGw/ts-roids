@@ -37,7 +37,7 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 #### Types 
 - [`Abs<N>`](https://ashgw.github.io/ts-roids/types/Abs.html) - Get the absolute value of a [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html).
 - [`And<B1,B2>`](https://ashgw.github.io/ts-roids/types/And.html) - Logical AND between two boolean types.
-- [`ArrayFilter<Arr,P`](https://ashgw.github.io/ts-roids/types/ArrayFilter.html) - Filters elements from an array based on a given predicate type.
+- [`ArrayFilter<Arr,P>`](https://ashgw.github.io/ts-roids/types/ArrayFilter.html) - Filters elements from an array based on a given predicate type.
 - [`ArrayIncludes<Arr,T>`](https://ashgw.github.io/ts-roids/types/ArrayIncludes.html) - Checks if a given type is in an array.
 - [`ArrayIntersection<Arr>`](https://ashgw.github.io/ts-roids/types/ArrayIntersection.html) - Calculates the intersection of the types within an array ``Arr`` of tuple types.
 - [`ArrayMax<Arr>`](https://ashgw.github.io/ts-roids/types/ArrayMax.html) - Extracts the maximum [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html) (positive and negative) value in a given array.
