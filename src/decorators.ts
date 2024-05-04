@@ -42,7 +42,7 @@ export const Final = <CST extends Newable>(cst: CST): CST => {
       super(...args);
       const newTarget = new.target as unknown as typeof F;
       if (newTarget !== F) {
-        throw new FinalTypeError(`Cannot inherit from a final class`);
+        throw new FinalTypeError(`Cannot inherit from the final class: `);
       }
     }
   }

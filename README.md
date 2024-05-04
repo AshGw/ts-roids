@@ -173,25 +173,21 @@ type Baz = NewType<'Baz', string>;
 type Secret = NewType<'Secret', string>;
 
 abstract class BaseFoo<T> {
-  protected abstract get foo(): T;
   abstract requestFoo(secret: Secret, baz: Baz): Optional<T>;
 }
 
 @Final
 @Frozen
 class Foo<T> extends BaseFoo<T> {
-  private readonly _foo: T;
+  readonly foo: T;
   bar: Optional<Bar>;
 
   constructor(foo: T, bar?: MaybeUndefined<Bar>) {
     super();
-    this._foo = foo;
+    this.foo = foo;
     this.bar = bar ?? null;
   }
-  protected override get foo(): T {
-    console.log('do some stuff first');
-    return this._foo;
-  }
+
 
   requestFoo(secret: Secret, baz: Baz): Optional<T> {
     // A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value
@@ -218,7 +214,7 @@ const foo = new Foo<string>('foo');
 
 // Since the object is final:
 
-// The line below will cause a TypeError: Cannot inherit from the finl class Foo
+// The line below will cause a TypeError: Cannot inherit from the final class Foo
 const _ = new SubFoo('subFoo');
 
 // Since the object is frozen:

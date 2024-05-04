@@ -92,7 +92,7 @@ test('Should work when the final class is a subclass itself', () => {
 });
 
 test(`Should not allow inheritance, of the final class, when the final class
-  is a subclass itself, a TypeError should be thrown`, () => {
+  is a subclass itself, a FinalTypeError should be thrown`, () => {
   abstract class BaseFoo<T> {
     abstract someFoo(): T;
   }
