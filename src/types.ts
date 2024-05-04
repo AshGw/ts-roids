@@ -347,17 +347,17 @@ export type IsBoolean<T> = IfExtends<T, boolean, true, false>;
 export type IsNumeric<T> = IfExtends<T, Numeric, true, false>;
 
 /**
- * Check if a given type `T` is indeed a tuple
+ * Represents a tuple.
  * @example
  * ````ts
- * IsTuple<[69]>; // Result: true
- * IsTuple<69[]; // Result: false
+ * Tuple<['a', 'b']>; // Result: ['a', 'b']
+ * Tuple<string[]>; // Result: never
  */
-export type IsTuple<T> = T extends readonly unknown[]
+export type Tuple<T> = T extends readonly unknown[]
   ? number extends T['length']
-    ? false
-    : true
-  : false;
+    ? never
+    : T
+  : never;
 
 /**
  * Is a given type `T` an array?
@@ -399,8 +399,6 @@ export type IsArrayIncludesTypeof<Arr, T> = IfExtends<Arr, T[], true, false>;
  * ```
  */
 export type ArrayOf<Arr, T> = If<Extends<Arr, T[]>, Arr, never>;
-
-type _ = ArrayOf<'string'[], string>;
 
 /**
  * Type utility that checks if a given type `T` is an `AnyFunction` (any function type).
