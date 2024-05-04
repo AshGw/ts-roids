@@ -204,14 +204,12 @@ export type IsNegativeFloat<N extends Numeric> = IsNegative<Float<N>>;
 export type IsPositiveFloat<N extends Numeric> = IsPositive<Float<N>>;
 
 /**
- * Is a given number odd?
- * @returns
- * `true` if it is, else `false`
+ * Represents an odd numeric?
  * @example
  * ````ts
- * IsOdd<2587967>; // true
- * IsOdd<215848141>; // true
- * IsOdd<200000000000000>; // false
+ * Odd<2587967>; // 2587967
+ * Odd<215848141>; // 215848141
+ * Odd<200000000000000>; // never
  * ````
  */
 export type OddNumeric<T extends Numeric> = IfExtends<
@@ -222,14 +220,12 @@ export type OddNumeric<T extends Numeric> = IfExtends<
 >;
 
 /**
- * Is a given number even?
- * @returns
- * `true` if it is, else `false`
+ * Represents an even numeric
  * @example
  * ````ts
- * IsEven<200000000000000>; // true
- * IsEven<258796>; // true
- * IsEven<2000000000000001>; // false
+ * Even<200000000000000>; // 258796
+ * Even<258796>; // 258796
+ * Even<2000000000000001>; // never
  * ````
  */
 export type EvenNumeric<T extends Numeric> = IfExtends<
@@ -394,25 +390,17 @@ export type IsArray<T> = IfExtends<T, unknown[], true, false>;
 export type IsArrayIncludesTypeof<Arr, T> = IfExtends<Arr, T[], true, false>;
 
 /**
- * Checks if a given type `Arr` is exactly an array of elements of type `T`.
- * @template Arr The type to check if it's an array of elements of type `T`.
- * @template T The element type expected in the array.
- * @returns `true` if `Arr` is exactly an array of elements of type `T`, otherwise `false`.
- * An array of elements of type `T` is defined as `Arr` being exactly `T[]`.
+ * @returns `T` if `Arr` is an array of elements of type `T`, otherwise `never`.
  * @example
  * ```
- * IsArrayOf<string[], string & boolean>; // false
- * IsArrayOf<Record<string, number>[], number>; // false
- * IsArrayOf<Record<string, number>[], string | number>; // false
- * IsArrayOf<Record<string, number>[], Record<symbol, boolean>>; // false
- * IsArrayOf<Record<string, number>[], Record<string, unknown>>; // false ('unknown' does not get a pass)
- * IsArrayOf<Record<string, number>[], Record<string, any>>; // false ('any' does not get a pass)
- * IsArrayOf<Record<string, number>[], Record<string, number>>; // true
- * IsArrayOf<string[], string>; // true
- * IsArrayOf<string[], string | 'string'>; // true
+ * ArrayOf<string[], string & boolean>; // string[]
+ * ArrayOf<string[], string & boolean>; // string[]
+ *  ArrayOf<Record<string, number>[], number>; // never
  * ```
  */
-export type IsArrayOf<Arr, T> = Equals<Arr, T[]>;
+export type ArrayOf<Arr, T> = If<Extends<Arr, T[]>, Arr, never>;
+
+type _ = ArrayOf<'string'[], string>;
 
 /**
  * Type utility that checks if a given type `T` is an `AnyFunction` (any function type).
