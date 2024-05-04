@@ -57,11 +57,13 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`EqualStrlen<S1, S2>`](https://ashgw.github.io/ts-roids/types/EqualStrlen.html) - Check if two strings ``S1`` and ``S2`` have the same length.
 - [`Nullable`](https://ashgw.github.io/ts-roids/types/Nullable.html) - Represents any non-nullish value, basically `{}`.
 - [`Equals<X,Y>`](https://ashgw.github.io/ts-roids/types/Equals.html) - Checks if two types ``X`` and ``Y`` are exactly equal.
+- [`EvenNumeric<T>`](https://ashgw.github.io/ts-roids/types/EvenNumeric.html) - Represents an even [`Numeric`](https://ashgw.github.io/ts-roids/types/Numeric.html).
 - [`ExcludeNull<T>`](https://ashgw.github.io/ts-roids/types/ExcludeNull.html) - Excludes ``null`` from a type ``T``.
 - [`ExcludeNullable<T>`](https://ashgw.github.io/ts-roids/types/ExcludeNullable.html) - Excludes [`Nullable`](https://ashgw.github.io/ts-roids/types/Nullable.html) from a type ``T``.
 - [`ExcludeUndefined<T>`](https://ashgw.github.io/ts-roids/types/ExcludeUndefined.html) - Excludes `undefined` from a type ``T``.
 - [`Extends<T,U>`](https://ashgw.github.io/ts-roids/types/Extends.html) - Evaluates whether one type ``T`` is assignable to another type ``U``.
 - [`Falsy`](https://ashgw.github.io/ts-roids/types/Falsy.html) - Represents a type that is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)  JavaScript. 
+- [`FalsyProperties<T>`](https://ashgw.github.io/ts-roids/types/FalsyProperties.html) - Extracts falsy properties from an object type ``T``.
 - [`FilterBy<Obj, P>`](https://ashgw.github.io/ts-roids/types/FilterBy.html) -  Filters keys from the object type `Obj` based on a specified predicate ``P``.
 - [`Flip<Obj>`](https://ashgw.github.io/ts-roids/types/Flip.html) - Flips keys with values of an object type `Obj`.
 - [`Float<N>`](https://ashgw.github.io/ts-roids/types/Float.html) - Type representing a float.
@@ -73,7 +75,6 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IsAnyFunction<T>`](https://ashgw.github.io/ts-roids/types/IsAnyFunction.html) - Checks if a type ``T`` is  [``AnyFunction``](https://ashgw.github.io/ts-roids/types/AnyFunction.html).
 - [`IsArray<T>`](https://ashgw.github.io/ts-roids/types/IsArray.html) - Checks if a type `T` is an array.
 - [`IsArrayIncludesTypeof<Arr, T>`](https://ashgw.github.io/ts-roids/types/IsArrayIncludesTypeof.html) - Checks if an array type `Arr` includes one or more of `T` type.
-- [`IsArrayOf<Arr, T`](https://ashgw.github.io/ts-roids/types/IsArrayOf.html) - Checks if a given array type ``Arr`` is exactly an array of elements of type ``T``.
 - [`IsBigInt<T>`](https://ashgw.github.io/ts-roids/types/IsBigInt.html) - Checks if `T` is a ``bigint``.
 - [`IsBoolean<T>`](https://ashgw.github.io/ts-roids/types/IsBoolean.html) -  Checks if `T` is a ``boolean``.
 - [`IsDeepImmutable<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepImmutable.html) - Checks if all the nested properties of a given object ``Obj`` are immutable.
@@ -100,7 +101,6 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IsNumber<T>`](https://ashgw.github.io/ts-roids/types/IsNumber.html) - Checks if a type `T` is a `number`.
 - [`IsNumeric<T>`](https://ashgw.github.io/ts-roids/types/IsNumeric.html) - Checks if a type `T` is [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html).
 - [`IsObject<T>`](https://ashgw.github.io/ts-roids/types/IsObject.html) -  Checks if a given type `T` qualifies as an object.
-- [`IsOdd<T>`](https://ashgw.github.io/ts-roids/types/IsOdd.html) - Checks if a given type `T` is an odd number.
 - [`IsPositive<T>`](https://ashgw.github.io/ts-roids/types/IsPositive.html) - Check if a given type `T` is a positive (\[0,+∞\[) [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html).
 
 - [`IsPositiveFloat<T>`](https://ashgw.github.io/ts-roids/types/IsPositiveFloat.html) - Check if a given type `T` is a positive (\[0,+∞\[) [``Float<N>``](https://ashgw.github.io/ts-roids/types/Float.html).
@@ -110,7 +110,6 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IsString<T>`](https://ashgw.github.io/ts-roids/types/IsString.html) - Check if a given type `T` is a ``string``.
 - [`IsSymbol<T>`](https://ashgw.github.io/ts-roids/types/IsSymbol.html) - Check if a given type `T` is a ``symbol``.
 - [`IsTruthy<T>`](https://ashgw.github.io/ts-roids/types/IsTruthy.html) - Check if a given type `T` resolves to a truthy value.
-- [`IsTuple<T>`](https://ashgw.github.io/ts-roids/types/IsTuple.html) -  Check if a given type `T` resolves to a tuple type.
 - [`Keys<T>`](https://ashgw.github.io/ts-roids/types/Keys.html) - Retrieves the union type of keys (property names) of a type ``T``.
 - [`Maybe<T>`](https://ashgw.github.io/ts-roids/types/Maybe.html) - Type that might be [``Nullable``](https://ashgw.github.io/ts-roids/types/Nullable.html)
 - [`MaybeUndefined<T>`](https://ashgw.github.io/ts-roids/types/MaybeUndefined.html) - Type that might ``undefined``.
@@ -130,6 +129,7 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`NumerifyString<S>`](https://ashgw.github.io/ts-roids/types/NumerifyString.html) - Turn a given string literal to a [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html), if possible.
 - [`Methods<Obj>`](https://ashgw.github.io/ts-roids/types/Methods.html) - Get the literal names of keys that are methods in an object type `Obj`.
 - [`Properties<Obj>`](https://ashgw.github.io/ts-roids/types/Properties.html) - Get the literal names of keys that are properties in an object type `Obj`.
+- [`OddNumeric<T>`](https://ashgw.github.io/ts-roids/types/OmitByType.html) - Represents an odd [`Numeric`](https://ashgw.github.io/ts-roids/types/OddNumeric.html).
 - [`OmitByType<Obj, T>`](https://ashgw.github.io/ts-roids/types/OmitByType.html) - Get a set of properties from `Obj` whose type are not assignable to ``T``.
 - [`OmitCommonKeys<Obj1, Obj2>`](https://ashgw.github.io/ts-roids/types/OmitCommonKeys.html) - Omit any common key between the the two objects,.
 - [`OmitExactlyByType<Obj, T>`](https://ashgw.github.io/ts-roids/types/OmitExactlyByType.html) - Omit properties from ``Obj`` whose type exactly matches ``T``.
@@ -150,6 +150,7 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`StringifyPrimitive<P>`](https://ashgw.github.io/ts-roids/types/StringifyPrimitive.html) - Turns a given [``Primitive``](https://ashgw.github.io/ts-roids/types/Primitive.html) value (except ``symbol``) into its string representation.
 - [`Strlen<S>`](https://ashgw.github.io/ts-roids/types/Strlen.html) - Get the length of a string `S`.
 - [`TestType<T1, T2, Expected>`](https://ashgw.github.io/ts-roids/types/TestType.html) - Tests if type `T1` and `T2` are the same.
+- [`TruthyProperties<T>`](https://ashgw.github.io/ts-roids/types/TruthyProperties.html) - Extracts truthy properties from an object type ``T``.
 - [`UnionToIntersection<U>`](https://ashgw.github.io/ts-roids/types/UnionToIntersection.html) - As the name implies, it turns a union into an intersection.
 - [`Vals<Obj>`](https://ashgw.github.io/ts-roids/types/Vals.html) - Get the set of type values in a given object.
 - [`Xor<B1, B2>`](https://ashgw.github.io/ts-roids/types/Xor.html) - Exclusive ``OR`` between two boolean types ``B1`` and ``B2``.
