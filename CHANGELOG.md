@@ -1,6 +1,36 @@
 # Changelog
 
 
+## v1.36.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.35.0...v1.36.0)
+
+### 🚀 Enhancements
+
+- Add `OddNumeric` ([eceb401](https://github.com/ashgw/ts-roids/commit/eceb401))
+- Add `ArrayOf` ([1ebd401](https://github.com/ashgw/ts-roids/commit/1ebd401))
+- Add `FalsyProperties<T>` ([faf9ea9](https://github.com/ashgw/ts-roids/commit/faf9ea9))
+
+### 🩹 Fixes
+
+- `Tuple` ([ab15b15](https://github.com/ashgw/ts-roids/commit/ab15b15))
+- Unused import ([aa5e2c7](https://github.com/ashgw/ts-roids/commit/aa5e2c7))
+
+### 📖 Documentation
+
+- **readme:** Fix `Abs` typo ([de7ac27](https://github.com/ashgw/ts-roids/commit/de7ac27))
+- Add new api docs for recently added types ([462eced](https://github.com/ashgw/ts-roids/commit/462eced))
+- Fix Array typo ([60b2844](https://github.com/ashgw/ts-roids/commit/60b2844))
+- Fix typos ([e75dc62](https://github.com/ashgw/ts-roids/commit/e75dc62))
+
+### 🏡 Chore
+
+- Cleaup source types file ([a5cb94b](https://github.com/ashgw/ts-roids/commit/a5cb94b))
+
+### ❤️ Contributors
+
+- AshGw ([@AshGw](http://github.com/AshGw))
+
 ## v1.35.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.34.0...v1.35.0)

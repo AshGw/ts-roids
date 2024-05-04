@@ -233,7 +233,7 @@ Although they introduced `override` in [`v4.3`](https://www.typescriptlang.org/d
 
 Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
 
-You can also seal an object.
+You can also seal an object btw.
 ```ts
 @Sealed
 class Person {
