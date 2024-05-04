@@ -92,7 +92,6 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IsFloat<N>`](https://ashgw.github.io/ts-roids/types/IsFloat.html) - Checks if a given type ``T`` is a [``Float<N>``](https://ashgw.github.io/ts-roids/types/Float.html).
 - [`IsFunction<T>`](https://ashgw.github.io/ts-roids/types/IsFunction.html) - Checks if a given type ``T`` is a function.
 - [`IsInteger<N>`](https://ashgw.github.io/ts-roids/types/IsInteger.html) - Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is an [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html).
-- [`IsInteger<N>`](https://ashgw.github.io/ts-roids/types/IsInteger.html) - Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is an [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html).
 - [`IsNegativeFloat<F`](https://ashgw.github.io/ts-roids/types/IsNegativeFloat.html) -  Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is a negative [``Float<N>``](https://ashgw.github.io/ts-roids/types/Flip.html).
 - [`IsNegativeInteger<F>`](https://ashgw.github.io/ts-roids/types/IsNegativeInteger.html) - Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is a negative [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html).
 - [`IsNever<T>:`](https://ashgw.github.io/ts-roids/types/IsNever.html) - Checks if a type `T` does not resolve, so `never`.
