@@ -81,7 +81,6 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IsDeepNotRequired<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepNotRequired.html) - Checks if all the properties of a given object (nested) are not required, as in, all properties have the `?` modifier.
 
 - [`IsDeepRequired<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepRequired.html) - Checks if all the properties of a given object (nested) are required, as in, all properties do not have the `?` modifier.
-- [`IsEven<T>`](https://ashgw.github.io/ts-roids/types/IsEven.html) - Checks if the given type is an even number.
 - [`IsExactlyAny<T>`](https://ashgw.github.io/ts-roids/types/IsExactlyAny.html) - Checks if a type `T` is exactly `any`.
 - [`IsExactlyBigInt<T>`](https://ashgw.github.io/ts-roids/types/IsExactlyBigInt.html) - Checks if a type `T` is exactly `bigint` not a subtype of it.
 - [`IsExactlyNumber<T>`](https://ashgw.github.io/ts-roids/types/IsExactlyNumber.html) - Checks if a type `T` is exactly ``number`` not a subtype of it. 
