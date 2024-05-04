@@ -54,36 +54,6 @@ export const Final = <CST extends Newable>(cst: CST): CST => {
 
   return F as CST;
 };
-/**
-  TODO: figure it out, maybe use the new stage 3 decorators 
-  see [this](https://github.com/microsoft/TypeScript/pull/50820) 
-*/
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const finalMethod = (
-  target: object,
-  propertyKey: MaybeUndefined<string | symbol>,
-  descriptor: PropertyDescriptor
-): PropertyDescriptor => {
-  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-  const originalMethod = descriptor.value;
-
-  descriptor.value = function (...args: any[]) {
-    if (new.target !== target.constructor) {
-      throw new TypeError(
-        `Cannot override final method '${String(propertyKey)}' in class '${
-          target.constructor.name
-        }'`
-      );
-    }
-
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    /* eslint-disable  @typescript-eslint/no-unsafe-return */
-    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-    return originalMethod.apply(this, ...args);
-  };
-
-  return descriptor;
-};
 
 const _freeze = (obj: object) => {
   Object.freeze(obj);
