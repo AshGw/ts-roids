@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.36.1
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.0...v1.36.1)
+
+### 🩹 Fixes
+
+- Odd  numeric docs mismatch ([8b05831](https://github.com/ashgw/ts-roids/commit/8b05831))
+
+### 📖 Documentation
+
+- **readme:** Remove duplicates ([1c73ffc](https://github.com/ashgw/ts-roids/commit/1c73ffc))
+- **decorators:** Remove private `foo` for `@Final` ([2ec2e4a](https://github.com/ashgw/ts-roids/commit/2ec2e4a))
+- Clear out internal usage types ([f47d042](https://github.com/ashgw/ts-roids/commit/f47d042))
+- Remove bundle size badge ([6525e57](https://github.com/ashgw/ts-roids/commit/6525e57))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.36.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.35.0...v1.36.0)
