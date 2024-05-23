@@ -13,16 +13,16 @@ export class FinalTypeError extends TypeError {}
  * ```ts
  * @Final
  * class Foo<T> {
- *   private _foo: T;
+ *   foo: T;
  *   bar: string;
  *
  *   constructor(foo: T) {
- *     this._foo = foo;
+ *     this.foo = foo;
  *     this.bar = 'bar';
  *   }
  *
  *   someFoo(): T {
- *     return this._foo;
+ *     return this.foo;
  *   }
  * }
  *
