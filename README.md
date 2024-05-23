@@ -2,7 +2,7 @@
 
 # ts-roids
 
-120+  types and decorators to bullet proof TypeScript even more.
+100+  types and decorators to bullet proof TypeScript even more.
 
 [![tests](https://github.com/AshGw/ts-roids/actions/workflows/test.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/test.yml)
 [![@latest](https://img.shields.io/npm/v/ts-roids.svg)](https://www.npmjs.com/package/ts-roids)
@@ -72,15 +72,12 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IfExtends<T, P, Do, Else>`](https://ashgw.github.io/ts-roids/types/IfExtends.html) -  Checks if type ``T`` extends type ``P``. if it does, the type resolves to ``Do``, otherwise ``Else``.
 - [`ImmutableKeys<Obj>`](https://ashgw.github.io/ts-roids/types/ImmutableKeys.html) - Retrieves the keys that are immutable (``readonly``) from an object of type ``Obj``.
 - [`Integer<N>`](https://ashgw.github.io/ts-roids/types/Integer.html) - Represents an integer.
-- [`IsAnyFunction<T>`](https://ashgw.github.io/ts-roids/types/IsAnyFunction.html) - Checks if a type ``T`` is  [``AnyFunction``](https://ashgw.github.io/ts-roids/types/AnyFunction.html).
-- [`IsArray<T>`](https://ashgw.github.io/ts-roids/types/IsArray.html) - Checks if a type `T` is an array.
 - [`IsArrayIncludesTypeof<Arr, T>`](https://ashgw.github.io/ts-roids/types/IsArrayIncludesTypeof.html) - Checks if an array type `Arr` includes one or more of `T` type.
 - [`IsBigInt<T>`](https://ashgw.github.io/ts-roids/types/IsBigInt.html) - Checks if `T` is a ``bigint``.
 - [`IsBoolean<T>`](https://ashgw.github.io/ts-roids/types/IsBoolean.html) -  Checks if `T` is a ``boolean``.
 - [`IsDeepImmutable<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepImmutable.html) - Checks if all the nested properties of a given object ``Obj`` are immutable.
 - [`IsDeepMutable<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepMutable.html) - Checks if all the nested properties of a given object ``Obj`` are  mutable.
 - [`IsDeepNotRequired<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepNotRequired.html) - Checks if all the properties of a given object (nested) are not required, as in, all properties have the `?` modifier.
-
 - [`IsDeepRequired<Obj>`](https://ashgw.github.io/ts-roids/types/IsDeepRequired.html) - Checks if all the properties of a given object (nested) are required, as in, all properties do not have the `?` modifier.
 - [`IsExactlyAny<T>`](https://ashgw.github.io/ts-roids/types/IsExactlyAny.html) - Checks if a type `T` is exactly `any`.
 - [`IsExactlyBigInt<T>`](https://ashgw.github.io/ts-roids/types/IsExactlyBigInt.html) - Checks if a type `T` is exactly `bigint` not a subtype of it.
@@ -92,20 +89,12 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`IsFloat<N>`](https://ashgw.github.io/ts-roids/types/IsFloat.html) - Checks if a given type ``T`` is a [``Float<N>``](https://ashgw.github.io/ts-roids/types/Float.html).
 - [`IsFunction<T>`](https://ashgw.github.io/ts-roids/types/IsFunction.html) - Checks if a given type ``T`` is a function.
 - [`IsInteger<N>`](https://ashgw.github.io/ts-roids/types/IsInteger.html) - Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is an [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html).
-- [`IsNegativeFloat<F`](https://ashgw.github.io/ts-roids/types/IsNegativeFloat.html) -  Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is a negative [``Float<N>``](https://ashgw.github.io/ts-roids/types/Flip.html).
-- [`IsNegativeInteger<F>`](https://ashgw.github.io/ts-roids/types/IsNegativeInteger.html) - Checks if a given [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html)  is a negative [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html).
 - [`IsNever<T>:`](https://ashgw.github.io/ts-roids/types/IsNever.html) - Checks if a type `T` does not resolve, so `never`.
 - [`IsNewable<T>`](https://ashgw.github.io/ts-roids/types/IsNewable.html) -  Checks if a type `T` is [``Newable``](https://ashgw.github.io/ts-roids/types/Newable.html).
 - [`IsNullable<T>`](https://ashgw.github.io/ts-roids/types/IsNullable.html) -  Checks if a type `T` is [``Nullable``](https://ashgw.github.io/ts-roids/types/Nullable.html).
 - [`IsNumber<T>`](https://ashgw.github.io/ts-roids/types/IsNumber.html) - Checks if a type `T` is a `number`.
 - [`IsNumeric<T>`](https://ashgw.github.io/ts-roids/types/IsNumeric.html) - Checks if a type `T` is [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html).
 - [`IsObject<T>`](https://ashgw.github.io/ts-roids/types/IsObject.html) -  Checks if a given type `T` qualifies as an object.
-- [`IsPositive<T>`](https://ashgw.github.io/ts-roids/types/IsPositive.html) - Check if a given type `T` is a positive (\[0,+∞\[) [``Numeric``](https://ashgw.github.io/ts-roids/types/Numeric.html).
-
-- [`IsPositiveFloat<T>`](https://ashgw.github.io/ts-roids/types/IsPositiveFloat.html) - Check if a given type `T` is a positive (\[0,+∞\[) [``Float<N>``](https://ashgw.github.io/ts-roids/types/Float.html).
-
-- [`IsPositiveInteger<T>`](https://ashgw.github.io/ts-roids/types/IsPositiveInteger.html) - Check if a given type `T` is a positive (\[0,+∞\[) [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html).
-
 - [`IsString<T>`](https://ashgw.github.io/ts-roids/types/IsString.html) - Check if a given type `T` is a ``string``.
 - [`IsSymbol<T>`](https://ashgw.github.io/ts-roids/types/IsSymbol.html) - Check if a given type `T` is a ``symbol``.
 - [`IsTruthy<T>`](https://ashgw.github.io/ts-roids/types/IsTruthy.html) - Check if a given type `T` resolves to a truthy value.
@@ -120,7 +109,6 @@ Checkout the full [API reference](https://ashgw.github.io/ts-roids/) for all usa
 - [`NegativeIntegerString<S>`](https://ashgw.github.io/ts-roids/types/NegativeIntegerString.html) - Represents a negative [``Integer<N>``](https://ashgw.github.io/ts-roids/types/Integer.html) parsed from a ``string``.
 - [`NewType<New, Base>`](https://ashgw.github.io/ts-roids/types/NewType.html) -  Represents a new unique type derived from an existing base type. (branded type)
 - [`Newable`](https://ashgw.github.io/ts-roids/types/Newable.html) - Represents constructor functions that can be invoked using the new keyword.
-
 - [`NonRequiredKeys<Obj>`](https://ashgw.github.io/ts-roids/types/NonRequiredKeys.html) - Returns all non required keys of an object `Obj`, as in any property of an object that is marked with `?` operator.
 - [`Not<B>`](https://ashgw.github.io/ts-roids/types/Not.html) - Negates a boolean type `B`.
 - [`Nullable`](https://ashgw.github.io/ts-roids/types/Nullable.html) - Represents a type that can either be  ``null`` or ``undefined``.
