@@ -212,7 +212,7 @@ export type IsPositiveFloat<N extends Numeric> = IsPositive<Float<N>>;
  * Odd<200000000000000>; // never
  * ````
  */
-export type OddNumeric<T extends Numeric> = IfExtends<
+export type Odd<T extends Numeric> = IfExtends<
   StringifyPrimitive<T>,
   `${Numeric | ''}${1 | 3 | 5 | 7 | 9}`,
   T,
@@ -228,7 +228,7 @@ export type OddNumeric<T extends Numeric> = IfExtends<
  * Even<2000000000000001>; // never
  * ````
  */
-export type EvenNumeric<T extends Numeric> = IfExtends<
+export type Even<T extends Numeric> = IfExtends<
   StringifyPrimitive<T>,
   `${Numeric | ''}${2 | 4 | 6 | 8 | 0}`,
   T,

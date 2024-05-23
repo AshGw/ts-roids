@@ -129,3 +129,4 @@ export function Sealed<T extends Newable>(cst: T): T & Newable {
     }
   };
 }
+
