@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.36.3
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.1...v1.36.3)
+
+### 📖 Documentation
+
+- Fix typos ([8f8dc49](https://github.com/ashgw/ts-roids/commit/8f8dc49))
+- Update the old domain with the new one ([9e60656](https://github.com/ashgw/ts-roids/commit/9e60656))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.36.1
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.0...v1.36.1)

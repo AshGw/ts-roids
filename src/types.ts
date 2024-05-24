@@ -1987,5 +1987,3 @@ export type DeepNotRequired<T> = T extends UnknownFunction
   : {
       [K in Keys<T>]+?: IfExtends<T[K], unknown, DeepNotRequired<T[K]>, T[K]>;
     };
-
-
