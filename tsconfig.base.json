@@ -11,7 +11,7 @@
       "lib": ["ESNext"],
       "module": "ESNext",
       "experimentalDecorators": true,
-      "moduleResolution": "bundler",
+      "moduleResolution": "Node",
       "newLine": "LF",
       "noEmitOnError": true,
       "noErrorTruncation": true,
