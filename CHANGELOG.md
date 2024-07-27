@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.36.5
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.4...v1.36.5)
+
+### 🏡 Chore
+
+- Update build configs ([afadfd9](https://github.com/ashgw/ts-roids/commit/afadfd9))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.36.4
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.3...v1.36.4)
