@@ -1,6 +1,6 @@
 {
   "name": "ts-roids",
-  "version": "1.36.5",
+  "version": "1.36.8",
   "private": false,
   "description": "Bullet-proof TS even more",
   "keywords": [
@@ -35,7 +35,7 @@
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/types/index.d.cts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/",
     "package.json",

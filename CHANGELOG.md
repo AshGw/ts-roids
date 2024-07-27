@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.36.8
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.5...v1.36.8)
+
+### 🩹 Fixes
+
+- Husky bug ([96298fa](https://github.com/ashgw/ts-roids/commit/96298fa))
+
+### 🏡 Chore
+
+- **deps-dev:** Bump braces from 3.0.2 to 3.0.3 ([#134](https://github.com/ashgw/ts-roids/pull/134))
+- Bump braces ([4a9ff3f](https://github.com/ashgw/ts-roids/commit/4a9ff3f))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.36.5
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.4...v1.36.5)
