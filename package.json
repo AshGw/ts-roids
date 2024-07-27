@@ -21,8 +21,9 @@
   "license": "GPL-3.0-only",
   "author": {
     "name": "Ashref Gwader",
-    "email": "ashrefgw@proton.me"
+    "email": "contact@ashgw.me"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     "types": {
@@ -32,6 +33,9 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.cjs"
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.cts",
   "files": [
     "dist/",
     "package.json",
