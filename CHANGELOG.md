@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.36.4
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.3...v1.36.4)
+
+### 🩹 Fixes
+
+- Module resolution ([cf3391d](https://github.com/ashgw/ts-roids/commit/cf3391d))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.36.3
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.1...v1.36.3)
