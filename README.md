@@ -131,6 +131,7 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`Primitive`](https://ts-roids.ashgw.me/types/Primitive.html) - All [primitive](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) types.
 - [`ReplaceKeys<Obj1,P,Obj2>`](https://ts-roids.ashgw.me/types/ReplaceKeys.html) - Constructs a new type by replacing properties `P` of type ``Obj`` with object type ``Obj2``.
 - [`RequiredKeys<Obj>`](https://ts-roids.ashgw.me/types/RequiredKeys.html) - Get the required keys of an object (shallow).
+- [`SizedTuple<T,N>`](https://ts-roids.ashgw.me/types/SizedTuple.html) -  Creates a tuple with a specific length, where each element is of a given type.
 - [`StringEndsWith<S,E>`](https://ts-roids.ashgw.me/types/StringEndsWith.html) - Checks if a string `S` ends with `E` 
 - [`StringStartsWith<S,St>`](https://ts-roids.ashgw.me/types/StringStartsWith.html) -  Checks if a string `S` starts with `St`
 - [`StringifyPrimitive<P>`](https://ts-roids.ashgw.me/types/StringifyPrimitive.html) - Turns a given [``Primitive``](https://ts-roids.ashgw.me/types/Primitive.html) value (except ``symbol``) into its string representation.
