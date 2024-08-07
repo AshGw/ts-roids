@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v1.37.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.5...v1.37.0)
+
+### 🚀 Enhancements
+
+- Add `SizedTuple<T,N>` ([b905707](https://github.com/ashgw/ts-roids/commit/b905707))
+
+### 🩹 Fixes
+
+- Husky bug ([96298fa](https://github.com/ashgw/ts-roids/commit/96298fa))
+
+### 🏡 Chore
+
+- **deps-dev:** Bump braces from 3.0.2 to 3.0.3 ([#134](https://github.com/ashgw/ts-roids/pull/134))
+- Bump braces ([4a9ff3f](https://github.com/ashgw/ts-roids/commit/4a9ff3f))
+- **release:** V1.36.8 ([b6bcdfe](https://github.com/ashgw/ts-roids/commit/b6bcdfe))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.36.8
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.5...v1.36.8)
