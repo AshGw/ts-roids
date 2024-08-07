@@ -404,6 +404,33 @@ export type Tuple<T> = T extends readonly unknown[]
   : never;
 
 /**
+ * Represents a tuple of size `N`, where `N` is a Numeric type.
+ * The tuple's length is exactly `N`, with each element of the tuple being of type `T`.
+ *
+ * @template T The type of the elements in the tuple.
+ * @template N The desired length of the tuple.
+ * @template Acc Accumulator type for recursive construction.
+ *
+ * @example
+ * ```
+ * SizedTuple<string, 3>; // Result: [string, string, string]
+ * SizedTuple<number, 2>; // Result: [number, number]
+ * SizedTuple<number, 0>; // Result: []
+ * ```
+ *
+ * @see Tuple
+ */
+export type SizedTuple<
+  T,
+  N extends Numeric,
+  Acc extends T[] = [],
+> = N extends Integer<infer M>
+  ? Acc['length'] extends M
+    ? Acc
+    : SizedTuple<T, M, [T, ...Acc]>
+  : never;
+
+/**
  * Is a given type `T` an array?
  * @returns `true` if `T` it is, otherwise `false`.
  * @example
