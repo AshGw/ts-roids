@@ -988,7 +988,7 @@ export type ArrayFilter<T extends unknown[], P> = T extends [
 >; // =>  [unknown, 'foo', any, never, '33', 33]
  * ```
  */
-export type ArrayUnique<T, R extends any[] = []> = T extends [
+export type ArrayUnique<T, R extends unknown[] = []> = T extends [
   infer S,
   ...infer E,
 ]
@@ -1817,33 +1817,43 @@ export type OmitByType<T, P> = {
  * Get a set of properties from `T` whose type exactly matches `P`.
  * @example
  * ````ts
-type OneLevelDeep = {
-  foo: boolean;
-  bar?: Numeric;
-  baz: Nullable;
-  fooBaz: bigint;
-  bazFoo: string | boolean;
-};
-type A = OmitExactlyByType<OneLevelDeep, bigint>
+type deep = {
+        isActive: boolean;
+        count?: number;
+        description: string | null;
+        details: {
+          id: bigint;
+          name: string;
+          nested: {
+            title: string;
+            subtitle: string;
+            moreDetails: {
+              numberId: bigint;
+            };
+          };
+        };
+        additionalInfo: string | boolean;
+      }
+type A = OmitExactlyByTypeDeep<deep, bigint>
 // A results in:
-{
-      foo: boolean;
-      bar?: Numeric;
-      baz: Nullable;
-      bazFoo: string | boolean;
+ {
+      isActive: boolean;
+      count?: number;
+      description: string | null;
+      details: {
+        name: string;
+        nested: {
+          title: string;
+          subtitle: string;
+          moreDetails: EmptyObject;
+        };
+      };
+      additionalInfo: string | boolean;
     }
-type B = OmitExactlyByType<OneLevelDeep, string | boolean>
-// B results in
-{
-      foo: boolean;
-      bar?: Numeric;
-      baz: Nullable;
-      fooBaz: bigint;
-  }
  * ````
  */
-export type OmitExactlyByType<T, P> = {
-  [K in Keys<T> as If<Equals<T[K], P>, never, K>]: T[K];
+export type OmitExactlyByTypeDeep<T, P> = {
+  [K in Keys<T> as IfEquals<T[K], P, never, K>]: OmitExactlyByTypeDeep<T[K], P>;
 };
 
 /**
