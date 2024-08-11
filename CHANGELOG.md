@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.38.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.37.0...v1.38.0)
+
+### 🚀 Enhancements
+
+- Add `OmitExactlyByTypeDeep` ([5080ab2](https://github.com/ashgw/ts-roids/commit/5080ab2))
+- Add `Prune<T,N = NotIncluded>` ([ef002fa](https://github.com/ashgw/ts-roids/commit/ef002fa))
+
+### 📖 Documentation
+
+- Added ([ab7e014](https://github.com/ashgw/ts-roids/commit/ab7e014))
+
+### ❤️ Contributors
+
+- AshGw <AshrefGw@proton.me>
+
 ## v1.37.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.36.5...v1.37.0)
