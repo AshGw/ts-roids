@@ -34,6 +34,27 @@ Requires TypesScript `v5.0`+
 Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage examples with details. 
 
 #### Types 
+
+- [`Prune<T,N = NotIncluded>`](https://ts-roids.ashgw.me/types/Prune.html) - Prune a type `T` by recursively omitting properties of type `N` (defaults to [`NotIncluded`](https://ts-roids.ashgw.me/types/NotIncluded.html)).
+- [`DeepToPrimitive<Obj>`](https://ts-roids.ashgw.me/types/DeepToPrimitive.html) - Recursively transforms an object type T into a type where all properties are replaced with their corresponding primitive types.
+- [`Assign<Obj,ObjArr>`](https://ts-roids.ashgw.me/types/Assign.html) - Copies all enumerable own properties from one target object to a source array of objects.
+
+- [`DeepImmutable<Obj>`](https://ts-roids.ashgw.me/types/DeepImmutable.html) - Recursively turns the proprties within a given object type ``T`` immutable, as in have all the properties with the `readonly` modifier.
+- [`Deepmutable<Obj>`](https://ts-roids.ashgw.me/types/DeepMutable.html) - Recursively mutates all the proprties within a given object type ``T``, as in have all the properties without the `readonly` modifier.
+- [`DeepRequired<Obj>`](https://ts-roids.ashgw.me/types/DeepRequired.html) - Recursively make all object properties required.
+- [`DeepNotRequired<Obj>`](https://ts-roids.ashgw.me/types/DeepNotRequired.html) - Recursively make all object properties not required.
+- [`DeepOmit<Obj,P>`](https://ts-roids.ashgw.me/types/DeepOmit.html) - Recursively omits specified nested properties from an object, based on a given predicate `P`.
+- [`DeepPick<Obj,P>`](https://ts-roids.ashgw.me/types/DeepPick.html) - Deeply pick properties from a nested object, based on a given predicate `P`.
+- [`EmptyObject`](https://ts-roids.ashgw.me/types/EmptyObject.html) - Represents any non-nullish value, basically `{}`.
+- [`EqualStrlen<S1, S2>`](https://ts-roids.ashgw.me/types/EqualStrlen.html) - Check if two strings ``S1`` and ``S2`` have the same length.
+- [`FilterBy<Obj, P>`](https://ts-roids.ashgw.me/types/FilterBy.html) -  Filters keys from the object type `Obj` based on a specified predicate ``P``.
+- [`Flip<Obj>`](https://ts-roids.ashgw.me/types/Flip.html) - Flips keys with values of an object type `Obj`.
+- [`Float<N>`](https://ts-roids.ashgw.me/types/Float.html) - Type representing a float.
+- [`If<C, Do, Else>`](https://ts-roids.ashgw.me/types/If.html) - If ``C`` evaluates ``true``, ``Do``, otherwise return ``Else``.
+- [`IfEquals<T, P, Do, Else>`](https://ts-roids.ashgw.me/types/IfEquals.html) - Checks if type ``T`` is equal to type ``P``. If ``T`` is equal to ``P``, the type resolves to ``Do``, otherwise ``Else``.
+- [`IfExtends<T, P, Do, Else>`](https://ts-roids.ashgw.me/types/IfExtends.html) -  Checks if type ``T`` extends type ``P``. if it does, the type resolves to ``Do``, otherwise ``Else``.
+- [`ImmutableKeys<Obj>`](https://ts-roids.ashgw.me/types/ImmutableKeys.html) - Retrieves the keys that are immutable (``readonly``) from an object of type ``Obj``.
+- [`Integer<N>`](https://ts-roids.ashgw.me/types/Integer.html) - Represents an integer.
 - [`Abs<N>`](https://ts-roids.ashgw.me/types/Abs.html) - Get the absolute value of a [``Numeric``](https://ts-roids.ashgw.me/types/Numeric.html).
 - [`And<B1,B2>`](https://ts-roids.ashgw.me/types/And.html) - Logical AND between two boolean types.
 - [`ArrayFilter<Arr,P>`](https://ts-roids.ashgw.me/types/ArrayFilter.html) - Filters elements from an array based on a given predicate type.
@@ -43,17 +64,7 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`ArrayMin<Arr>`](https://ts-roids.ashgw.me/types/ArrayMin.html) - Extracts the minimum [``Numeric``](https://ts-roids.ashgw.me/types/Numeric.html) (positive and negative) value in a given array.
 - [`ArrayTranspose<Arr>`](https://ts-roids.ashgw.me/types/ArrayTranspose.html) - Transposes a given 2xN array or matrix, flipping the matrix over its diagonal, switching its row and column indices.
 - [`ArrayUnique<Arr>`](https://ts-roids.ashgw.me/types/ArrayUnique.html) - Constructs a new array containing only unique elements from a given array type.
-- [`Assign<Obj,ObjArr>`](https://ts-roids.ashgw.me/types/Assign.html) - Copies all enumerable own properties from one target object to a source array of objects.
-- [`DeepImmutable<Obj>`](https://ts-roids.ashgw.me/types/DeepImmutable.html) - Recursively turns the proprties within a given object type ``T`` immutable, as in have all the properties with the `readonly` modifier.
-- [`Deepmutable<Obj>`](https://ts-roids.ashgw.me/types/DeepMutable.html) - Recursively mutates all the proprties within a given object type ``T``, as in have all the properties without the `readonly` modifier.
-- [`DeepRequired<Obj>`](https://ts-roids.ashgw.me/types/DeepRequired.html) - Recursively make all object properties required.
-- [`DeepNotRequired<Obj>`](https://ts-roids.ashgw.me/types/DeepNotRequired.html) - Recursively make all object properties not required.
-- [`DeepOmit<Obj,P>`](https://ts-roids.ashgw.me/types/DeepOmit.html) - Recursively omits specified nested properties from an object, based on a given predicate `P`.
-- [`DeepPick<Obj,P>`](https://ts-roids.ashgw.me/types/DeepPick.html) - Deeply pick properties from a nested object, based on a given predicate `P`.
-- [`DeepToPrimitive<Obj>`](https://ts-roids.ashgw.me/types/DeepToPrimitive.html) - Recursively transforms an object type T into a type where all properties are replaced with their corresponding primitive types.
 - [`EitherOneOrMany<T>`](https://ts-roids.ashgw.me/types/EitherOneOrMany.html) - Represents a type that can be either a single value of type ``T`` or an array of values of type ``T``.
-- [`EmptyObject`](https://ts-roids.ashgw.me/types/EmptyObject.html) - Represents any non-nullish value, basically `{}`.
-- [`EqualStrlen<S1, S2>`](https://ts-roids.ashgw.me/types/EqualStrlen.html) - Check if two strings ``S1`` and ``S2`` have the same length.
 - [`Nullable`](https://ts-roids.ashgw.me/types/Nullable.html) - Represents any non-nullish value, basically `{}`.
 - [`Equals<X,Y>`](https://ts-roids.ashgw.me/types/Equals.html) - Checks if two types ``X`` and ``Y`` are exactly equal.
 - [`EvenNumeric<T>`](https://ts-roids.ashgw.me/types/EvenNumeric.html) - Represents an even [`Numeric`](https://ts-roids.ashgw.me/types/Numeric.html).
@@ -63,14 +74,6 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`Extends<T,U>`](https://ts-roids.ashgw.me/types/Extends.html) - Evaluates whether one type ``T`` is assignable to another type ``U``.
 - [`Falsy`](https://ts-roids.ashgw.me/types/Falsy.html) - Represents a type that is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)  JavaScript. 
 - [`FalsyProperties<T>`](https://ts-roids.ashgw.me/types/FalsyProperties.html) - Extracts falsy properties from an object type ``T``.
-- [`FilterBy<Obj, P>`](https://ts-roids.ashgw.me/types/FilterBy.html) -  Filters keys from the object type `Obj` based on a specified predicate ``P``.
-- [`Flip<Obj>`](https://ts-roids.ashgw.me/types/Flip.html) - Flips keys with values of an object type `Obj`.
-- [`Float<N>`](https://ts-roids.ashgw.me/types/Float.html) - Type representing a float.
-- [`If<C, Do, Else>`](https://ts-roids.ashgw.me/types/If.html) - If ``C`` evaluates ``true``, ``Do``, otherwise return ``Else``.
-- [`IfEquals<T, P, Do, Else>`](https://ts-roids.ashgw.me/types/IfEquals.html) - Checks if type ``T`` is equal to type ``P``. If ``T`` is equal to ``P``, the type resolves to ``Do``, otherwise ``Else``.
-- [`IfExtends<T, P, Do, Else>`](https://ts-roids.ashgw.me/types/IfExtends.html) -  Checks if type ``T`` extends type ``P``. if it does, the type resolves to ``Do``, otherwise ``Else``.
-- [`ImmutableKeys<Obj>`](https://ts-roids.ashgw.me/types/ImmutableKeys.html) - Retrieves the keys that are immutable (``readonly``) from an object of type ``Obj``.
-- [`Integer<N>`](https://ts-roids.ashgw.me/types/Integer.html) - Represents an integer.
 - [`IsArrayIncludesTypeof<Arr, T>`](https://ts-roids.ashgw.me/types/IsArrayIncludesTypeof.html) - Checks if an array type `Arr` includes one or more of `T` type.
 - [`IsBigInt<T>`](https://ts-roids.ashgw.me/types/IsBigInt.html) - Checks if `T` is a ``bigint``.
 - [`IsBoolean<T>`](https://ts-roids.ashgw.me/types/IsBoolean.html) -  Checks if `T` is a ``boolean``.
