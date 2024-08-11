@@ -2047,16 +2047,10 @@ export type NotIncluded = NewType<'NotIncluded', string>;
 
 /**
  * `Prune<T, N = NotIncluded>` is a utility type that recursively removes properties of
- * type `N` (defaulting to `NotIncluded`) from the object type `T`. This type is useful
+ * type `N` (defaulting to `NotIncluded`) from the object type `T`. Useful
  * for filtering out unwanted or excluded properties in complex, deeply nested object
- * structures.
- *
- * @remarks
- * `Prune` operates by traversing the entire structure of the object type `T` and omitting
- * any property that matches the type `N`. This makes it useful when you
- * need to clean up or transform types where certain properties should be excluded based
- * on specific conditions.
- *
+ * structures, where  you need to clean up or transform types where certain properties should be excluded based
+ * on specific generic type conditions.
  * @example
  * Consider the following example where `Prune` is used to exclude properties marked as `NotIncluded`:
  * ```ts
@@ -2190,6 +2184,8 @@ type UserOrderDetails<
   }[];
 };
  * ```
+Any property marked as `NotIncluded` will be excluded from the resulting `OrderData` type, not as `undefined` or `null`, but completely excluded as if it never existed on the type 
+
  * ```ts
   const testOrderData: OrderData = {
     orderStatus: OrderStatus.DELIVERED,
@@ -2210,7 +2206,6 @@ type UserOrderDetails<
     products: [
       {
         // Type 'ProdcutType.DIGITAL' is not assignable to type 'ProdcutType.PHYSICAL'.ts(2322)
-        // type: ProductType.DIGITAL,
         type: ProductType.PHYSICAL,
         productId: 'abc',
         productName: 'Test Product',
