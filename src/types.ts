@@ -2249,3 +2249,6 @@ Any property marked as `NotIncluded` will be excluded from the resulting `OrderD
  * that are marked with `NotIncluded`, resulting in a cleaned-up type structure.
  */
 export type Prune<T, N = NotIncluded> = OmitExactlyByTypeDeep<T, N>;
+
+export type _PartialExcept<T, K extends keyof T> = Partial<Omit<T, K>> &
+  Required<Pick<T, K>>;
