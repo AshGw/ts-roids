@@ -47,6 +47,7 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`DeepPick<Obj,P>`](https://ts-roids.ashgw.me/types/DeepPick.html) - Deeply pick properties from a nested object, based on a given predicate `P`.
 - [`EmptyObject`](https://ts-roids.ashgw.me/types/EmptyObject.html) - Represents any non-nullish value, basically `{}`.
 - [`EqualStrlen<S1, S2>`](https://ts-roids.ashgw.me/types/EqualStrlen.html) - Check if two strings ``S1`` and ``S2`` have the same length.
+- [`PartialExcept<T, P>`](https://ts-roids.ashgw.me/types/PartialExcept.html) - Makes all properties in `T` optional except those in `K` which remain required.
 - [`FilterBy<Obj, P>`](https://ts-roids.ashgw.me/types/FilterBy.html) -  Filters keys from the object type `Obj` based on a specified predicate ``P``.
 - [`Flip<Obj>`](https://ts-roids.ashgw.me/types/Flip.html) - Flips keys with values of an object type `Obj`.
 - [`Float<N>`](https://ts-roids.ashgw.me/types/Float.html) - Type representing a float.
