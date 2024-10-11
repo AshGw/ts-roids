@@ -79,4 +79,4 @@ jobs:
           if ! pnpm can-npm-publish; then
             exit 0
           fi
-          pnpm publish --access public
+          pnpm publish --no-git-checks --access public

@@ -2252,8 +2252,8 @@ export type Prune<T, N = NotIncluded> = OmitExactlyByTypeDeep<T, N>;
 
 /**
  * `PartialExcept<T, K extends keyof T>` is a utility type that makes all properties of `T` optional
- * except for the properties specified in `K`, which are required. This is useful for scenarios where
- * you want to enforce that certain fields must be present while allowing others to be omitted.
+ * except for the properties specified in `K`, which are required. This is useful for scenarios
+ * where you want to enforce that certain fields must be present while allowing others to be omitted.
  *
  * @template T - The original type from which to derive the new type.
  * @template K - A subset of keys from `T` that should remain required in the resulting type.

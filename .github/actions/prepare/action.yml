@@ -20,5 +20,5 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
-    - run: pnpm install --frozen-lockfile --ignore-scripts
+    - run: pnpm install
       shell: bash
