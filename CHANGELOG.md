@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.39.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.38.0...v1.39.0)
+
+### 🚀 Enhancements
+
+- **#135:** Add `PartialExcept<T,P>` ([e84cc44](https://github.com/ashgw/ts-roids/commit/e84cc44))
+
+### 📖 Documentation
+
+- Updated ([cddba33](https://github.com/ashgw/ts-roids/commit/cddba33))
+- Updated ([32f0802](https://github.com/ashgw/ts-roids/commit/32f0802))
+
+### 🏡 Chore
+
+- Purge deps ([2a88946](https://github.com/ashgw/ts-roids/commit/2a88946))
+
+### ❤️ Contributors
+
+- AshGw <ashrefgw@proton.me>
+
 ## v1.38.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.37.0...v1.38.0)

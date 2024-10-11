@@ -2249,3 +2249,26 @@ Any property marked as `NotIncluded` will be excluded from the resulting `OrderD
  * that are marked with `NotIncluded`, resulting in a cleaned-up type structure.
  */
 export type Prune<T, N = NotIncluded> = OmitExactlyByTypeDeep<T, N>;
+
+/**
+ * `PartialExcept<T, K extends keyof T>` is a utility type that makes all properties of `T` optional
+ * except for the properties specified in `K`, which are required. This is useful for scenarios where
+ * you want to enforce that certain fields must be present while allowing others to be omitted.
+ *
+ * @template T - The original type from which to derive the new type.
+ * @template K - A subset of keys from `T` that should remain required in the resulting type.
+ *
+ * @example
+ * ```ts
+ * type User = {
+ *   id: number;
+ *   name: string;
+ *   email: string;
+ * };
+ *
+ * type UserUpdate = PartialExcept<User, 'email'>; // Result: { id?: number; name?: string; email: string; }
+ * ```
+ */
+export type PartialExcept<T, K extends keyof T> = {
+  [P in K]: T[P];
+} & Partial<Omit<T, K>>;
