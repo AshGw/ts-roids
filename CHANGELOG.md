@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v1.40.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.38.0...v1.40.0)
+
+### 🚀 Enhancements
+
+- **#135:** Add `PartialExcept<T,K>` ([#136](https://github.com/ashgw/ts-roids/pull/136))
+- Add `PartializedUnion` ([de02d84](https://github.com/ashgw/ts-roids/commit/de02d84))
+
+### 🩹 Fixes
+
+- Build issues ([47ce6f2](https://github.com/ashgw/ts-roids/commit/47ce6f2))
+
+### 📖 Documentation
+
+- Updated ([cddba33](https://github.com/ashgw/ts-roids/commit/cddba33))
+- Updated ([32f0802](https://github.com/ashgw/ts-roids/commit/32f0802))
+
+### ❤️ Contributors
+
+- AshGw <ashrefgw@proton.me>
+- Ashref Gwader <ashrefgw@proton.me>
+
 ## v1.39.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.38.0...v1.39.0)
