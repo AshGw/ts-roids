@@ -35,6 +35,8 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 
 #### Types 
 
+- [`PartializedUnion<T>`](https://ts-roids.ashgw.me/types/PartializedUnion.html) - Creates a union type where each variant has its specific properties required, while other properties are optional.
+
 - [`Prune<T,N = NotIncluded>`](https://ts-roids.ashgw.me/types/Prune.html) - Prune a type `T` by recursively omitting properties of type `N` (defaults to [`NotIncluded`](https://ts-roids.ashgw.me/types/NotIncluded.html)).
 - [`DeepToPrimitive<Obj>`](https://ts-roids.ashgw.me/types/DeepToPrimitive.html) - Recursively transforms an object type T into a type where all properties are replaced with their corresponding primitive types.
 - [`Assign<Obj,ObjArr>`](https://ts-roids.ashgw.me/types/Assign.html) - Copies all enumerable own properties from one target object to a source array of objects.
@@ -72,6 +74,8 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`ExcludeNull<T>`](https://ts-roids.ashgw.me/types/ExcludeNull.html) - Excludes ``null`` from a type ``T``.
 - [`ExcludeNullable<T>`](https://ts-roids.ashgw.me/types/ExcludeNullable.html) - Excludes [`Nullable`](https://ts-roids.ashgw.me/types/Nullable.html) from a type ``T``.
 - [`ExcludeUndefined<T>`](https://ts-roids.ashgw.me/types/ExcludeUndefined.html) - Excludes `undefined` from a type ``T``.
+- [`KeysOfUnion<T>`](https://ts-roids.ashgw.me/types/KeysOfUnion.html) - Extracts the union of keys from a given union of object types, useful for accessing all possible keys in unions.
+- [`Simplify<T>`](https://ts-roids.ashgw.me/types/Simplify.html) - Flattens the structure of a type by resolving intersections and simplifying nested mapped types, enhancing readability.
 - [`Extends<T,U>`](https://ts-roids.ashgw.me/types/Extends.html) - Evaluates whether one type ``T`` is assignable to another type ``U``.
 - [`Falsy`](https://ts-roids.ashgw.me/types/Falsy.html) - Represents a type that is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)  JavaScript. 
 - [`FalsyProperties<T>`](https://ts-roids.ashgw.me/types/FalsyProperties.html) - Extracts falsy properties from an object type ``T``.

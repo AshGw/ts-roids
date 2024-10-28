@@ -2272,3 +2272,75 @@ export type Prune<T, N = NotIncluded> = OmitExactlyByTypeDeep<T, N>;
 export type PartialExcept<T, K extends keyof T> = {
   [P in K]: T[P];
 } & Partial<Omit<T, K>>;
+
+/**
+ * `KeysOfUnion` extracts the union of keys from a given union of object types.
+ * This is useful in scenarios where you need to access all possible keys across
+ * unioned object types within conditional or mapped types.
+ *
+ * @template T - The union of object types to extract keys from.
+ *
+ * @example
+ * ```ts
+ * type UnionKeys = KeysOfUnion<{ a: string } | { b: number }>; // Result: 'a' | 'b'
+ * ```
+ */
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+/**
+ * `Simplify<T>` flattens the structure of a given type by resolving intersections
+ * and reducing redundant wrapping, making complex types easier to work with.
+ * This type is particularly helpful for deeply nested mapped types, where
+ * readability and simplicity of the resulting type is crucial.
+ *
+ * @template T - The type to simplify.
+ *
+ * @example
+ * ```ts
+ * type Flattened = Simplify<{ a: string } & { b: number }>; // Result: { a: string; b: number }
+ * ```
+ */
+export type Simplify<T> = { [KeyType in Keys<T>]: T[KeyType] } & EmptyObject;
+
+/**
+ * `PartializedUnion<T>` creates a union type where each member has its own properties as required,
+ * while properties from other members of the union are made optional and set to `undefined`.
+ * This is useful for cases where different configurations or variants in a union require only their specific fields.
+ *
+ * @template T - The union of object types for which partially optionalized variants should be created.
+ * @template AllKeys - The union of all possible keys across the union's types, derived from `KeysOfUnion`.
+ *
+ * @example
+ * ```ts
+ * type Config = PartializedUnion<
+ *   | { dbConnectionString: string; maxConnections: number }
+ *   | { apiEndpoint: string; apiKey: string }
+ *   | { storageBucket: string; accessKeyId: string; secretAccessKey: string }
+ * >;
+ *
+ * // Example usage:
+ * function configureService(config: Config) {
+ *   if (config.dbConnectionString) {
+ *     console.log(`Configuring database with connection string ${config.dbConnectionString}`);
+ *   } else if (config.apiEndpoint) {
+ *     console.log(`Configuring API with endpoint ${config.apiEndpoint}`);
+ *   } else if (config.storageBucket && config.accessKeyId && config.secretAccessKey) {
+ *     console.log(`Configuring storage bucket ${config.storageBucket}`);
+ *   } else {
+ *     console.log('Invalid configuration');
+ *   }
+ * }
+ *
+ * configureService({ dbConnectionString: 'postgres://...', maxConnections: 100 });
+ * configureService({ apiEndpoint: 'https://api.example.com', apiKey: '1234' });
+ * configureService({ storageBucket: 'my-bucket', accessKeyId: 'AKIA...', secretAccessKey: 'abcd' });
+ * ```
+ */
+export type PartializedUnion<
+  T extends object,
+  AllKeys extends KeysOfUnion<T> = KeysOfUnion<T>,
+> = Simplify<
+  T extends unknown
+    ? T & Partial<Record<Exclude<AllKeys, Keys<T>>, undefined>>
+    : never
+>;
