@@ -7,10 +7,11 @@
 [![tests](https://github.com/AshGw/ts-roids/actions/workflows/test.yml/badge.svg)](https://github.com/AshGw/ts-roids/actions/workflows/test.yml)
 [![@latest](https://img.shields.io/npm/v/ts-roids.svg)](https://www.npmjs.com/package/ts-roids)
 [![npm downloads](https://img.shields.io/npm/dm/ts-utils.svg)](https://www.npmjs.com/package/ts-roids)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/ts-roids/1.40.0)](https://socket.dev/npm/package/ts-roids/overview/1.40.0)
 <hr/>
 </div>
-  
-## Installation 
+
+## Installation
 **npm**
 ```bash
 npm i ts-roids
@@ -31,9 +32,9 @@ And if you're using decorators, set this.
 ```
 Requires TypesScript `v5.0`+
 ## Documentation
-Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage examples with details. 
+Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage examples with details.
 
-#### Types 
+#### Types
 
 - [`PartializedUnion<T>`](https://ts-roids.ashgw.me/types/PartializedUnion.html) - Creates a union type where each variant has its specific properties required, while other properties are optional.
 
@@ -77,7 +78,7 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`KeysOfUnion<T>`](https://ts-roids.ashgw.me/types/KeysOfUnion.html) - Extracts the union of keys from a given union of object types, useful for accessing all possible keys in unions.
 - [`Simplify<T>`](https://ts-roids.ashgw.me/types/Simplify.html) - Flattens the structure of a type by resolving intersections and simplifying nested mapped types, enhancing readability.
 - [`Extends<T,U>`](https://ts-roids.ashgw.me/types/Extends.html) - Evaluates whether one type ``T`` is assignable to another type ``U``.
-- [`Falsy`](https://ts-roids.ashgw.me/types/Falsy.html) - Represents a type that is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)  JavaScript. 
+- [`Falsy`](https://ts-roids.ashgw.me/types/Falsy.html) - Represents a type that is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)  JavaScript.
 - [`FalsyProperties<T>`](https://ts-roids.ashgw.me/types/FalsyProperties.html) - Extracts falsy properties from an object type ``T``.
 - [`IsArrayIncludesTypeof<Arr, T>`](https://ts-roids.ashgw.me/types/IsArrayIncludesTypeof.html) - Checks if an array type `Arr` includes one or more of `T` type.
 - [`IsBigInt<T>`](https://ts-roids.ashgw.me/types/IsBigInt.html) - Checks if `T` is a ``bigint``.
@@ -88,10 +89,10 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`IsDeepRequired<Obj>`](https://ts-roids.ashgw.me/types/IsDeepRequired.html) - Checks if all the properties of a given object (nested) are required, as in, all properties do not have the `?` modifier.
 - [`IsExactlyAny<T>`](https://ts-roids.ashgw.me/types/IsExactlyAny.html) - Checks if a type `T` is exactly `any`.
 - [`IsExactlyBigInt<T>`](https://ts-roids.ashgw.me/types/IsExactlyBigInt.html) - Checks if a type `T` is exactly `bigint` not a subtype of it.
-- [`IsExactlyNumber<T>`](https://ts-roids.ashgw.me/types/IsExactlyNumber.html) - Checks if a type `T` is exactly ``number`` not a subtype of it. 
-- [`IsExactlyString<T>`](https://ts-roids.ashgw.me/types/IsExactlyString.html) - Checks if a type `T` is exactly ``string`` not a subtype of it. 
-- [`IsExactlySymbol<T>`](https://ts-roids.ashgw.me/types/IsExactlySymbol.html) - Checks if a type `T` is exactly ``symbol`` not a subtype of it. 
-- [`IsExactlyUnknown<T>`](https://ts-roids.ashgw.me/types/IsExactlyUnknown.html) - Checks if a type `T` is exactly ``unknown`` not a subtype of it. 
+- [`IsExactlyNumber<T>`](https://ts-roids.ashgw.me/types/IsExactlyNumber.html) - Checks if a type `T` is exactly ``number`` not a subtype of it.
+- [`IsExactlyString<T>`](https://ts-roids.ashgw.me/types/IsExactlyString.html) - Checks if a type `T` is exactly ``string`` not a subtype of it.
+- [`IsExactlySymbol<T>`](https://ts-roids.ashgw.me/types/IsExactlySymbol.html) - Checks if a type `T` is exactly ``symbol`` not a subtype of it.
+- [`IsExactlyUnknown<T>`](https://ts-roids.ashgw.me/types/IsExactlyUnknown.html) - Checks if a type `T` is exactly ``unknown`` not a subtype of it.
 - [`IsFalsy<T>`](https://ts-roids.ashgw.me/types/IsFalsy.html) - Checks if a given type ``T`` is [``Falsy``](https://ts-roids.ashgw.me/types/Falsy.html).
 - [`IsFloat<N>`](https://ts-roids.ashgw.me/types/IsFloat.html) - Checks if a given type ``T`` is a [``Float<N>``](https://ts-roids.ashgw.me/types/Float.html).
 - [`IsFunction<T>`](https://ts-roids.ashgw.me/types/IsFunction.html) - Checks if a given type ``T`` is a function.
@@ -140,7 +141,7 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`ReplaceKeys<Obj1,P,Obj2>`](https://ts-roids.ashgw.me/types/ReplaceKeys.html) - Constructs a new type by replacing properties `P` of type ``Obj`` with object type ``Obj2``.
 - [`RequiredKeys<Obj>`](https://ts-roids.ashgw.me/types/RequiredKeys.html) - Get the required keys of an object (shallow).
 - [`SizedTuple<T,N>`](https://ts-roids.ashgw.me/types/SizedTuple.html) -  Creates a tuple with a specific length, where each element is of a given type.
-- [`StringEndsWith<S,E>`](https://ts-roids.ashgw.me/types/StringEndsWith.html) - Checks if a string `S` ends with `E` 
+- [`StringEndsWith<S,E>`](https://ts-roids.ashgw.me/types/StringEndsWith.html) - Checks if a string `S` ends with `E`
 - [`StringStartsWith<S,St>`](https://ts-roids.ashgw.me/types/StringStartsWith.html) -  Checks if a string `S` starts with `St`
 - [`StringifyPrimitive<P>`](https://ts-roids.ashgw.me/types/StringifyPrimitive.html) - Turns a given [``Primitive``](https://ts-roids.ashgw.me/types/Primitive.html) value (except ``symbol``) into its string representation.
 - [`Strlen<S>`](https://ts-roids.ashgw.me/types/Strlen.html) - Get the length of a string `S`.
@@ -150,13 +151,13 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`Vals<Obj>`](https://ts-roids.ashgw.me/types/Vals.html) - Get the set of type values in a given object.
 - [`Xor<B1, B2>`](https://ts-roids.ashgw.me/types/Xor.html) - Exclusive ``OR`` between two boolean types ``B1`` and ``B2``.
 
-#### Decorators 
+#### Decorators
 
 - [`@Final`]() - Marks an object final, as in one cannot inherit from it.
 - [`@Sealed`]() - [Seals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) an object.
 - [`@Frozen`]() - [Freezes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) an object.
 
-#### Basic Usage 
+#### Basic Usage
 Finalize and freeze objects
 
 ```ts
@@ -222,8 +223,8 @@ foo.requestFoo = () => {
 // The line below will cause a TypeError: Cannot assign to read only property 'bar'
 foo.bar = 'not bar' as Bar;
 ```
- The TypeScript team has not yet introduced a built-in final modifier yet, check 
-[this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests. 
+ The TypeScript team has not yet introduced a built-in final modifier yet, check
+[this](https://github.com/microsoft/TypeScript/issues/8306), [this](https://github.com/microsoft/TypeScript/issues/50532) and many other requests.
 Although they introduced `override` in [`v4.3`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag) .
 
 Decorators like ``@Final`` provide a limited way to emulate final behavior, these are merely band-aids for now, until TS officially supports a true final modifier.
@@ -245,12 +246,12 @@ john.age = 31; // No Errors
 (john as any).email = 'john@doe.com'; // TypeError: Cannot add property email,
 // object is not extensible
 
-delete john.age; // TypeError: Cannot delete property 'age' 
+delete john.age; // TypeError: Cannot delete property 'age'
 ```
 
 ## Changelog
 
 See [releases](https://github.com/ashgw/ts-roids/releases).
 
-## License 
+## License
 [GPL-3](/LICENSE)
