@@ -156,46 +156,51 @@ Checkout the full [API reference](https://ts-roids.ashgw.me/) for all usage exam
 - [`@Final`]() - Marks an object final, as in one cannot inherit from it.
 - [`@Sealed`]() - [Seals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) an object.
 - [`@Frozen`]() - [Freezes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) an object.
+- [`@Singleton`]() -  Ensures that only a single instance of the class can be created.
 
 #### Basic Usage
 Finalize and freeze objects
 
 ```ts
 import type { Optional, NewType, MaybeUndefined } from 'ts-roids';
-import { Final, Frozen } from 'ts-roids';
+import { Final, Frozen, Singleton } from 'ts-roids';
 
 type Bar = NewType<'Bar', string>;
 type Baz = NewType<'Baz', string>;
 type Secret = NewType<'Secret', string>;
 
 abstract class BaseFoo<T> {
-  abstract requestFoo(secret: Secret, baz: Baz): Optional<T>;
+  public abstract requestFoo(secret: Secret, baz: Baz): Promise<Optional<T>>;
 }
 
 @Final
 @Frozen
+@Singleton
 class Foo<T> extends BaseFoo<T> {
-  readonly foo: T;
-  bar: Optional<Bar>;
+  private static readonly rnd = Math.random();
+  private readonly foo: T;
+  public bar: Optional<Bar>; // `Bar` then becomes readonly with the decorator
 
-  constructor(foo: T, bar?: MaybeUndefined<Bar>) {
+  public constructor(foo: T, bar?: MaybeUndefined<Bar>) {
     super();
     this.foo = foo;
     this.bar = bar ?? null;
   }
 
-
-  requestFoo(secret: Secret, baz: Baz): Optional<T> {
-    // A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value
+  public override async requestFoo(
+    secret: Secret,
+    baz: Baz
+  ): Promise<Optional<T>> {
     if (
+      Foo.rnd > 0.5 &&
       secret.concat().toLowerCase() === '123' &&
       baz.concat().toLowerCase() === 'baz' &&
       this.bar !== null
     ) {
-      return this.foo;
+      return await Promise.resolve(this.foo);
     }
 
-    return null; // So you have to explicitly return null here.
+    return null;
   }
 }
 
@@ -206,18 +211,20 @@ class SubFoo extends Foo<string> {
 }
 
 // No problem with instantiation
-const foo = new Foo<string>('foo');
+const foo = new Foo('foo');
+
+// The Singleton ensures the same instance is returned
+const foo2 = new Foo('bar');
+console.log(foo2 === foo); // True
 
 // Since the object is final:
-
 // The line below will cause a TypeError: Cannot inherit from the final class Foo
-const _ = new SubFoo('subFoo');
+new SubFoo('subFoo');
 
 // Since the object is frozen:
-
 // The line below will cause a TypeError: Cannot add property 'requestFoo', object is not extensible
-foo.requestFoo = () => {
-  return 'not foo';
+foo.requestFoo = async () => {
+  return await Promise.resolve('not foo');
 };
 
 // The line below will cause a TypeError: Cannot assign to read only property 'bar'

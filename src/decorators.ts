@@ -129,3 +129,42 @@ export function Sealed<T extends Newable>(cst: T): T & Newable {
     }
   };
 }
+
+/**
+ * When applied to a class, it ensures that only a single instance of the class can be created.
+ * If an attempt is made to create another instance, the existing instance will be returned.
+ *
+ * @remarks
+ * The `Singleton` pattern is often used for cases where a global state or resource needs to be shared across the entire application.
+ * It is common in cases like configuration settings or managing connections to a shared resource (e.g., a database or API).
+ *
+ * @example
+ * ```ts
+ * @Singleton
+ * class Database {
+ *   constructor(public host: string, public port: number) {}
+ * }
+ *
+ * const db1 = new Database('localhost', 5432);
+ * const db2 = new Database('localhost', 5432);
+ *
+ * console.log(db1 === db2); // true, both db1 and db2 refer to the same instance
+ * ```
+ * @see
+ * https://en.wikipedia.org/wiki/Singleton_pattern
+ */
+
+export function Singleton<T extends Newable>(cst: T): T {
+  let instance: T;
+
+  return class Singleton extends cst {
+    constructor(...args: any[]) {
+      if (instance) {
+        return instance;
+      }
+      super(...args);
+      instance = new cst(...args) as T;
+      return instance;
+    }
+  };
+}

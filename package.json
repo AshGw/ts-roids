@@ -3,6 +3,7 @@
   "version": "1.40.0",
   "private": false,
   "description": "Bullet-proof TS even more",
+  "type": "module",
   "keywords": [
     "typescript",
     "utility",
@@ -24,7 +25,6 @@
     "email": "contact@ashgw.me"
   },
   "sideEffects": false,
-  "type": "module",
   "exports": {
     "types": {
       "import": "./dist/index.d.mts",
