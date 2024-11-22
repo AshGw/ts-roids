@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.41.0
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.40.0...v1.41.0)
+
+### 🚀 Enhancements
+
+- Add `@Singleton` ([b627a38](https://github.com/ashgw/ts-roids/commit/b627a38))
+
+### 🏡 Chore
+
+- Add socket badge ([eca4ad5](https://github.com/ashgw/ts-roids/commit/eca4ad5))
+- Update CI status ([4a6c15e](https://github.com/ashgw/ts-roids/commit/4a6c15e))
+
+### ❤️ Contributors
+
+- AshGw <ashrefgw@proton.me>
+
 ## v1.40.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.38.0...v1.40.0)
