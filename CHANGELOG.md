@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.41.1
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.41.0...v1.41.1)
+
+### 🩹 Fixes
+
+- Package types resolution ([2b4ff96](https://github.com/ashgw/ts-roids/commit/2b4ff96))
+
+### 🏡 Chore
+
+- Update `SECURITY.md` ([28e886a](https://github.com/ashgw/ts-roids/commit/28e886a))
+- Update `SECURITY.md` ([27849fc](https://github.com/ashgw/ts-roids/commit/27849fc))
+
+### ❤️ Contributors
+
+- AshGw <ashrefgw@proton.me>
+
 ## v1.41.0
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.40.0...v1.41.0)
