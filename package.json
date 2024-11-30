@@ -22,14 +22,10 @@
   "license": "GPL-3.0-only",
   "author": {
     "name": "Ashref Gwader",
-    "email": "contact@ashgw.me"
+    "email": "ashref@ashgw.me"
   },
   "sideEffects": false,
   "exports": {
-    "types": {
-      "import": "./dist/index.d.mts",
-      "require": "./dist/index.d.cts"
-    },
     "import": "./dist/index.mjs",
     "require": "./dist/index.cjs"
   },
