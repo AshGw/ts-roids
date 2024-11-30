@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.41.3
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.41.2...v1.41.3)
+
+### 🩹 Fixes
+
+- Make dist pick up types ([032394e](https://github.com/ashgw/ts-roids/commit/032394e))
+
+### ❤️ Contributors
+
+- AshGw <ashrefgw@proton.me>
+
 ## v1.41.2
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.41.1...v1.41.2)
