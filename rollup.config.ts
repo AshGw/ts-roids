@@ -3,42 +3,35 @@ import rollupPluginTypescript from '@rollup/plugin-typescript';
 import { type Plugin, type RollupOptions } from 'rollup';
 import rollupPluginAutoExternal from 'rollup-plugin-auto-external';
 import rollupPluginDts from 'rollup-plugin-dts';
+import path from 'path';
 
 import pkg from './package.json' assert { type: 'json' };
 
-const common = {
+const common: RollupOptions = {
   input: 'src/index.ts',
-
-  output: {
-    sourcemap: false,
-  },
-
   external: [],
-
   treeshake: {
     annotations: true,
-    moduleSideEffects: [],
+    moduleSideEffects: false,
     propertyReadSideEffects: false,
     unknownGlobalSideEffects: false,
   },
-} satisfies RollupOptions;
+};
 
-const runtimes = {
+const runtimes: RollupOptions = {
   ...common,
-
   output: [
     {
-      ...common.output,
       file: pkg.exports.import,
       format: 'esm',
+      sourcemap: false,
     },
     {
-      ...common.output,
       file: pkg.exports.require,
       format: 'cjs',
+      sourcemap: false,
     },
   ],
-
   plugins: [
     rollupPluginAutoExternal(),
     rollupPluginTypescript({
@@ -48,31 +41,25 @@ const runtimes = {
       values: {
         'import.meta.vitest': 'undefined',
       },
+      preventAssignment: true,
     }),
   ],
-} satisfies RollupOptions;
+};
 
-const types = {
-  ...common,
-
+const types: RollupOptions = {
+  input: 'src/index.ts',
   output: [
     {
-      ...common.output,
-      file: pkg.exports.types.import,
+      file: path.resolve('dist', 'index.d.ts'),
       format: 'esm',
     },
-    {
-      ...common.output,
-      file: pkg.exports.types.require,
-      format: 'cjs',
-    },
   ],
-
   plugins: [
     rollupPluginDts({
       tsconfig: 'tsconfig.build.json',
+      respectExternal: true,
     }),
   ] as Plugin[],
-} satisfies RollupOptions;
+};
 
 export default [runtimes, types];

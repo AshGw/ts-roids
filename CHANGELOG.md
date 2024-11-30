@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.41.2
+
+[compare changes](https://github.com/ashgw/ts-roids/compare/v1.41.1...v1.41.2)
+
+### 🏡 Chore
+
+- Update rollup configs ([c13326e](https://github.com/ashgw/ts-roids/commit/c13326e))
+
+### ❤️ Contributors
+
+- AshGw <ashrefgw@proton.me>
+
 ## v1.41.1
 
 [compare changes](https://github.com/ashgw/ts-roids/compare/v1.41.0...v1.41.1)
