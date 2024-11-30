@@ -5,8 +5,6 @@ import rollupPluginAutoExternal from 'rollup-plugin-auto-external';
 import rollupPluginDts from 'rollup-plugin-dts';
 import path from 'path';
 
-import pkg from './package.json' assert { type: 'json' };
-
 const common: RollupOptions = {
   input: 'src/index.ts',
   external: [],
@@ -22,12 +20,12 @@ const runtimes: RollupOptions = {
   ...common,
   output: [
     {
-      file: pkg.exports.import,
+      file: './dist/index.mjs',
       format: 'esm',
       sourcemap: false,
     },
     {
-      file: pkg.exports.require,
+      file: './dist/index.cjs',
       format: 'cjs',
       sourcemap: false,
     },
